@@ -195,7 +195,10 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		 * in case we want to get all feeds again later (i.e. to refresh), that's
 		 * why we use a counter to keep track of where in the queue we are 
 		 */
-		downloadTask.execute(feedList.get(feedQueueCounter++));
+		if (!feedList.isEmpty()){
+			downloadTask.execute(feedList.get(feedQueueCounter++));
+		}
+
 	}
 
 	public ArrayList<String> getFeedList() {
