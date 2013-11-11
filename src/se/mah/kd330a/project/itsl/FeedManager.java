@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import org.mcsoxford.rss.RSSFeed;
 import org.mcsoxford.rss.RSSItem;
+
+import se.mah.kd330a.project.R;
 import android.content.Context;
 import android.util.Log;
 
@@ -73,7 +75,6 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 
 	public void addFeedURL(String url) // throws MalformedURLException
 	{
-		Log.i(TAG, url);
 		feedList.add(url);
 	}
 
@@ -175,7 +176,6 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		if (feedList.isEmpty())
 		{
 			Log.i(TAG, "Feed list is empty, adding some feeds:");
-			//addFeedURL("https://mah.itslearning.com/Bulletin/RssFeed.aspx?LocationType=1&LocationID=16066&PersonId=71004&CustomerId=719&Guid=52845be1dfae034819b676d6d2b18733&Culture=sv-SE");
 			//addFeedURL("http://www.mah.se/rss/nyheter");
 		}
 
@@ -195,10 +195,15 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		 * in case we want to get all feeds again later (i.e. to refresh), that's
 		 * why we use a counter to keep track of where in the queue we are 
 		 */
+<<<<<<< HEAD
 		if (!feedList.isEmpty()){
 			downloadTask.execute(feedList.get(feedQueueCounter++));
 		}
 
+=======
+		if (!feedList.isEmpty())
+			downloadTask.execute(feedList.get(feedQueueCounter++));
+>>>>>>> marcus
 	}
 
 	public ArrayList<String> getFeedList() {
