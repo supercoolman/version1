@@ -55,16 +55,26 @@ public class FragmentITSL extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_itsl, container, false);
-		actionBar = getActivity().getActionBar();
-		
-		/*
-		 *  In case there is nothing in the cache, or it doesn't exist
-		 *  we have to refresh
-		 */
-		if (!feedManager.loadCache())
-			refresh();
-
+		if (feedManager.queueSize() > 0)
+		{
+			rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_itsl, container, false);
+			
+			/*
+			 *  In case there is nothing in the cache, or it doesn't exist
+			 *  we have to refresh
+			 */
+			if (!feedManager.loadCache())
+				refresh();
+			
+		}
+		else
+		{
+			/*
+			 * no feeds registered, show help screen
+			 */
+			rootView = (ViewGroup) inflater.inflate(R.layout.itsl_help, container, false);
+		}
+			
 		return rootView;
 	}
 
@@ -74,7 +84,9 @@ public class FragmentITSL extends Fragment implements
 		Log.i(TAG, "Resumed: Stopping background updates");
 		AlarmManager alarm = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 		alarm.cancel(backgroundUpdateIntent);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		
+		if (feedManager.queueSize() > 0)
+			getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	}
 	
 	public void onPause()
@@ -87,7 +99,7 @@ public class FragmentITSL extends Fragment implements
 		/*
 		 * Removes tabs and everything associated with it.
 		 */
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
 		/*
 		 * Remember when we last had this view opened 
@@ -142,63 +154,39 @@ public class FragmentITSL extends Fragment implements
 	private ArrayList<TabFragment> createFragments()
 	{
 		ArrayList<TabFragment> fragments = new ArrayList<TabFragment>();
-		Bundle b = new Bundle();
 		HashMap<String, FeedObject> foList = getFeedObjects();
+		actionBar = getActivity().getActionBar();
 		actionBar.removeAllTabs();
-		
-		/*
-		 * The first tab contains everything unfiltered
-		actionBar.addTab(
-				actionBar.newTab()
-				.setText("All")
-				.setTabListener(this));
-		
-		fragments.add(new TabFragment(feedManager.getArticles()));
-		 */
 
 		/*
 		 * For all feeds we have downloaded, create a new tab and add the 
 		 * corresponding data to a new TabFragment
 		 */
-		if (!foList.isEmpty()){
-			
-			TabFragment fragment;
-			for (String title : foList.keySet())
+		TabFragment fragment;
+		for (String title : foList.keySet())
+		{
+			String titleDisp = "course name";
+			try
 			{
-				String titleDisp = "course name";
-				try{
 				String[] parts = title.split("-");
-				titleDisp=parts[2].substring(1, parts[2].length()-1);}
-				catch(Exception e){
-					titleDisp=title;
-				}
-				actionBar.addTab(
-						actionBar.newTab()
-						.setText(titleDisp)
-						.setTabListener(this));
-				
-				fragment = new TabFragment();
-				fragment.setArticles(foList.get(title).articles);
-				
-				b.putBoolean("isEmpty", false);
-				fragment.setArguments(b);
-				fragments.add(fragment);
-				
-				Log.i(TAG, "Filtered map key => tab title is: " + title);
+				titleDisp = parts[2].substring(1, parts[2].length() - 1);
 			}
-		}
-		else{
+			catch (Exception e)
+			{
+				titleDisp = title;
+			}
+			
 			actionBar.addTab(
-					actionBar.newTab()
-					.setText("Set up It's Learning")
-					.setTabListener(this));
-			TabFragment fragment = new TabFragment();
-			fragment.setArticles(null);
-			b.putBoolean("isEmpty", true);
-			fragment.setArguments(b);
+				actionBar.newTab()
+				.setText(titleDisp)
+				.setTabListener(this));
+			
+			fragment = new TabFragment();
+			fragment.setArticles(foList.get(title).articles);
 			fragments.add(fragment);
+			
+			Log.i(TAG, "Filtered map key => tab title is: " + title);
 		}
-
 		return fragments;
 	}
 	
@@ -231,6 +219,7 @@ public class FragmentITSL extends Fragment implements
 		/*
 		 * Set up tabs in the actionbar
 		 */
+		actionBar = getActivity().getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
 		mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
