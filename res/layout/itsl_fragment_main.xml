@@ -10,7 +10,7 @@
     <ExpandableListView
         android:id="@+id/lvExp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="8dp"
@@ -19,5 +19,13 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:groupIndicator="@null" />
+    
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="2dp"
+    android:layout_alignBottom="@+id/lvExp"
+    android:layout_alignParentLeft="true"
+    android:background="@color/grey" />
+    
     
 </RelativeLayout>
