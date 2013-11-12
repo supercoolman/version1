@@ -48,9 +48,10 @@
                     android:orientation="horizontal" >
 
                     <View
+                        android:id="@+id/home_schedule1"
                         android:layout_width="8dp"
                         android:layout_height="match_parent"
-                        android:background="@color/blue" />
+                        android:background="@color/red_mah" />
 
                     <LinearLayout
                         android:layout_width="72dp"
@@ -81,11 +82,12 @@
                     </LinearLayout>
 
                     <View
+                        android:id="@+id/home_schedule2"
                         android:layout_width="2dp"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="8dp"
                         android:layout_marginTop="8dp"
-                        android:background="@color/blue" />
+                        android:background="@color/red_mah" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -146,9 +148,10 @@
                     android:orientation="horizontal" >
 
                     <View
+                        android:id="@+id/home_itsl1"
                         android:layout_width="8dp"
                         android:layout_height="match_parent"
-                        android:background="@color/green" />
+                        android:background="@color/red_mah" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -171,9 +174,10 @@
                             android:textColor="@color/grey_dark" />
 
                         <View
+                            android:id="@+id/home_itsl2"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/green" />
+                            android:background="@color/red_mah" />
 
                         <TextView
                             android:id="@+id/text_itsl_date"

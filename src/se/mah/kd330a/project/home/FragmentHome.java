@@ -3,7 +3,10 @@ package se.mah.kd330a.project.home;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import se.mah.kd330a.project.adladok.model.Course;
+import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.framework.MainActivity;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase;
 //import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -42,7 +45,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	private FileInputStream fis = null;
 	private boolean profileRegistered = false;
 	private FeedManager ITSLfeedManager;
-
+	
 	public FragmentHome()
 	{
 	}
@@ -62,7 +65,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		{
 			Log.e("FragmentHome", e.toString());
 		}
-
+		
 	}
 
 	@Override
@@ -80,6 +83,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			ITSLfeedManager.reset();
 			ITSLfeedManager.processFeeds();
 		}
+		
 		return rootView;
 
 	}
@@ -129,6 +133,17 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		nextClassWidget.setVisibility(LinearLayout.VISIBLE);
 		SharedPreferences sharedPref = this.getActivity().getSharedPreferences("courseName", Context.MODE_PRIVATE);
 		String courseName = sharedPref.getString(nextClass.getCourseName(), nextClass.getCourseName());
+		String courseID = nextClass.getCourseId();
+		
+		//For synchronizing color
+		HashMap<String, Integer> colors = new HashMap<String, Integer>();
+		
+		//Fill hashmap with colors from my courses
+		for (Course c : Me.getCourses())
+		{
+			colors.put(c.getCourseID(), c.getColor());			
+		}
+		
 		if (profileRegistered)
 		{
 			TextView textNextClassName = (TextView) nextClassWidget.findViewById(R.id.text_next_class_name);
@@ -141,6 +156,18 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			textNextClassEndTime.setText(nextClass.getEndTime());
 			TextView textNextClassLocation = (TextView) nextClassWidget.findViewById(R.id.text_next_class_location);
 			textNextClassLocation.setText(nextClass.getLocation());
+			
+		
+			View scheduleColor1 = (View) nextClassWidget.findViewById(R.id.home_schedule1);
+			View scheduleColor2 = (View) nextClassWidget.findViewById(R.id.home_schedule2);
+			
+			//Color				
+			if (colors.get(courseID)!=null)
+			{
+				scheduleColor1.setBackgroundColor(colors.get(courseID));
+				scheduleColor2.setBackgroundColor(colors.get(courseID));
+			}
+
 		}
 		else
 		{
@@ -200,9 +227,40 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			//View widget = (View)rootView.findViewById(R.id.itslearning_widget);
 			View widget = rootView;
 			Article a = articles.get(0);
+			
+			//For synchronizing color
+			HashMap<String, Integer> colors = new HashMap<String, Integer>();
+			
+			//Fill hashmap with colors from my courses
+			for (Course c : Me.getCourses())
+			{
+				colors.put(c.getRegCode(), c.getColor());			
+			}
+
+
+				
 			((TextView)widget.findViewById(R.id.text_itsl_title)).setText(a.getArticleHeader());
 			((TextView)widget.findViewById(R.id.text_itsl_date)).setText(a.getArticleDate());
 			((TextView)widget.findViewById(R.id.text_itsl_content)).setText(a.getArticleText());
+			
+			
+			String regCode = "";
+			
+			if (a.getArticleCourseCode().contains("-"))
+			{
+				int start = a.getArticleCourseCode().indexOf("-")+1;
+				
+				regCode = a.getArticleCourseCode().substring(start, start+5);
+			}
+			
+			
+			if (colors.get(regCode)!=null)
+			{
+				((View)widget.findViewById(R.id.home_itsl1)).setBackgroundColor(colors.get(regCode));
+				((View)widget.findViewById(R.id.home_itsl2)).setBackgroundColor(colors.get(regCode));
+			}
+		
+			
 		}
 		catch(Exception e)
 		{

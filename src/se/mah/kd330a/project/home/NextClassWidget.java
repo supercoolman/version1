@@ -80,6 +80,7 @@ public class NextClassWidget {
 			setStartTime(items.get(0).getStartTime());
 			setEndTime(items.get(0).getEndTime());
 			setDate(items.get(0).getDateAndTime2());
+			setCourseId(items.get(0).getCourseID());
 			return true;
 		} else {
 			Log.e(getClass().toString(), "item list is empty");
