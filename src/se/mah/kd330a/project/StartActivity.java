@@ -49,7 +49,7 @@ public class StartActivity extends Activity implements Observer
 		Me.observable.addObserver(this);
 		Me.restoreMe(getApplicationContext());
 
-		if (Me.getFirstName().isEmpty())
+		if (Me.getFirstName().isEmpty())  //Should be id???
 		{
 			showLoginView();
 		}
@@ -71,8 +71,11 @@ public class StartActivity extends Activity implements Observer
 		((View) findViewById(R.id.login_view)).setVisibility(View.VISIBLE);
 		editTextUsername = (EditText) findViewById(R.id.editText1);
 		editTextPassword = (EditText) findViewById(R.id.editText2);
-		editTextUsername.setText(Me.getUserID());
-		editTextPassword.setText("");
+		//Test setting
+		//editTextUsername.setText(Me.getUserID());
+		//editTextPassword.setText("");
+		editTextUsername.setText("testUser");
+		editTextPassword.setText("testUser");
 	}
 
 	public void hideLoginView()

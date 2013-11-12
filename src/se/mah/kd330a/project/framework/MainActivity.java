@@ -3,22 +3,15 @@ package se.mah.kd330a.project.framework;
 
 
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import net.fortuna.ical4j.data.ParserException;
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
 import se.mah.kd330a.project.help.FragmentCredits;
-import se.mah.kd330a.project.help.FragmentCredits;
 import se.mah.kd330a.project.home.FragmentHome;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.FragmentITSL;
-import se.mah.kd330a.project.schedule.data.KronoxCalendar;
-import se.mah.kd330a.project.schedule.data.KronoxReader;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
 import se.mah.kd330a.project.settings.view.SettingsActivity;
 
@@ -64,12 +57,7 @@ public class MainActivity extends FragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      
-        
         setContentView(R.layout.activity_main);
-            
-        
-     	
         mTitle = mDrawerTitle = getTitle();
         mMenuTitles = getResources().getStringArray(R.array.menu_texts);
         mMenuIcons = getResources().obtainTypedArray(R.array.menu_icons);
@@ -246,10 +234,10 @@ public class MainActivity extends FragmentActivity{
 		
 		switch (i) {
 		case 0:
-			c.setColor(this.getResources().getColor(R.color.blue));
+			c.setColor(this.getResources().getColor(R.color.orange));
 			break;
 		case 1:
-			c.setColor(this.getResources().getColor(R.color.orange));								
+			c.setColor(this.getResources().getColor(R.color.blue));								
 			break;
 		case 2:
 			c.setColor(this.getResources().getColor(R.color.green));

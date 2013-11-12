@@ -57,6 +57,7 @@ public class Me implements Serializable{
 	
 	public static void clear(Context c) {
 		// Lars fixa detta. Metoden ska ta bort alla spår av användaren
+		Log.i(TAG,"clear all");
 		 clearCourses();
 		 firstName="";
 		 lastName="";
@@ -100,11 +101,13 @@ public class Me implements Serializable{
 	}
 	
 	public static void updateMe(){
+		Log.i(TAG,"updateMe");
 		myCourses.clear(); //Perhaps not....
 		doUpdate(userID, password);
 	}
 	
 	public static void clearCourses(){
+		Log.i(TAG,"clearMe");
 		myCourses.clear();
 	}
 	
