@@ -11,12 +11,7 @@
         android:layout_marginLeft="32dp"
         android:layout_gravity="center_vertical|center"
         android:text="KD330A"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ImageView
-        android:id="@+id/clrTab"
-        android:layout_width="fill_parent"
-        android:layout_height="6dp"
-        android:background="@color/green" />
 
 </LinearLayout>

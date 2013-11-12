@@ -158,6 +158,7 @@ public class FragmentITSL extends Fragment implements
 		actionBar = getActivity().getActionBar();
 		actionBar.removeAllTabs();
 
+
 		/*
 		 * For all feeds we have downloaded, create a new tab and add the 
 		 * corresponding data to a new TabFragment
@@ -178,12 +179,14 @@ public class FragmentITSL extends Fragment implements
 			
 			actionBar.addTab(
 				actionBar.newTab()
-				.setText(titleDisp)
+				.setText(" "+titleDisp)
+				
 				.setTabListener(this));
 			
 			fragment = new TabFragment();
 			fragment.setArticles(foList.get(title).articles);
 			fragments.add(fragment);
+		
 			
 			Log.i(TAG, "Filtered map key => tab title is: " + title);
 		}

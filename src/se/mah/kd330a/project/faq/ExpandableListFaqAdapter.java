@@ -115,7 +115,7 @@ public class ExpandableListFaqAdapter extends BaseExpandableListAdapter {
 	        ImageView imgPointer2 = (ImageView) convertView.findViewById(R.id.icPointer2);
 	        TextView lblListHeader = (TextView) convertView
 	                .findViewById(R.id.lblListHeader);
-	        lblListHeader.setTypeface(null, Typeface.BOLD);
+	        lblListHeader.setTypeface(null, Typeface.NORMAL);
 	        lblListHeader.setText(headerTitle);
 	        
 	        TextView lblListHeader2 = (TextView) convertView
