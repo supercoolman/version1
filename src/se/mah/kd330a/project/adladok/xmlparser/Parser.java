@@ -29,8 +29,9 @@ public class Parser{
 	 * Uppdate Me and courses from XML
 	 * @param xml string
 	 * */
-	public static void updateMeFromADandLADOK(String xmlFromWebservice) throws Exception{
-        XMLParser parser = new XMLParser();
+	public static boolean updateMeFromADandLADOK(String xmlFromWebservice) throws Exception{
+        boolean success = true;
+		XMLParser parser = new XMLParser();
 		if (xmlFromWebservice!=null){
 			Document doc = parser.getDomElement(xmlFromWebservice); // getting DOM element
 			//firstname
@@ -83,8 +84,12 @@ public class Parser{
 			// add the courses......
 			nl = doc.getElementsByTagName("courses");
 			e = (Element) nl.item(0);			
-			//Get the first station
+			
 			NodeList courseNode = e.getElementsByTagName("course");
+			//TODO here it is needed to check if the course exists
+			if (courseNode.getLength()>0){  //At least we we check if we have any courses before clearing them.....
+				Me.clearCourses();
+			}
 			for (int j =0;j < courseNode.getLength();j++){
 				Element e2 = (Element) courseNode.item(j);
 				Course course = new Course(parser.getValue(e2, "displaynamesv"), parser.getValue(e2, "courseid"));
@@ -92,12 +97,17 @@ public class Parser{
 				course.setRegCode(parser.getValue(e2,"regcode"));
 				course.setProgram(parser.getValue(e2,"program"));
 				course.setTerm(parser.getValue(e2,"term"));
-				try{
-					course.setColor(Integer.parseInt(parser.getValue(e2, "color")));
-				}catch(Exception e7){}
+				try {
+					course.setColor(Integer.parseInt(parser.getValue(e2,"color")));
+				} catch (Exception e1) {
+					course.setColor(0);
+				}
 				Me.addCourse(course);
 			}
+		}else{
+			success=false;
 		}
+		return success;
     }
 	
 	/**
@@ -151,6 +161,9 @@ public class Parser{
 	        serializer.startTag("", "courses");
 	        for (Course course: Me.getCourses()){
 	        	serializer.startTag("", "course");
+	        	serializer.startTag("", "courseid");
+	        	serializer.text(course.getCourseID());
+	        	serializer.endTag("", "courseid");
 	        	serializer.startTag("", "displaynamesv");
 	        	serializer.text(course.getDisplaynameSv());
 	        	serializer.endTag("", "displaynamesv");
@@ -164,7 +177,7 @@ public class Parser{
 	        	serializer.text(course.getProgram());
 	        	serializer.endTag("", "program");
 	        	serializer.startTag("", "term");
-	        	serializer.text(course.getProgram());
+	        	serializer.text(course.getTerm());
 	        	serializer.endTag("", "term");
 	        	serializer.startTag("", "color");
 	        	serializer.text(String.valueOf(course.getColor()));

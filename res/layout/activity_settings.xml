@@ -113,7 +113,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
             android:onClick="toLadokInlogg"
-            android:text="Enter LadokId" />
+            android:text="Log me out" />
     </LinearLayout>
 
 </ScrollView>

@@ -47,16 +47,16 @@ public class StartActivity extends Activity implements Observer
 		
 		Me.observable.deleteObservers();
 		Me.observable.addObserver(this);
-		Me.restoreMe(getApplicationContext());
+		boolean restoredsuccess = Me.restoreMeFromLocalStorage(getApplicationContext());
 
-		if (Me.getFirstName().isEmpty())  //Should be id???
+		if (!restoredsuccess)  //Should be id???
 		{
 			showLoginView();
 		}
 		else
 		{
-			hideLoginView();
-			Me.updateMe();
+			hideLoginView(); //TODO this should not be done everytime!!! Perhaps update in settings or an update button
+			Me.updateMeFromWebService();
 		}
 
 	}
@@ -72,10 +72,10 @@ public class StartActivity extends Activity implements Observer
 		editTextUsername = (EditText) findViewById(R.id.editText1);
 		editTextPassword = (EditText) findViewById(R.id.editText2);
 		//Test setting
-		//editTextUsername.setText(Me.getUserID());
-		//editTextPassword.setText("");
-		editTextUsername.setText("testUser");
-		editTextPassword.setText("testUser");
+		editTextUsername.setText(Me.getUserID());
+		editTextPassword.setText("");
+//		editTextUsername.setText("testUser");
+//		editTextPassword.setText("testUser");
 	}
 
 	public void hideLoginView()
@@ -104,20 +104,9 @@ public class StartActivity extends Activity implements Observer
 		
 		String username = editTextUsername.getText().toString();
 		String password = editTextPassword.getText().toString();
-
-		/* 
-		 * Reset the Me "object"
-		 */
-		Me.setDispayName("");
-		Me.setEmail("");
-		Me.setFirstName("");
-		Me.setIsStudent(false);
-		Me.setIsStaff(false);
-		Me.setLastName("");
-		Me.clearCourses();
 		Me.setUserID(username);
 		Me.setPassword(password);
-		Me.updateMe();
+		Me.updateMeFromWebService();
 	}
 
 	/*
@@ -127,15 +116,15 @@ public class StartActivity extends Activity implements Observer
 	public void update(Observable observable, Object data)
 	{
 		Log.i(TAG, "update(): Got callback from Me");
-
-		if (Me.getFirstName().isEmpty())
+		Integer result = (Integer)data;
+		if (result.intValue()!=1)
 		{
 			showLoginView();
 			Toast.makeText(this, "Unable to log you in", Toast.LENGTH_LONG).show();
 			return;
 		}
 
-		Me.saveMe(getApplicationContext());
+		Me.saveMeToLocalStorage(getApplicationContext());
 		BackgroundDownloadTask downloads = new BackgroundDownloadTask(this);
 		downloads.execute();
 	}
@@ -185,8 +174,12 @@ public class StartActivity extends Activity implements Observer
 
 				for (Course c : Me.getCourses())
 				{
-					String courseId = c.getKronoxCalendarCode().substring(2);
-					courses.add(new KronoxCourse(courseId));
+					try {
+						String courseId = c.getKronoxCalendarCode().substring(2);
+						courses.add(new KronoxCourse(courseId));
+					} catch (Exception e) {
+						Log.i(TAG, "Empty courses");
+					}
 				}
 
 				KronoxCourse[] courses_array = new KronoxCourse[courses.size()];

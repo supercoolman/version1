@@ -68,15 +68,23 @@ public class Course {
 		}
 	
 		//There could be duplicates if you have many courses on one program
-		public String getKronoxCalendarCode(){
-			String s;
-					if(!this.regCode.equals("")){ //course
+		
+		public String getKronoxCalendarCode() {
+			String s="";
+					if(!this.regCode.isEmpty()&&!this.courseID.isEmpty()&&!this.term.isEmpty()){ //course
 						s="k."+this.courseID+"-"+this.term+"-"+this.regCode;
-					}else{
+					}else if(!this.program.isEmpty()&&!this.term.isEmpty()){
+							s="p."+this.program+this.term.substring(2, 4);
+							Log.i("UserInfo","year"+this.term.substring(2, 4));
+							Log.i("UserInfo","term"+term.substring(4, 5));
+							if(term.substring(4, 5).equals("2")){
+								s= s+"h";
+							}
+							else{
+								s=s+"v";
+							}
 						s="p."+this.program+this.term.substring(2, 4);
 						this.term.substring(2, 4);
-						Log.i("UserInfo","year"+this.term.substring(2, 4));
-						Log.i("UserInfo","term"+term.substring(4, 5));
 						if(term.substring(4, 5).equals("2")){
 							s= s+"h";
 						}
@@ -84,8 +92,8 @@ public class Course {
 							s=s+"v";
 						}
 					}
+					Log.i("UserInfo","Kronoxcode: "+s);
 					return s;
-			
 		}
 		
 

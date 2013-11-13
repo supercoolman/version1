@@ -17,11 +17,13 @@ import se.mah.kd330a.project.settings.view.SettingsActivity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract.Instances;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -107,6 +109,13 @@ public class MainActivity extends FragmentActivity{
         
     }
     
+    @Override
+    protected void onPause() {
+    	// TODO Auto-generated method stub
+    	super.onPause();
+    	Me.saveMeToLocalStorage(this);
+    }
+    
     public RSSFeed getRssNewsFeed() {
     	return newsFeed;
     }
@@ -176,7 +185,11 @@ public class MainActivity extends FragmentActivity{
 		default:	
 			fragment = new FragmentHome();
 		}
-    	fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    	android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+    	transaction.replace(R.id.content_frame, fragment);
+    	transaction.commit();
+    	
+    	//fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);

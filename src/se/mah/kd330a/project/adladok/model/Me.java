@@ -55,9 +55,15 @@ public class Me implements Serializable{
 		//prevents anyone from doing instances
 	}
 	
-	public static void clear(Context c) {
+	public static void clearAllIncludingSavedData(Context c) {
+		 clearAllExcludingSavedData(c);
+		 Log.i(TAG,"clear all including locally saved data");
+		 saveMeToLocalStorage(c);
+	}
+	
+	public static void clearAllExcludingSavedData(Context c) {
 		// Lars fixa detta. Metoden ska ta bort alla spår av användaren
-		Log.i(TAG,"clear all");
+		Log.i(TAG,"clear all excluding saved data");
 		 clearCourses();
 		 firstName="";
 		 lastName="";
@@ -67,28 +73,34 @@ public class Me implements Serializable{
 		 isStudent = false;
 		 userID="";
 		 password="";
-		 saveMe(c);
 	}
 	
-	/**Restores Me and my courses from local storage*/
-	public static void restoreMe(Context c){
+	/**Restores Me and my courses from local storage, use with care since it first clears all data in Me object
+	 * Use saveMe first*/
+	public static boolean restoreMeFromLocalStorage(Context c){
 		//Read local storage
+		boolean restored = false;
 		File file = new File(c.getFilesDir(), SAVE_FILE_NAME);
 		if (file.exists()){
-			myCourses.clear(); //perhaps not this easy if I saved stuff here...
+			//Clear content in me:
+			
 			String xml = Parser.getXmlFromFile(file);
 			Log.i("UserInfo","Restored" + xml);
 			 try {
-				Parser.updateMeFromADandLADOK(xml);
-				observable.setChanged();  //Tell that we made changes....
-		        observable.notifyObservers();  //Notify all listeners...
-			} catch (Exception e) {}
+				 restored = Parser.updateMeFromADandLADOK(xml);
+				 if(Me.password.isEmpty()&&Me.userID.isEmpty()){
+					 restored = false;
+				 }
+//				observable.setChanged();  //Tell that we made changes....
+//		        observable.notifyObservers();  //Notify all listeners...
+			} catch (Exception e) {restored =false;}
 		}
+		return restored;
 	}
 	
 	/**Stores Me and my courses on local storage
 	 * Call this also when changes are made to Me or courses*/
-	public static void saveMe(Context c){
+	public static void saveMeToLocalStorage(Context c){
 		String xml = Parser.writeXml();
 		Log.i("UserInfo","Saved: " + xml);
 		try {
@@ -100,14 +112,13 @@ public class Me implements Serializable{
 		}
 	}
 	
-	public static void updateMe(){
+	public static void updateMeFromWebService(){
 		Log.i(TAG,"updateMe");
-		myCourses.clear(); //Perhaps not....
 		doUpdate(userID, password);
 	}
 	
 	public static void clearCourses(){
-		Log.i(TAG,"clearMe");
+		Log.i(TAG,"clearing courses in memory");
 		myCourses.clear();
 	}
 	
@@ -186,38 +197,47 @@ public class Me implements Serializable{
 	
     private static final String NAMESPACE = "http://mahapp.k3.mah.se/";
     private static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
-    private static AsyncTask<String, Void, Void> asyncTask= null;
+    private static AsyncTask<String, Void, Integer> asyncTask= null;
   //Only one update at a time
     private static void doUpdate(String userID, String password){
     	if(asyncTask!=null){
 	    	if (asyncTask.getStatus()==AsyncTask.Status.FINISHED){
+	    		Log.i(TAG,"Finished do again");
 	    		asyncTask = new AsyncCallGetUserInfo().execute(userID,password);
+	    	}else{
+	    		Log.i(TAG,"Not finished");
 	    	}
     	}else{
+    		Log.i(TAG,"Asynctask do null");
     		asyncTask = new AsyncCallGetUserInfo().execute(userID,password);
     	}
     }
     
-    private static class AsyncCallGetUserInfo extends AsyncTask<String, Void, Void> {
+    private static class AsyncCallGetUserInfo extends AsyncTask<String, Void, Integer> {
 	        @Override
-	        protected Void doInBackground(String... params) {
+	        protected Integer doInBackground(String... params) {
+	        	int result = 0;
 	        	Log.i(TAG,"Starting update");
 	            //get the info from web service
 	        	String userInfoAsXML = getUserInfoAsXML(params[0],params[1]);
 	            //parse the XML it and update the class Me{
 	        	try{
-	        		Parser.updateMeFromADandLADOK(userInfoAsXML);
+	        		if(Parser.updateMeFromADandLADOK(userInfoAsXML)){
+	        			result = 1; //success
+	        		}
+	        		Log.i("UserInfo","Result of update 1 is good");
 	        	}catch(Exception e){
-	        		//Log.i("UserInfo",e.getMessage());
+	        		Log.e("UserInfo","Parser update exception");
 	        	}
-	            return null;
+	            return result;
 	        }
 	        @Override
-	        protected void onPostExecute(Void result) {
+	        protected void onPostExecute(Integer result) {
 	        	Log.i(TAG,"Update finished");
 		        super.onPostExecute(result);
-		        observable.setChanged();  //Tell that we made changes....
-		        observable.notifyObservers();  //Notify all listeners...
+			    observable.setChanged();  //Tell that we made changes....
+			    observable.notifyObservers(result);  // Notify all listeners...
+		        Log.i(TAG,"Update finished listeners notified result: "+ result);
 	        }
 	    }
 	 

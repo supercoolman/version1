@@ -65,7 +65,7 @@ public class SplashActivity extends Activity
 		{
 			Me.setUserID(userId);
 			Me.setPassword(userPassword);
-			Me.updateMe();
+			Me.updateMeFromWebService();
 			onResume();
 		}
 	}

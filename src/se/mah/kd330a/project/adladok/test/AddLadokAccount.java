@@ -44,15 +44,7 @@ public class AddLadokAccount extends Activity implements Observer {
 
 	public void update(View v) {
 		// clear all
-		Me.setDispayName("");
-		Me.setEmail("");
-		Me.setFirstName("");
-		Me.setIsStudent(false);
-		Me.setIsStaff(false);
-		Me.setLastName("");
-		Me.setPassword("");
-		Me.setUserID("");
-		Me.clearCourses();
+		Me.clearAllIncludingSavedData(this);
 
 		// First we have to set username and password those should are probably
 		// be saved in Sharedprefs
@@ -60,7 +52,7 @@ public class AddLadokAccount extends Activity implements Observer {
 		EditText password_et = (EditText) findViewById(R.id.passWordET);
 		Me.setUserID(userID_et.getText().toString());
 		Me.setPassword(password_et.getText().toString());
-		Me.updateMe();
+		Me.updateMeFromWebService();
 		
 		int i=0;		
 		for (Course c : Me.getCourses()) {
