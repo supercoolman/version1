@@ -43,6 +43,9 @@ public class Me implements Serializable{
 		Me.password = password;
 	}
 	
+	public static String getPassword() {
+		return Me.password;
+	}
 	
 	public static String getUserID() {
 		return userID;
@@ -53,6 +56,44 @@ public class Me implements Serializable{
 	
 	private Me() {
 		//prevents anyone from doing instances
+	}
+	
+	public static String getFirstName() {
+		return firstName;
+	}
+	public static void setFirstName(String firstName) {
+		Me.firstName = firstName;
+	}
+	public static String getLastName() {
+		return lastName;
+	}
+	public static void setLastName(String lastName) {
+		Me.lastName = lastName;
+	}
+	public static String getEmail() {
+		return email;
+	}
+	public static void setEmail(String email) {
+		Me.email = email;
+	}
+	public static String getDispayName() {
+		return dispayName;
+	}
+	public static void setDispayName(String dispayName) {
+		Me.dispayName = dispayName;
+	}
+
+	public static boolean isStaff() {
+		return Me.isStaff;
+	}
+	public static void setIsStaff(boolean isStaff) {
+		Me.isStaff = isStaff;
+	}
+	public static boolean isStudent() {
+		return isStudent;
+	}
+	public static void setIsStudent(boolean isStudent) {
+		Me.isStudent = isStudent;
 	}
 	
 	public static void clearAllIncludingSavedData(Context c) {
@@ -118,8 +159,10 @@ public class Me implements Serializable{
 	}
 	
 	public static void clearCourses(){
-		Log.i(TAG,"clearing courses in memory");
-		myCourses.clear();
+		if (myCourses.size()>0){
+			Log.i(TAG,"clearing courses in memory");
+			myCourses.clear();
+		}
 	}
 	
 	public static List<Course> getCourses(){
@@ -154,45 +197,6 @@ public class Me implements Serializable{
 		Me.myCourses.add(course);
 		
 	}
-	
-	public static String getFirstName() {
-		return firstName;
-	}
-	public static void setFirstName(String firstName) {
-		Me.firstName = firstName;
-	}
-	public static String getLastName() {
-		return lastName;
-	}
-	public static void setLastName(String lastName) {
-		Me.lastName = lastName;
-	}
-	public static String getEmail() {
-		return email;
-	}
-	public static void setEmail(String email) {
-		Me.email = email;
-	}
-	public static String getDispayName() {
-		return dispayName;
-	}
-	public static void setDispayName(String dispayName) {
-		Me.dispayName = dispayName;
-	}
-
-	public static boolean isStaff() {
-		return Me.isStaff;
-	}
-	public static void setIsStaff(boolean isStaff) {
-		Me.isStaff = isStaff;
-	}
-	public static boolean isStudent() {
-		return isStudent;
-	}
-	public static void setIsStudent(boolean isStudent) {
-		Me.isStudent = isStudent;
-	}
-	
 //Part handling updateddd
 	
     private static final String NAMESPACE = "http://mahapp.k3.mah.se/";
@@ -225,7 +229,7 @@ public class Me implements Serializable{
 	        		if(Parser.updateMeFromADandLADOK(userInfoAsXML)){
 	        			result = 1; //success
 	        		}
-	        		Log.i("UserInfo","Result of update 1 is good");
+	        		Log.i("UserInfo","Result of update 1 is good: "+result);
 	        	}catch(Exception e){
 	        		Log.e("UserInfo","Parser update exception");
 	        	}

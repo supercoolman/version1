@@ -34,9 +34,19 @@ public class Parser{
 		XMLParser parser = new XMLParser();
 		if (xmlFromWebservice!=null){
 			Document doc = parser.getDomElement(xmlFromWebservice); // getting DOM element
-			//firstname
-			NodeList nl = doc.getElementsByTagName("givenname");
+			NodeList nl = doc.getElementsByTagName("userid");
 			Element e = (Element)nl.item(0);
+			if (e!=null){
+				Me.setUserID(parser.getElementValue(e));
+			}
+			nl = doc.getElementsByTagName("password");
+			e = (Element)nl.item(0);
+			if (e!=null){
+				Me.setPassword(parser.getElementValue(e));
+			}
+			//firstname
+			nl = doc.getElementsByTagName("givenname");
+			e = (Element)nl.item(0);
 			if (e!=null){
 				Me.setFirstName(parser.getElementValue(e));
 			}
@@ -87,7 +97,7 @@ public class Parser{
 			
 			NodeList courseNode = e.getElementsByTagName("course");
 			//TODO here it is needed to check if the course exists
-			if (courseNode.getLength()>0){  //At least we we check if we have any courses before clearing them.....
+			if (courseNode.getLength()>0){  //At least we check if we have any courses before clearing them.....
 				Me.clearCourses();
 			}
 			for (int j =0;j < courseNode.getLength();j++){
@@ -140,6 +150,12 @@ public class Parser{
 	        serializer.setOutput(writer);
 	        serializer.startDocument("UTF-8", true);
 	        serializer.startTag("","user");
+	        serializer.startTag("", "userid");
+        	serializer.text(Me.getUserID());
+        	serializer.endTag("", "userid");
+        	serializer.startTag("", "password");
+        	serializer.text(Me.getPassword());
+        	serializer.endTag("", "password");
         	serializer.startTag("", "givenname");
         	serializer.text(Me.getFirstName());
         	serializer.endTag("", "givenname");
@@ -156,7 +172,7 @@ public class Parser{
         	serializer.text(String.valueOf(Me.isStudent()));
         	serializer.endTag("", "mahisstudent");
         	serializer.startTag("", "mahisstaff");
-        	serializer.text(String.valueOf(Me.isStudent()));
+        	serializer.text(String.valueOf(Me.isStaff()));
         	serializer.endTag("", "mahisstaff");
 	        serializer.startTag("", "courses");
 	        for (Course course: Me.getCourses()){

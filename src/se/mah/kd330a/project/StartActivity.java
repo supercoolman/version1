@@ -38,17 +38,17 @@ public class StartActivity extends Activity implements Observer
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 		
 		((LinearLayout) findViewById(R.id.login_view)).setVisibility(LinearLayout.GONE);
 		((LinearLayout) findViewById(R.id.loading_view)).setVisibility(LinearLayout.GONE);
 
-		
-		Me.observable.deleteObservers();
+		Me.observable.deleteObservers(); //since we will call a webservice....
 		Me.observable.addObserver(this);
 		boolean restoredsuccess = Me.restoreMeFromLocalStorage(getApplicationContext());
-
+		Log.i(TAG, "On create restored: "+ restoredsuccess);
 		if (!restoredsuccess)  //Should be id???
 		{
 			showLoginView();
@@ -71,9 +71,9 @@ public class StartActivity extends Activity implements Observer
 		((View) findViewById(R.id.login_view)).setVisibility(View.VISIBLE);
 		editTextUsername = (EditText) findViewById(R.id.editText1);
 		editTextPassword = (EditText) findViewById(R.id.editText2);
-		//Test setting
 		editTextUsername.setText(Me.getUserID());
 		editTextPassword.setText("");
+		//Test setting
 //		editTextUsername.setText("testUser");
 //		editTextPassword.setText("testUser");
 	}
@@ -87,15 +87,6 @@ public class StartActivity extends Activity implements Observer
 		
 		((View) findViewById(R.id.login_view)).setVisibility(View.GONE);
 		((View) findViewById(R.id.loading_view)).setVisibility(View.VISIBLE);
-	}
-
-	public void forgetButtonClicked(View v)
-	{
-		Me.setUserID("");
-		Me.setPassword("");
-
-		Toast.makeText(this, "You've been forgotten.", Toast.LENGTH_SHORT).show();
-		finish();
 	}
 
 	public void loginButtonClicked(View v)
