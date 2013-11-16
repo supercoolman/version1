@@ -1,5 +1,6 @@
 package se.mah.kd330a.project.adladok.model;
 
+import android.graphics.Color;
 import android.util.Log;
 import se.mah.kd330a.project.R;
 
@@ -10,11 +11,12 @@ public class Course {
 	 private String regCode="";
 	 private String program ="";
 	 private String term;
-	 private int color = R.color.white;
+	 private int color = R.color.red_mah;
+
 	 
 	 
 	 public int getColor() {
-		return color;
+		 return color;
 	}
 	 
 	public void setColor(int color) {

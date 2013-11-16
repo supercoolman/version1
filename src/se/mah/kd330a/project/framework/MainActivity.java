@@ -4,6 +4,7 @@ package se.mah.kd330a.project.framework;
 
 
 import se.mah.kd330a.project.R;
+import se.mah.kd330a.project.R.color;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.faq.FragmentFaq;
@@ -21,12 +22,14 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract.Instances;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -244,7 +247,6 @@ public class MainActivity extends FragmentActivity{
 	public void updateColors() {
 	int i=0;		
 	for (Course c : Me.getCourses()) {
-		
 		switch (i) {
 		case 0:
 			c.setColor(this.getResources().getColor(R.color.orange));
@@ -266,7 +268,6 @@ public class MainActivity extends FragmentActivity{
 		}
 		i++;
 	}
-
 	}
 
     

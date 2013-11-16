@@ -86,7 +86,6 @@ public class FragmentScheduleWeek extends Fragment implements
 			
 			//Default color if the feed is not attached to a course
 			colors.put("", context.getResources().getColor(R.color.red_mah));
-			
 			//Fill hashmap with colors from my courses
 			for (Course c : Me.getCourses())
 			{
@@ -145,8 +144,15 @@ public class FragmentScheduleWeek extends Fragment implements
 			ScheduleItem previousSI = null ;
 			
 			String courseID = currentSI.getCourseID();
-			SharedPreferences sharedPref = getActivity().getSharedPreferences("courseName", Context.MODE_PRIVATE);
-			String courseName = sharedPref.getString(currentSI.getCourseName(), currentSI.getCourseName());
+			Course course = Me.getCourse(courseID);
+			String courseName ="";
+			if (course!=null){
+				courseName = course.getDisplaynameSv();
+				Log.i("UserInfo","CourseName: "+ courseName);
+			}
+			
+			//SharedPreferences sharedPref = getActivity().getSharedPreferences("courseName", Context.MODE_PRIVATE);
+			//String courseName = sharedPref.getString(currentSI.getCourseName(), currentSI.getCourseName());
 			
 			if(groupPosition!=0){
 				previousSI=(ScheduleItem) getGroup(groupPosition-1);

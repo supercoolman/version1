@@ -47,7 +47,7 @@ public class StartActivity extends Activity implements Observer
 
 		Me.observable.deleteObservers(); //since we will call a webservice....
 		Me.observable.addObserver(this);
-		boolean restoredsuccess = Me.restoreMeFromLocalStorage(getApplicationContext());
+		boolean restoredsuccess = Me.restoreMeFromLocalStorage(this);
 		Log.i(TAG, "On create restored: "+ restoredsuccess);
 		if (!restoredsuccess)  //Should be id???
 		{

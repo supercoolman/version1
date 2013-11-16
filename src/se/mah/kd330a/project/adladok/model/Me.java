@@ -18,6 +18,7 @@ import se.mah.kd330a.project.adladok.xmlparser.Parser;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
@@ -171,29 +172,7 @@ public class Me implements Serializable{
 	
 	@SuppressLint("ResourceAsColor")
 	public static void addCourse(Course course) {
-		//Here check if it exist already then update it............
-		//Set Colors on courses first
-		
-	/*	This doesn't work - needs a context to work
-	/* switch (Me.myCourses.size()) {
-		case 0:
-			course.setColor(R.color.blue);
-			break;
-		case 1:
-			course.setColor(R.color.orange);
-			break;
-		case 2:
-			course.setColor(R.color.blue);
-			break;
-		case 3:
-			course.setColor(R.color.green);
-			break;
-		case 4:
-			course.setColor(R.color.yellow);
-			break;
-		default:
-			break;
-		} */
+		//Set Colors on courses first needs a context so perhaps Singleton....
 		Me.myCourses.add(course);
 		
 	}
@@ -271,4 +250,13 @@ public class Me implements Serializable{
 			super.setChanged();
 		}
 	 }
+
+	public static Course getCourse(String courseID) {
+		for(Course c: myCourses){
+			if (c.getCourseID().equals(courseID)){
+				return c;
+			}
+		}
+		return null;
+	}
 }

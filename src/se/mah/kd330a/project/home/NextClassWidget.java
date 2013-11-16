@@ -75,12 +75,13 @@ public class NextClassWidget {
 	private boolean setData() {
 		if (!items.isEmpty()) {
 
-			setCourseName(items.get(0).getCourseName());
+			//setCourseName(items.get(0).getCourseName());
 			setLocation(items.get(0).getRoomCode());
 			setStartTime(items.get(0).getStartTime());
 			setEndTime(items.get(0).getEndTime());
 			setDate(items.get(0).getDateAndTime2());
 			setCourseId(items.get(0).getCourseID());
+			setCourseName(Me.getCourse(getCourseId()).getDisplaynameEn()); //Not so pretty
 			return true;
 		} else {
 			Log.e(getClass().toString(), "item list is empty");
