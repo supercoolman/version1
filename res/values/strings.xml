@@ -251,5 +251,7 @@
         <item>Victor Sandberg</item>
         <item>Alexander Taavitsainen</item>
     </string-array>
+    <string name="activity">Activity: </string>
+    <string name="noactivity">Activity not entered</string>
 
 </resources>

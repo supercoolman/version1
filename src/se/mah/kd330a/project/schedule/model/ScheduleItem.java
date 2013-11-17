@@ -44,6 +44,7 @@ public class ScheduleItem implements Serializable {
 	private String location;
 	private String courseName;
 	private String teacherID;
+	private String description;
 	private boolean isDivider = false;
 	
 	
@@ -76,7 +77,16 @@ public class ScheduleItem implements Serializable {
 			teacherID = summary.substring(summary.indexOf("Sign: ") + 6,
 					summary.indexOf("Sign: ") + 12);
 		}
+		if (summary.indexOf("Description: ") != -1){
+			description = summary.substring(summary.indexOf("Description: ") + 13,
+					summary.indexOf("Activity type: "));
+		}
 		//Log.i("ScheduleSummary",v.getSummary().getValue());
+		//Log.i("Description: ",description);
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public boolean isDividerElement() {

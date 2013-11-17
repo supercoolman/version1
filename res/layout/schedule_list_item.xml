@@ -57,13 +57,32 @@
                 android:text="@string/sign"
                 android:textSize="11sp"
                 android:textColor="@color/grey_dark" />
+            <TextView
+                android:id="@+id/activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textTeacherName"
+                android:layout_alignLeft="@+id/findButton"
+                android:text="@string/activity"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/grey_dark" />
+
+            <TextView
+                android:id="@+id/list_course_child_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity"
+                android:layout_marginLeft="2dp"
+                android:text="@string/noactivity"
+                android:textSize="11sp"
+                android:textColor="@color/grey_dark" />
 
             <Button
                 android:id="@+id/findButton"
                 style="@style/mah_button_red"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
-                android:layout_below="@id/list_course_child_lector"
+                android:layout_below="@id/list_course_child_activity"
                 android:layout_marginRight="32dp"
                 android:layout_marginTop="16dp"
                 android:focusable="false"

@@ -80,7 +80,7 @@ public class FragmentScheduleWeek extends Fragment implements
 
 		String lastDate = null;
 		String location;	
-		HashMap<String, Integer> colors = new HashMap<String, Integer>();
+		HashMap<String, Integer> colors = new HashMap<String, Integer>(); //This should be cleaned out use colors from courses 
 		
 		public ExpandableListViewAdapter(Context context) {
 			
@@ -253,20 +253,12 @@ public class FragmentScheduleWeek extends Fragment implements
 				boolean isLastChild, View convertView, ViewGroup parent) {
 			ArrayList<String> childTexts = (ArrayList<String>) getChild(
 					groupPosition, childPosition);
-			
-			
-
-
 			if (convertView == null) {
 				LayoutInflater infalInflater = (LayoutInflater) getActivity()
 						.getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
 				convertView = infalInflater.inflate(
 						R.layout.schedule_list_item, null);
-				
-				
-				
-		
-				
+			
 			}
 			
 			ScheduleItem currentSI = (ScheduleItem) getGroup(groupPosition);
@@ -274,6 +266,8 @@ public class FragmentScheduleWeek extends Fragment implements
 			
 			TextView lector = (TextView) convertView
 					.findViewById(R.id.list_course_child_lector);
+			//HERE enter activity
+			TextView activity = (TextView)convertView.findViewById(R.id.list_course_child_activity);
 			Button btnFind = (Button) convertView.findViewById(R.id.findButton);
 			btnFind.setOnClickListener(new OnClickListener() {
 				
@@ -304,6 +298,7 @@ public class FragmentScheduleWeek extends Fragment implements
 			ScheduleItem previousSI = null ;
 			String courseID = currentSI.getCourseID();
 			lector.setText(childTexts.get(0));
+			activity.setText(currentSI.getDescription());
 			ImageView calendarColorFrameC1 = (ImageView) convertView.findViewById(R.id.calendarColorFrame1);
 			ImageView calendarColorFrameC2= (ImageView) convertView.findViewById(R.id.calendarColorFrame2);
 			
