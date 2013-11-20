@@ -147,8 +147,8 @@ public class FragmentScheduleWeek extends Fragment implements
 			Course course = Me.getCourse(courseID);
 			String courseName ="";
 			if (course!=null){
-				courseName = course.getDisplaynameSv();
-				Log.i("UserInfo","CourseName: "+ courseName);
+				courseName = course.getDisplaynameEn();
+				//Log.i("UserInfo","CourseName: "+ courseName);
 			}
 			
 			//SharedPreferences sharedPref = getActivity().getSharedPreferences("courseName", Context.MODE_PRIVATE);

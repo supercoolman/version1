@@ -28,6 +28,7 @@ public class Me implements Serializable{
 	private static final long serialVersionUID = 1L;
 	//Static variables there is only one Me
 	private static List<Course> myCourses = new ArrayList<Course>();
+	private static List<Teacher> myTeachers = new ArrayList<Teacher>();
 	private static String firstName="";
 	private static String lastName="";
 	private static String email="";
@@ -97,6 +98,14 @@ public class Me implements Serializable{
 		Me.isStudent = isStudent;
 	}
 	
+	public static String getTeacherName(String teacherID) {
+		//search the teachers return name if found if not found call web service but else:
+			//Not found call web service
+			//Save in arraylist as teacher
+			//return the name
+		return teacherID;
+	}
+	
 	public static void clearAllIncludingSavedData(Context c) {
 		 clearAllExcludingSavedData(c);
 		 Log.i(TAG,"clear all including locally saved data");
@@ -107,6 +116,7 @@ public class Me implements Serializable{
 		// Lars fixa detta. Metoden ska ta bort alla spår av användaren
 		Log.i(TAG,"clear all excluding saved data");
 		 clearCourses();
+		 //clearTeachers();
 		 firstName="";
 		 lastName="";
 		 email="";
@@ -125,7 +135,6 @@ public class Me implements Serializable{
 		File file = new File(c.getFilesDir(), SAVE_FILE_NAME);
 		if (file.exists()){
 			//Clear content in me:
-			
 			String xml = Parser.getXmlFromFile(file);
 			Log.i("UserInfo","Restored" + xml);
 			 try {
@@ -133,14 +142,12 @@ public class Me implements Serializable{
 				 if(Me.password.isEmpty()&&Me.userID.isEmpty()){
 					 restored = false;
 				 }
-//				observable.setChanged();  //Tell that we made changes....
-//		        observable.notifyObservers();  //Notify all listeners...
 			} catch (Exception e) {restored =false;}
 		}
 		return restored;
 	}
 	
-	/**Stores Me and my courses on local storage
+	/**Stores Me and my courses on local storage CourseName:
 	 * Call this also when changes are made to Me or courses*/
 	public static void saveMeToLocalStorage(Context c){
 		String xml = Parser.writeXml();

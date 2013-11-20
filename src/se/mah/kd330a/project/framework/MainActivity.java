@@ -3,8 +3,10 @@ package se.mah.kd330a.project.framework;
 
 
 
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import se.mah.kd330a.project.R;
-import se.mah.kd330a.project.R.color;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.faq.FragmentFaq;
@@ -13,19 +15,18 @@ import se.mah.kd330a.project.help.FragmentCredits;
 import se.mah.kd330a.project.home.FragmentHome;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.FragmentITSL;
+import se.mah.kd330a.project.schedule.data.KronoxCalendar;
+import se.mah.kd330a.project.schedule.data.KronoxReader;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
 import se.mah.kd330a.project.settings.view.SettingsActivity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract.Instances;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -48,16 +49,15 @@ public class MainActivity extends FragmentActivity{
     private TypedArray mMenuIcons;
     private TypedArray mMenuColors;
     public RSSFeed newsFeed;
-    
+    private final String TAG = "MainActivity";
     private final int HOME = 0;
 	private final int SCHEDULE = 1;
 	private final int ITSL = 2;
 	private final int FIND = 3;
 	private final int FAQ = 4;
 	private final int HELP = 5;
-	
-	
-	
+    private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1);
+		
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,19 +110,44 @@ public class MainActivity extends FragmentActivity{
         //Assigns colors for the courses - maximum 5 courses
         updateColors();
         
+        //Scheduled updates
+        this.executor_.scheduleWithFixedDelay(new Runnable() {
+    		@Override
+    		public void run() {
+    		    updateSchedule();
+    		    }
+    		}, 10L, 300L, TimeUnit.SECONDS);
+        
     }
     
     @Override
     protected void onPause() {
     	// TODO Auto-generated method stub
     	super.onPause();
-    	Me.saveMeToLocalStorage(this);
+    	//Me.saveMeToLocalStorage(this);
+    }
+    
+    @Override
+    protected void onResume() {
+    	// TODO Auto-generated method stub
+    	super.onResume();
+    	Log.i(TAG,"OnResume");
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	// TODO Auto-generated method stub
+    	super.onDestroy();
+    	Log.i(TAG,"Scheduled updater thread stopped");
+    	 this.executor_.shutdown();
     }
     
     public RSSFeed getRssNewsFeed() {
     	return newsFeed;
     }
-
+    
+    
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -165,6 +190,7 @@ public class MainActivity extends FragmentActivity{
     public void selectItem(int position) {
         // update the main content by replacing fragments
     	android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+    	
     	Fragment fragment;
     	switch (position) {
 		case HOME:	
@@ -188,12 +214,14 @@ public class MainActivity extends FragmentActivity{
 		default:	
 			fragment = new FragmentHome();
 		}
+
     	android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
     	transaction.replace(R.id.content_frame, fragment);
+    	//transaction.addToBackStack(null);
     	transaction.commit();
     	
-    	//fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
+    	//fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
         setTitle(mMenuTitles[position]);
@@ -268,10 +296,18 @@ public class MainActivity extends FragmentActivity{
 		}
 		i++;
 	}
+	} 
+	
+	private void updateSchedule(){
+		Log.i(TAG, "Kronox: Downloading schedule from background, then creating calendar and file saved");
+		try
+		{
+			KronoxReader.update(getApplicationContext());
+			KronoxCalendar.createCalendar(KronoxReader.getFile(getApplicationContext()));
+		}
+		catch (Exception f)
+		{
+			Log.e(TAG, f.toString());
+		}
 	}
-
-    
-    
-
-    
 }

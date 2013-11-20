@@ -158,61 +158,27 @@ public class StartActivity extends Activity implements Observer
 				Log.e(TAG, e.toString());
 			}
 
-			if (!Me.getCourses().isEmpty())
+//			if (!Me.getCourses().isEmpty())
+//			{
+			try
 			{
-				Log.i(TAG, "Kronox: setting up courses");
-				ArrayList<KronoxCourse> courses = new ArrayList<KronoxCourse>();
-
-				for (Course c : Me.getCourses())
-				{
-					try {
-						String courseId = c.getKronoxCalendarCode().substring(2);
-						courses.add(new KronoxCourse(courseId));
-					} catch (Exception e) {
-						Log.i(TAG, "Empty courses");
-					}
-				}
-
-				KronoxCourse[] courses_array = new KronoxCourse[courses.size()];
-				courses.toArray(courses_array);
-
+				Log.i(TAG, "Kronox: Creating calendar from file if saved");
+				KronoxCalendar.createCalendar(KronoxReader.getFile(getApplicationContext()));
+			}
+			catch (Exception e)
+			{
+				Log.i(TAG, "Kronox: Downloading schedule, then creating calendar and file saved");
 				try
 				{
-					Log.i(TAG, "Kronox: something");
-					KronoxCourse course = KronoxJSON.getCourse(courses_array[0].getFullCode());
-					if (course != null)
-					{
-						SharedPreferences sp = getSharedPreferences("courseName", Context.MODE_PRIVATE);
-						SharedPreferences.Editor editor = sp.edit();
-						editor.putString(course.getFullCode(), course.getName());
-						editor.commit();
-						Log.i(TAG, String.format("Course: %s, %s", course.getFullCode(), course.getName()));
-
-						try
-						{
-							Log.i(TAG, "Kronox: Creating calendar");
-							KronoxCalendar.createCalendar(KronoxReader.getFile(getApplicationContext()));
-						}
-						catch (Exception e)
-						{
-							Log.i(TAG, "Kronox: Downloading schedule, then creating calendar");
-							try
-							{
-								KronoxReader.update(getApplicationContext(), courses_array);
-								KronoxCalendar.createCalendar(KronoxReader.getFile(getApplicationContext()));
-							}
-							catch (Exception f)
-							{
-								Log.e(TAG, f.toString());
-							}
-						}
-					}
+					KronoxReader.update(getApplicationContext());
+					KronoxCalendar.createCalendar(KronoxReader.getFile(getApplicationContext()));
 				}
-				catch (Exception e)
+				catch (Exception f)
 				{
-					Log.e(TAG, e.toString());
+					Log.e(TAG, f.toString());
 				}
 			}
+	//				}
 
 			return null;
 		}
