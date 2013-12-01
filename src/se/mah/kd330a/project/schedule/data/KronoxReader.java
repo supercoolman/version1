@@ -1,5 +1,6 @@
 package se.mah.kd330a.project.schedule.data;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,11 +28,21 @@ public class KronoxReader {
 	
 	private static String generateURL() {
 		String kurser = "";
+		String programCourse ="";
 		for(se.mah.kd330a.project.adladok.model.Course course : Me.getCourses()) {
 			//kurser += String.format("k.%s-%%2C", course.getFullCode());
+
 			if (!course.getKronoxCalendarCode().isEmpty()){
-				kurser += String.format("%s-%%2C", course.getKronoxCalendarCode());
+				if(course.getProgram().isEmpty()){  //fristående course
+					kurser += String.format("%s%%2C", course.getKronoxCalendarCode());
+				}else if(!course.getProgram().equals(programCourse)){ //if course is part of program only add once
+				  kurser += String.format("%s%%2C", course.getKronoxCalendarCode());
+				}
+				programCourse = course.getProgram();
 			}
+		}
+		if (kurser.endsWith("%2C")){
+		  kurser = kurser.substring(0, kurser.lastIndexOf("%2C"));
 		}
 		String url = "http://schema.mah.se/setup/jsp/SchemaICAL.ics";
 		url += String.format("?startDatum=idag&intervallTyp=%s&intervallAntal=%d",
@@ -75,5 +86,20 @@ public class KronoxReader {
 	 */
 	public static FileInputStream getFile(Context ctx) throws FileNotFoundException {
 		return ctx.openFileInput(KronoxReader.LOCAL_FILENAME);
-}
+	}
+	
+	/**
+	 * This will clear content fromschedulefile if exists.
+	 * 
+	 * @return true if deleted
+	 * @throws FileNotFoundException
+	 */
+	public static boolean clearKronox(Context ctx){
+		boolean result = false;
+		File file = new File(ctx.getFilesDir(), LOCAL_FILENAME);
+		if (file.exists()){
+			result = file.delete();
+		}
+		return result;
+	}
 }

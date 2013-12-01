@@ -42,8 +42,8 @@ public class NextClassWidget {
 
 	}
 
-	public boolean getTodaysClasses() {
-		if (!Me.getFirstName().isEmpty()) {
+	public boolean anyClassesToday() {
+		if (!Me.getUserID().isEmpty()) {
 			listEvents();
 			if (setData()) {
 				return true;
@@ -52,15 +52,12 @@ public class NextClassWidget {
 		} else {
 			return false;
 		}
-
 	}
 
 	private void listEvents() {
 		items = new ArrayList<ScheduleItem>();
 		Collection<?> kronox_events = KronoxCalendar.todaysEvents();
-
 		if (kronox_events != null) {
-
 			items.clear();
 			for (Iterator<?> i = kronox_events.iterator(); i.hasNext();) {
 				Component c = (Component) i.next();
@@ -69,7 +66,6 @@ public class NextClassWidget {
 				}
 			}
 		}
-
 	}
 
 	private boolean setData() {
@@ -136,5 +132,4 @@ public class NextClassWidget {
 	public void setDate(String date) {
 		this.date = date;
 	}
-
 }

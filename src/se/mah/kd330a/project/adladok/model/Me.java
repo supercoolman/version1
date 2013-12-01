@@ -6,6 +6,8 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -15,6 +17,7 @@ import org.xmlpull.v1.XmlSerializer;
 
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.xmlparser.Parser;
+import se.mah.kd330a.project.schedule.data.KronoxReader;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -40,6 +43,7 @@ public class Me implements Serializable{
 	private static String password="";
 	private static final String SAVE_FILE_NAME = "savefilename";
 	public static MyObservable observable = new MyObservable(); 
+
 
 	public static void setPassword(String password) {
 		Me.password = password;
@@ -108,6 +112,8 @@ public class Me implements Serializable{
 	
 	public static void clearAllIncludingSavedData(Context c) {
 		 clearAllExcludingSavedData(c);
+		 //clear kronox
+		 KronoxReader.clearKronox(c);
 		 Log.i(TAG,"clear all including locally saved data");
 		 saveMeToLocalStorage(c);
 	}
@@ -175,6 +181,15 @@ public class Me implements Serializable{
 	
 	public static List<Course> getCourses(){
 		return myCourses;
+	}
+	
+	public static Course getCourse(String courseID) {
+		for(Course c: myCourses){  //overide equals
+			if (c.getCourseID().equals(courseID)){
+				return c;
+			}
+		}
+		return null;
 	}
 	
 	@SuppressLint("ResourceAsColor")
@@ -257,13 +272,4 @@ public class Me implements Serializable{
 			super.setChanged();
 		}
 	 }
-
-	public static Course getCourse(String courseID) {
-		for(Course c: myCourses){
-			if (c.getCourseID().equals(courseID)){
-				return c;
-			}
-		}
-		return null;
-	}
 }

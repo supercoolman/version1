@@ -54,38 +54,31 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
-
 		try
 		{
 			nextClass = new NextClassWidget();
-			profileRegistered = nextClass.getTodaysClasses();
+			profileRegistered = nextClass.anyClassesToday();
 		}
 		catch (Exception e)
 		{
 			Log.e("FragmentHome", e.toString());
 		}
-		
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-	
-		
 		rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_home, container, false);
 		setNextClassWidget(rootView);
 		setNewsFeedMah(rootView);
-		setLastItslPost(rootView);
+		//setLastItslPost(rootView);
 		ITSLfeedManager = new FeedManager(this, getActivity().getApplicationContext());
 		if (!ITSLfeedManager.loadCache())
 		{
 			ITSLfeedManager.reset();
 			ITSLfeedManager.processFeeds();
-		}
-		
+		}	
 		return rootView;
-
 	}
 
 	private void setNewsFeedMah(ViewGroup rootView)
@@ -131,8 +124,9 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		
 		LinearLayout nextClassWidget = (LinearLayout) rootView.findViewById(R.id.next_class_widget);
 		nextClassWidget.setVisibility(LinearLayout.VISIBLE);
-		SharedPreferences sharedPref = this.getActivity().getSharedPreferences("courseName", Context.MODE_PRIVATE);
-		String courseName = sharedPref.getString(nextClass.getCourseName(), nextClass.getCourseName());
+//		SharedPreferences sharedPref = this.getActivity().getSharedPreferences("courseName", Context.MODE_PRIVATE);
+//		String courseName = sharedPref.getString(nextClass.getCourseName(), nextClass.getCourseName());
+		String courseName = nextClass.getCourseName();
 		String courseID = nextClass.getCourseId();
 		
 		//For synchronizing color
@@ -160,13 +154,19 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		
 			View scheduleColor1 = (View) nextClassWidget.findViewById(R.id.home_schedule1);
 			View scheduleColor2 = (View) nextClassWidget.findViewById(R.id.home_schedule2);
-			
-			//Color				
-			if (colors.get(courseID)!=null)
-			{
-				scheduleColor1.setBackgroundColor(colors.get(courseID));
-				scheduleColor2.setBackgroundColor(colors.get(courseID));
+			if (Me.getCourse(courseID)!= null){
+				scheduleColor1.setBackgroundColor(Me.getCourse(courseID).getColor());
+				scheduleColor2.setBackgroundColor(Me.getCourse(courseID).getColor());
+			}else{
+				scheduleColor1.setBackgroundColor(getResources().getColor(R.color.red_mah));
+				scheduleColor2.setBackgroundColor(getResources().getColor(R.color.red_mah));
 			}
+			//Color				
+//			if (colors.get(courseID)!=null)
+//			{
+//				scheduleColor1.setBackgroundColor(colors.get(courseID));
+//				scheduleColor2.setBackgroundColor(colors.get(courseID));
+//			}
 
 		}
 		else
@@ -178,12 +178,12 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 
 	}
 
-	private SharedPreferences getSharedPreferences(String string, int modePrivate)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+//	private SharedPreferences getSharedPreferences(String string, int modePrivate)
+//	{
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
 	private void setLastItslPost(ViewGroup rootView)
 	{
 		// TODO Auto-generated method stub
@@ -214,7 +214,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			// Do some stuff here
 
 			// Call onRefreshComplete when the list has been refreshed.
-			// mPullRefreshScrollView.onRefreshComplete();
+			//mPullRefreshScrollView.onRefreshComplete();
 			super.onPostExecute(result);
 		}
 	}
@@ -235,32 +235,21 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			for (Course c : Me.getCourses())
 			{
 				colors.put(c.getRegCode(), c.getColor());			
-			}
-
-
-				
+			}	
 			((TextView)widget.findViewById(R.id.text_itsl_title)).setText(a.getArticleHeader());
 			((TextView)widget.findViewById(R.id.text_itsl_date)).setText(a.getArticleDate());
 			((TextView)widget.findViewById(R.id.text_itsl_content)).setText(a.getArticleText());
-			
-			
-			String regCode = "";
-			
+			String regCode = "";		
 			if (a.getArticleCourseCode().contains("-"))
 			{
 				int start = a.getArticleCourseCode().indexOf("-")+1;
-				
 				regCode = a.getArticleCourseCode().substring(start, start+5);
 			}
-			
-			
 			if (colors.get(regCode)!=null)
 			{
 				((View)widget.findViewById(R.id.home_itsl1)).setBackgroundColor(colors.get(regCode));
 				((View)widget.findViewById(R.id.home_itsl2)).setBackgroundColor(colors.get(regCode));
 			}
-		
-			
 		}
 		catch(Exception e)
 		{

@@ -3,17 +3,20 @@ package se.mah.kd330a.project.framework;
 
 
 
+import java.util.Observable;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
+import se.mah.kd330a.project.adladok.model.Me.MyObservable;
 import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
 import se.mah.kd330a.project.help.FragmentCredits;
 import se.mah.kd330a.project.home.FragmentHome;
 import se.mah.kd330a.project.home.data.RSSFeed;
+import se.mah.kd330a.project.itsl.FeedManager;
 import se.mah.kd330a.project.itsl.FragmentITSL;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
@@ -42,7 +45,8 @@ public class MainActivity extends FragmentActivity{
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private String urlNewsFeed = "http://www.mah.se/english/News/";
+    private String urlNewsFeed
+    = "http://www.mah.se/english/News/";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mMenuTitles;
@@ -57,7 +61,6 @@ public class MainActivity extends FragmentActivity{
 	private final int FAQ = 4;
 	private final int HELP = 5;
     private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1);
-		
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +119,7 @@ public class MainActivity extends FragmentActivity{
     		public void run() {
     		    updateSchedule();
     		    }
-    		}, 10L, 300L, TimeUnit.SECONDS);
+    		}, 10L, 30L, TimeUnit.SECONDS);//FOR test only 30
         
     }
     
@@ -304,6 +307,7 @@ public class MainActivity extends FragmentActivity{
 		{
 			KronoxReader.update(getApplicationContext());
 			KronoxCalendar.createCalendar(KronoxReader.getFile(getApplicationContext()));
+			
 		}
 		catch (Exception f)
 		{

@@ -133,15 +133,14 @@ public class StartActivity extends Activity implements Observer
 	private class BackgroundDownloadTask extends AsyncTask<Void, Void, Void>
 	{
 		private StartActivity appContext;
-
 		public BackgroundDownloadTask(StartActivity activity)
 		{
 			appContext = activity;
 		}
-
 		@Override
 		protected Void doInBackground(Void... arg0)
 		{
+//ITSL			
 			try
 			{
 				Log.i(TAG, "RSS: Save a rss feed for god knows what reason");
@@ -157,9 +156,7 @@ public class StartActivity extends Activity implements Observer
 			{
 				Log.e(TAG, e.toString());
 			}
-
-//			if (!Me.getCourses().isEmpty())
-//			{
+//Kronox
 			try
 			{
 				Log.i(TAG, "Kronox: Creating calendar from file if saved");
@@ -178,8 +175,6 @@ public class StartActivity extends Activity implements Observer
 					Log.e(TAG, f.toString());
 				}
 			}
-	//				}
-
 			return null;
 		}
 
@@ -202,9 +197,7 @@ public class StartActivity extends Activity implements Observer
 		 *  the app
 		 */
 		Me.observable.deleteObserver(this);
-
 		Log.i(TAG, "finish(): destroying now");
-
 	}
 	
 	
