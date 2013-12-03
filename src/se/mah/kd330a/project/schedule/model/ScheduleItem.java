@@ -35,10 +35,12 @@ public class ScheduleItem implements Serializable {
 	SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	SimpleDateFormat date_format2 = new SimpleDateFormat("dd MMM, yyyy");
 	SimpleDateFormat week_day_format = new SimpleDateFormat("EEEE");
+	SimpleDateFormat short_week_day_format = new SimpleDateFormat("EE");
 
 	private String startTime;
 	private String endTime;
 	private String weekDay;
+	private String shortWeekDay;
 	private String dateAndTime1;
 	private String dateAndTime2;
 	private String location;
@@ -57,6 +59,7 @@ public class ScheduleItem implements Serializable {
 	public ScheduleItem(VEvent v) {
 		startTime = time_format.format(v.getStartDate().getDate());
 		weekDay = week_day_format.format(v.getStartDate().getDate());
+		shortWeekDay = short_week_day_format.format(v.getStartDate().getDate());
 		dateAndTime2 = date_format2.format(v.getStartDate().getDate());
 
 		endTime = time_format.format(v.getEndDate().getDate());
@@ -121,6 +124,10 @@ public class ScheduleItem implements Serializable {
 		return weekDay;
 	}
 
+	public String getShortWeekDay() {
+		return shortWeekDay;
+	}
+	
 	public String getDateAndTime2() {
 		return dateAndTime2;
 	}
