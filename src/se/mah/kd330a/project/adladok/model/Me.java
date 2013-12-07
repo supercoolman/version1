@@ -29,7 +29,7 @@ import android.util.Log;
 import android.util.Xml;
 
 
-public class Me extends Application implements Serializable{
+public class Me implements Serializable{
 	private static final long serialVersionUID = 1L;
 	//Static variables there is only one Me
 	private List<Course> myCourses = new ArrayList<Course>();
@@ -40,13 +40,14 @@ public class Me extends Application implements Serializable{
 	private String dispayName="";
 	private boolean isStaff = false;
 	private boolean isStudent = false;
-    private String TAG ="UserInfo";
+    private String TAG ="MeClass";
 	private String userID="";
 	private String password="";
 	private final String SAVE_FILE_NAME = "savefilename";
 	private static Me instanceOfMe;
 	private MyObservable observable = new MyObservable(); 
-	 private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1); //updater thread
+	private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1); //updater thread
+	
 	
 	public static Me getInstance(){
 		if (instanceOfMe==null){
@@ -60,7 +61,12 @@ public class Me extends Application implements Serializable{
 	}		
 	
 	 public void startUpdate(Context ctx){
-		 updateSchedule();
+		 setColors(ctx);
+		 updateSchedule(ctx);
+	 }
+	
+	 public void stopUpdate(){
+		 this.executor_.shutdown();
 	 }
 
 	public MyObservable getObservable() {
@@ -129,17 +135,14 @@ public class Me extends Application implements Serializable{
 	
 	public void clearAllIncludingSavedData(Context c) {
 		 clearAllExcludingSavedData(c);
-		 //clear kronox
 		 KronoxReader.clearKronox(c);
-		 Log.i(TAG,"clear all including locally saved data");
 		 saveMeToLocalStorage(c);
+		 Log.i(TAG,"clear all including locally saved data");
 	}
 	
 	public void clearAllExcludingSavedData(Context c) {
-		// Lars fixa detta. Metoden ska ta bort alla spår av användaren
 		Log.i(TAG,"clear all excluding saved data");
 		 clearCourses();
-		 //clearTeachers();
 		 firstName="";
 		 lastName="";
 		 email="";
@@ -196,7 +199,7 @@ public class Me extends Application implements Serializable{
 		}
 	}
 	
-	public void setColors(Context ctx){
+	private void setColors(Context ctx){
 		int i=0;
 			for (Course c : Me.getInstance().getCourses()) {
 				switch (i) {
@@ -244,18 +247,16 @@ public class Me extends Application implements Serializable{
 		return null;
 	}
 	
-	public void addCourse(Course course) {
-		//Set Colors on courses first needs a context so perhaps Singleton....
-		
+	public void addCourse(Course course) {		
 		this.myCourses.add(course);
 		
 	}
-//Part handling updateddd
 	
     private static final String NAMESPACE = "http://mahapp.k3.mah.se/";
     private static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
     private static AsyncTask<String, Void, Integer> asyncTask= null;
   //Only one update at a time
+    //This can partly be moved to ScheduleFixedDelay
     private void doUpdate(String userID, String password){
     	if(asyncTask!=null){
 	    	if (asyncTask.getStatus()==AsyncTask.Status.FINISHED){
@@ -326,23 +327,10 @@ public class Me extends Application implements Serializable{
 	 }
 	 
 	 /*updater metod*/
-	 private void updateSchedule(){
-		 this.executor_.scheduleWithFixedDelay(new Runnable() {
-	    		@Override
-	    		public void run() {
-	    			try
-	    			{
-	    				KronoxReader.update(getApplicationContext());
-	    				KronoxCalendar.createCalendar(KronoxReader.getFile(getApplicationContext()));
-	    				
-	    			}
-	    			catch (Exception f)
-	    			{
-	    				Log.e(TAG, f.toString());
-	    			}
-	    		    }
-	    		}, 10L, 30L, TimeUnit.SECONDS);//FOR test only 30
-			Log.i(TAG, "Kronox: Downloading schedule from background, then creating calendar and file saved");
+	 private void updateSchedule(Context ctx){
+		 ScheduleFixedDelay scheduledTask = new ScheduleFixedDelay(ctx);
+		 this.executor_.scheduleWithFixedDelay(scheduledTask, 10L, 30L, TimeUnit.SECONDS);//FOR test only 30
+			Log.i(TAG, "UpdateSchedule called");
 			
 		}
 }

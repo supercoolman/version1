@@ -22,7 +22,6 @@ import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
 import se.mah.kd330a.project.settings.view.SettingsActivity;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.content.Context;
@@ -61,7 +60,6 @@ public class MainActivity extends FragmentActivity{
 	private final int FIND = 3;
 	private final int FAQ = 4;
 	private final int HELP = 5;
-    private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,15 +111,7 @@ public class MainActivity extends FragmentActivity{
         }
 
        // updateColors();
-        Me.getInstance().setColors(this);
-        //Scheduled updates
-        this.executor_.scheduleWithFixedDelay(new Runnable() {
-    		@Override
-    		public void run() {
-    		    updateSchedule();
-    		    }
-    		}, 10L, 30L, TimeUnit.SECONDS);//FOR test only 30
-        
+       Me.getInstance().startUpdate(this);
     }
     
     @Override
@@ -143,7 +133,7 @@ public class MainActivity extends FragmentActivity{
     	// TODO Auto-generated method stub
     	super.onDestroy();
     	Log.i(TAG,"Scheduled updater thread stopped");
-    	 this.executor_.shutdown();
+    	 Me.getInstance().stopUpdate();
     }
     
     public RSSFeed getRssNewsFeed() {
@@ -194,7 +184,7 @@ public class MainActivity extends FragmentActivity{
     public void selectItem(int position) {
         // update the main content by replacing fragments
     	android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-    	
+    	android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
     	Fragment fragment;
     	switch (position) {
 		case HOME:	
@@ -202,26 +192,28 @@ public class MainActivity extends FragmentActivity{
 			break;
 		case SCHEDULE:
 			fragment = new FragmentScheduleWeekPager();
+			transaction.addToBackStack(null);
 			break;
 		case ITSL:
 			fragment = new FragmentITSL();
+			transaction.addToBackStack(null);
 			break;
 		case FIND:
 			fragment = new FragmentFind();
+			transaction.addToBackStack(null);
 			break;
 		case FAQ:
 			fragment = new FragmentFaq();
+			transaction.addToBackStack(null);
 			break;
 		case HELP:
 			fragment = new FragmentCredits();
+			transaction.addToBackStack(null);
 			break;
 		default:	
 			fragment = new FragmentHome();
 		}
-
-    	android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
     	transaction.replace(R.id.content_frame, fragment);
-    	//transaction.addToBackStack(null);
     	transaction.commit();
     	
 
@@ -276,43 +268,4 @@ public class MainActivity extends FragmentActivity{
     	startActivity(launchBrowser);
     }
 
-//	public void updateColors() {
-//	int i=0;		
-//	for (Course c : Me.getInstance().getCourses()) {
-//		switch (i) {
-//		case 0:
-//			c.setColor(this.getResources().getColor(R.color.orange));
-//			break;
-//		case 1:
-//			c.setColor(this.getResources().getColor(R.color.blue));								
-//			break;
-//		case 2:
-//			c.setColor(this.getResources().getColor(R.color.green));
-//			break;
-//		case 3:
-//			c.setColor(this.getResources().getColor(R.color.yellow));
-//			break;
-//		case 4:
-//			c.setColor(this.getResources().getColor(R.color.grey));
-//			break;
-//		default:
-//			break;			
-//		}
-//		i++;
-//	}
-//	} 
-	
-	private void updateSchedule(){
-		Log.i(TAG, "Kronox: Downloading schedule from background, then creating calendar and file saved");
-		try
-		{
-			KronoxReader.update(getApplicationContext());
-			KronoxCalendar.createCalendar(KronoxReader.getFile(getApplicationContext()));
-			
-		}
-		catch (Exception f)
-		{
-			Log.e(TAG, f.toString());
-		}
-	}
 }
