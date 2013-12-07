@@ -37,36 +37,36 @@ public class Parser{
 			NodeList nl = doc.getElementsByTagName("userid");
 			Element e = (Element)nl.item(0);
 			if (e!=null){
-				Me.setUserID(parser.getElementValue(e));
+				Me.getInstance().setUserID(parser.getElementValue(e));
 			}
 			nl = doc.getElementsByTagName("password");
 			e = (Element)nl.item(0);
 			if (e!=null){
-				Me.setPassword(parser.getElementValue(e));
+				Me.getInstance().setPassword(parser.getElementValue(e));
 			}
 			//firstname
 			nl = doc.getElementsByTagName("givenname");
 			e = (Element)nl.item(0);
 			if (e!=null){
-				Me.setFirstName(parser.getElementValue(e));
+				Me.getInstance().setFirstName(parser.getElementValue(e));
 			}
 			//lastname
 			nl = doc.getElementsByTagName("lastname");
 			e = (Element)nl.item(0);
 			if (e!=null){
-				Me.setLastName(parser.getElementValue(e));
+				Me.getInstance().setLastName(parser.getElementValue(e));
 			}
 			//displayname
 			nl = doc.getElementsByTagName("displayname");
 			e = (Element)nl.item(0);
 			if (e!=null){
-				Me.setDispayName(parser.getElementValue(e));
+				Me.getInstance().setDispayName(parser.getElementValue(e));
 			}
 			//email
 			nl = doc.getElementsByTagName("mahmail");
 			e = (Element)nl.item(0);
 			if (e!=null){
-				Me.setEmail(parser.getElementValue(e));
+				Me.getInstance().setEmail(parser.getElementValue(e));
 			}
 			//isstaff
 			nl = doc.getElementsByTagName("mahisstaff");
@@ -74,9 +74,9 @@ public class Parser{
 			if (e!=null){
 				String s = parser.getElementValue(e);
 				if (s.equals("True")||s.equals("true")){
-					Me.setIsStaff(true);
+					Me.getInstance().setIsStaff(true);
 				}else{
-					Me.setIsStaff(false);
+					Me.getInstance().setIsStaff(false);
 				}
 			}
 			//isstudent
@@ -85,9 +85,9 @@ public class Parser{
 			if (e!=null){
 				String s = parser.getElementValue(e);
 				if (s.equals("True")||s.equals("true")){
-					Me.setIsStudent(true);
+					Me.getInstance().setIsStudent(true);
 				}else{
-					Me.setIsStudent(false);
+					Me.getInstance().setIsStudent(false);
 				}
 			}
 			
@@ -98,7 +98,7 @@ public class Parser{
 			NodeList courseNode = e.getElementsByTagName("course");
 			//TODO here it is needed to check if the course exists
 			if (courseNode.getLength()>0){  //At least we check if we have any courses before clearing them.....
-				Me.clearCourses();
+				Me.getInstance().clearCourses();
 			}
 			for (int j =0;j < courseNode.getLength();j++){
 				Element e2 = (Element) courseNode.item(j);
@@ -112,7 +112,7 @@ public class Parser{
 				} catch (Exception e1) {
 					course.setColor(0);
 				}
-				Me.addCourse(course);
+				Me.getInstance().addCourse(course);
 			}
 		}else{
 			success=false;
@@ -151,31 +151,31 @@ public class Parser{
 	        serializer.startDocument("UTF-8", true);
 	        serializer.startTag("","user");
 	        serializer.startTag("", "userid");
-        	serializer.text(Me.getUserID());
+        	serializer.text(Me.getInstance().getUserID());
         	serializer.endTag("", "userid");
         	serializer.startTag("", "password");
-        	serializer.text(Me.getPassword());
+        	serializer.text(Me.getInstance().getPassword());
         	serializer.endTag("", "password");
         	serializer.startTag("", "givenname");
-        	serializer.text(Me.getFirstName());
+        	serializer.text(Me.getInstance().getFirstName());
         	serializer.endTag("", "givenname");
         	serializer.startTag("", "lastname");
-        	serializer.text(Me.getLastName());
+        	serializer.text(Me.getInstance().getLastName());
         	serializer.endTag("", "lastname");
         	serializer.startTag("", "displayname");
-        	serializer.text(Me.getDispayName());
+        	serializer.text(Me.getInstance().getDispayName());
         	serializer.endTag("", "displayname");
         	serializer.startTag("", "mahmail");
-        	serializer.text(Me.getEmail());
+        	serializer.text(Me.getInstance().getEmail());
         	serializer.endTag("", "mahmail");
         	serializer.startTag("", "mahisstudent");
-        	serializer.text(String.valueOf(Me.isStudent()));
+        	serializer.text(String.valueOf(Me.getInstance().isStudent()));
         	serializer.endTag("", "mahisstudent");
         	serializer.startTag("", "mahisstaff");
-        	serializer.text(String.valueOf(Me.isStaff()));
+        	serializer.text(String.valueOf(Me.getInstance().isStaff()));
         	serializer.endTag("", "mahisstaff");
 	        serializer.startTag("", "courses");
-	        for (Course course: Me.getCourses()){
+	        for (Course course: Me.getInstance().getCourses()){
 	        	serializer.startTag("", "course");
 	        	serializer.startTag("", "courseid");
 	        	serializer.text(course.getCourseID());

@@ -38,10 +38,10 @@ public class SettingsActivity extends Activity {
 
 	@SuppressLint("ResourceAsColor")
 	private void addProfilInformation() {
-		if (Me.getUserID() != null) {
-			profilName = Me.getDispayName();
-			profilId = Me.getUserID();
-			myCourses = (ArrayList<Course>) Me.getCourses();
+		if (Me.getInstance().getUserID() != null) {
+			profilName = Me.getInstance().getDispayName();
+			profilId = Me.getInstance().getUserID();
+			myCourses = (ArrayList<Course>) Me.getInstance().getCourses();
 			TextView profilNameTextView = (TextView) findViewById(R.id.profil_name);
 			TextView profilIdTextView = (TextView) findViewById(R.id.profil_id);
 			profilNameTextView.setText(profilName);
@@ -74,7 +74,7 @@ public class SettingsActivity extends Activity {
 	public void toLadokInlogg(View view) {
 		// starting the old activity, Should redirect to StartActivity and clear the the ME.java
 		
-		Me.clearAllIncludingSavedData(this);
+		Me.getInstance().clearAllIncludingSavedData(this);
 		Intent intent = new Intent(this, StartActivity.class);
 		startActivity(intent);
 		finish();

@@ -42,8 +42,8 @@ public class NextClassWidget {
 
 	}
 
-	public boolean getTodaysClasses() {
-		if (!Me.getFirstName().isEmpty()) {
+	public boolean anyClassesToday() {
+		if (!Me.getInstance().getUserID().isEmpty()) {
 			listEvents();
 			if (setData()) {
 				return true;
@@ -52,15 +52,12 @@ public class NextClassWidget {
 		} else {
 			return false;
 		}
-
 	}
 
 	private void listEvents() {
 		items = new ArrayList<ScheduleItem>();
 		Collection<?> kronox_events = KronoxCalendar.todaysEvents();
-
 		if (kronox_events != null) {
-
 			items.clear();
 			for (Iterator<?> i = kronox_events.iterator(); i.hasNext();) {
 				Component c = (Component) i.next();
@@ -69,7 +66,6 @@ public class NextClassWidget {
 				}
 			}
 		}
-
 	}
 
 	private boolean setData() {
@@ -81,7 +77,7 @@ public class NextClassWidget {
 			setEndTime(items.get(0).getEndTime());
 			setDate(items.get(0).getShortWeekDay() + ", " + items.get(0).getDateAndTime2());
 			setCourseId(items.get(0).getCourseID());
-			setCourseName(Me.getCourse(getCourseId()).getDisplaynameEn()); //Not so pretty
+			setCourseName(Me.getInstance().getCourse(getCourseId()).getDisplaynameEn()); //Not so pretty
 			return true;
 		} else {
 			Log.e(getClass().toString(), "item list is empty");
@@ -136,5 +132,4 @@ public class NextClassWidget {
 	public void setDate(String date) {
 		this.date = date;
 	}
-
 }

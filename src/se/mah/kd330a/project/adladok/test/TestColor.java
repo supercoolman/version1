@@ -16,15 +16,15 @@ public class TestColor extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_test_color);
-		Me.addCourse(new Course("Testkurs","kkkk"));
-		Me.addCourse(new Course("Testkurs1","222"));
-		Me.addCourse(new Course("Testkurs3","333"));
+		Me.getInstance().addCourse(new Course("Testkurs","kkkk"));
+		Me.getInstance().addCourse(new Course("Testkurs1","222"));
+		Me.getInstance().addCourse(new Course("Testkurs3","333"));
 		ImageButton i1 = (ImageButton) findViewById(R.id.imageButton1);
-		i1.setBackgroundColor(Me.getCourses().get(0).getColor());
+		i1.setBackgroundColor(Me.getInstance().getCourses().get(0).getColor());
 		ImageButton i2 = (ImageButton) findViewById(R.id.imageButton2);
-		i2.setBackgroundColor(Me.getCourses().get(0).getColor());
+		i2.setBackgroundColor(Me.getInstance().getCourses().get(0).getColor());
 		ImageButton i3 = (ImageButton) findViewById(R.id.imageButton3);
-		i3.setBackgroundColor(Me.getCourses().get(0).getColor());
+		i3.setBackgroundColor(Me.getInstance().getCourses().get(0).getColor());
 	}
 
 	@Override
