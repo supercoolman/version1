@@ -75,7 +75,7 @@ public class NextClassWidget {
 			setLocation(items.get(0).getRoomCode());
 			setStartTime(items.get(0).getStartTime());
 			setEndTime(items.get(0).getEndTime());
-			setDate(items.get(0).getDateAndTime2());
+			setDate(items.get(0).getShortWeekDay() + ", " + items.get(0).getDateAndTime2());
 			setCourseId(items.get(0).getCourseID());
 			setCourseName(Me.getInstance().getCourse(getCourseId()).getDisplaynameEn()); //Not so pretty
 			return true;

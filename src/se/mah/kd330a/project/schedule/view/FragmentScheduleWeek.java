@@ -165,7 +165,7 @@ public class FragmentScheduleWeek extends Fragment implements
 						R.layout.schedule_list_seperator, null);
 				TextView sepertorText = (TextView) convertView
 						.findViewById(R.id.list_item_section_text);
-				sepertorText.setText(currentDate);
+				sepertorText.setText(currentSI.getWeekDay() + ", " + currentDate);
 			
 				TextView courseNameTextView = (TextView) convertView
 						.findViewById(R.id.list_course_name);
