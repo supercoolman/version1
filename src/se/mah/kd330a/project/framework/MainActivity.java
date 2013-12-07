@@ -25,6 +25,7 @@ import se.mah.kd330a.project.settings.view.SettingsActivity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -110,9 +111,9 @@ public class MainActivity extends FragmentActivity{
         if (savedInstanceState == null) {
             selectItem(0);
         }
-        //Assigns colors for the courses - maximum 5 courses
-        updateColors();
-        
+
+       // updateColors();
+        Me.getInstance().setColors(this);
         //Scheduled updates
         this.executor_.scheduleWithFixedDelay(new Runnable() {
     		@Override
@@ -275,31 +276,31 @@ public class MainActivity extends FragmentActivity{
     	startActivity(launchBrowser);
     }
 
-	public void updateColors() {
-	int i=0;		
-	for (Course c : Me.getCourses()) {
-		switch (i) {
-		case 0:
-			c.setColor(this.getResources().getColor(R.color.orange));
-			break;
-		case 1:
-			c.setColor(this.getResources().getColor(R.color.blue));								
-			break;
-		case 2:
-			c.setColor(this.getResources().getColor(R.color.green));
-			break;
-		case 3:
-			c.setColor(this.getResources().getColor(R.color.yellow));
-			break;
-		case 4:
-			c.setColor(this.getResources().getColor(R.color.grey));
-			break;
-		default:
-			break;			
-		}
-		i++;
-	}
-	} 
+//	public void updateColors() {
+//	int i=0;		
+//	for (Course c : Me.getInstance().getCourses()) {
+//		switch (i) {
+//		case 0:
+//			c.setColor(this.getResources().getColor(R.color.orange));
+//			break;
+//		case 1:
+//			c.setColor(this.getResources().getColor(R.color.blue));								
+//			break;
+//		case 2:
+//			c.setColor(this.getResources().getColor(R.color.green));
+//			break;
+//		case 3:
+//			c.setColor(this.getResources().getColor(R.color.yellow));
+//			break;
+//		case 4:
+//			c.setColor(this.getResources().getColor(R.color.grey));
+//			break;
+//		default:
+//			break;			
+//		}
+//		i++;
+//	}
+//	} 
 	
 	private void updateSchedule(){
 		Log.i(TAG, "Kronox: Downloading schedule from background, then creating calendar and file saved");

@@ -17,9 +17,11 @@ import org.xmlpull.v1.XmlSerializer;
 
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.xmlparser.Parser;
+import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -27,82 +29,97 @@ import android.util.Log;
 import android.util.Xml;
 
 
-public class Me implements Serializable{
+public class Me extends Application implements Serializable{
 	private static final long serialVersionUID = 1L;
 	//Static variables there is only one Me
-	private static List<Course> myCourses = new ArrayList<Course>();
-	private static List<Teacher> myTeachers = new ArrayList<Teacher>();
-	private static String firstName="";
-	private static String lastName="";
-	private static String email="";
-	private static String dispayName="";
-	private static boolean isStaff = false;
-	private static boolean isStudent = false;
-    private static String TAG ="UserInfo";
-	private static String userID="";
-	private static String password="";
-	private static final String SAVE_FILE_NAME = "savefilename";
-	public static MyObservable observable = new MyObservable(); 
-
-
-	public static void setPassword(String password) {
-		Me.password = password;
-	}
+	private List<Course> myCourses = new ArrayList<Course>();
+	private List<Teacher> myTeachers = new ArrayList<Teacher>();
+	private String firstName="";
+	private String lastName="";
+	private String email="";
+	private String dispayName="";
+	private boolean isStaff = false;
+	private boolean isStudent = false;
+    private String TAG ="UserInfo";
+	private String userID="";
+	private String password="";
+	private final String SAVE_FILE_NAME = "savefilename";
+	private static Me instanceOfMe;
+	private MyObservable observable = new MyObservable(); 
+	 private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1); //updater thread
 	
-	public static String getPassword() {
-		return Me.password;
-	}
-	
-	public static String getUserID() {
-		return userID;
-	}
-	public static void setUserID(String userID) {
-		Me.userID = userID;
+	public static Me getInstance(){
+		if (instanceOfMe==null){
+			instanceOfMe = new Me();
+		}
+		return instanceOfMe;
 	}
 	
 	private Me() {
-		//prevents anyone from doing instances
+		/*Singleton*/
+	}		
+	
+	 public void startUpdate(Context ctx){
+		 updateSchedule();
+	 }
+
+	public MyObservable getObservable() {
+		return observable;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
-	public static String getFirstName() {
-		return firstName;
+	public String getPassword() {
+		return this.password;
 	}
-	public static void setFirstName(String firstName) {
-		Me.firstName = firstName;
+	
+	public String getUserID() {
+		return this.userID;
 	}
-	public static String getLastName() {
-		return lastName;
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
-	public static void setLastName(String lastName) {
-		Me.lastName = lastName;
+	
+	public String getFirstName() {
+		return this.firstName;
 	}
-	public static String getEmail() {
-		return email;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public static void setEmail(String email) {
-		Me.email = email;
+	public String getLastName() {
+		return this.lastName;
 	}
-	public static String getDispayName() {
-		return dispayName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public static void setDispayName(String dispayName) {
-		Me.dispayName = dispayName;
+	public String getEmail() {
+		return this.email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getDispayName() {
+		return this.dispayName;
+	}
+	public void setDispayName(String dispayName) {
+		this.dispayName = dispayName;
 	}
 
-	public static boolean isStaff() {
-		return Me.isStaff;
+	public boolean isStaff() {
+		return this.isStaff;
 	}
-	public static void setIsStaff(boolean isStaff) {
-		Me.isStaff = isStaff;
+	public void setIsStaff(boolean isStaff) {
+		this.isStaff = isStaff;
 	}
-	public static boolean isStudent() {
-		return isStudent;
+	public boolean isStudent() {
+		return this.isStudent;
 	}
-	public static void setIsStudent(boolean isStudent) {
-		Me.isStudent = isStudent;
+	public void setIsStudent(boolean isStudent) {
+		this.isStudent = isStudent;
 	}
 	
-	public static String getTeacherName(String teacherID) {
+	public String getTeacherName(String teacherID) {
 		//search the teachers return name if found if not found call web service but else:
 			//Not found call web service
 			//Save in arraylist as teacher
@@ -110,7 +127,7 @@ public class Me implements Serializable{
 		return teacherID;
 	}
 	
-	public static void clearAllIncludingSavedData(Context c) {
+	public void clearAllIncludingSavedData(Context c) {
 		 clearAllExcludingSavedData(c);
 		 //clear kronox
 		 KronoxReader.clearKronox(c);
@@ -118,7 +135,7 @@ public class Me implements Serializable{
 		 saveMeToLocalStorage(c);
 	}
 	
-	public static void clearAllExcludingSavedData(Context c) {
+	public void clearAllExcludingSavedData(Context c) {
 		// Lars fixa detta. Metoden ska ta bort alla spŒr av anvŠndaren
 		Log.i(TAG,"clear all excluding saved data");
 		 clearCourses();
@@ -135,7 +152,7 @@ public class Me implements Serializable{
 	
 	/**Restores Me and my courses from local storage, use with care since it first clears all data in Me object
 	 * Use saveMe first*/
-	public static boolean restoreMeFromLocalStorage(Context c){
+	public boolean restoreMeFromLocalStorage(Context c){
 		//Read local storage
 		boolean restored = false;
 		File file = new File(c.getFilesDir(), SAVE_FILE_NAME);
@@ -145,7 +162,7 @@ public class Me implements Serializable{
 			Log.i("UserInfo","Restored" + xml);
 			 try {
 				 restored = Parser.updateMeFromADandLADOK(xml);
-				 if(Me.password.isEmpty()&&Me.userID.isEmpty()){
+				 if(this.password.isEmpty()&&this.userID.isEmpty()){
 					 restored = false;
 				 }
 			} catch (Exception e) {restored =false;}
@@ -155,7 +172,7 @@ public class Me implements Serializable{
 	
 	/**Stores Me and my courses on local storage CourseName:
 	 * Call this also when changes are made to Me or courses*/
-	public static void saveMeToLocalStorage(Context c){
+	public void saveMeToLocalStorage(Context c){
 		String xml = Parser.writeXml();
 		Log.i("UserInfo","Saved: " + xml);
 		try {
@@ -167,23 +184,58 @@ public class Me implements Serializable{
 		}
 	}
 	
-	public static void updateMeFromWebService(){
+	public void updateMeFromWebService(){
 		Log.i(TAG,"updateMe");
 		doUpdate(userID, password);
 	}
 	
-	public static void clearCourses(){
+	public void clearCourses(){
 		if (myCourses.size()>0){
 			Log.i(TAG,"clearing courses in memory");
 			myCourses.clear();
 		}
 	}
 	
-	public static List<Course> getCourses(){
+	public void setColors(Context ctx){
+		int i=0;
+			for (Course c : Me.getInstance().getCourses()) {
+				switch (i) {
+				case 0:
+					c.setColor(ctx.getResources().getColor(R.color.orange));
+					break;
+				case 1:
+					c.setColor(ctx.getResources().getColor(R.color.blue));								
+					break;
+				case 2:
+					c.setColor(ctx.getResources().getColor(R.color.green));
+					break;
+				case 3:
+					c.setColor(ctx.getResources().getColor(R.color.yellow));
+					break;
+				case 4:
+					c.setColor(ctx.getResources().getColor(R.color.grey));
+					break;
+				case 5:
+					c.setColor(ctx.getResources().getColor(R.color.red));
+					break;
+				case 6:
+					c.setColor(ctx.getResources().getColor(R.color.white));
+					break;
+				case 7:
+					c.setColor(ctx.getResources().getColor(R.color.grey));
+					break;
+				default:
+					break;			
+				}
+				i++;
+			}
+	}
+	
+	public List<Course> getCourses(){
 		return myCourses;
 	}
 	
-	public static Course getCourse(String courseID) {
+	public Course getCourse(String courseID) {
 		for(Course c: myCourses){  //overide equals
 			if (c.getCourseID().equals(courseID)){
 				return c;
@@ -192,10 +244,10 @@ public class Me implements Serializable{
 		return null;
 	}
 	
-	@SuppressLint("ResourceAsColor")
-	public static void addCourse(Course course) {
+	public void addCourse(Course course) {
 		//Set Colors on courses first needs a context so perhaps Singleton....
-		Me.myCourses.add(course);
+		
+		this.myCourses.add(course);
 		
 	}
 //Part handling updateddd
@@ -204,7 +256,7 @@ public class Me implements Serializable{
     private static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
     private static AsyncTask<String, Void, Integer> asyncTask= null;
   //Only one update at a time
-    private static void doUpdate(String userID, String password){
+    private void doUpdate(String userID, String password){
     	if(asyncTask!=null){
 	    	if (asyncTask.getStatus()==AsyncTask.Status.FINISHED){
 	    		Log.i(TAG,"Finished do again");
@@ -218,7 +270,7 @@ public class Me implements Serializable{
     	}
     }
     
-    private static class AsyncCallGetUserInfo extends AsyncTask<String, Void, Integer> {
+    private class AsyncCallGetUserInfo extends AsyncTask<String, Void, Integer> {
 	        @Override
 	        protected Integer doInBackground(String... params) {
 	        	int result = 0;
@@ -246,7 +298,7 @@ public class Me implements Serializable{
 	        }
 	    }
 	 
-	 public static String getUserInfoAsXML(String loginID, String password){	   
+	 public String getUserInfoAsXML(String loginID, String password){	   
 	     Object result="";
 		 try {
 	        	SoapObject loginrequest = new SoapObject(NAMESPACE, "getUserInfo");
@@ -266,10 +318,31 @@ public class Me implements Serializable{
 	 
 	 ///--- for observer pattern
 	 
-	 public static class MyObservable extends Observable{  //Must be here to get hold on the protected setChanged
+	 public class MyObservable extends Observable{  //Must be here to get hold on the protected setChanged
 		 @Override
 		protected void setChanged() {
 			super.setChanged();
 		}
 	 }
+	 
+	 /*updater metod*/
+	 private void updateSchedule(){
+		 this.executor_.scheduleWithFixedDelay(new Runnable() {
+	    		@Override
+	    		public void run() {
+	    			try
+	    			{
+	    				KronoxReader.update(getApplicationContext());
+	    				KronoxCalendar.createCalendar(KronoxReader.getFile(getApplicationContext()));
+	    				
+	    			}
+	    			catch (Exception f)
+	    			{
+	    				Log.e(TAG, f.toString());
+	    			}
+	    		    }
+	    		}, 10L, 30L, TimeUnit.SECONDS);//FOR test only 30
+			Log.i(TAG, "Kronox: Downloading schedule from background, then creating calendar and file saved");
+			
+		}
 }

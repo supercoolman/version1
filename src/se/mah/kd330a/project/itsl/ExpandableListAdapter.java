@@ -41,7 +41,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 									
 				
 		//Fill hashmap with colors from my courses
-		for (Course c : Me.getCourses())
+		for (Course c : Me.getInstance().getCourses())
 		{
 			Log.i("kurs", c.getRegCode());
 			colors.put(c.getRegCode(), c.getColor());			

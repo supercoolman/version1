@@ -26,11 +26,11 @@ public class AddLadokAccount extends Activity implements Observer {
 		sharedPref = getSharedPreferences(userFile, Context.MODE_PRIVATE);
 		userID_et.setText(sharedPref.getString("user_id", ""));
 
-		Log.i("UserInfo", "Antal observers :" + Me.observable.countObservers());
-		if (Me.observable.countObservers() > 0) {
-			Me.observable.deleteObservers();
+		Log.i("UserInfo", "Antal observers :" + Me.getInstance().getObservable().countObservers());
+		if (Me.getInstance().getObservable().countObservers() > 0) {
+			Me.getInstance().getObservable().deleteObservers();
 		}
-		Me.observable.addObserver(this);
+		Me.getInstance().getObservable().addObserver(this);
 		
 	}
 
@@ -44,18 +44,18 @@ public class AddLadokAccount extends Activity implements Observer {
 
 	public void update(View v) {
 		// clear all
-		Me.clearAllIncludingSavedData(this);
+		Me.getInstance().clearAllIncludingSavedData(this);
 
 		// First we have to set username and password those should are probably
 		// be saved in Sharedprefs
 		EditText userID_et = (EditText) findViewById(R.id.userIDet);
 		EditText password_et = (EditText) findViewById(R.id.passWordET);
-		Me.setUserID(userID_et.getText().toString());
-		Me.setPassword(password_et.getText().toString());
-		Me.updateMeFromWebService();
+		Me.getInstance().setUserID(userID_et.getText().toString());
+		Me.getInstance().setPassword(password_et.getText().toString());
+		Me.getInstance().updateMeFromWebService();
 		
 		int i=0;		
-		for (Course c : Me.getCourses()) {
+		for (Course c : Me.getInstance().getCourses()) {
 			
 			switch (i) {
 			case 0:
@@ -89,10 +89,10 @@ public class AddLadokAccount extends Activity implements Observer {
 	@Override
 	public void update(Observable observable, Object data) {
 		String courses = "";
-		Log.i("UserInfo", "Length: " + Me.getCourses().size());
+		Log.i("UserInfo", "Length: " + Me.getInstance().getCourses().size());
 		
 		int i=0;
-		for (Course c : Me.getCourses()) {
+		for (Course c : Me.getInstance().getCourses()) {
 			courses = courses + "course: \n" + "NameSV: "
 					+ c.getDisplaynameSv() + "\n" + "NameEN: "
 					+ c.getDisplaynameEn() + "\n" + "CourseID: "
@@ -126,11 +126,11 @@ public class AddLadokAccount extends Activity implements Observer {
 		}
 
 		Log.i("Ladok", "c.getKronoxCalendarCode()");
-		if (Me.getFirstName().isEmpty()) {
+		if (Me.getInstance().getFirstName().isEmpty()) {
 			Toast.makeText(this, "Please enter a valid Username or Password",
 					Toast.LENGTH_LONG).show();
 		} else {
-			Me.observable.deleteObserver(this);
+			Me.getInstance().getObservable().deleteObserver(this);
 			finish();
 		}
 	}

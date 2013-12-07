@@ -43,7 +43,7 @@ public class NextClassWidget {
 	}
 
 	public boolean anyClassesToday() {
-		if (!Me.getUserID().isEmpty()) {
+		if (!Me.getInstance().getUserID().isEmpty()) {
 			listEvents();
 			if (setData()) {
 				return true;
@@ -77,7 +77,7 @@ public class NextClassWidget {
 			setEndTime(items.get(0).getEndTime());
 			setDate(items.get(0).getDateAndTime2());
 			setCourseId(items.get(0).getCourseID());
-			setCourseName(Me.getCourse(getCourseId()).getDisplaynameEn()); //Not so pretty
+			setCourseName(Me.getInstance().getCourse(getCourseId()).getDisplaynameEn()); //Not so pretty
 			return true;
 		} else {
 			Log.e(getClass().toString(), "item list is empty");

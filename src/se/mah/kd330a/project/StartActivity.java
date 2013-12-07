@@ -45,9 +45,9 @@ public class StartActivity extends Activity implements Observer
 		((LinearLayout) findViewById(R.id.login_view)).setVisibility(LinearLayout.GONE);
 		((LinearLayout) findViewById(R.id.loading_view)).setVisibility(LinearLayout.GONE);
 
-		Me.observable.deleteObservers(); //since we will call a webservice....
-		Me.observable.addObserver(this);
-		boolean restoredsuccess = Me.restoreMeFromLocalStorage(this);
+		Me.getInstance().getObservable().deleteObservers(); //since we will call a webservice....
+		Me.getInstance().getObservable().addObserver(this);
+		boolean restoredsuccess = Me.getInstance().restoreMeFromLocalStorage(this);
 		Log.i(TAG, "On create restored: "+ restoredsuccess);
 		if (!restoredsuccess)  //Should be id???
 		{
@@ -56,7 +56,7 @@ public class StartActivity extends Activity implements Observer
 		else
 		{
 			hideLoginView(); //TODO this should not be done everytime!!! Perhaps update in settings or an update button
-			Me.updateMeFromWebService();
+			Me.getInstance().updateMeFromWebService();
 		}
 
 	}
@@ -71,7 +71,7 @@ public class StartActivity extends Activity implements Observer
 		((View) findViewById(R.id.login_view)).setVisibility(View.VISIBLE);
 		editTextUsername = (EditText) findViewById(R.id.editText1);
 		editTextPassword = (EditText) findViewById(R.id.editText2);
-		editTextUsername.setText(Me.getUserID());
+		editTextUsername.setText(Me.getInstance().getUserID());
 		editTextPassword.setText("");
 		//Test setting
 //		editTextUsername.setText("testUser");
@@ -95,9 +95,9 @@ public class StartActivity extends Activity implements Observer
 		
 		String username = editTextUsername.getText().toString();
 		String password = editTextPassword.getText().toString();
-		Me.setUserID(username);
-		Me.setPassword(password);
-		Me.updateMeFromWebService();
+		Me.getInstance().setUserID(username);
+		Me.getInstance().setPassword(password);
+		Me.getInstance().updateMeFromWebService();
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class StartActivity extends Activity implements Observer
 			return;
 		}
 
-		Me.saveMeToLocalStorage(getApplicationContext());
+		Me.getInstance().saveMeToLocalStorage(getApplicationContext());
 		BackgroundDownloadTask downloads = new BackgroundDownloadTask(this);
 		downloads.execute();
 	}
@@ -196,7 +196,7 @@ public class StartActivity extends Activity implements Observer
 		 *  more and more instances will be created each time we start 
 		 *  the app
 		 */
-		Me.observable.deleteObserver(this);
+		Me.getInstance().getObservable().deleteObserver(this);
 		Log.i(TAG, "finish(): destroying now");
 	}
 	

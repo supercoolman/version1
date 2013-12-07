@@ -29,7 +29,7 @@ public class KronoxReader {
 	private static String generateURL() {
 		String kurser = "";
 		String programCourse ="";
-		for(se.mah.kd330a.project.adladok.model.Course course : Me.getCourses()) {
+		for(se.mah.kd330a.project.adladok.model.Course course : Me.getInstance().getCourses()) {
 			//kurser += String.format("k.%s-%%2C", course.getFullCode());
 
 			if (!course.getKronoxCalendarCode().isEmpty()){
@@ -63,7 +63,7 @@ public class KronoxReader {
 	 *         This will be thrown on network errors or file writing errors
 	 */
 	public static void update(Context ctx) throws IOException {
-		if ( Me.getCourses().size()>0){
+		if ( Me.getInstance().getCourses().size()>0){
 			URL url = new URL(KronoxReader.generateURL());
 			InputStream is = url.openStream();
 			DataInputStream dis = new DataInputStream(is);

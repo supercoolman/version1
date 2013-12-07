@@ -133,7 +133,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		HashMap<String, Integer> colors = new HashMap<String, Integer>();
 		
 		//Fill hashmap with colors from my courses
-		for (Course c : Me.getCourses())
+		for (Course c : Me.getInstance().getCourses())
 		{
 			colors.put(c.getCourseID(), c.getColor());			
 		}
@@ -154,9 +154,9 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		
 			View scheduleColor1 = (View) nextClassWidget.findViewById(R.id.home_schedule1);
 			View scheduleColor2 = (View) nextClassWidget.findViewById(R.id.home_schedule2);
-			if (Me.getCourse(courseID)!= null){
-				scheduleColor1.setBackgroundColor(Me.getCourse(courseID).getColor());
-				scheduleColor2.setBackgroundColor(Me.getCourse(courseID).getColor());
+			if (Me.getInstance().getCourse(courseID)!= null){
+				scheduleColor1.setBackgroundColor(Me.getInstance().getCourse(courseID).getColor());
+				scheduleColor2.setBackgroundColor(Me.getInstance().getCourse(courseID).getColor());
 			}else{
 				scheduleColor1.setBackgroundColor(getResources().getColor(R.color.red_mah));
 				scheduleColor2.setBackgroundColor(getResources().getColor(R.color.red_mah));
@@ -232,7 +232,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			HashMap<String, Integer> colors = new HashMap<String, Integer>();
 			
 			//Fill hashmap with colors from my courses
-			for (Course c : Me.getCourses())
+			for (Course c : Me.getInstance().getCourses())
 			{
 				colors.put(c.getRegCode(), c.getColor());			
 			}	
