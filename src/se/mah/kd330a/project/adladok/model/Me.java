@@ -329,7 +329,12 @@ public class Me implements Serializable{
 	 /*updater metod*/
 	 private void updateSchedule(Context ctx){
 		 ScheduleFixedDelay scheduledTask = new ScheduleFixedDelay(ctx);
-		 this.executor_.scheduleWithFixedDelay(scheduledTask, 10L, 30L, TimeUnit.SECONDS);//FOR test only 30
+		 try {
+			 this.executor_.scheduleWithFixedDelay(scheduledTask, 10L, 30L, TimeUnit.SECONDS);//FOR test only 30
+		} catch (Exception e) {
+			Log.i(TAG,"ScheduelError: "+e.getMessage());
+		}
+		 
 			Log.i(TAG, "UpdateSchedule called");
 			
 		}

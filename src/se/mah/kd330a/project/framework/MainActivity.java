@@ -189,30 +189,43 @@ public class MainActivity extends FragmentActivity{
     	switch (position) {
 		case HOME:	
 			fragment = new FragmentHome();
+			Log.i(TAG,"BackstackNbr"+fragmentManager.getBackStackEntryCount());
 			break;
 		case SCHEDULE:
 			fragment = new FragmentScheduleWeekPager();
-			transaction.addToBackStack(null);
+
+			if(fragmentManager.getBackStackEntryCount()==0){
+			 transaction.addToBackStack(null);
+			}
 			break;
 		case ITSL:
 			fragment = new FragmentITSL();
-			transaction.addToBackStack(null);
+			if(fragmentManager.getBackStackEntryCount()==0){
+				 transaction.addToBackStack(null);
+			}
 			break;
 		case FIND:
 			fragment = new FragmentFind();
-			transaction.addToBackStack(null);
+			if(fragmentManager.getBackStackEntryCount()==0){
+				 transaction.addToBackStack(null);
+			}
 			break;
 		case FAQ:
 			fragment = new FragmentFaq();
-			transaction.addToBackStack(null);
+			if(fragmentManager.getBackStackEntryCount()==0){
+				 transaction.addToBackStack(null);
+			}
 			break;
 		case HELP:
 			fragment = new FragmentCredits();
-			transaction.addToBackStack(null);
+			if(fragmentManager.getBackStackEntryCount()==0){
+				 transaction.addToBackStack(null);
+			}
 			break;
 		default:	
 			fragment = new FragmentHome();
 		}
+    	Log.i(TAG,"BackstackNbr after commit"+fragmentManager.getBackStackEntryCount());
     	transaction.replace(R.id.content_frame, fragment);
     	transaction.commit();
     	
