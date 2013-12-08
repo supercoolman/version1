@@ -70,7 +70,7 @@ public class Util
 						 */
 						if (url.contains("Rss"))
 						{
-							Log.i(TAG, "Bookmark found:" + url);
+							Log.i(TAG, "Bookmark found: " + url);
 							urls.add(url);
 						}
 					}

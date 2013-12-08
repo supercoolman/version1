@@ -124,8 +124,6 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		
 		LinearLayout nextClassWidget = (LinearLayout) rootView.findViewById(R.id.next_class_widget);
 		nextClassWidget.setVisibility(LinearLayout.VISIBLE);
-//		SharedPreferences sharedPref = this.getActivity().getSharedPreferences("courseName", Context.MODE_PRIVATE);
-//		String courseName = sharedPref.getString(nextClass.getCourseName(), nextClass.getCourseName());
 		String courseName = nextClass.getCourseName();
 		String courseID = nextClass.getCourseId();
 		
@@ -161,12 +159,6 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 				scheduleColor1.setBackgroundColor(getResources().getColor(R.color.red_mah));
 				scheduleColor2.setBackgroundColor(getResources().getColor(R.color.red_mah));
 			}
-			//Color				
-//			if (colors.get(courseID)!=null)
-//			{
-//				scheduleColor1.setBackgroundColor(colors.get(courseID));
-//				scheduleColor2.setBackgroundColor(colors.get(courseID));
-//			}
 
 		}
 		else
@@ -184,40 +176,40 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 //		return null;
 //	}
 //
-	private void setLastItslPost(ViewGroup rootView)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	private class UpdateDataTask extends AsyncTask<Void, Void, String[]>
-	{
-
-		@Override
-		protected String[] doInBackground(Void... params)
-		{
-			// Simulates a background job.
-			try
-			{
-				Thread.sleep(4000);
-			}
-			catch (InterruptedException e)
-			{
-
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(String[] result)
-		{
-			// Do some stuff here
-
-			// Call onRefreshComplete when the list has been refreshed.
-			//mPullRefreshScrollView.onRefreshComplete();
-			super.onPostExecute(result);
-		}
-	}
+//	private void setLastItslPost(ViewGroup rootView)
+//	{
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	private class UpdateDataTask extends AsyncTask<Void, Void, String[]>
+//	{
+//
+//		@Override
+//		protected String[] doInBackground(Void... params)
+//		{
+//			// Simulates a background job.
+//			try
+//			{
+//				Thread.sleep(4000);
+//			}
+//			catch (InterruptedException e)
+//			{
+//
+//			}
+//			return null;
+//		}
+//
+//		@Override
+//		protected void onPostExecute(String[] result)
+//		{
+//			// Do some stuff here
+//
+//			// Call onRefreshComplete when the list has been refreshed.
+//			//mPullRefreshScrollView.onRefreshComplete();
+//			super.onPostExecute(result);
+//		}
+//	}
 
 	@Override
 	public void onFeedManagerDone(FeedManager fm, ArrayList<Article> articles)

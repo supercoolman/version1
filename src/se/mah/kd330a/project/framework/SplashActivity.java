@@ -1,28 +1,28 @@
-package se.mah.kd330a.project.framework;
+//package se.mah.kd330a.project.framework;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import se.mah.kd330a.project.R;
-import se.mah.kd330a.project.adladok.model.Course;
-import se.mah.kd330a.project.adladok.model.Me;
-import se.mah.kd330a.project.adladok.test.AddLadokAccount;
-import se.mah.kd330a.project.home.data.DOMParser;
-import se.mah.kd330a.project.home.data.RSSFeed;
-import se.mah.kd330a.project.schedule.data.KronoxCalendar;
-import se.mah.kd330a.project.schedule.data.KronoxCourse;
-import se.mah.kd330a.project.schedule.data.KronoxJSON;
-import se.mah.kd330a.project.schedule.data.KronoxReader;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-
-public class SplashActivity extends Activity
-{
+//import java.io.FileOutputStream;
+//import java.io.ObjectOutputStream;
+//import java.util.ArrayList;
+//import se.mah.kd330a.project.R;
+//import se.mah.kd330a.project.adladok.model.Course;
+//import se.mah.kd330a.project.adladok.model.Me;
+//import se.mah.kd330a.project.adladok.test.AddLadokAccount;
+//import se.mah.kd330a.project.home.data.DOMParser;
+//import se.mah.kd330a.project.home.data.RSSFeed;
+//import se.mah.kd330a.project.schedule.data.KronoxCalendar;
+////import se.mah.kd330a.project.schedule.data.KronoxCourse;
+////import se.mah.kd330a.project.schedule.data.KronoxJSON;
+//import se.mah.kd330a.project.schedule.data.KronoxReader;
+//import android.app.Activity;
+//import android.content.Context;
+//import android.content.Intent;
+//import android.content.SharedPreferences;
+//import android.os.AsyncTask;
+//import android.os.Bundle;
+//import android.util.Log;
+//
+//public class SplashActivity extends Activity
+//{
 //	private final String TAG = "SplashActivity";
 //	private String RSSNEWSFEEDURL = "http://www.mah.se/Nyheter/RSS/News/";
 //	private RSSFeed feed;
@@ -278,4 +278,4 @@ public class SplashActivity extends Activity
 //		Log.i("SplashActivity", "finish called");
 //
 //	}
-}
+//}

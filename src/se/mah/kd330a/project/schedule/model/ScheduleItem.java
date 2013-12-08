@@ -7,8 +7,8 @@ import java.util.Locale;
 
 import org.json.JSONException;
 
-import se.mah.kd330a.project.schedule.data.KronoxCourse;
-import se.mah.kd330a.project.schedule.data.KronoxJSON;
+//import se.mah.kd330a.project.schedule.data.KronoxCourse;
+//import se.mah.kd330a.project.schedule.data.KronoxJSON;
 
 import android.os.AsyncTask;
 import android.util.Log;
