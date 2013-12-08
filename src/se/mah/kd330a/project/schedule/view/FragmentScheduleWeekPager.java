@@ -27,8 +27,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 		myScheduleInWeeks = parseData.getParsedDataFromKronoxByWeekNew(20);
 		if (myScheduleInWeeks != null) {
 			num_items = myScheduleInWeeks.size();
-			Log.i("onCreate in FragmentScheduleWeekPager",
-					Integer.toString(num_items));
+			Log.i("onCreate in FragmentScheduleWeekPager",Integer.toString(num_items));
 		}
 		super.onCreate(savedInstanceState);
 	}
@@ -37,8 +36,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		Log.i("onCreateView", "loaded");
-		View result = inflater.inflate(R.layout.view_pager_fragment, container,
-				false);
+		View result = inflater.inflate(R.layout.view_pager_fragment, container,false);
 		ViewPager pager = (ViewPager) result.findViewById(R.id.pager);
 		ViewPagerAdapter viewPagerAdapter = buildAdapter();
 		pager.setAdapter(viewPagerAdapter);
@@ -59,8 +57,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 		public Fragment getItem(int num) {
 			Log.i("getItem", Integer.toString(num));
 			if(myScheduleInWeeks != null){
-			return FragmentScheduleWeek.newInstance(myScheduleInWeeks.get(num),
-					num);
+			return FragmentScheduleWeek.newInstance(myScheduleInWeeks.get(num),num);
 			} else {
 			return new FragmentScheduleDay();
 			}

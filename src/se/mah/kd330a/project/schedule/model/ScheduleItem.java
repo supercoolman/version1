@@ -28,9 +28,10 @@ import net.fortuna.ical4j.model.component.VEvent;
  */
 public class ScheduleItem implements Serializable {
 	/**
-	 * 
+	 * C110
 	 */
 	private static final long serialVersionUID = 2L;
+	
 	SimpleDateFormat time_format = new SimpleDateFormat("HH:mm");
 	SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	SimpleDateFormat date_format2 = new SimpleDateFormat("dd MMM, yyyy");

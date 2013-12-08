@@ -74,8 +74,8 @@ public class StartActivity extends Activity implements Observer
 		editTextUsername.setText(Me.getInstance().getUserID());
 		editTextPassword.setText("");
 		//Test setting
-//		editTextUsername.setText("testUser");
-//		editTextPassword.setText("testUser");
+		editTextUsername.setText("testUser");
+		editTextPassword.setText("testUser");
 	}
 
 	public void hideLoginView()

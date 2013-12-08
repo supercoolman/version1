@@ -72,10 +72,11 @@ public class SettingsActivity extends Activity {
 	}
 
 	public void toLadokInlogg(View view) {
-		// starting the old activity, Should redirect to StartActivity and clear the the ME.java
-		
+		//Clear all including backstack
 		Me.getInstance().clearAllIncludingSavedData(this);
 		Intent intent = new Intent(this, StartActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 		finish();
 

@@ -24,6 +24,7 @@ import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
 import se.mah.kd330a.project.settings.view.SettingsActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -184,43 +185,32 @@ public class MainActivity extends FragmentActivity{
     public void selectItem(int position) {
         // update the main content by replacing fragments
     	android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+    	fragmentManager. popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE); 
     	android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
     	Fragment fragment;
     	switch (position) {
 		case HOME:	
 			fragment = new FragmentHome();
-			Log.i(TAG,"BackstackNbr"+fragmentManager.getBackStackEntryCount());
 			break;
 		case SCHEDULE:
 			fragment = new FragmentScheduleWeekPager();
-
-			if(fragmentManager.getBackStackEntryCount()==0){
-			 transaction.addToBackStack(null);
-			}
+			transaction.addToBackStack(null);
 			break;
 		case ITSL:
 			fragment = new FragmentITSL();
-			if(fragmentManager.getBackStackEntryCount()==0){
-				 transaction.addToBackStack(null);
-			}
+			transaction.addToBackStack(null);
 			break;
 		case FIND:
 			fragment = new FragmentFind();
-			if(fragmentManager.getBackStackEntryCount()==0){
-				 transaction.addToBackStack(null);
-			}
+			transaction.addToBackStack(null);
 			break;
 		case FAQ:
 			fragment = new FragmentFaq();
-			if(fragmentManager.getBackStackEntryCount()==0){
-				 transaction.addToBackStack(null);
-			}
+			transaction.addToBackStack(null);
 			break;
 		case HELP:
 			fragment = new FragmentCredits();
-			if(fragmentManager.getBackStackEntryCount()==0){
-				 transaction.addToBackStack(null);
-			}
+		    transaction.addToBackStack(null);
 			break;
 		default:	
 			fragment = new FragmentHome();
@@ -228,9 +218,6 @@ public class MainActivity extends FragmentActivity{
     	Log.i(TAG,"BackstackNbr after commit"+fragmentManager.getBackStackEntryCount());
     	transaction.replace(R.id.content_frame, fragment);
     	transaction.commit();
-    	
-
-    	//fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
         setTitle(mMenuTitles[position]);

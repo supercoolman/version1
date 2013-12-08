@@ -253,5 +253,6 @@
     </string-array>
     <string name="activity">Activity: </string>
     <string name="noactivity">Activity not entered</string>
+    <string name="emptycalendertext">No scheduled lectures for this week.</string>
 
 </resources>

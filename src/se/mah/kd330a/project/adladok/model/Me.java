@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +21,6 @@ import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.xmlparser.Parser;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
-
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
@@ -57,6 +58,7 @@ public class Me implements Serializable{
 	}
 	
 	private Me() {
+		//Locale.setDefault(Locale.US); Kanske kanske inte
 		/*Singleton*/
 	}		
 	
@@ -330,7 +332,7 @@ public class Me implements Serializable{
 	 private void updateSchedule(Context ctx){
 		 ScheduleFixedDelay scheduledTask = new ScheduleFixedDelay(ctx);
 		 try {
-			 this.executor_.scheduleWithFixedDelay(scheduledTask, 10L, 30L, TimeUnit.SECONDS);//FOR test only 30
+			 this.executor_.scheduleWithFixedDelay(scheduledTask, 20L, 300L, TimeUnit.SECONDS);//FOR test only 30
 		} catch (Exception e) {
 			Log.i(TAG,"ScheduelError: "+e.getMessage());
 		}

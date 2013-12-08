@@ -15,6 +15,7 @@ import se.mah.kd330a.project.schedule.model.ScheduleItem;
 import se.mah.kd330a.project.schedule.model.ScheduleWeek;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,13 +31,12 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentScheduleWeek extends Fragment implements
-		OnChildClickListener {
+public class FragmentScheduleWeek extends Fragment implements OnChildClickListener {
 
 	// private static ArrayList<ScheduleItem> _scheduleItemsThisWeek;
-
-	public static FragmentScheduleWeek newInstance(ScheduleWeek scheduleWeek,
-			int position) {
+	private final String TAG = "FragmentScheduleWeek";
+	
+	public static FragmentScheduleWeek newInstance(ScheduleWeek scheduleWeek,int position) {
 		FragmentScheduleWeek f = new FragmentScheduleWeek();
 		Bundle b = new Bundle();
 		b.putSerializable("ScheduleWeek", scheduleWeek);
@@ -49,30 +49,21 @@ public class FragmentScheduleWeek extends Fragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.i("onCreate", "called");
-		_scheduleWeek = (ScheduleWeek) getArguments().getSerializable(
-				"ScheduleWeek");
+		_scheduleWeek = (ScheduleWeek) getArguments().getSerializable("ScheduleWeek");
 
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-
-		ViewGroup rootView = (ViewGroup) inflater.inflate(
-				R.layout.fragment_schedule_expendable_list_view, container,
-				false);
-
-		TextView v = (TextView) rootView
-				.findViewById(R.id.schudule_week_number);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+		ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_schedule_expendable_list_view, container,false);
+		TextView v = (TextView) rootView.findViewById(R.id.schudule_week_number);
 		v.setText("Week " + (_scheduleWeek.getWeekNumber()));
-		
-		Log.i("onCreateView", Integer.toString(_scheduleWeek.getWeekNumber()));
-		ExpandableListView elv = (ExpandableListView) rootView
-				.findViewById(R.id.expandable_list);
+		Log.i(TAG,"NbrItems this week: "+_scheduleWeek.getScheduleItems().size());
+		ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.expandable_list);
+		TextView empty = (TextView) rootView.findViewById(R.id.emptytw);
+		elv.setEmptyView(empty);
 		elv.setAdapter(new ExpandableListViewAdapter(getActivity()));
 		elv.setOnChildClickListener(this);
-
 		return rootView;
 	}
 
@@ -80,18 +71,7 @@ public class FragmentScheduleWeek extends Fragment implements
 
 		String lastDate = null;
 		String location;	
-		HashMap<String, Integer> colors = new HashMap<String, Integer>(); //This should be cleaned out use colors from courses 
-		
-		public ExpandableListViewAdapter(Context context) {
-			
-			//Default color if the feed is not attached to a course
-			colors.put("", context.getResources().getColor(R.color.red_mah));
-			//Fill hashmap with colors from my courses
-			for (Course c : Me.getInstance().getCourses())
-			{
-				colors.put(c.getCourseID(), c.getColor());
-				Log.i("colors courseID in Schedule", c.getCourseID());
-			}		
+		public ExpandableListViewAdapter(Context context) {	
 
 		}
 
@@ -133,115 +113,57 @@ public class FragmentScheduleWeek extends Fragment implements
 		}
 
 		@Override
-		public View getGroupView(int groupPosition, boolean isExpanded,
-				View convertView, ViewGroup parent) {
-			LayoutInflater infalInflater = (LayoutInflater) getActivity()
-					.getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-
+		public View getGroupView(int groupPosition, boolean isExpanded,View convertView, ViewGroup parent) {
+			LayoutInflater infalInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			ScheduleItem currentSI = (ScheduleItem) getGroup(groupPosition);
 			String currentDate = currentSI.getDateAndTime2();
 			String previousDate = "dummyDate";
 			ScheduleItem previousSI = null ;
-			
 			String courseID = currentSI.getCourseID();
 			Course course = Me.getInstance().getCourse(courseID);
-			String courseName ="";
+			String courseName ="Missing";
+			int color = 0;
 			if (course!=null){
 				courseName = course.getDisplaynameEn();
-				//Log.i("UserInfo","CourseName: "+ courseName);
+				color = Me.getInstance().getCourse(courseID).getColor();
 			}
-			
-			//SharedPreferences sharedPref = getActivity().getSharedPreferences("courseName", Context.MODE_PRIVATE);
-			//String courseName = sharedPref.getString(currentSI.getCourseName(), currentSI.getCourseName());
 			
 			if(groupPosition!=0){
 				previousSI=(ScheduleItem) getGroup(groupPosition-1);
 				previousDate=previousSI.getDateAndTime2();
 			}
 
-
-			if (groupPosition==0||!currentDate.equals(previousDate)) {
-				convertView = infalInflater.inflate(
-						R.layout.schedule_list_seperator, null);
-				TextView sepertorText = (TextView) convertView
-						.findViewById(R.id.list_item_section_text);
+			if (groupPosition==0||!currentDate.equals(previousDate)) {  //Separator and first Calendar item
+				convertView = infalInflater.inflate(R.layout.schedule_list_seperator, null);
+				TextView sepertorText = (TextView) convertView.findViewById(R.id.list_item_section_text);
 				sepertorText.setText(currentSI.getWeekDay() + ", " + currentDate);
-			
-				TextView courseNameTextView = (TextView) convertView
-						.findViewById(R.id.list_course_name);
-				courseNameTextView.setText(courseName);
-				TextView startTime = (TextView) convertView
-						.findViewById(R.id.list_course_start_time);
-				startTime.setText(currentSI.getStartTime());
-				TextView endTime = (TextView) convertView
-						.findViewById(R.id.list_course_end_time);
-				endTime.setText(currentSI.getEndTime());
-				TextView location = (TextView) convertView
-						.findViewById(R.id.list_course_location);
-				location.setText(currentSI.getRoomCode());
 				lastDate = currentDate;
-				
-				ImageView calendarColorFrame1 = (ImageView) convertView.findViewById(R.id.calendarColorFrame1);
-				View calendarColorFrame2 = (View) convertView.findViewById(R.id.calendarColorFrame2);
-				
-				//Color				
-				if (colors.get(courseID)!=null)
-				{
-					calendarColorFrame1.setBackgroundColor(colors.get(courseID));
-					calendarColorFrame2.setBackgroundColor(colors.get(courseID));
-				}
-				else
-				{
-					calendarColorFrame1.setBackgroundColor(colors.get(""));
-					calendarColorFrame2.setBackgroundColor(colors.get(""));
-				}	
-				
-
-				//ImageView imgPointer = (ImageView) convertView.findViewById(R.id.icPointer);
-				//if (isExpanded){
-				//	imgPointer.setVisibility(View.GONE);
-				//}
-			
-
-
-			} else {
-
-				convertView = infalInflater.inflate(
-						R.layout.schedule_list_group, null);
-				TextView courseNameTextView = (TextView) convertView
-						.findViewById(R.id.list_course_name);
+				TextView courseNameTextView = (TextView) convertView.findViewById(R.id.list_course_name);
 				courseNameTextView.setText(courseName);
-				TextView startTime = (TextView) convertView
-						.findViewById(R.id.list_course_start_time);
+				TextView startTime = (TextView) convertView.findViewById(R.id.list_course_start_time);
 				startTime.setText(currentSI.getStartTime());
-				TextView endTime = (TextView) convertView
-						.findViewById(R.id.list_course_end_time);
+				TextView endTime = (TextView) convertView.findViewById(R.id.list_course_end_time);
 				endTime.setText(currentSI.getEndTime());
-				TextView location = (TextView) convertView
-						.findViewById(R.id.list_course_location);
+				TextView location = (TextView) convertView.findViewById(R.id.list_course_location);
 				location.setText(currentSI.getRoomCode());
-				
 				ImageView calendarColorFrame1 = (ImageView) convertView.findViewById(R.id.calendarColorFrame1);
 				View calendarColorFrame2 = (View) convertView.findViewById(R.id.calendarColorFrame2);
-				
-				//Color				
-				if (colors.get(courseID)!=null)
-				{
-					calendarColorFrame1.setBackgroundColor(colors.get(courseID));
-					calendarColorFrame2.setBackgroundColor(colors.get(courseID));
-				}
-				else
-				{
-					calendarColorFrame1.setBackgroundColor(colors.get(""));
-					calendarColorFrame2.setBackgroundColor(colors.get(""));
-				}	
-				
-				
-				//ImageView imgPointer = (ImageView) convertView.findViewById(R.id.icPointer);
-				//if (isExpanded){
-				//	imgPointer.setVisibility(View.GONE);
-				//}
-				
+				calendarColorFrame1.setBackgroundColor(color);
+				calendarColorFrame2.setBackgroundColor(color);
+			} else {  //The calendar item not first
+				convertView = infalInflater.inflate(R.layout.schedule_list_group, null);
+				TextView courseNameTextView = (TextView) convertView.findViewById(R.id.list_course_name);
+				courseNameTextView.setText(courseName);
+				TextView startTime = (TextView) convertView.findViewById(R.id.list_course_start_time);
+				startTime.setText(currentSI.getStartTime());
+				TextView endTime = (TextView) convertView.findViewById(R.id.list_course_end_time);
+				endTime.setText(currentSI.getEndTime());
+				TextView location = (TextView) convertView.findViewById(R.id.list_course_location);
+				location.setText(currentSI.getRoomCode());
+				ImageView calendarColorFrame1 = (ImageView) convertView.findViewById(R.id.calendarColorFrame1);
+				View calendarColorFrame2 = (View) convertView.findViewById(R.id.calendarColorFrame2);
+				calendarColorFrame1.setBackgroundColor(color);
+				calendarColorFrame2.setBackgroundColor(color);
 			}
 
 			return convertView;
@@ -249,23 +171,16 @@ public class FragmentScheduleWeek extends Fragment implements
 		}
 
 		@Override
-		public View getChildView(int groupPosition, final int childPosition,
-				boolean isLastChild, View convertView, ViewGroup parent) {
-			ArrayList<String> childTexts = (ArrayList<String>) getChild(
-					groupPosition, childPosition);
+		public View getChildView(int groupPosition, final int childPosition,boolean isLastChild, View convertView, ViewGroup parent) {
+			ArrayList<String> childTexts = (ArrayList<String>) getChild(groupPosition, childPosition);
 			if (convertView == null) {
-				LayoutInflater infalInflater = (LayoutInflater) getActivity()
-						.getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-				convertView = infalInflater.inflate(
-						R.layout.schedule_list_item, null);
-			
+				LayoutInflater infalInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				convertView = infalInflater.inflate(R.layout.schedule_list_item, null);
 			}
 			
 			ScheduleItem currentSI = (ScheduleItem) getGroup(groupPosition);
 			location = currentSI.getRoomCode();
-			
-			TextView lector = (TextView) convertView
-					.findViewById(R.id.list_course_child_lector);
+			TextView lector = (TextView) convertView.findViewById(R.id.list_course_child_lector);
 			//HERE enter activity
 			TextView activity = (TextView)convertView.findViewById(R.id.list_course_child_activity);
 			Button btnFind = (Button) convertView.findViewById(R.id.findButton);
@@ -276,7 +191,6 @@ public class FragmentScheduleWeek extends Fragment implements
 					// TODO Auto-generated method stub
 					try {
 						String[] locs = location.split(" ");
-						Log.i("UserInfo", "Button Find click" + locs[0]);
 						RoomDbHandler dbHandler = new RoomDbHandler(getActivity());
 						if (dbHandler.isRoomExists(locs[0])) {
 							startNavigation(locs[0]);
@@ -295,41 +209,30 @@ public class FragmentScheduleWeek extends Fragment implements
 				}
 			});
 			
-			ScheduleItem previousSI = null ;
 			String courseID = currentSI.getCourseID();
+			Course course = Me.getInstance().getCourse(courseID);
+			String courseName ="Missing";
+			int color = 0;
+			if (course!=null){
+				courseName = course.getDisplaynameEn();
+				color = Me.getInstance().getCourse(courseID).getColor();
+			}
 			lector.setText(childTexts.get(0));
 			activity.setText(currentSI.getDescription());
 			ImageView calendarColorFrameC1 = (ImageView) convertView.findViewById(R.id.calendarColorFrame1);
 			ImageView calendarColorFrameC2= (ImageView) convertView.findViewById(R.id.calendarColorFrame2);
-			
-			
-			//Color				
-			if (colors.get(courseID)!=null)
-			{
-				calendarColorFrameC1.setBackgroundColor(colors.get(courseID));
-				calendarColorFrameC2.setBackgroundColor(colors.get(courseID));
-			}
-			else
-			{
-				calendarColorFrameC1.setBackgroundColor(colors.get(""));
-				calendarColorFrameC2.setBackgroundColor(colors.get(""));
-			}	
-			
-			
-
+			calendarColorFrameC1.setBackgroundColor(color);
+			calendarColorFrameC2.setBackgroundColor(color);
 			return convertView;
 		}
 		
 		private void startNavigation(String roomNr) {
-
 			Fragment fragment = new FragmentResult();
 			Bundle args = new Bundle();
 			args.putString(FragmentResult. ARG_ROOMNR, roomNr);
 			//args.putInt(FragmentResult.ARG_BUILDINGPOS, spin_selected);
 			fragment.setArguments(args);
-
 			FragmentManager	 fragmentManager = getActivity().getSupportFragmentManager();
-
 			FragmentTransaction fragmentTrans = fragmentManager.beginTransaction();	
 			fragmentTrans.replace(R.id.content_frame, fragment);
 			fragmentTrans.addToBackStack(null);
@@ -341,9 +244,7 @@ public class FragmentScheduleWeek extends Fragment implements
 			Bundle args = new Bundle();
 			args.putString(FragmentFloorMap.ARG_FLOORMAP, floorMapCode);
 			fragment.setArguments(args);
-
 			FragmentManager	 fragmentManager = getActivity().getSupportFragmentManager();
-
 			FragmentTransaction fragmentTrans = fragmentManager.beginTransaction();	
 			fragmentTrans.replace(R.id.content_frame, fragment);
 			fragmentTrans.addToBackStack(null);
