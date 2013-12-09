@@ -121,11 +121,15 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			ScheduleItem previousSI = null ;
 			String courseID = currentSI.getCourseID();
 			Course course = Me.getInstance().getCourse(courseID);
+			
 			String courseName ="Missing";
 			int color = 0;
 			if (course!=null){
 				courseName = course.getDisplaynameEn();
 				color = Me.getInstance().getCourse(courseID).getColor();
+			}else{
+				courseName = courseID;
+				color = getResources().getColor(R.color.red_mah);
 			}
 			
 			if(groupPosition!=0){
