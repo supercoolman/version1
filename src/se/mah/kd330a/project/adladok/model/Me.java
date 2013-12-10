@@ -48,7 +48,7 @@ public class Me implements Serializable{
 	private static Me instanceOfMe;
 	private MyObservable observable = new MyObservable(); 
 	private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1); //updater thread
-	
+	private ScheduleFixedDelay scheduledTask;
 	
 	public static Me getInstance(){
 		if (instanceOfMe==null){
@@ -71,9 +71,13 @@ public class Me implements Serializable{
 		 this.executor_.shutdown();
 	 }
 
+	 public Observable getNewObservable() {
+			return scheduledTask;
+	}
 	public MyObservable getObservable() {
 		return observable;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -330,14 +334,12 @@ public class Me implements Serializable{
 	 
 	 /*updater metod*/
 	 private void updateSchedule(Context ctx){
-		 ScheduleFixedDelay scheduledTask = new ScheduleFixedDelay(ctx);
+		 scheduledTask = new ScheduleFixedDelay(ctx);
 		 try {
-			 this.executor_.scheduleWithFixedDelay(scheduledTask, 20L, 300L, TimeUnit.SECONDS);//FOR test only 30
-		} catch (Exception e) {
-			Log.i(TAG,"ScheduelError: "+e.getMessage());
-		}
-		 
+				 this.executor_.scheduleWithFixedDelay(scheduledTask, ScheduleFixedDelay.initalDelayInSeconds, ScheduleFixedDelay.delayBetweenCallInSeconds, TimeUnit.SECONDS);//FOR test only 30
+			} catch (Exception e) {
+				Log.i(TAG,"ScheduelError: "+e.getMessage());
+			}
 			Log.i(TAG, "UpdateSchedule called");
-			
-		}
+	}
 }

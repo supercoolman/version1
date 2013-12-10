@@ -4,6 +4,7 @@ package se.mah.kd330a.project.framework;
 
 
 import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -11,6 +12,7 @@ import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.Me.MyObservable;
+import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
 import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
 import se.mah.kd330a.project.help.FragmentCredits;
@@ -42,7 +44,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class MainActivity extends FragmentActivity{
+public class MainActivity extends FragmentActivity implements Observer{
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -113,6 +115,7 @@ public class MainActivity extends FragmentActivity{
 
        // updateColors();
        Me.getInstance().startUpdate(this);
+       Me.getInstance().getNewObservable().addObserver(this); //register....
     }
     
     @Override
@@ -215,7 +218,6 @@ public class MainActivity extends FragmentActivity{
 		default:	
 			fragment = new FragmentHome();
 		}
-    	Log.i(TAG,"BackstackNbr after commit"+fragmentManager.getBackStackEntryCount());
     	transaction.replace(R.id.content_frame, fragment);
     	transaction.commit();
         // update selected item and title, then close the drawer
@@ -268,4 +270,27 @@ public class MainActivity extends FragmentActivity{
     	startActivity(launchBrowser);
     }
 
+	@Override
+	public void update(Observable observable, Object data) {
+		// TODO Auto-generated method stub
+		Log.i(TAG,"Called from updater with data: "+(UpdateType)data);
+		
+		switch ((UpdateType)data){
+		case KRONOX:
+			Log.i(TAG,"Called from updater with data: KRONOX");
+		break;
+		case COURSES_and_AD:
+			Log.i(TAG,"Called from updater with data: COURSES");
+		break;
+		case ALL:
+			Log.i(TAG,"Called from updater with data: ALL");
+		break;
+		
+		default:
+			break;
+		
+		}
+	}
+
 }
+

@@ -33,7 +33,6 @@ public class ExpandableListFaqAdapter extends BaseExpandableListAdapter {
         this._groupImages = groupImages;
         this._listDataHeader = listDataHeader;
         this._listDataHeader2 = listDataHeader2;
-      
         this._listDataChild = listChildData;
     }
 
@@ -138,15 +137,6 @@ public class ExpandableListFaqAdapter extends BaseExpandableListAdapter {
             	imgPointer2.setVisibility(View.GONE);
             	
             }
-            
-            
-           
-        
-            
-            
-	        
-	       
-	 
 	        return convertView;
 	    }
 

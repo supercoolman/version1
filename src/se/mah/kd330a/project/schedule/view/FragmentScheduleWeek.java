@@ -1,8 +1,6 @@
 package se.mah.kd330a.project.schedule.view;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import se.mah.kd330a.project.R;
@@ -14,13 +12,10 @@ import se.mah.kd330a.project.find.view.FragmentResult;
 import se.mah.kd330a.project.schedule.model.ScheduleItem;
 import se.mah.kd330a.project.schedule.model.ScheduleWeek;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,7 +53,6 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_schedule_expendable_list_view, container,false);
 		TextView v = (TextView) rootView.findViewById(R.id.schudule_week_number);
 		v.setText("Week " + (_scheduleWeek.getWeekNumber()));
-		Log.i(TAG,"NbrItems this week: "+_scheduleWeek.getScheduleItems().size());
 		ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.expandable_list);
 		TextView empty = (TextView) rootView.findViewById(R.id.emptytw);
 		elv.setEmptyView(empty);

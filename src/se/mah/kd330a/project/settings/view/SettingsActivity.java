@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.StartActivity;
-import se.mah.kd330a.project.adladok.test.AddLadokAccount;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.Course;
 
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
 
 public class SettingsActivity extends Activity {
-	private static final String PREFS_NAME = "myCourses";
 	SharedPreferences sharedPref;
 	private String profilName;
 	private String profilId;
@@ -31,9 +28,7 @@ public class SettingsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
-		
 		addProfilInformation();
-
 	}
 
 	@SuppressLint("ResourceAsColor")
@@ -79,7 +74,6 @@ public class SettingsActivity extends Activity {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 		finish();
-
 	}
 
 }

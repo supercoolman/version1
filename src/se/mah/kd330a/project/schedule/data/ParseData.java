@@ -52,16 +52,10 @@ public class ParseData {
 				Component c = (Component) i.next();
 				if (c instanceof VEvent) {
 					ScheduleItem s = new ScheduleItem((VEvent) c);
-					// New day????
-					/*
-					 * if (!s.getWeekDay().equals(lastWeekDay)){ //Put in extra
-					 * element in list that should be an divider with day and so on
-					 * ScheduleItemTest s2 = new ScheduleItemTest((VEvent)c);
-					 * s2.setDividerElement(); items.add(s2); lastWeekDay =
-					 * s2.getWeekDay(); //Set the new day.... }
-					 */
-
-					thisWeekList.add(s);
+					//Clean out items from courses that I am not registered on (program courses)
+					if (Me.getInstance().getCourse(s.getCourseID())!=null){
+						thisWeekList.add(s);
+					}
 				}
 			}
 		} catch (Exception e) {

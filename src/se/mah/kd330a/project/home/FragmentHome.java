@@ -170,46 +170,6 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 
 	}
 
-//	private SharedPreferences getSharedPreferences(String string, int modePrivate)
-//	{
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	private void setLastItslPost(ViewGroup rootView)
-//	{
-//		// TODO Auto-generated method stub
-//
-//	}
-//
-//	private class UpdateDataTask extends AsyncTask<Void, Void, String[]>
-//	{
-//
-//		@Override
-//		protected String[] doInBackground(Void... params)
-//		{
-//			// Simulates a background job.
-//			try
-//			{
-//				Thread.sleep(4000);
-//			}
-//			catch (InterruptedException e)
-//			{
-//
-//			}
-//			return null;
-//		}
-//
-//		@Override
-//		protected void onPostExecute(String[] result)
-//		{
-//			// Do some stuff here
-//
-//			// Call onRefreshComplete when the list has been refreshed.
-//			//mPullRefreshScrollView.onRefreshComplete();
-//			super.onPostExecute(result);
-//		}
-//	}
 
 	@Override
 	public void onFeedManagerDone(FeedManager fm, ArrayList<Article> articles)

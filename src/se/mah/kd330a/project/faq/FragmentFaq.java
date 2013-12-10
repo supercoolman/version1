@@ -4,99 +4,52 @@ package se.mah.kd330a.project.faq;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-
-
-
 import se.mah.kd330a.project.faq.ExpandableListFaqAdapter;
 import se.mah.kd330a.project.R;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ImageView;
-
-
 public class FragmentFaq extends Fragment {
-	
-	
-	
 	ExpandableListFaqAdapter listAdapter;
 	ExpandableListView expListFaqView;
 	List<String> listDataHeader;
 	List<String> listDataHeader2;
 	List<Integer> imageHeader;
-	
-
-	
-	
 	HashMap<String, List<String>> listDataChild;
-
-	
 	public FragmentFaq () {
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
-        
-        
-		
 		super.onCreate(savedInstanceState);
-		
 	}
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
-		
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 	
 		ViewGroup rootView = (ViewGroup) inflater
                 .inflate(R.layout.faq_activity_main, container, false);
-		
-		
-		
-		
-		
 		// get the listview
 		expListFaqView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
-		
-		
-		 
 		// preparing list data
 		prepareListData();
-
 		listAdapter = new ExpandableListFaqAdapter(getActivity(), imageHeader, listDataHeader, listDataHeader2,
 				listDataChild);
-
-		
-        
-     
-	
-	     
         //this code for adjusting the group indicator into right side of the view
-        
-	
-
 		// setting list adapter
-		expListFaqView.setAdapter(listAdapter);
-		
-expListFaqView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener(){
+		expListFaqView.setAdapter(listAdapter);		
+		expListFaqView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener(){
 			
 			@Override
 			public void onGroupExpand(int groupPosition){
-				Log.d("EXPAND", "EXPANDED");
+				Log.d("EXPAND", "EXPANDED");	
 				
-				
-				
-			}
-			
-			
+			}		
 		});
 		
 		expListFaqView.setOnChildClickListener(new OnChildClickListener() {
