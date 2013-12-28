@@ -107,11 +107,11 @@ public class Parser{
 				course.setRegCode(parser.getValue(e2,"regcode"));
 				course.setProgram(parser.getValue(e2,"program"));
 				course.setTerm(parser.getValue(e2,"term"));
-				try {
-					course.setColor(Integer.parseInt(parser.getValue(e2,"color")));
-				} catch (Exception e1) {
-					course.setColor(0);
-				}
+//				try {
+//					course.setColor(Integer.parseInt(parser.getValue(e2,"color")));
+//				} catch (Exception e1) {
+//					course.setColor(0);
+//				}
 				Me.getInstance().addCourse(course);
 			}
 		}else{

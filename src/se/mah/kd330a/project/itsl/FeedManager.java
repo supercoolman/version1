@@ -34,7 +34,7 @@ import android.util.Log;
 public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 {
 	private final String TAG = "FeedManager";
-	private final String CACHE_FILENAME = "article_cache.ser";
+	private final String CACHE_FILENAME = "ITSL_articles";
 	private FeedDownloadTask downloadTask;
 	private FeedManagerDoneListener callbackHandler;
 	private ArrayList<Article> articleList;

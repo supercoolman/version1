@@ -1,12 +1,19 @@
 package se.mah.kd330a.project.home;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
+import net.fortuna.ical4j.data.ParserException;
+import se.mah.kd330a.project.adladok.model.Constants;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
+import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
 import se.mah.kd330a.project.framework.MainActivity;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase;
 //import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -15,6 +22,8 @@ import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.Article;
 import se.mah.kd330a.project.itsl.FeedManager;
 import se.mah.kd330a.project.itsl.ListPagerAdapter;
+import se.mah.kd330a.project.schedule.data.KronoxCalendar;
+import se.mah.kd330a.project.schedule.data.KronoxReader;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
 import se.mah.kd330a.project.R;
 import android.app.ActionBar;
@@ -35,7 +44,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentHome extends Fragment implements FeedManager.FeedManagerDoneListener
+public class FragmentHome extends Fragment implements FeedManager.FeedManagerDoneListener, Observer
 {
 
 	private NextClassWidget nextClass;
@@ -45,6 +54,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	private FileInputStream fis = null;
 	private boolean profileRegistered = false;
 	private FeedManager ITSLfeedManager;
+	private String TAG ="FragmentHome";
 	
 	public FragmentHome()
 	{
@@ -54,6 +64,12 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		Me.getInstance().getObservable().addObserver(this);
+        try {
+			KronoxCalendar.createCalendar(KronoxReader.getFile(getActivity().getApplicationContext()));
+		} catch (Exception e) {
+			Log.e("FragmentHome", e.toString());
+		} 
 		try
 		{
 			nextClass = new NextClassWidget();
@@ -69,9 +85,8 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_home, container, false);
-		setNextClassWidget(rootView);
+		setNextKronoxClass(rootView);
 		setNewsFeedMah(rootView);
-		//setLastItslPost(rootView);
 		ITSLfeedManager = new FeedManager(this, getActivity().getApplicationContext());
 		if (!ITSLfeedManager.loadCache())
 		{
@@ -85,7 +100,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	{
 		try
 		{
-			fis = getActivity().openFileInput("filename");
+			fis = getActivity().openFileInput(Constants.mahNewsSavedFileName);
 			in = new ObjectInputStream(fis);
 			newsFeed = (RSSFeed) in.readObject();
 			in.close();
@@ -119,22 +134,21 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 
 	}
 
-	private void setNextClassWidget(ViewGroup rootView)
+	private void setNextKronoxClass(ViewGroup rootView)
 	{
 		
 		LinearLayout nextClassWidget = (LinearLayout) rootView.findViewById(R.id.next_class_widget);
 		nextClassWidget.setVisibility(LinearLayout.VISIBLE);
 		String courseName = nextClass.getCourseName();
 		String courseID = nextClass.getCourseId();
-		
-		//For synchronizing color
-		HashMap<String, Integer> colors = new HashMap<String, Integer>();
-		
-		//Fill hashmap with colors from my courses
-		for (Course c : Me.getInstance().getCourses())
-		{
-			colors.put(c.getCourseID(), c.getColor());			
-		}
+//		//For synchronizing color
+//		HashMap<String, Integer> colors = new HashMap<String, Integer>();
+//		
+//		//Fill hashmap with colors from my courses
+//		for (Course c : Me.getInstance().getCourses())
+//		{
+//			colors.put(c.getCourseID(), c.getColor());			
+//		}
 		
 		if (profileRegistered)
 		{
@@ -147,8 +161,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			TextView textNextClassEndTime = (TextView) nextClassWidget.findViewById(R.id.text_next_class_end_time);
 			textNextClassEndTime.setText(nextClass.getEndTime());
 			TextView textNextClassLocation = (TextView) nextClassWidget.findViewById(R.id.text_next_class_location);
-			textNextClassLocation.setText(nextClass.getLocation());
-			
+			textNextClassLocation.setText(nextClass.getLocation());			
 		
 			View scheduleColor1 = (View) nextClassWidget.findViewById(R.id.home_schedule1);
 			View scheduleColor2 = (View) nextClassWidget.findViewById(R.id.home_schedule2);
@@ -159,7 +172,6 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 				scheduleColor1.setBackgroundColor(getResources().getColor(R.color.red_mah));
 				scheduleColor2.setBackgroundColor(getResources().getColor(R.color.red_mah));
 			}
-
 		}
 		else
 		{
@@ -170,7 +182,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 
 	}
 
-
+//ITSL
 	@Override
 	public void onFeedManagerDone(FeedManager fm, ArrayList<Article> articles)
 	{
@@ -214,6 +226,30 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	{
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void update(Observable observable, Object data) {
+		UpdateType type= (UpdateType)data;
+		Log.i(TAG,"updated with data: "+type);
+		switch(type){
+		case KRONOX:
+			getActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					profileRegistered = nextClass.anyClassesToday();
+					if (profileRegistered){
+						setNextKronoxClass(rootView);
+					}	
+				}
+				
+			});
+			
+			break;
+		default:
+			break;
+		}
+		
 	}
 
 }

@@ -8,8 +8,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Observable;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import net.fortuna.ical4j.model.parameter.ScheduleStatus;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -30,7 +35,7 @@ import android.util.Log;
 import android.util.Xml;
 
 
-public class Me implements Serializable{
+public class Me{
 	private static final long serialVersionUID = 1L;
 	//Static variables there is only one Me
 	private List<Course> myCourses = new ArrayList<Course>();
@@ -44,10 +49,13 @@ public class Me implements Serializable{
     private String TAG ="MeClass";
 	private String userID="";
 	private String password="";
-	private final String SAVE_FILE_NAME = "savefilename";
+	private final String ME_FILE_NAME = "MEfile";
 	private static Me instanceOfMe;
-	private MyObservable observable = new MyObservable(); 
-	private final ScheduledThreadPoolExecutor executor_ = new ScheduledThreadPoolExecutor(1); //updater thread
+	private static AsyncTask<String, Void, Integer> asyncLoginTask;
+	//private MyObservable observable = new MyObservable(); 
+	private ScheduledExecutorService executor_;
+
+//	private final ScheduledThreadPoolExecutor executor_ ;//updater thread
 	private ScheduleFixedDelay scheduledTask;
 	
 	public static Me getInstance(){
@@ -58,25 +66,48 @@ public class Me implements Serializable{
 	}
 	
 	private Me() {
+//		
+//		if (scheduler != null){
+//			scheduler = Executors.newSingleThreadScheduledExecutor();
+//		}
+//		if (executor_ != null){
+//			executor_ = new ScheduledThreadPoolExecutor(1);
+//		}
+//			executor_.setKeepAliveTime(ScheduleFixedDelay.delayBetweenUpdatesInSeconds+1, TimeUnit.SECONDS);
+//			executor_.allowCoreThreadTimeOut(true); 
 		//Locale.setDefault(Locale.US); Kanske kanske inte
 		/*Singleton*/
 	}		
 	
 	 public void startUpdate(Context ctx){
 		 setColors(ctx);
-		 updateSchedule(ctx);
+		 scheduledUpdater(ctx);
+//		 try
+//			{
+//				Log.i(TAG, "Kronox: Creating calendar from file if saved");
+//				KronoxCalendar.createCalendar(KronoxReader.getFile(ctx));
+//			}
+//			catch (Exception e)
+//			{
+//				Log.i(TAG, "Kronox: No calendar file saved");
+//			}
 	 }
 	
 	 public void stopUpdate(){
 		 this.executor_.shutdown();
+		 while (!executor_.isTerminated()) {
+	        }
+		 Log.i(TAG, "ThreadPoolExecutor: Finished all threads");
+	        System.out.println("Finished all threads");
+		 
 	 }
 
-	 public Observable getNewObservable() {
+	 public Observable getObservable() {
 			return scheduledTask;
 	}
-	public MyObservable getObservable() {
-		return observable;
-	}
+//	public MyObservable getObservable() {
+//		return observable;
+//	}
 	
 	public void setPassword(String password) {
 		this.password = password;
@@ -164,11 +195,11 @@ public class Me implements Serializable{
 	public boolean restoreMeFromLocalStorage(Context c){
 		//Read local storage
 		boolean restored = false;
-		File file = new File(c.getFilesDir(), SAVE_FILE_NAME);
+		File file = new File(c.getFilesDir(), ME_FILE_NAME);
 		if (file.exists()){
 			//Clear content in me:
 			String xml = Parser.getXmlFromFile(file);
-			Log.i("UserInfo","Restored" + xml);
+			Log.i(TAG,"Restored" + xml);
 			 try {
 				 restored = Parser.updateMeFromADandLADOK(xml);
 				 if(this.password.isEmpty()&&this.userID.isEmpty()){
@@ -183,9 +214,9 @@ public class Me implements Serializable{
 	 * Call this also when changes are made to Me or courses*/
 	public void saveMeToLocalStorage(Context c){
 		String xml = Parser.writeXml();
-		Log.i("UserInfo","Saved: " + xml);
+		Log.d(TAG,"Saved: " + xml);
 		try {
-			java.io.FileOutputStream fos = c.openFileOutput(SAVE_FILE_NAME, Context.MODE_PRIVATE);
+			java.io.FileOutputStream fos = c.openFileOutput(ME_FILE_NAME, Context.MODE_PRIVATE);
 			fos.write(xml.getBytes());
 			fos.close();
 		} catch (Exception e) {
@@ -193,10 +224,7 @@ public class Me implements Serializable{
 		}
 	}
 	
-	public void updateMeFromWebService(){
-		Log.i(TAG,"updateMe");
-		doUpdate(userID, password);
-	}
+	
 	
 	public void clearCourses(){
 		if (myCourses.size()>0){
@@ -205,12 +233,12 @@ public class Me implements Serializable{
 		}
 	}
 	
-	private void setColors(Context ctx){
+	public void setColors(Context ctx){
 		int i=0;
 			for (Course c : Me.getInstance().getCourses()) {
 				switch (i) {
 				case 0:
-					c.setColor(ctx.getResources().getColor(R.color.orange));
+					c.setColor(ctx.getResources().getColor(R.color.grey_dark));
 					break;
 				case 1:
 					c.setColor(ctx.getResources().getColor(R.color.blue));								
@@ -222,20 +250,21 @@ public class Me implements Serializable{
 					c.setColor(ctx.getResources().getColor(R.color.yellow));
 					break;
 				case 4:
-					c.setColor(ctx.getResources().getColor(R.color.grey));
+					c.setColor(ctx.getResources().getColor(R.color.orange));
 					break;
 				case 5:
 					c.setColor(ctx.getResources().getColor(R.color.red));
 					break;
 				case 6:
-					c.setColor(ctx.getResources().getColor(R.color.white));
+					c.setColor(ctx.getResources().getColor(R.color.grey));
 					break;
 				case 7:
-					c.setColor(ctx.getResources().getColor(R.color.grey));
+					c.setColor(ctx.getResources().getColor(R.color.grey_middle));
 					break;
 				default:
 					break;			
 				}
+				//Log.d(TAG,"Color: " + c.getColor() + " Set to: " + c.getCourseID());
 				i++;
 			}
 	}
@@ -255,57 +284,64 @@ public class Me implements Serializable{
 	
 	public void addCourse(Course course) {		
 		this.myCourses.add(course);
-		
 	}
 	
+//	public void updateMeFromWebService(){
+//		Log.i(TAG,"updateMe");
+//		doUpdate(userID, password);
+//	}
+	
+  
+//    private static AsyncTask<String, Void, Integer> asyncTask= null;
+//  //Only one update at a time
+//    //This can partly be moved to ScheduleFixedDelay
+//    private void doUpdate(String userID, String password){
+//    	if(asyncTask!=null){
+//	    	if (asyncTask.getStatus()==AsyncTask.Status.FINISHED){
+//	    		Log.i(TAG,"Finished do again");
+//	    		asyncTask = new AsyncCallGetUserInfo().execute(userID,password);
+//	    	}else{
+//	    		Log.i(TAG,"Not finished");
+//	    	}
+//    	}else{
+//    		Log.i(TAG,"Asynctask do null");
+//    		asyncTask = new AsyncCallGetUserInfo().execute(userID,password);
+//    	}
+//    }
+//    
+//    private class AsyncCallGetUserInfo extends AsyncTask<String, Void, Integer> {
+//	        @Override
+//	        protected Integer doInBackground(String... params) {
+//	        	int result = 0;
+//	        	Log.i(TAG,"Starting update");
+//	            //get the info from web service
+//	        	String userInfoAsXML = getUserInfoAsXML(params[0],params[1]);
+//	            //parse the XML it and update the class Me{
+//	        	try{
+//	        		if(Parser.updateMeFromADandLADOK(userInfoAsXML)){
+//	        			result = 1; //success
+//	        		}
+//	        		Log.i("UserInfo","Result of update 1 is good: "+result);
+//	        	}catch(Exception e){
+//	        		Log.e("UserInfo","Parser update exception");
+//	        	}
+//	            return result;
+//	        }
+//	        @Override
+//	        protected void onPostExecute(Integer result) {
+//	        	Log.i(TAG,"Update finished");
+//		        super.onPostExecute(result);
+////			    observable.setChanged();  //Tell that we made changes....
+////			    observable.notifyObservers(result);  // Notify all listeners...
+//		        Log.i(TAG,"Update finished listeners notified result: "+ result);
+//	        }
+//	    }
+    
+	
+	 
     private static final String NAMESPACE = "http://mahapp.k3.mah.se/";
     private static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
-    private static AsyncTask<String, Void, Integer> asyncTask= null;
-  //Only one update at a time
-    //This can partly be moved to ScheduleFixedDelay
-    private void doUpdate(String userID, String password){
-    	if(asyncTask!=null){
-	    	if (asyncTask.getStatus()==AsyncTask.Status.FINISHED){
-	    		Log.i(TAG,"Finished do again");
-	    		asyncTask = new AsyncCallGetUserInfo().execute(userID,password);
-	    	}else{
-	    		Log.i(TAG,"Not finished");
-	    	}
-    	}else{
-    		Log.i(TAG,"Asynctask do null");
-    		asyncTask = new AsyncCallGetUserInfo().execute(userID,password);
-    	}
-    }
-    
-    private class AsyncCallGetUserInfo extends AsyncTask<String, Void, Integer> {
-	        @Override
-	        protected Integer doInBackground(String... params) {
-	        	int result = 0;
-	        	Log.i(TAG,"Starting update");
-	            //get the info from web service
-	        	String userInfoAsXML = getUserInfoAsXML(params[0],params[1]);
-	            //parse the XML it and update the class Me{
-	        	try{
-	        		if(Parser.updateMeFromADandLADOK(userInfoAsXML)){
-	        			result = 1; //success
-	        		}
-	        		Log.i("UserInfo","Result of update 1 is good: "+result);
-	        	}catch(Exception e){
-	        		Log.e("UserInfo","Parser update exception");
-	        	}
-	            return result;
-	        }
-	        @Override
-	        protected void onPostExecute(Integer result) {
-	        	Log.i(TAG,"Update finished");
-		        super.onPostExecute(result);
-			    observable.setChanged();  //Tell that we made changes....
-			    observable.notifyObservers(result);  // Notify all listeners...
-		        Log.i(TAG,"Update finished listeners notified result: "+ result);
-	        }
-	    }
-	 
-	 public String getUserInfoAsXML(String loginID, String password){	   
+    public String getUserInfoAsXML(String loginID, String password){	   
 	     Object result="";
 		 try {
 	        	SoapObject loginrequest = new SoapObject(NAMESPACE, "getUserInfo");
@@ -321,25 +357,60 @@ public class Me implements Serializable{
 	        	//Log.i(TAG,"LoginError: "+e.getMessage());
 	       }
 	        return result.toString();
-	    }
+	}
 	 
-	 ///--- for observer pattern
-	 
-	 public class MyObservable extends Observable{  //Must be here to get hold on the protected setChanged
-		 @Override
-		protected void setChanged() {
-			super.setChanged();
-		}
-	 }
+
+    
+  
+//    private class AsyncCallLoginUser extends AsyncTask<String, Void, Integer> {
+//        @Override
+//        protected Integer doInBackground(String... params) {
+//        	Object result = 0;
+//        	Log.i(TAG,"Starting Login");
+//            //get the info from web service
+//        	try {
+//	        	SoapObject loginrequest = new SoapObject(NAMESPACE, "logInTheUser");
+//	            loginrequest.addProperty("username", params[0]);
+//	            loginrequest.addProperty("password", params[1]);
+//	            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+//	            envelope.dotNet=true;
+//	            envelope.setOutputSoapObject(loginrequest);
+//	            HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+//	            androidHttpTransport.call(NAMESPACE+"logInTheUser", envelope);
+//	            result = (Object)envelope.getResponse();
+//	            Log.d(TAG,"Loginresult "+result.toString());
+//	        } catch (Exception e) {
+//	        	Log.e(TAG,"LoginError: not logged in... "+e.getMessage());
+//	       }
+//        	Boolean loggedIn = loginToAD(params[0],params[1]);
+//            //parse the XML it and update the class Me{
+//            return 2;
+//        }
+//        
+//        @Override
+//        protected void onPostExecute(Integer result) {
+//        	Log.i(TAG,"Update finished");
+//	        super.onPostExecute(result);
+//        }
+//    }
+    
+//	 public class MyObservable extends Observable{  //Must be here to get hold on the protected setChanged
+//		 @Override
+//		protected void setChanged() {
+//			super.setChanged();
+//		}
+//	 }
 	 
 	 /*updater metod*/
-	 private void updateSchedule(Context ctx){
+	 private void scheduledUpdater(Context ctx){
 		 scheduledTask = new ScheduleFixedDelay(ctx);
+		 executor_ = Executors.newSingleThreadScheduledExecutor();
 		 try {
-				 this.executor_.scheduleWithFixedDelay(scheduledTask, ScheduleFixedDelay.initalDelayInSeconds, ScheduleFixedDelay.delayBetweenCallInSeconds, TimeUnit.SECONDS);//FOR test only 30
-			} catch (Exception e) {
-				Log.i(TAG,"ScheduelError: "+e.getMessage());
+				 this.executor_.scheduleWithFixedDelay(scheduledTask, ScheduleFixedDelay.initalDelayInSeconds, ScheduleFixedDelay.delayBetweenUpdatesInSeconds, TimeUnit.SECONDS);//FOR test only 30
+				 Log.i(TAG, "UpdateSchedule started");
+		 } catch (Exception e) {
+				Log.e(TAG,"ScheduelError: "+e.getMessage());
 			}
-			Log.i(TAG, "UpdateSchedule called");
+			
 	}
 }

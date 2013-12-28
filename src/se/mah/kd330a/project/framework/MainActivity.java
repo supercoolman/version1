@@ -3,15 +3,17 @@ package se.mah.kd330a.project.framework;
 
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import net.fortuna.ical4j.data.ParserException;
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
-import se.mah.kd330a.project.adladok.model.Me.MyObservable;
 import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
 import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
@@ -48,8 +50,7 @@ public class MainActivity extends FragmentActivity implements Observer{
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private String urlNewsFeed
-    = "http://www.mah.se/english/News/";
+    private String urlNewsFeed = "http://www.mah.se/english/News/";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mMenuTitles;
@@ -68,6 +69,8 @@ public class MainActivity extends FragmentActivity implements Observer{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Me.getInstance().startUpdate(this);
+        Me.getInstance().getObservable().addObserver(this); //register....
         mTitle = mDrawerTitle = getTitle();
         mMenuTitles = getResources().getStringArray(R.array.menu_texts);
         mMenuIcons = getResources().obtainTypedArray(R.array.menu_icons);
@@ -112,16 +115,13 @@ public class MainActivity extends FragmentActivity implements Observer{
         if (savedInstanceState == null) {
             selectItem(0);
         }
-
-       // updateColors();
-       Me.getInstance().startUpdate(this);
-       Me.getInstance().getNewObservable().addObserver(this); //register....
     }
     
     @Override
     protected void onPause() {
     	// TODO Auto-generated method stub
     	super.onPause();
+    	Log.i(TAG,"OnPause");
     	//Me.saveMeToLocalStorage(this);
     }
     
@@ -130,13 +130,14 @@ public class MainActivity extends FragmentActivity implements Observer{
     	// TODO Auto-generated method stub
     	super.onResume();
     	Log.i(TAG,"OnResume");
+    	 //Me.getInstance().startUpdate(this);
     }
     
     @Override
     protected void onDestroy() {
     	// TODO Auto-generated method stub
     	super.onDestroy();
-    	Log.i(TAG,"Scheduled updater thread stopped");
+    	Log.i(TAG,"onDestroy Scheduled updater thread stopped");
     	 Me.getInstance().stopUpdate();
     }
     
@@ -277,13 +278,16 @@ public class MainActivity extends FragmentActivity implements Observer{
 		
 		switch ((UpdateType)data){
 		case KRONOX:
-			Log.i(TAG,"Called from updater with data: KRONOX");
+			Log.i(TAG,"Data: KRONOX");
 		break;
 		case COURSES_and_AD:
-			Log.i(TAG,"Called from updater with data: COURSES");
+			Log.i(TAG,"Data: COURSES");
+		break;
+		case MAHNEWS:
+			Log.i(TAG,"Data: MAHNEWS");
 		break;
 		case ALL:
-			Log.i(TAG,"Called from updater with data: ALL");
+			Log.i(TAG,"Data: ALL");
 		break;
 		
 		default:

@@ -11,7 +11,7 @@ import java.net.URL;
 import se.mah.kd330a.project.adladok.model.Me;
 import android.content.Context;
 public class KronoxReader {
-	private final static String LOCAL_FILENAME = "courses.ical";
+	private final static String COURSES_FILENAME = "courses_ical";
 	private final static String LENGTH_UNIT = "v"; // d=days, v=weeks, m=months
 	private final static int LENGTH = 20;
 	// We will need to be consistent here, since the _tags_ in the summary field
@@ -67,7 +67,7 @@ public class KronoxReader {
 			URL url = new URL(KronoxReader.generateURL());
 			InputStream is = url.openStream();
 			DataInputStream dis = new DataInputStream(is);
-			FileOutputStream fos = ctx.openFileOutput(KronoxReader.LOCAL_FILENAME,Context.MODE_PRIVATE);
+			FileOutputStream fos = ctx.openFileOutput(KronoxReader.COURSES_FILENAME,Context.MODE_PRIVATE);
 			byte[] buffer = new byte[4096];
 			int length;
 			while((length = dis.read(buffer)) > 0) {
@@ -85,7 +85,7 @@ public class KronoxReader {
 	 * @throws FileNotFoundException
 	 */
 	public static FileInputStream getFile(Context ctx) throws FileNotFoundException {
-		return ctx.openFileInput(KronoxReader.LOCAL_FILENAME);
+		return ctx.openFileInput(KronoxReader.COURSES_FILENAME);
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class KronoxReader {
 	 */
 	public static boolean clearKronox(Context ctx){
 		boolean result = false;
-		File file = new File(ctx.getFilesDir(), LOCAL_FILENAME);
+		File file = new File(ctx.getFilesDir(), COURSES_FILENAME);
 		if (file.exists()){
 			result = file.delete();
 		}

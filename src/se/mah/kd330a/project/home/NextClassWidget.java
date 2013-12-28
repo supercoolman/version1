@@ -1,20 +1,13 @@
 package se.mah.kd330a.project.home;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.provider.ContactsContract.Contacts.Data;
 import android.util.Log;
-
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.model.ScheduleItem;
-
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.component.VEvent;
 

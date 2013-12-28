@@ -17,6 +17,7 @@ import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Dur;
 import net.fortuna.ical4j.model.Period;
 public class KronoxCalendar {
+	private String TAG ="KronoxCalendar";
 	private static Calendar calendar;
 	/**
 	 * Create the calendar object. Must be called before anything else.
@@ -31,25 +32,24 @@ public class KronoxCalendar {
 	public static void createCalendar(FileInputStream fin) throws IOException, ParserException {
 		CalendarBuilder builder = new CalendarBuilder();
 		KronoxCalendar.calendar = builder.build(fin);
+		Log.i("KronoxCalendar", "Calendarbuilder called");	
 	}
 	
 	public static Collection<?> todaysEvents() {
 		Collection<?> retval = null;
 		try {
-
-		java.util.Calendar today = java.util.Calendar.getInstance();
-		today.set(java.util.Calendar.HOUR_OF_DAY, 0);
-		today.clear(java.util.Calendar.MINUTE);
-		today.clear(java.util.Calendar.SECOND);
-		Dur one_day = new Dur(7, 0, 0, 0);
-		Rule[] rules = new Rule[1];
-		Period period = new Period(new DateTime(today.getTime()), one_day);
-		rules[0] = new PeriodRule(period);
-		Filter filter = new Filter(rules, Filter.MATCH_ANY);
-		retval = filter.filter(calendar.getComponents(Component.VEVENT));
+			java.util.Calendar today = java.util.Calendar.getInstance();
+			today.set(java.util.Calendar.HOUR_OF_DAY, 0);
+			today.clear(java.util.Calendar.MINUTE);
+			today.clear(java.util.Calendar.SECOND);
+			Dur one_day = new Dur(7, 0, 0, 0);
+			Rule[] rules = new Rule[1];
+			Period period = new Period(new DateTime(today.getTime()), one_day);
+			rules[0] = new PeriodRule(period);
+			Filter filter = new Filter(rules, Filter.MATCH_ANY);
+			retval = filter.filter(calendar.getComponents(Component.VEVENT));
 		} catch (Exception e) {
-		Log.e("KronoxCalender", e.toString());
-		
+			Log.e("KronoxCalendar", e.toString());	
 		}
 		return retval;					
 
@@ -107,7 +107,7 @@ public class KronoxCalendar {
 //	}
 	
 	public static Collection<?> getWeeksEventsFromThisWeek(int weekFromThisWeek) {
-		//Find date of this monday.....
+		//Find date of this monday........
 		java.util.Calendar thisMonday = java.util.Calendar.getInstance();
 		final int currentDayOfWeek = (thisMonday.get(java.util.Calendar.DAY_OF_WEEK) + 7 - thisMonday.getFirstDayOfWeek()) % 7;
 		thisMonday.add(java.util.Calendar.DAY_OF_YEAR, -currentDayOfWeek +(7*weekFromThisWeek));

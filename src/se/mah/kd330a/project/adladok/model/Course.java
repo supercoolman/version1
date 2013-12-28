@@ -11,7 +11,7 @@ public class Course {
 	 private String regCode="";
 	 private String program ="";
 	 private String term;
-	 private int color = R.color.red_mah;
+	 private int color = 2131034120;
 
 	 
 	 
