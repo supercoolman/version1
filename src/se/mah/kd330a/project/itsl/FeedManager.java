@@ -54,7 +54,6 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		articleList = new ArrayList<Article>();
 		feedList = new ArrayList<String>();
 		feedQueueCounter = 0;
-		
 		try
 		{
 			this.callbackHandler = (FeedManagerDoneListener) callbackHandler;
@@ -109,8 +108,9 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		/*
 		 * notify the UI of update
 		 */
-		if (callbackHandler != null)
+		if (callbackHandler != null){
 			callbackHandler.onFeedManagerProgress(this, feedQueueCounter, feedList.size());
+		}
 
 		if (downloadTask.hasException())
 		{
@@ -120,7 +120,6 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		{
 			Article article;
 			String feedDescription = feed.getTitle();
-			
 			for (RSSItem rssItem : feed.getItems())
 			{
 				article = new Article(rssItem);
@@ -128,9 +127,10 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 				article.setArticleCourseCode(feedDescription);
 			}
 		}
-
+		
 		if (feedQueueCounter < feedList.size())
 		{
+			Log.i(TAG, "Will download feed nbr: " +feedQueueCounter+" of "+feedList.size() +" and I have "+ articleList.size() +" in the list");
 			processFeeds();
 		}
 		else
@@ -162,8 +162,9 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 			 */
 			Log.i(TAG, "downloading complete, # articles: " + this.articleList.size());
 
-			if (callbackHandler != null)
+			if (callbackHandler != null){
 				callbackHandler.onFeedManagerDone(this, getArticles());
+			}
 		}
 	}
 
@@ -182,8 +183,9 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		/*
 		 * notify the UI of update
 		 */
-		if (callbackHandler != null)
+		if (callbackHandler != null){
 			callbackHandler.onFeedManagerProgress(this, feedQueueCounter, feedList.size());
+		}
 
 		/* 
 		 * there can only be one task at any time and it can only be used once
@@ -195,8 +197,10 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		 * in case we want to get all feeds again later (i.e. to refresh), that's
 		 * why we use a counter to keep track of where in the queue we are 
 		 */
-		if (!feedList.isEmpty())
-			downloadTask.execute(feedList.get(feedQueueCounter++));
+		if (!feedList.isEmpty()){
+			downloadTask.execute(feedList.get(feedQueueCounter));
+			feedQueueCounter = feedQueueCounter +1;
+		}
 	}
 
 	public ArrayList<String> getFeedList() {
@@ -208,24 +212,17 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		/*
 		 * don't overwrite saved data with nothing 
 		 */
-		if (!articleList.isEmpty())
-		{
 			FileOutputStream fos = appContext.openFileOutput(CACHE_FILENAME, Context.MODE_PRIVATE);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(articleList);
 			fos.close();
-		}
-		else
-		{
-			Log.e(TAG, "Nothing to save, are we online?");
-		}
+			Log.i(TAG, "Saved ITSL to cache");
 	}
 
 	@SuppressWarnings("unchecked")
 	public boolean loadCache()
 	{		
 		boolean returnValue = false; 
-
 		if (appContext.getFileStreamPath(CACHE_FILENAME).exists())
 		{
 			try

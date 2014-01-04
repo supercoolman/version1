@@ -30,6 +30,8 @@ public class FragmentITSL extends Fragment implements
 {
 	private static final String TAG = "FragmentITSL";
 	private static final long UPDATE_INTERVAL = 600000; // every ten minute
+	private static final long INITIAL_START_AFTER = 1000; // one minute
+	//private static final long UPDATE_INTERVAL = 60000; // every minute for testing
 	private ActionBar actionBar;
 	private FeedManager feedManager;
 	private ProgressDialog dialog;
@@ -48,7 +50,6 @@ public class FragmentITSL extends Fragment implements
 		 */
 		Context appContext = getActivity().getApplicationContext();
 		backgroundUpdateIntent = PendingIntent.getService(appContext, 0, new Intent(appContext, TimeAlarm.class), 0);
-
 		feedManager = new FeedManager(this, appContext);
 	}
 
@@ -63,9 +64,9 @@ public class FragmentITSL extends Fragment implements
 			 *  In case there is nothing in the cache, or it doesn't exist
 			 *  we have to refresh
 			 */
-			if (!feedManager.loadCache())
+			if (!feedManager.loadCache()){
 				refresh();
-			
+			}
 		}
 		else
 		{
@@ -94,7 +95,8 @@ public class FragmentITSL extends Fragment implements
 		super.onPause();
 		Log.i(TAG, "Paused: Setting up background updates");
 		AlarmManager alarm = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-		alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + UPDATE_INTERVAL, UPDATE_INTERVAL, backgroundUpdateIntent);
+		//WHY NOT DIRECTLY in OnCreate
+		alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + INITIAL_START_AFTER, UPDATE_INTERVAL, backgroundUpdateIntent);
 		
 		/*
 		 * Removes tabs and everything associated with it.
@@ -179,8 +181,7 @@ public class FragmentITSL extends Fragment implements
 			
 			actionBar.addTab(
 				actionBar.newTab()
-				.setText(" "+titleDisp)
-				
+				.setText(" "+titleDisp)		
 				.setTabListener(this));
 			
 			fragment = new TabFragment();

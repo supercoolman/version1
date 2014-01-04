@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,8 +26,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	private Context _context;
 	private List<Article> _listDataHeader; // header titles
 	private Date lastUpdate;
-	
-	HashMap<String, Integer> colors = new HashMap<String, Integer>();
+	private final String TAG = "ExpandableListAdapter";
+	//HashMap<String, Integer> colors = new HashMap<String, Integer>();
 	
 
 	public ExpandableListAdapter(Context context, List<Article> listDataHeader)
@@ -34,18 +35,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 		this._context = context;
 		this._listDataHeader = listDataHeader;
 		this.lastUpdate = Util.getLatestUpdate(_context);
-		
-		
-		//Default color if the feed is not attached to a course
-				colors.put("", context.getResources().getColor(R.color.red_mah));
-									
-				
-		//Fill hashmap with colors from my courses
-		for (Course c : Me.getInstance().getCourses())
-		{
-			Log.i("kurs", c.getRegCode());
-			colors.put(c.getRegCode(), c.getColor());			
-		}		
+			
 
 	}
 
@@ -86,24 +76,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 			TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
 			txtListChild.setText(this._listDataHeader.get(groupPosition).getArticleText());
 			ImageView imgClrCode = (ImageView) convertView.findViewById(R.id.clrCode);
+			int color = getColor(this._listDataHeader.get(groupPosition));
+			imgClrCode.setBackgroundColor(color);
 			String regCode = "";
-			
-			if (this._listDataHeader.get(groupPosition).getArticleCourseCode().contains("-"))
-			{
-				int start = this._listDataHeader.get(groupPosition).getArticleCourseCode().indexOf("-")+1;
-				
-				regCode = this._listDataHeader.get(groupPosition).getArticleCourseCode().substring(start, start+5);
-			}
-			
-			
-			if (colors.get(regCode)!=null)
-			{
-				imgClrCode.setBackgroundColor(colors.get(regCode));
-			}
-			else
-			{
-				imgClrCode.setBackgroundColor(colors.get(""));
-			}	
 		}
 
 		return convertView;
@@ -190,33 +165,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 			{
 				convertView.setClickable(false);
 			}
-
-String regCode = "";
-			
-			if (this._listDataHeader.get(groupPosition).getArticleCourseCode().contains("-"))
-			{
-				int start = this._listDataHeader.get(groupPosition).getArticleCourseCode().indexOf("-")+1;
-				
-				regCode = this._listDataHeader.get(groupPosition).getArticleCourseCode().substring(start, start+5);
-			}
-			
-			Log.i("getView", regCode);
-			
-			/* 
-			 * Sets the color to a default color if the coursecode can't be found in
-			 * the list of courses
-			 */
-			
-			if (colors.get(regCode)!=null)
-			{
-				imgClrCode.setBackgroundColor(colors.get(regCode));
-				txtClrLine.setBackgroundColor(colors.get(regCode));
-			}
-			else
-			{
-				imgClrCode.setBackgroundColor(colors.get(""));
-				txtClrLine.setBackgroundColor(colors.get(""));
-			}
+			int color = getColor(this._listDataHeader.get(groupPosition));
+			imgClrCode.setBackgroundColor(color);
+			txtClrLine.setBackgroundColor(color);
 		}
 		return convertView;
 
@@ -264,4 +215,21 @@ String regCode = "";
 	{
 		return 1;
 	}
+	
+	private int getColor(Article a){
+		int start = a.getArticleCourseCode().indexOf(" - ");
+		String courseName = a.getArticleCourseCode().substring(start+3,start+23);
+		int color = _context.getResources().getColor(R.color.red_mah);
+		for (Course c : Me.getInstance().getCourses())
+		{
+			Log.i(TAG,"course::"+c.getDisplaynameSv()+ "::AcourseNAME::"+courseName);
+			if (c.getDisplaynameSv().contains(courseName)||c.getDisplaynameEn().contains(courseName)){
+				Log.i(TAG," Color" + c.getColor()+ "course"+c.getDisplaynameSv()+ " Artcode "+a.getArticleCourseCode());
+				color=c.getColor();
+				break;
+			}
+		}
+		return color;
+	}
+
 }

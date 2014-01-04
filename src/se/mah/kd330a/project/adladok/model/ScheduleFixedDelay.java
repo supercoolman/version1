@@ -20,8 +20,8 @@ import android.util.Log;
 
 public class ScheduleFixedDelay extends Observable implements Runnable  {
 	
-	public final static long initalDelayInSeconds = 1;
-	public final static long delayBetweenUpdatesInSeconds = 300; //5  minutes then we take AD every 30 minutes
+	public final static long initalDelayInSeconds = 0;
+	public final static long delayBetweenUpdatesInSeconds = 180; //3  minutes then we take AD every 30 minutes
 	//public final static long delayBetweenUpdatesInSeconds = 30; //30sec for testing
 	private int ADUpdateCount=10; 
 	public enum UpdateType {
@@ -44,37 +44,7 @@ public class ScheduleFixedDelay extends Observable implements Runnable  {
 			for (String s : files) {
 				Log.d(TAG,"Filename: "+s);
 			}
-			try
-			{
-				KronoxReader.update(c.getApplicationContext());
-				KronoxCalendar.createCalendar(KronoxReader.getFile(c.getApplicationContext()));
-				setChanged();
-				notifyObservers(UpdateType.KRONOX);
-				Log.i(TAG, "Updated Calendar from Kronox");
-			}catch (Exception f){
-					Log.i(TAG, f.toString());
-			 }
-			//AD
-			if (ADUpdateCount >=10){
-				ADUpdateCount=0;
-				Log.d(TAG,"Starting AD update");
-	        	try{
-	        		String userInfoAsXML = Me.getInstance().getUserInfoAsXML(Me.getInstance().getUserID(),Me.getInstance().getPassword());
-	        		if(Parser.updateMeFromADandLADOK(userInfoAsXML)){
-	        			Log.i(TAG,"UserUpdate succesfull saving to local storage");
-	        			Me.getInstance().setColors(c);
-	        			Me.getInstance().saveMeToLocalStorage(c);
-	        			setChanged();
-	        			notifyObservers(UpdateType.COURSES_and_AD);
-	        		}
-	        	}catch(Exception e){
-	        		Log.e(TAG,"LADOK Parser update exception");
-	        	}
-			}else{
-				ADUpdateCount++;
-			}
-			//MAHNEWS writes news to a file
-			
+			//MAHNEWS writes MAHnews to file and notifies listeners
 			try{
 				DOMParser myParser = new DOMParser();
 				RSSFeed feedFromNet = myParser.parseXml(Constants.mahNewsAdress);
@@ -109,19 +79,41 @@ public class ScheduleFixedDelay extends Observable implements Runnable  {
 					notifyObservers(UpdateType.MAHNEWS);
 					Log.i(TAG,"MAHNEWS No file saved locally saving new file");
 				}
-			}catch(FileNotFoundException e1){
+			}catch(Exception e1){
 				Log.i(TAG,e1.toString());
 			
 			}
-			catch (StreamCorruptedException e) {
-				// TODO Auto-generated catch block
-				Log.e(TAG, e.toString());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				Log.e(TAG, e.toString());
-			}catch(Exception e){
-				Log.e(TAG, e.toString());
-		    }
+			// updates from AD and LADOK notifies listeners
+			if (ADUpdateCount >=10){
+				ADUpdateCount=0;
+				Log.d(TAG,"Starting AD update");
+	        	try{
+	        		String userInfoAsXML = Me.getInstance().getUserInfoAsXML(Me.getInstance().getUserID(),Me.getInstance().getPassword());
+	        		if(!userInfoAsXML.isEmpty()&&Parser.updateMeFromADandLADOK(userInfoAsXML,c)){
+	        			Log.i(TAG,"UserUpdate succesfull saving to local storage");
+	        			Me.getInstance().saveMeToLocalStorage(c);
+	        			setChanged();
+	        			notifyObservers(UpdateType.COURSES_and_AD);
+	        		}
+	        	}catch(Exception e){
+	        		Log.e(TAG,"AD-LADOK Parser update exception");
+	        	}
+			}else{
+				ADUpdateCount++;
+			}
+			
+			//Kronox reads from Kronox with information from registerd courses
+			try
+			{
+				KronoxReader.update(c.getApplicationContext());
+				KronoxCalendar.createCalendar(KronoxReader.getFile(c.getApplicationContext()));
+				setChanged();
+				notifyObservers(UpdateType.KRONOX);
+				Log.i(TAG, "Updated Calendar from Kronox");
+			}catch (Exception f){
+					Log.i(TAG, "Kronox: "+f.toString());
+			 }
+			
 			//ITSL
 			//????
 			

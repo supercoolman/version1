@@ -51,11 +51,9 @@ public class Me{
 	private String password="";
 	private final String ME_FILE_NAME = "MEfile";
 	private static Me instanceOfMe;
-	private static AsyncTask<String, Void, Integer> asyncLoginTask;
-	//private MyObservable observable = new MyObservable(); 
+	private static AsyncTask<String, Void, Integer> asyncLoginTask; 
 	private ScheduledExecutorService executor_;
 
-//	private final ScheduledThreadPoolExecutor executor_ ;//updater thread
 	private ScheduleFixedDelay scheduledTask;
 	
 	public static Me getInstance(){
@@ -66,31 +64,11 @@ public class Me{
 	}
 	
 	private Me() {
-//		
-//		if (scheduler != null){
-//			scheduler = Executors.newSingleThreadScheduledExecutor();
-//		}
-//		if (executor_ != null){
-//			executor_ = new ScheduledThreadPoolExecutor(1);
-//		}
-//			executor_.setKeepAliveTime(ScheduleFixedDelay.delayBetweenUpdatesInSeconds+1, TimeUnit.SECONDS);
-//			executor_.allowCoreThreadTimeOut(true); 
-		//Locale.setDefault(Locale.US); Kanske kanske inte
 		/*Singleton*/
 	}		
 	
 	 public void startUpdate(Context ctx){
-		 setColors(ctx);
 		 scheduledUpdater(ctx);
-//		 try
-//			{
-//				Log.i(TAG, "Kronox: Creating calendar from file if saved");
-//				KronoxCalendar.createCalendar(KronoxReader.getFile(ctx));
-//			}
-//			catch (Exception e)
-//			{
-//				Log.i(TAG, "Kronox: No calendar file saved");
-//			}
 	 }
 	
 	 public void stopUpdate(){
@@ -98,16 +76,13 @@ public class Me{
 		 while (!executor_.isTerminated()) {
 	        }
 		 Log.i(TAG, "ThreadPoolExecutor: Finished all threads");
-	        System.out.println("Finished all threads");
+	      System.out.println("Finished all threads");
 		 
 	 }
 
 	 public Observable getObservable() {
 			return scheduledTask;
 	}
-//	public MyObservable getObservable() {
-//		return observable;
-//	}
 	
 	public void setPassword(String password) {
 		this.password = password;
@@ -172,8 +147,14 @@ public class Me{
 	
 	public void clearAllIncludingSavedData(Context c) {
 		 clearAllExcludingSavedData(c);
-		 KronoxReader.clearKronox(c);
-		 saveMeToLocalStorage(c);
+		 String[] files = c.fileList();
+			for (String fileName : files) {
+				File file = new File(c.getFilesDir(), fileName);
+				if (file.exists()){
+					file.delete();
+					Log.i(TAG,"Deleted: "+fileName);
+				}
+		 }
 		 Log.i(TAG,"clear all including locally saved data");
 	}
 	
@@ -190,19 +171,18 @@ public class Me{
 		 password="";
 	}
 	
-	/**Restores Me and my courses from local storage, use with care since it first clears all data in Me object
-	 * Use saveMe first*/
+	/**Restores Me and my courses from local storage*/
 	public boolean restoreMeFromLocalStorage(Context c){
 		//Read local storage
-		boolean restored = false;
+		boolean restored = true;
 		File file = new File(c.getFilesDir(), ME_FILE_NAME);
 		if (file.exists()){
 			//Clear content in me:
 			String xml = Parser.getXmlFromFile(file);
 			Log.i(TAG,"Restored" + xml);
 			 try {
-				 restored = Parser.updateMeFromADandLADOK(xml);
-				 if(this.password.isEmpty()&&this.userID.isEmpty()){
+				 Parser.updateMeFromADandLADOK(xml,c);
+				 if(this.password.isEmpty()||this.userID.isEmpty()){
 					 restored = false;
 				 }
 			} catch (Exception e) {restored =false;}
@@ -233,48 +213,12 @@ public class Me{
 		}
 	}
 	
-	public void setColors(Context ctx){
-		int i=0;
-			for (Course c : Me.getInstance().getCourses()) {
-				switch (i) {
-				case 0:
-					c.setColor(ctx.getResources().getColor(R.color.grey_dark));
-					break;
-				case 1:
-					c.setColor(ctx.getResources().getColor(R.color.blue));								
-					break;
-				case 2:
-					c.setColor(ctx.getResources().getColor(R.color.green));
-					break;
-				case 3:
-					c.setColor(ctx.getResources().getColor(R.color.yellow));
-					break;
-				case 4:
-					c.setColor(ctx.getResources().getColor(R.color.orange));
-					break;
-				case 5:
-					c.setColor(ctx.getResources().getColor(R.color.red));
-					break;
-				case 6:
-					c.setColor(ctx.getResources().getColor(R.color.grey));
-					break;
-				case 7:
-					c.setColor(ctx.getResources().getColor(R.color.grey_middle));
-					break;
-				default:
-					break;			
-				}
-				//Log.d(TAG,"Color: " + c.getColor() + " Set to: " + c.getCourseID());
-				i++;
-			}
-	}
-	
 	public List<Course> getCourses(){
 		return myCourses;
 	}
 	
 	public Course getCourse(String courseID) {
-		for(Course c: myCourses){  //overide equals
+		for(Course c: myCourses){  //overide equals instead.......
 			if (c.getCourseID().equals(courseID)){
 				return c;
 			}
@@ -285,59 +229,6 @@ public class Me{
 	public void addCourse(Course course) {		
 		this.myCourses.add(course);
 	}
-	
-//	public void updateMeFromWebService(){
-//		Log.i(TAG,"updateMe");
-//		doUpdate(userID, password);
-//	}
-	
-  
-//    private static AsyncTask<String, Void, Integer> asyncTask= null;
-//  //Only one update at a time
-//    //This can partly be moved to ScheduleFixedDelay
-//    private void doUpdate(String userID, String password){
-//    	if(asyncTask!=null){
-//	    	if (asyncTask.getStatus()==AsyncTask.Status.FINISHED){
-//	    		Log.i(TAG,"Finished do again");
-//	    		asyncTask = new AsyncCallGetUserInfo().execute(userID,password);
-//	    	}else{
-//	    		Log.i(TAG,"Not finished");
-//	    	}
-//    	}else{
-//    		Log.i(TAG,"Asynctask do null");
-//    		asyncTask = new AsyncCallGetUserInfo().execute(userID,password);
-//    	}
-//    }
-//    
-//    private class AsyncCallGetUserInfo extends AsyncTask<String, Void, Integer> {
-//	        @Override
-//	        protected Integer doInBackground(String... params) {
-//	        	int result = 0;
-//	        	Log.i(TAG,"Starting update");
-//	            //get the info from web service
-//	        	String userInfoAsXML = getUserInfoAsXML(params[0],params[1]);
-//	            //parse the XML it and update the class Me{
-//	        	try{
-//	        		if(Parser.updateMeFromADandLADOK(userInfoAsXML)){
-//	        			result = 1; //success
-//	        		}
-//	        		Log.i("UserInfo","Result of update 1 is good: "+result);
-//	        	}catch(Exception e){
-//	        		Log.e("UserInfo","Parser update exception");
-//	        	}
-//	            return result;
-//	        }
-//	        @Override
-//	        protected void onPostExecute(Integer result) {
-//	        	Log.i(TAG,"Update finished");
-//		        super.onPostExecute(result);
-////			    observable.setChanged();  //Tell that we made changes....
-////			    observable.notifyObservers(result);  // Notify all listeners...
-//		        Log.i(TAG,"Update finished listeners notified result: "+ result);
-//	        }
-//	    }
-    
-	
 	 
     private static final String NAMESPACE = "http://mahapp.k3.mah.se/";
     private static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
@@ -354,54 +245,12 @@ public class Me{
 	            androidHttpTransport.call(NAMESPACE+"getUserInfo", envelope);
 	            result = (Object)envelope.getResponse();
 	        } catch (Exception e) {
-	        	//Log.i(TAG,"LoginError: "+e.getMessage());
+	        	Log.i(TAG,"LoginError: "+e.getMessage());
 	       }
 	        return result.toString();
 	}
 	 
-
-    
-  
-//    private class AsyncCallLoginUser extends AsyncTask<String, Void, Integer> {
-//        @Override
-//        protected Integer doInBackground(String... params) {
-//        	Object result = 0;
-//        	Log.i(TAG,"Starting Login");
-//            //get the info from web service
-//        	try {
-//	        	SoapObject loginrequest = new SoapObject(NAMESPACE, "logInTheUser");
-//	            loginrequest.addProperty("username", params[0]);
-//	            loginrequest.addProperty("password", params[1]);
-//	            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-//	            envelope.dotNet=true;
-//	            envelope.setOutputSoapObject(loginrequest);
-//	            HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-//	            androidHttpTransport.call(NAMESPACE+"logInTheUser", envelope);
-//	            result = (Object)envelope.getResponse();
-//	            Log.d(TAG,"Loginresult "+result.toString());
-//	        } catch (Exception e) {
-//	        	Log.e(TAG,"LoginError: not logged in... "+e.getMessage());
-//	       }
-//        	Boolean loggedIn = loginToAD(params[0],params[1]);
-//            //parse the XML it and update the class Me{
-//            return 2;
-//        }
-//        
-//        @Override
-//        protected void onPostExecute(Integer result) {
-//        	Log.i(TAG,"Update finished");
-//	        super.onPostExecute(result);
-//        }
-//    }
-    
-//	 public class MyObservable extends Observable{  //Must be here to get hold on the protected setChanged
-//		 @Override
-//		protected void setChanged() {
-//			super.setChanged();
-//		}
-//	 }
-	 
-	 /*updater metod*/
+	 /**Starts the updating from AD,LADOK and Kronox**/
 	 private void scheduledUpdater(Context ctx){
 		 scheduledTask = new ScheduleFixedDelay(ctx);
 		 executor_ = Executors.newSingleThreadScheduledExecutor();

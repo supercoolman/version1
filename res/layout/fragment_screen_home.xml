@@ -101,8 +101,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:textColor="@color/grey_dark"
+                            android:text="@string/fultext"
                             android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/grey_dark"
                             android:textStyle="bold" />
 
                         <TextView
@@ -270,16 +271,15 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textStyle="bold" />
 						
-                        
                         <TextView
                             android:id="@+id/text_latest_news_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:textColor="@color/grey_dark"
+                            android:lineSpacingExtra="4dp"
+                            android:text="@string/fultext"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:lineSpacingExtra="4dp" />
-
+                            android:textColor="@color/grey_dark" />
                         
                     </LinearLayout>
                 </LinearLayout>

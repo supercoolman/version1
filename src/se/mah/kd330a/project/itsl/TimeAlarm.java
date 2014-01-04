@@ -32,6 +32,7 @@ public class TimeAlarm extends IntentService implements FeedManager.FeedManagerD
 		{
 			FeedManager feedManager = new FeedManager(this, getApplicationContext());
 			feedManager.processFeeds();
+			Log.e(TAG, "Called feedManager.processFeeds()");
 		}
 		else
 		{

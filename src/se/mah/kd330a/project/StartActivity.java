@@ -40,6 +40,7 @@ public class StartActivity extends Activity
 		((LinearLayout) findViewById(R.id.loading_view)).setVisibility(LinearLayout.GONE);		
 		restoredsuccess = Me.getInstance().restoreMeFromLocalStorage(this);
 		//check if password changed
+		Log.i(TAG,"restoredsuccess: "+restoredsuccess);
 		if(restoredsuccess){
 			username = Me.getInstance().getUserID();
 			password = Me.getInstance().getPassword();

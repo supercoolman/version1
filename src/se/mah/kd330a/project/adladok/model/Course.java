@@ -13,8 +13,6 @@ public class Course {
 	 private String term;
 	 private int color = 2131034120;
 
-	 
-	 
 	 public int getColor() {
 		 return color;
 	}
@@ -77,8 +75,6 @@ public class Course {
 						s="k."+this.courseID+"-"+this.term+"-"+this.regCode;
 					}else if(!this.program.isEmpty()&&!this.term.isEmpty()){
 							s="p."+this.program+this.term.substring(2, 4);
-							Log.i("UserInfo","year"+this.term.substring(2, 4));
-							Log.i("UserInfo","term"+term.substring(4, 5));
 							if(term.substring(4, 5).equals("2")){
 								s= s+"h";
 							}
@@ -94,7 +90,6 @@ public class Course {
 							s=s+"v";
 						}
 					}
-					Log.i("UserInfo","Kronoxcode: "+s);
 					return s;
 		}
 		

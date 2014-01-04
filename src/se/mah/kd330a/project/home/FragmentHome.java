@@ -29,6 +29,7 @@ import se.mah.kd330a.project.R;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -63,6 +64,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
+		Log.i("FragmentHome", "OnCreate: ");
 		super.onCreate(savedInstanceState);
 		Me.getInstance().getObservable().addObserver(this);
         try {
@@ -77,27 +79,32 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		}
 		catch (Exception e)
 		{
-			Log.e("FragmentHome", e.toString());
+			Log.e("FragmentHome", "OnCreate: "+e.toString());
 		}
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
+		Log.i("FragmentHome", "OnCreateView: ");
 		rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_home, container, false);
 		setNextKronoxClass(rootView);
 		setNewsFeedMah(rootView);
 		ITSLfeedManager = new FeedManager(this, getActivity().getApplicationContext());
+		//ITSLfeedManager.getFeedList().size()
+		Log.i(TAG,"ITSLfeedManager.getFeedList().size()" + ITSLfeedManager.getFeedList().size());
 		if (!ITSLfeedManager.loadCache())
 		{
 			ITSLfeedManager.reset();
 			ITSLfeedManager.processFeeds();
 		}	
+		//Perhaps or all should be done in ScheduledFixedDelay????
 		return rootView;
 	}
 
 	private void setNewsFeedMah(ViewGroup rootView)
 	{
+		Log.i(TAG,"setNewsFeedMah: ");
 		try
 		{
 			fis = getActivity().openFileInput(Constants.mahNewsSavedFileName);
@@ -105,11 +112,11 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			newsFeed = (RSSFeed) in.readObject();
 			in.close();
 			fis.close();
-			Log.i("setNewsFeedMah", Integer.toString(newsFeed.getItemCount()));
+			Log.i(TAG, "Items in MAHNews feed: "+ Integer.toString(newsFeed.getItemCount()));
 		}
 		catch (Exception ex)
 		{
-			Log.e("FragmentHome", "Error in get method");
+			Log.e(TAG, "Error in get method");
 		}
 
 		try
@@ -119,17 +126,15 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			for (int i = 0; i < 1; i++)
 			{
 				TextView title = (TextView) newsFeedMahWidget.findViewById(R.id.text_latest_news_heading);
-
 				title.setText(newsFeed.getItem(i).getTitle());
 				TextView description = (TextView) newsFeedMahWidget.findViewById(R.id.text_latest_news_description);
-
 				description.setText(newsFeed.getItem(i).getDescription());
 
 			}
 		}
 		catch (Exception ex)
 		{
-			Log.e("FragmentHome", "Error in get method");
+			Log.e(TAG, "Error in get method");
 		}
 
 	}
@@ -141,14 +146,6 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		nextClassWidget.setVisibility(LinearLayout.VISIBLE);
 		String courseName = nextClass.getCourseName();
 		String courseID = nextClass.getCourseId();
-//		//For synchronizing color
-//		HashMap<String, Integer> colors = new HashMap<String, Integer>();
-//		
-//		//Fill hashmap with colors from my courses
-//		for (Course c : Me.getInstance().getCourses())
-//		{
-//			colors.put(c.getCourseID(), c.getColor());			
-//		}
 		
 		if (profileRegistered)
 		{
@@ -175,9 +172,9 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		}
 		else
 		{
-			nextClassWidget.setVisibility(LinearLayout.GONE);
-			TextView textNextClassDate = (TextView) nextClassWidget.findViewById(R.id.text_next_class_date);
-			textNextClassDate.setText("No classes");
+			//nextClassWidget.setVisibility(LinearLayout.GONE);
+			//TextView textNextClassDate = (TextView) nextClassWidget.findViewById(R.id.text_next_class_date);
+			//textNextClassDate.setText("No classes found updating....");
 		}
 
 	}
@@ -191,33 +188,27 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			//View widget = (View)rootView.findViewById(R.id.itslearning_widget);
 			View widget = rootView;
 			Article a = articles.get(0);
-			
-			//For synchronizing color
-			HashMap<String, Integer> colors = new HashMap<String, Integer>();
-			
-			//Fill hashmap with colors from my courses
+			int start = a.getArticleCourseCode().indexOf(" - ");
+			String courseName = a.getArticleCourseCode().substring(start+3,start+23);
+			int color = this.getResources().getColor(R.color.red_mah);
 			for (Course c : Me.getInstance().getCourses())
 			{
-				colors.put(c.getRegCode(), c.getColor());			
+				Log.i(TAG,"course::"+c.getDisplaynameSv()+ "::AcourseNAME::"+courseName);
+				if (c.getDisplaynameSv().contains(courseName)||c.getDisplaynameEn().contains(courseName)){
+					Log.i(TAG," Color" + c.getColor()+ "course"+c.getDisplaynameSv()+ " Artcode "+a.getArticleCourseCode());
+					color=c.getColor();
+					break;
+				}
 			}	
 			((TextView)widget.findViewById(R.id.text_itsl_title)).setText(a.getArticleHeader());
 			((TextView)widget.findViewById(R.id.text_itsl_date)).setText(a.getArticleDate());
 			((TextView)widget.findViewById(R.id.text_itsl_content)).setText(a.getArticleText());
-			String regCode = "";		
-			if (a.getArticleCourseCode().contains("-"))
-			{
-				int start = a.getArticleCourseCode().indexOf("-")+1;
-				regCode = a.getArticleCourseCode().substring(start, start+5);
-			}
-			if (colors.get(regCode)!=null)
-			{
-				((View)widget.findViewById(R.id.home_itsl1)).setBackgroundColor(colors.get(regCode));
-				((View)widget.findViewById(R.id.home_itsl2)).setBackgroundColor(colors.get(regCode));
-			}
+			((View)widget.findViewById(R.id.home_itsl1)).setBackgroundColor(color);
+			((View)widget.findViewById(R.id.home_itsl2)).setBackgroundColor(color);
 		}
 		catch(Exception e)
 		{
-			Log.i("FragmentHome", "onFeedManagerDone(): " + e.toString());
+			Log.e(TAG, "onFeedManagerDone(): " + e.toString());
 		}
 	}
 
@@ -245,6 +236,15 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 				
 			});
 			
+			break;
+		case MAHNEWS:
+			getActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					setNewsFeedMah(rootView);
+				}
+				
+			});
 			break;
 		default:
 			break;

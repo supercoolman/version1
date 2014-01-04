@@ -26,47 +26,55 @@ public class Parser{
 	//"courses""displaynamesv""course""courseid""displaynameen""regcode""program""term"
 	
 	/**
-	 * Uppdate Me and courses from XML
+	 * Uppdate Me and courses from XML if there are any changes
 	 * @param xml string
+	 * @return boolean if info is updated in  Me
 	 * */
-	public static boolean updateMeFromADandLADOK(String xmlFromWebservice) throws Exception{
-        boolean success = true;
+	public static boolean updateMeFromADandLADOK(String xmlFromWebservice, Context ctx) throws Exception{
+        boolean changedInfo = false;
 		XMLParser parser = new XMLParser();
 		if (xmlFromWebservice!=null){
-			Document doc = parser.getDomElement(xmlFromWebservice); // getting DOM element
+			Document doc = parser.getDomElement(xmlFromWebservice);
+			//UserID 
 			NodeList nl = doc.getElementsByTagName("userid");
 			Element e = (Element)nl.item(0);
-			if (e!=null){
+			if (e!=null&&!Me.getInstance().getUserID().equals(parser.getElementValue(e))){
 				Me.getInstance().setUserID(parser.getElementValue(e));
+				changedInfo = true;
 			}
 			nl = doc.getElementsByTagName("password");
 			e = (Element)nl.item(0);
-			if (e!=null){
+			if (e!=null&&!Me.getInstance().getPassword().equals(parser.getElementValue(e))){
 				Me.getInstance().setPassword(parser.getElementValue(e));
+				changedInfo = true;
 			}
 			//firstname
 			nl = doc.getElementsByTagName("givenname");
 			e = (Element)nl.item(0);
-			if (e!=null){
+			if (e!=null&&!Me.getInstance().getFirstName().equals(parser.getElementValue(e))){
 				Me.getInstance().setFirstName(parser.getElementValue(e));
+				changedInfo = true;
 			}
 			//lastname
 			nl = doc.getElementsByTagName("lastname");
 			e = (Element)nl.item(0);
-			if (e!=null){
+			if (e!=null&&!Me.getInstance().getLastName().equals(parser.getElementValue(e))){
 				Me.getInstance().setLastName(parser.getElementValue(e));
+				changedInfo = true;
 			}
 			//displayname
 			nl = doc.getElementsByTagName("displayname");
 			e = (Element)nl.item(0);
-			if (e!=null){
+			if (e!=null&&!Me.getInstance().getDispayName().equals(parser.getElementValue(e))){
 				Me.getInstance().setDispayName(parser.getElementValue(e));
+				changedInfo = true;
 			}
 			//email
 			nl = doc.getElementsByTagName("mahmail");
 			e = (Element)nl.item(0);
-			if (e!=null){
+			if (e!=null&&!Me.getInstance().getEmail().equals(parser.getElementValue(e))){
 				Me.getInstance().setEmail(parser.getElementValue(e));
+				changedInfo = true;
 			}
 			//isstaff
 			nl = doc.getElementsByTagName("mahisstaff");
@@ -74,9 +82,15 @@ public class Parser{
 			if (e!=null){
 				String s = parser.getElementValue(e);
 				if (s.equals("True")||s.equals("true")){
-					Me.getInstance().setIsStaff(true);
+					if (!Me.getInstance().isStaff()){
+						Me.getInstance().setIsStaff(true);
+						changedInfo = true;
+					}
 				}else{
-					Me.getInstance().setIsStaff(false);
+					if (Me.getInstance().isStaff()){
+						Me.getInstance().setIsStaff(false);
+						changedInfo = true;
+					}
 				}
 			}
 			//isstudent
@@ -85,39 +99,67 @@ public class Parser{
 			if (e!=null){
 				String s = parser.getElementValue(e);
 				if (s.equals("True")||s.equals("true")){
-					Me.getInstance().setIsStudent(true);
+					if(!Me.getInstance().isStudent()){
+						Me.getInstance().setIsStudent(true);
+						changedInfo = true;
+					}
 				}else{
-					Me.getInstance().setIsStudent(false);
+					if(Me.getInstance().isStudent()){
+						Me.getInstance().setIsStudent(false);
+						changedInfo = true;
+					}
 				}
 			}
-			
-			// add the courses......
 			nl = doc.getElementsByTagName("courses");
 			e = (Element) nl.item(0);			
-			
 			NodeList courseNode = e.getElementsByTagName("course");
-			//TODO here it is needed to check if the course exists
-			if (courseNode.getLength()>0){  //At least we check if we have any courses before clearing them.....
-				Me.getInstance().clearCourses();
-			}
 			for (int j =0;j < courseNode.getLength();j++){
 				Element e2 = (Element) courseNode.item(j);
-				Course course = new Course(parser.getValue(e2, "displaynamesv"), parser.getValue(e2, "courseid"));
-				course.setDisplaynameen(parser.getValue(e2,"displaynameen"));
-				course.setRegCode(parser.getValue(e2,"regcode"));
-				course.setProgram(parser.getValue(e2,"program"));
-				course.setTerm(parser.getValue(e2,"term"));
-//				try {
-//					course.setColor(Integer.parseInt(parser.getValue(e2,"color")));
-//				} catch (Exception e1) {
-//					course.setColor(0);
-//				}
-				Me.getInstance().addCourse(course);
+				//Remove old courses
+				Course c = Me.getInstance().getCourse(parser.getValue(e2, "courseid"));
+				if (c==null){  //the course does not exist in Me
+					Course course = new Course(parser.getValue(e2, "displaynamesv"), parser.getValue(e2, "courseid"));
+					course.setDisplaynameen(parser.getValue(e2,"displaynameen"));
+					course.setRegCode(parser.getValue(e2,"regcode"));
+					course.setProgram(parser.getValue(e2,"program"));
+					course.setTerm(parser.getValue(e2,"term"));
+					switch (j) {
+					case 0:
+						course.setColor(ctx.getResources().getColor(R.color.blue));
+						break;
+					case 1:
+						course.setColor(ctx.getResources().getColor(R.color.orange));								
+						break;
+					case 2:
+						course.setColor(ctx.getResources().getColor(R.color.green));
+						break;
+					case 3:
+						course.setColor(ctx.getResources().getColor(R.color.yellow));
+						break;
+					case 4:
+						course.setColor(ctx.getResources().getColor(R.color.red));
+						break;
+					case 5:
+						course.setColor(ctx.getResources().getColor(R.color.grey_dark));
+						break;
+					case 6:
+						course.setColor(ctx.getResources().getColor(R.color.grey));
+						break;
+					case 7:
+						course.setColor(ctx.getResources().getColor(R.color.grey_middle));
+						break;
+					default:
+						course.setColor(ctx.getResources().getColor(R.color.red_mah));
+						break;			
+					}
+					Me.getInstance().addCourse(course);
+					changedInfo = true;
+				}
 			}
 		}else{
-			success=false;
+			changedInfo=false;
 		}
-		return success;
+		return changedInfo;
     }
 	
 	/**
@@ -208,5 +250,4 @@ public class Parser{
 	        return"<user></user>";
 	    } 
 	}
-	
 }
