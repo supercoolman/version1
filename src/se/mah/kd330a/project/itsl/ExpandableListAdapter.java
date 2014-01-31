@@ -218,13 +218,21 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
 	
 	private int getColor(Article a){
 		int start = a.getArticleCourseCode().indexOf(" - ");
-		String courseName = a.getArticleCourseCode().substring(start+3,start+23);
+		Log.i(TAG,"CourseCode: "+  a.getArticleCourseCode());
+		String courseName="";
+		try{
+			courseName = a.getArticleCourseCode().substring(start+3,a.getArticleCourseCode().length()-1);
+		}catch  (Exception e){
+			Log.i(TAG,e.getMessage());
+		}
+		Log.i(TAG,"CourseName:"+ courseName+":");
 		int color = _context.getResources().getColor(R.color.red_mah);
 		for (Course c : Me.getInstance().getCourses())
 		{
-			Log.i(TAG,"course::"+c.getDisplaynameSv()+ "::AcourseNAME::"+courseName);
+			Log.i(TAG,"course: "+c.getDisplaynameSv()+ " :courseNAME: "+courseName);
+			//This is not right if the name on ITSL is a pert of the coursename example "Programmering for interaktionsdesign och Interaktionsdesign"
 			if (c.getDisplaynameSv().contains(courseName)||c.getDisplaynameEn().contains(courseName)){
-				Log.i(TAG," Color" + c.getColor()+ "course"+c.getDisplaynameSv()+ " Artcode "+a.getArticleCourseCode());
+				Log.i(TAG," Color: " + c.getColor()+ " course: "+c.getDisplaynameSv()+ " Artcode: "+a.getArticleCourseCode());
 				color=c.getColor();
 				break;
 			}

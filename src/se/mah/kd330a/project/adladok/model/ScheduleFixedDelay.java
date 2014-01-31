@@ -102,7 +102,7 @@ public class ScheduleFixedDelay extends Observable implements Runnable  {
 				ADUpdateCount++;
 			}
 			
-			//Kronox reads from Kronox with information from registerd courses
+			//Kronox reads from Kronox with information from registered courses
 			try
 			{
 				KronoxReader.update(c.getApplicationContext());

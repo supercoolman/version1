@@ -48,7 +48,7 @@ public class Parser{
 				Me.getInstance().setPassword(parser.getElementValue(e));
 				changedInfo = true;
 			}
-			//firstname
+			//firstnamevv
 			nl = doc.getElementsByTagName("givenname");
 			e = (Element)nl.item(0);
 			if (e!=null&&!Me.getInstance().getFirstName().equals(parser.getElementValue(e))){
@@ -122,6 +122,7 @@ public class Parser{
 					course.setDisplaynameen(parser.getValue(e2,"displaynameen"));
 					course.setRegCode(parser.getValue(e2,"regcode"));
 					course.setProgram(parser.getValue(e2,"program"));
+					course.setAntterm(parser.getValue(e2,"programantterm"));
 					course.setTerm(parser.getValue(e2,"term"));
 					switch (j) {
 					case 0:
@@ -234,6 +235,9 @@ public class Parser{
 	        	serializer.startTag("", "program");
 	        	serializer.text(course.getProgram());
 	        	serializer.endTag("", "program");
+	        	serializer.startTag("", "programantterm");
+	        	serializer.text(course.getAntterm());
+	        	serializer.endTag("", "programantterm");
 	        	serializer.startTag("", "term");
 	        	serializer.text(course.getTerm());
 	        	serializer.endTag("", "term");

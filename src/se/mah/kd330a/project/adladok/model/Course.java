@@ -10,6 +10,7 @@ public class Course {
 	 private String courseID;
 	 private String regCode="";
 	 private String program ="";
+	 private String antterm ="";
 	 private String term;
 	 private int color = 2131034120;
 
@@ -52,6 +53,14 @@ public class Course {
 		public void setProgram(String program) {
 			this.program = program;
 		}
+		public String getAntterm() {
+			return antterm;
+		}
+
+		public void setAntterm(String antterm) {
+			this.antterm = antterm;
+		}
+
 		public String getDisplaynameSv() {
 			return displaynamesv;
 		}
@@ -73,22 +82,14 @@ public class Course {
 			String s="";
 					if(!this.regCode.isEmpty()&&!this.courseID.isEmpty()&&!this.term.isEmpty()){ //course
 						s="k."+this.courseID+"-"+this.term+"-"+this.regCode;
-					}else if(!this.program.isEmpty()&&!this.term.isEmpty()){
-							s="p."+this.program+this.term.substring(2, 4);
-							if(term.substring(4, 5).equals("2")){
+					}else if(!this.program.isEmpty()&&!this.antterm.isEmpty()){
+							s="p."+this.program+this.antterm.substring(2, 4);
+							if(this.antterm.substring(4, 5).equals("2")){
 								s= s+"h";
 							}
 							else{
 								s=s+"v";
 							}
-						s="p."+this.program+this.term.substring(2, 4);
-						this.term.substring(2, 4);
-						if(term.substring(4, 5).equals("2")){
-							s= s+"h";
-						}
-						else{
-							s=s+"v";
-						}
 					}
 					return s;
 		}

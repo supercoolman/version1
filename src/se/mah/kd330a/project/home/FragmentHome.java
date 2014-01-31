@@ -189,7 +189,13 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			View widget = rootView;
 			Article a = articles.get(0);
 			int start = a.getArticleCourseCode().indexOf(" - ");
-			String courseName = a.getArticleCourseCode().substring(start+3,start+23);
+			String courseName="";
+			try{
+				courseName = a.getArticleCourseCode().substring(start+3,a.getArticleCourseCode().length()-1);
+			}catch  (Exception e){
+				Log.i(TAG,e.getMessage());
+			}
+			Log.i(TAG,"CourseName:"+ courseName+":");
 			int color = this.getResources().getColor(R.color.red_mah);
 			for (Course c : Me.getInstance().getCourses())
 			{
