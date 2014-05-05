@@ -67,7 +67,7 @@ public class StartActivity extends Activity
 		editTextPassword = (EditText) findViewById(R.id.editText2);
 		editTextUsername.setText(Me.getInstance().getUserID());
 		editTextPassword.setText("");
-		//Test setting '
+		//Test setting
 //		editTextUsername.setText("testUser");
 //		editTextPassword.setText("testUser");
 	}
