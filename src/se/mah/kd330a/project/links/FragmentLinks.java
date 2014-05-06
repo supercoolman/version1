@@ -1,10 +1,11 @@
 
-package se.mah.kd330a.project.faq;
+package se.mah.kd330a.project.links;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import se.mah.kd330a.project.faq.ExpandableListFaqAdapter;
+
+import se.mah.kd330a.project.links.ExpandableListLinksAdapter;
 import se.mah.kd330a.project.R;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,14 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-public class FragmentFaq extends Fragment {
-	ExpandableListFaqAdapter listAdapter;
+public class FragmentLinks extends Fragment {
+	ExpandableListLinksAdapter listAdapter;
 	ExpandableListView expListFaqView;
 	List<String> listDataHeader;
 	List<String> listDataHeader2;
 	List<Integer> imageHeader;
 	HashMap<String, List<String>> listDataChild;
-	public FragmentFaq () {
+	public FragmentLinks () {
 	}
 
 	@Override
@@ -38,7 +39,7 @@ public class FragmentFaq extends Fragment {
 		expListFaqView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
 		// preparing list data
 		prepareListData();
-		listAdapter = new ExpandableListFaqAdapter(getActivity(), imageHeader, listDataHeader, listDataHeader2,
+		listAdapter = new ExpandableListLinksAdapter(getActivity(), imageHeader, listDataHeader, listDataHeader2,
 				listDataChild);
         //this code for adjusting the group indicator into right side of the view
 		// setting list adapter

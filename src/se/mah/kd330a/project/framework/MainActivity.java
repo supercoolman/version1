@@ -15,13 +15,13 @@ import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
-import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
 import se.mah.kd330a.project.help.FragmentCredits;
 import se.mah.kd330a.project.home.FragmentHome;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.FeedManager;
 import se.mah.kd330a.project.itsl.FragmentITSL;
+import se.mah.kd330a.project.links.FragmentLinks;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
@@ -58,12 +58,12 @@ public class MainActivity extends FragmentActivity implements Observer{
     private TypedArray mMenuColors;
     public RSSFeed newsFeed;
     private final String TAG = "MainActivity";
-    private final int HOME = 0;
-	private final int SCHEDULE = 1;
-	private final int ITSL = 2;
-	private final int FIND = 3;
-	private final int FAQ = 4;
-	private final int HELP = 5;
+    private final static int HOME = 0;
+	private final static int SCHEDULE = 1;
+	private final static int ITSL = 2;
+	private final static int FIND = 3;
+	private final static int LINKS = 4;
+	private final static int HELP = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +162,7 @@ public class MainActivity extends FragmentActivity implements Observer{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-         // The action bar home/up action should open or close the drawer.
+         // The action bar HOME/up action should open or close the drawer.
          // ActionBarDrawerToggle will take care of this.
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
@@ -208,8 +208,8 @@ public class MainActivity extends FragmentActivity implements Observer{
 			fragment = new FragmentFind();
 			transaction.addToBackStack(null);
 			break;
-		case FAQ:
-			fragment = new FragmentFaq();
+		case LINKS:
+			fragment = new FragmentLinks();
 			transaction.addToBackStack(null);
 			break;
 		case HELP:
