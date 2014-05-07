@@ -11,14 +11,22 @@ import java.net.URL;
 import se.mah.kd330a.project.adladok.model.Me;
 import android.content.Context;
 public class KronoxReader {
-	private final static String COURSES_FILENAME = "courses_ical";
-	private final static String LENGTH_UNIT = "v"; // d=days, v=weeks, m=months
-	private final static int LENGTH = 20;
+	
+	private final static String 	COURSES_FILENAME = "courses_ical";
+	private final static String 	LENGTH_UNIT = "v"; // d=days, v=weeks, m=months
+	private final static int 		LENGTH = 20;
+	
 	// We will need to be consistent here, since the _tags_ in the summary field
 	// are language dependent!
-	private final static String LANGUAGE = "EN";
+	private final static String 	LANGUAGE = "EN";
+	
+	
 	private KronoxReader() {
+//		Prevents from calling newInstance â€“ only one instance can be running
+//		Called Singleton class.
 	}
+	
+	
 	/**
 	 * Generates the URL that gets the iCalendar files for our courses.
 	 * 
@@ -27,31 +35,31 @@ public class KronoxReader {
 	 */
 	
 	private static String generateURL() {
-		String kurser = "";
+		String courses = "";
 		String programCourse ="";
-		for(se.mah.kd330a.project.adladok.model.Course course : Me.getInstance().getCourses()) {
-			//kurser += String.format("k.%s-%%2C", course.getFullCode());
-
-			if (!course.getKronoxCalendarCode().isEmpty()){
-				if(course.getProgram().isEmpty()){  //fristående course
-					kurser += String.format("%s%%2C", course.getKronoxCalendarCode());
-				}else if(!course.getProgram().equals(programCourse)){ //if course is part of program only add once
-				  kurser += String.format("%s%%2C", course.getKronoxCalendarCode());
+		for(se.mah.kd330a.project.adladok.model.Course myCourses : Me.getInstance().getCourses()) {
+			if (!myCourses.getKronoxCalendarCode().isEmpty()){
+				if(myCourses.getProgram().isEmpty()){  //fristaende course
+					courses += String.format("%s%%2C", myCourses.getKronoxCalendarCode());
+				}else if(!myCourses.getProgram().equals(programCourse)){ //if course is part of program only add once
+				  courses += String.format("%s%%2C", myCourses.getKronoxCalendarCode());
 				}
-				programCourse = course.getProgram();
+				programCourse = myCourses.getProgram();
 			}
 		}
-		if (kurser.endsWith("%2C")){
-		  kurser = kurser.substring(0, kurser.lastIndexOf("%2C"));
+		if (courses.endsWith("%2C")){
+		  courses = courses.substring(0, courses.lastIndexOf("%2C"));
 		}
 		String url = "http://schema.mah.se/setup/jsp/SchemaICAL.ics";
 		url += String.format("?startDatum=idag&intervallTyp=%s&intervallAntal=%d",
 		                     LENGTH_UNIT, LENGTH);
 		url += "&sprak=" + LANGUAGE;
 		url += "&sokMedAND=false";
-		url += "&resurser=" + kurser;
+		url += "&resurser=" + courses;
 		return url;
 	}
+	
+	
 	/**
 	 * This will download the iCalendar file from KronoX and save it locally.
 	 * 
@@ -62,12 +70,14 @@ public class KronoxReader {
 	 * @throws IOException
 	 *         This will be thrown on network errors or file writing errors
 	 */
+	
+	
 	public static void update(Context ctx) throws IOException {
-		if ( Me.getInstance().getCourses().size()>0){
+		if (Me.getInstance().getCourses().size() > 0){
 			URL url = new URL(KronoxReader.generateURL());
 			InputStream is = url.openStream();
 			DataInputStream dis = new DataInputStream(is);
-			FileOutputStream fos = ctx.openFileOutput(KronoxReader.COURSES_FILENAME,Context.MODE_PRIVATE);
+			FileOutputStream fos = ctx.openFileOutput(KronoxReader.COURSES_FILENAME, Context.MODE_PRIVATE);
 			byte[] buffer = new byte[4096];
 			int length;
 			while((length = dis.read(buffer)) > 0) {
