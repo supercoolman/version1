@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 public class FragmentLinks extends Fragment {
+	
 	ExpandableListLinksAdapter listAdapter;
 	ExpandableListView expListFaqView;
 	List<String> listDataHeader;
@@ -25,11 +26,14 @@ public class FragmentLinks extends Fragment {
 	List<Integer> imageHeader;
 	HashMap<String, List<String>> listDataChild;
 	public FragmentLinks () {
+		
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// preparing list data
+		prepareListData();
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 	
@@ -37,8 +41,6 @@ public class FragmentLinks extends Fragment {
                 .inflate(R.layout.faq_activity_main, container, false);
 		// get the listview
 		expListFaqView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
-		// preparing list data
-		prepareListData();
 		listAdapter = new ExpandableListLinksAdapter(getActivity(), imageHeader, listDataHeader, listDataHeader2,
 				listDataChild);
         //this code for adjusting the group indicator into right side of the view

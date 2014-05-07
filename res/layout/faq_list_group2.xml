@@ -44,9 +44,9 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-          android:textColor="#313131"
+        android:textColor="#313131" 
         android:text="" />
-    
+     
             <ImageView
                 android:id="@+id/icPointer"
                 android:layout_width="16dp"
