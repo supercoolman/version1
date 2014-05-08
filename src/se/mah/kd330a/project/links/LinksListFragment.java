@@ -15,7 +15,6 @@ public class LinksListFragment extends Fragment {
 
 	ArrayAdapter<String> adapter;
 	String[] linkList;
-	int position;
 	int image;
 	
 	public static final String LINK_LIST = "se.mah.kd330a.project.links.LINK_LIST";
@@ -32,7 +31,7 @@ public class LinksListFragment extends Fragment {
 		Bundle args = getArguments();
 		
 		linkList = args.getStringArray("LINK_LIST");
-		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, linkList);
+		adapter = new ArrayAdapter<String>(getActivity(), R.layout.link_item, linkList);
 		listView.setAdapter(adapter);
 		
 		image = args.getInt("IMAGE");

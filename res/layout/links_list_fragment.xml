@@ -6,7 +6,6 @@
     android:background="@color/white"
 	android:layout_marginRight="8dp"
     android:layout_marginLeft="8dp"
-    android:paddingBottom="8dp"
     >
     
     <ImageView 
@@ -24,6 +23,6 @@
     android:layout_weight="3" 
     android:layout_height="0dp"
     android:divider="@color/grey_light"
-    android:dividerHeight="4.0sp" />
+    android:dividerHeight="4.0dp" />
 
 </LinearLayout>
