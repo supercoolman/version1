@@ -28,10 +28,7 @@
         <item>@drawable/menuitem_6</item>
     </string-array>
     
-    
-    
-    
-    <string-array name ="faqOptions">
+    <string-array name ="links_options">
        <item>"IT Support"</item> 
        <item>"Housing in Malmo"</item>
        <item>"Student Service"</item>
@@ -111,13 +108,14 @@
         <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Technology-and-Society/</item>
         <item></item>
     </string-array>
-    <string-array name="faq_drawables">
+    
+    <array name="link_drawables">
         <item>@drawable/itsupport_lager</item>
         <item>@drawable/housing</item>
         <item>@drawable/studentservice</item>
         <item>@drawable/careerservice</item>
         <item>@drawable/newstudent</item>
-    </string-array>
+    </array>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
