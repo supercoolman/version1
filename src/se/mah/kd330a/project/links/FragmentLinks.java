@@ -16,43 +16,23 @@ import android.view.ViewGroup;
 
 public class FragmentLinks extends Fragment {
 	
-	// Initialize stuff
-	ViewPager 			mViewPager;
-	PagerTabStrip		mPagerTabStrip;
+	ViewPager viewPager;
+	PagerTabStrip pagerTabStrip;
 	
 	// This is used to pass data to pageradapter and later to child fragments
 	private final List<String[]> mLinkArrays = new ArrayList<String[]>();
-	
-	
-	String[]		 	mLinksOptions;
-	String[] 			mItSupportOptions;
-	String[]			mHousingOptions;
-	String[]			mStudentOptions;
-	String[]			mCareerOptions;
-	String[]			mNewStudentOptions;
-	
-	
+    private final int[] mLinkImgs = new int[]{R.drawable.itsupport_lager, R.drawable.housing, R.drawable.studentservice,
+                R.drawable.careerservice, R.drawable.newstudent };
+    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		mLinksOptions = getResources().getStringArray(R.array.links_options);
-		mLinkArrays.add(mLinksOptions);
-		
-		mItSupportOptions = getResources().getStringArray(R.array.itSupportOptions);
-		mLinkArrays.add(mItSupportOptions);
-		
-		mHousingOptions = getResources().getStringArray(R.array.housingOptions);
-		mLinkArrays.add(mHousingOptions);
-		
-		mStudentOptions = getResources().getStringArray(R.array.studentOptions);
-		mLinkArrays.add(mStudentOptions);
-		
-		mCareerOptions = getResources().getStringArray(R.array.careerOptions);
-		mLinkArrays.add(mCareerOptions);
-		
-		mNewStudentOptions = getResources().getStringArray(R.array.newStudentOptions);
-		mLinkArrays.add(mNewStudentOptions);
+		mLinkArrays.add(getResources().getStringArray(R.array.links_options));
+		mLinkArrays.add(getResources().getStringArray(R.array.itSupportOptions));
+		mLinkArrays.add(getResources().getStringArray(R.array.housingOptions));
+		mLinkArrays.add(getResources().getStringArray(R.array.studentOptions));
+		mLinkArrays.add(getResources().getStringArray(R.array.careerOptions));
+		mLinkArrays.add(getResources().getStringArray(R.array.newStudentOptions));
 	}
 	
     @Override
@@ -60,17 +40,17 @@ public class FragmentLinks extends Fragment {
 			Bundle savedInstanceState) {
     		View v = inflater.inflate(R.layout.links_fragment, container, false);
     
-    		mViewPager = (ViewPager) v.findViewById(R.id.pager);
-    		mViewPager.setAdapter(buildAdapter());
+    		viewPager = (ViewPager) v.findViewById(R.id.pager);
+    		viewPager.setAdapter(buildAdapter());
     		
-    		mPagerTabStrip = (PagerTabStrip) v.findViewById(R.id.pager_tab_strip);
-    		mPagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));
-    		mPagerTabStrip.setDrawFullUnderline(true);
+    		pagerTabStrip = (PagerTabStrip) v.findViewById(R.id.pager_tab_strip);
+    		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));
+    		pagerTabStrip.setDrawFullUnderline(true);
     		
     	return v;
 	}
     
     private PagerAdapter buildAdapter() {
-        return(new CollectionPagerAdapter(getChildFragmentManager(), mLinkArrays));
+        return(new CollectionPagerAdapter(getChildFragmentManager(), mLinkArrays, mLinkImgs));
       } 
 }

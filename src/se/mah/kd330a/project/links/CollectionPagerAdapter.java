@@ -9,23 +9,24 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
-	List<String[]>  mLinkArrays;
-	Bundle 			args;
+	List<String[]> linkArrays;
+	int[] linkImgs;
+	Bundle args;
 
-	public CollectionPagerAdapter(FragmentManager fm, List<String[]> linkArrays) {
+	public CollectionPagerAdapter(FragmentManager fm, List<String[]> linkArrays, int[] linkImgs) {
 		super(fm);
-		this.mLinkArrays = linkArrays;
+		this.linkArrays = linkArrays;
+		this.linkImgs = linkImgs;
 	}
 	
-	// Create fragments when swiping, destroy them dynamically
 	@Override
 	public Fragment getItem(int i) {
 		Fragment fragment = new LinksListFragment();
 		
 		// Bundle some stuff to use in fragments
 		args = new Bundle();
-		args.putStringArray("TEXT_ARRAY", mLinkArrays.get(i+1));
-		args.putInt("POSITION", i);
+		args.putStringArray("LINK_LIST", linkArrays.get(i+1));
+		args.putInt("IMAGE", linkImgs[i]);
 		
 		fragment.setArguments(args);
 		return fragment;
@@ -38,6 +39,6 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		return mLinkArrays.get(0)[position];
+		return linkArrays.get(0)[position];
 	}
 }

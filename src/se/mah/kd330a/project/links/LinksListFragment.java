@@ -2,7 +2,6 @@ package se.mah.kd330a.project.links;
 
 
 import se.mah.kd330a.project.R;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,21 +13,14 @@ import android.widget.ListView;
 
 public class LinksListFragment extends Fragment {
 
-	ArrayAdapter<String> mAdapter;
-	String[]			 mListArray;
-	int 		 	     mPosition;
-	TypedArray			 mLinkImgs;
+	ArrayAdapter<String> adapter;
+	String[] linkList;
+	int position;
+	int image;
 	
-	public static final String POSITION = "se.mah.kd330a.project.links.POSITION";
-	public static final String TEXT_ARRAY = "se.mah.kd330a.project.links.TEXT_ARRAY";
+	public static final String LINK_LIST = "se.mah.kd330a.project.links.LINK_LIST";
+	   public static final String IMAGE = "se.mah.kd330a.project.links.IMAGE";
 
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		mLinkImgs = getResources().obtainTypedArray(R.array.link_drawables);
-	}
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -38,19 +30,14 @@ public class LinksListFragment extends Fragment {
 		
 		// Get arguments from FragmentStatePagerAdapter
 		Bundle args = getArguments();
-		mListArray = args.getStringArray("TEXT_ARRAY");
-		mPosition = args.getInt("POSITION");
 		
-		mAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mListArray);
-		listView.setAdapter(mAdapter);
-		imageView.setImageDrawable(mLinkImgs.getDrawable(mPosition));
+		linkList = args.getStringArray("LINK_LIST");
+		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, linkList);
+		listView.setAdapter(adapter);
+		
+		image = args.getInt("IMAGE");
+		imageView.setImageResource(image);
 		
 		return v;
-	}
-	
-	@Override
-	public void onDetach() {
-		super.onDetach();
-		mLinkImgs.recycle();
 	}
 }

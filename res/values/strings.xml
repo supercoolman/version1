@@ -109,13 +109,13 @@
         <item></item>
     </string-array>
     
-    <array name="link_drawables">
+    <string-array name="link_drawables">
         <item>@drawable/itsupport_lager</item>
         <item>@drawable/housing</item>
         <item>@drawable/studentservice</item>
         <item>@drawable/careerservice</item>
         <item>@drawable/newstudent</item>
-    </array>
+    </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
