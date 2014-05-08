@@ -1,49 +1,49 @@
 package se.mah.kd330a.project.home;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+//import java.io.FileNotFoundException;
+//import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import net.fortuna.ical4j.data.ParserException;
+//import net.fortuna.ical4j.data.ParserException;
 import se.mah.kd330a.project.adladok.model.Constants;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
-import se.mah.kd330a.project.framework.MainActivity;
+//import se.mah.kd330a.project.framework.MainActivity;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase;
 //import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.Article;
 import se.mah.kd330a.project.itsl.FeedManager;
-import se.mah.kd330a.project.itsl.ListPagerAdapter;
+//import se.mah.kd330a.project.itsl.ListPagerAdapter;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
-import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
+//import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
 import se.mah.kd330a.project.R;
-import android.app.ActionBar;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.AsyncTask;
+//import android.app.ActionBar;
+//import android.content.Context;
+//import android.content.SharedPreferences;
+//import android.graphics.Color;
+//import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.text.method.LinkMovementMethod;
+//import android.support.v4.view.ViewPager;
+//import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
+//import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 public class FragmentHome extends Fragment implements FeedManager.FeedManagerDoneListener, Observer
 {
@@ -258,4 +258,4 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		
 	}
 
-}
+}//Commit Test 
