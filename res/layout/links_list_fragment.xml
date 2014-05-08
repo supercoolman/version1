@@ -3,6 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
+	android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp"
+    android:paddingBottom="8dp"
     >
     
     <ImageView 
@@ -18,6 +22,8 @@
     android:id="@+id/list_view"
     android:layout_width="match_parent"
     android:layout_weight="3" 
-    android:layout_height="0dp" />
+    android:layout_height="0dp"
+    android:divider="@color/grey_light"
+    android:dividerHeight="4.0sp" />
 
 </LinearLayout>
