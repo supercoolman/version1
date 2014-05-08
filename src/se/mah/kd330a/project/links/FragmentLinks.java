@@ -23,6 +23,7 @@ public class FragmentLinks extends Fragment {
 	// This is used to pass data to pageradapter and later to child fragments
 	private final List<String[]> mLinkArrays = new ArrayList<String[]>();
 	
+	
 	String[]		 	mLinksOptions;
 	String[] 			mItSupportOptions;
 	String[]			mHousingOptions;
