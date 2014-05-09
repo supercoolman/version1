@@ -215,8 +215,22 @@
     <string name="credits">Credits</string>
     <string name="it">Interaction design</string>
     <string name="whenMade">The app was released on 8th November 2013</string>
-
- <string-array name="Idteam"> 
+    
+    
+    
+    <!-- Ny array -->
+    <string-array name ="idk">
+        <item>Version 2</item>
+        <item>Interaktionsdesign programmet 2013 </item>        
+        </string-array>
+        
+    <string-array name ="utgivare">
+        <item>Ansvarig utgivare: </item>
+        <item>Lars Holmberg</item></string-array>
+	<!-- Slut på våra arrays -->
+	
+ 	<string-array name="Idteam">
+     	<item>Version 1 \n</item> 
       	<item>INTERACTION DESIGN</item>
      	<item>Anil Akyol</item>
         <item>Daniel Bagge</item>
