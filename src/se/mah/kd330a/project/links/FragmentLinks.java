@@ -24,6 +24,7 @@ public class FragmentLinks extends Fragment {
     private final int[] mLinkImgs = new int[]{R.drawable.itsupport_lager, R.drawable.housing, R.drawable.studentservice,
                 R.drawable.careerservice, R.drawable.newstudent };
     
+    //Gets the information from the string arrays
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
