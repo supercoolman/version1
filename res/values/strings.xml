@@ -47,11 +47,11 @@
     
     <string-array name = "it">
     	<item>"IDService.mah.se"</item> 
-    	<item>"Wireless Networke"</item> 
+    	<item>"Wireless Network"</item> 
     	<item>"Printing And Copying"</item> 
-    	<item>"Mah@Instagram"</item>
-        <item>"Mah@Facebook"</item>
-        <item>"Mah@Twitter"</item> 
+    	<item>"MAH@Instagram"</item>
+        <item>"MAH@Facebook"</item>
+        <item>"MAH@Twitter"</item> 
     </string-array>
     
     <string-array name = "housing">
@@ -62,15 +62,15 @@
     
     <string-array name = "student_at_mah">
         <item>"Student Service"</item> 
-    	<item>"MinaStudier.se"</item> 
-    	<item>"Malmöstudent.se"</item> 
+    	<item>"MinaStudier.mah.se"</item> 
+    	<item>"Student Union Malmö"</item> 
     	<item>"Event"</item>
     	<item>"Odontolog Student Union"</item> 
     	<item>"Exchange Student"</item> 
     </string-array>
     
      <string-array name = "career_guide">
-    	<item>"Platsannons"</item> 
+    	<item>"Job advertisement"</item> 
     	<item>"Job Coach"</item> 
     	<item>"Career Workshop"</item>
         <item>"Future Finder"</item>
@@ -78,13 +78,13 @@
     
      <string-array name = "library">
     	<item>"Link to library"</item> 
-    	<item>"Reserve a room"</item> 
+    	<item>"Book a group room"</item> 
     </string-array>
     
     <string-array name="html_links_it">
         <item>"https://idservice.mah.se/default.aspx"</item>
-        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>
         <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/"</item>
+        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>
     </string-array>
     <string-array name="student_housing">
         <item>http://hemma.mah.se/</item>
