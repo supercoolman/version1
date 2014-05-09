@@ -29,6 +29,7 @@
     </string-array>
     
     <string-array name ="links_options">
+       <item>"Categories"</item>
        <item>"IT Support"</item> 
        <item>"Housing in Malmo"</item>
        <item>"Student Service"</item>
@@ -37,7 +38,7 @@
        
     </string-array>
     
-    <string-array name = "faqSubOptions">
+    <string-array name = "linkSubOptions">
         <item>"Useful links to IT services"</item>
         <item>"First step to living in Malmö"</item>
         <item>"Find out stuff about yourself"</item>

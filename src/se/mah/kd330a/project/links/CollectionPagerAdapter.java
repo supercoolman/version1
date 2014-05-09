@@ -25,7 +25,7 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 		
 		// Bundle some stuff to use in fragments
 		args = new Bundle();
-		args.putStringArray("LINK_LIST", linkArrays.get(i+1));
+		args.putStringArray("LINK_LIST", linkArrays.get(i));
 		args.putInt("IMAGE", linkImgs[i]);
 		
 		fragment.setArguments(args);
