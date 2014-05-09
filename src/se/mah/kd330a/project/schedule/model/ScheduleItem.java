@@ -32,11 +32,11 @@ public class ScheduleItem implements Serializable {
 	 */
 	private static final long serialVersionUID = 2L;
 	
-	SimpleDateFormat time_format = new SimpleDateFormat("HH:mm");
-	SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	SimpleDateFormat date_format2 = new SimpleDateFormat("dd MMM, yyyy");
-	SimpleDateFormat week_day_format = new SimpleDateFormat("EEEE");
-	SimpleDateFormat short_week_day_format = new SimpleDateFormat("EE");
+	SimpleDateFormat time_format = new SimpleDateFormat("HH:mm", Locale.US);
+	SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+	SimpleDateFormat date_format2 = new SimpleDateFormat("dd MMM, yyyy", Locale.US);
+	SimpleDateFormat week_day_format = new SimpleDateFormat("EEEE", Locale.US);
+	SimpleDateFormat short_week_day_format = new SimpleDateFormat("EE", Locale.US);
 
 	private String startTime;
 	private String endTime;
