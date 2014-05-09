@@ -28,11 +28,12 @@ public class FragmentLinks extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mLinkArrays.add(getResources().getStringArray(R.array.links_options));
-		mLinkArrays.add(getResources().getStringArray(R.array.StudentAtMAH));
-		mLinkArrays.add(getResources().getStringArray(R.array.IT));
-		mLinkArrays.add(getResources().getStringArray(R.array.Library));
-		mLinkArrays.add(getResources().getStringArray(R.array.Housing));
-		mLinkArrays.add(getResources().getStringArray(R.array.CarreirGuide));
+	      mLinkArrays.add(getResources().getStringArray(R.array.links_list_options));
+		mLinkArrays.add(getResources().getStringArray(R.array.student_at_mah));
+		mLinkArrays.add(getResources().getStringArray(R.array.it));
+		mLinkArrays.add(getResources().getStringArray(R.array.library));
+		mLinkArrays.add(getResources().getStringArray(R.array.housing));
+		mLinkArrays.add(getResources().getStringArray(R.array.career_guide));
 	}
 	
     @Override

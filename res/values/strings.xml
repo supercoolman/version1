@@ -29,59 +29,56 @@
     </string-array>
     
     <string-array name ="links_options">
+       <item>"Categories"</item>
        <item>"Student@MAH"</item> 
        <item>"IT"</item>
        <item>"Library"</item>
        <item>"Housing"</item>
        <item>"Career Guide"</item>
-       
     </string-array>
     
-    <string-array name = "faqSubOptions">
-        <item>"Useful links to IT services"</item>
-        <item>"First step to living in Malmö"</item>
-        <item>"Find out stuff about yourself"</item>
-        <item>"Supporting your job search"</item>
-        <item>"Starting out as a student"</item>
+        <string-array name ="links_list_options">
+       <item>"Student@MAH"</item> 
+       <item>"IT"</item>
+       <item>"Library"</item>
+       <item>"Housing"</item>
+       <item>"Career Guide"</item>
     </string-array>
     
-    <string-array name = "IT">
-    	<item>"- IDService.mah.se"</item> 
-    	<item>"- Wireless Networke"</item> 
-    	<item>"- Printing And Copying"</item> 
-    	<item>"- Mah@Instagram"</item>
-        <item>"- Mah@Facebook"</item>
-        <item>"- Mah@Twitter"</item>
-        
-    </string-array>
-    <string-array name = "Housing">
-    	<item>"- Student Housing"</item> 
-    	<item>"- Rental Housing"</item> 
-    	<item>"- Exchange Student"</item> 
-    	
-    </string-array>
-    <string-array name = "StudentAtMAH">
-        <item>"- Student Service"</item> 
-    	<item>"- MinaStudier.se"</item> 
-    	<item>"- Malmöstudent.se"</item> 
-    	<item>"- Event"</item>
-    	<item>"- Odontolog Student Union"</item> 
-    	<item>"- Exchange Student"</item> 
-        
+    <string-array name = "it">
+    	<item>"IDService.mah.se"</item> 
+    	<item>"Wireless Networke"</item> 
+    	<item>"Printing And Copying"</item> 
+    	<item>"Mah@Instagram"</item>
+        <item>"Mah@Facebook"</item>
+        <item>"Mah@Twitter"</item> 
     </string-array>
     
-     <string-array name = "CarreirGuide">
-    	<item>"- Platsannons"</item> 
-    	<item>"- Job Coach"</item> 
-    	<item>"- Career Workshop"</item>
-        <item>"- Future Finder"</item> 
-        
+    <string-array name = "housing">
+    	<item>"Student Housing"</item> 
+    	<item>"Rental Housing"</item> 
+    	<item>"Exchange Student"</item> 
     </string-array>
     
-     <string-array name = "Library">
-    	<item>"- Link to library"</item> 
-    	<item>"- Reserv a room"</item> 
-    	
+    <string-array name = "student_at_mah">
+        <item>"Student Service"</item> 
+    	<item>"MinaStudier.se"</item> 
+    	<item>"Malmöstudent.se"</item> 
+    	<item>"Event"</item>
+    	<item>"Odontolog Student Union"</item> 
+    	<item>"Exchange Student"</item> 
+    </string-array>
+    
+     <string-array name = "career_guide">
+    	<item>"Platsannons"</item> 
+    	<item>"Job Coach"</item> 
+    	<item>"Career Workshop"</item>
+        <item>"Future Finder"</item>
+    </string-array>
+    
+     <string-array name = "library">
+    	<item>"Link to library"</item> 
+    	<item>"Reserve a room"</item> 
     </string-array>
     
     <string-array name="html_links_it">
