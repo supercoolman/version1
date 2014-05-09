@@ -29,16 +29,15 @@
     </string-array>
     
     <string-array name ="links_options">
-       <item>"Categories"</item>
-       <item>"IT Support"</item> 
-       <item>"Housing in Malmo"</item>
-       <item>"Student Service"</item>
-       <item>"Career Service"</item>
-       <item>"New Student"</item>
+       <item>"Student@MAH"</item> 
+       <item>"IT"</item>
+       <item>"Library"</item>
+       <item>"Housing"</item>
+       <item>"Career Guide"</item>
        
     </string-array>
     
-    <string-array name = "linkSubOptions">
+    <string-array name = "faqSubOptions">
         <item>"Useful links to IT services"</item>
         <item>"First step to living in Malmö"</item>
         <item>"Find out stuff about yourself"</item>
@@ -46,44 +45,45 @@
         <item>"Starting out as a student"</item>
     </string-array>
     
-    <string-array name = "itSupportOptions">
-    	<item>"- ID-Service"</item> 
+    <string-array name = "IT">
+    	<item>"- IDService.mah.se"</item> 
+    	<item>"- Wireless Networke"</item> 
     	<item>"- Printing And Copying"</item> 
-    	<item>"- WiFi"</item>
-        
+    	<item>"- Mah@Instagram"</item>
+        <item>"- Mah@Facebook"</item>
+        <item>"- Mah@Twitter"</item>
         
     </string-array>
-    <string-array name = "housingOptions">
+    <string-array name = "Housing">
     	<item>"- Student Housing"</item> 
     	<item>"- Rental Housing"</item> 
+    	<item>"- Exchange Student"</item> 
     	
-        
-        
     </string-array>
-    <string-array name = "studentOptions">
-    	<item>"- Student Service"</item> 
-    	
-        
+    <string-array name = "StudentAtMAH">
+        <item>"- Student Service"</item> 
+    	<item>"- MinaStudier.se"</item> 
+    	<item>"- Malmöstudent.se"</item> 
+    	<item>"- Event"</item>
+    	<item>"- Odontolog Student Union"</item> 
+    	<item>"- Exchange Student"</item> 
         
     </string-array>
     
-     <string-array name = "careerOptions">
-    	<item>"- Career Workshop"</item> 
-    	<item>"- Job Coaching"</item> 
-    	<item>"- Avalible Jobs"</item>
-        
+     <string-array name = "CarreirGuide">
+    	<item>"- Platsannons"</item> 
+    	<item>"- Job Coach"</item> 
+    	<item>"- Career Workshop"</item>
+        <item>"- Future Finder"</item> 
         
     </string-array>
     
-     <string-array name = "newStudentOptions">
-    	<item>"- Faculty of Health and Society"</item> 
-    	<item>"- Faculty of Culture and Society"</item> 
-    	<item>"- Faculty of Education and Society"</item>
-    	<item>"- Faculty of Odontology"</item>
-    	<item>"- Faculty of Technology and Society"</item>
-        
-        
+     <string-array name = "Library">
+    	<item>"- Link to library"</item> 
+    	<item>"- Reserv a room"</item> 
+    	
     </string-array>
+    
     <string-array name="html_links_it">
         <item>"https://idservice.mah.se/default.aspx"</item>
         <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>

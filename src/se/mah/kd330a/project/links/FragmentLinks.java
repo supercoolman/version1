@@ -24,16 +24,15 @@ public class FragmentLinks extends Fragment {
     private final int[] mLinkImgs = new int[]{R.drawable.itsupport_lager, R.drawable.housing, R.drawable.studentservice,
                 R.drawable.careerservice, R.drawable.newstudent };
     
-    //Gets the information from the string arrays
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mLinkArrays.add(getResources().getStringArray(R.array.links_options));
-		mLinkArrays.add(getResources().getStringArray(R.array.itSupportOptions));
-		mLinkArrays.add(getResources().getStringArray(R.array.housingOptions));
-		mLinkArrays.add(getResources().getStringArray(R.array.studentOptions));
-		mLinkArrays.add(getResources().getStringArray(R.array.careerOptions));
-		mLinkArrays.add(getResources().getStringArray(R.array.newStudentOptions));
+		mLinkArrays.add(getResources().getStringArray(R.array.StudentAtMAH));
+		mLinkArrays.add(getResources().getStringArray(R.array.IT));
+		mLinkArrays.add(getResources().getStringArray(R.array.Library));
+		mLinkArrays.add(getResources().getStringArray(R.array.Housing));
+		mLinkArrays.add(getResources().getStringArray(R.array.CarreirGuide));
 	}
 	
     @Override
