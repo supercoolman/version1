@@ -100,6 +100,12 @@ public class FragmentCredits extends Fragment {
 	// --> gdTeamS
 	
 	public void Scroll() {
+		
+		// Ny kod
+		
+		
+		
+		//Gammla koden.
 
 		String s = "";
 
