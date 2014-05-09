@@ -94,7 +94,11 @@ public class FragmentCredits extends Fragment {
 
 		}
 	};
-
+	
+	// HŠr Šr text funktionen, vi ska Šndra i arrayen,
+	// --> idTeanS
+	// --> gdTeamS
+	
 	public void Scroll() {
 
 		String s = "";
