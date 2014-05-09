@@ -8,7 +8,7 @@
         <item>My Schedule</item>
         <item>It\'s Learning</item>
         <item>Find on Campus</item>
-        <item>Me @ MAH</item>
+        <item>Links @ MAH</item>
         <item>About this app</item>
     </string-array>
     <string-array name="menu_icons">
@@ -36,7 +36,7 @@
        <item>"Housing in Malmo"</item>
        <item>"Student Service"</item>
        <item>"Career Service"</item>
-       <item>"New Student"</item>
+   
        
     </string-array>
     
@@ -92,20 +92,20 @@
         <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/"</item>
     </string-array>
     <string-array name="student_housing">
-        <item>http://www.mah.se/english/Student/Housing/Student-Housing/</item>
-        <item>http://www.mah.se/english/Student/Housing/Housing-in-Malmo/</item>
+        <item>http://hemma.mah.se/</item>
+        <item>http://www.mah.se/english/Student/Housing/Student-Housing-FAQ/</item>
     </string-array>
     <string-array name="student_service">
         <item>http://www.mah.se/english/Student/Student-services/</item>
     </string-array>
     <string-array name="career_service">
         <item>http://www.mah.se/english/Student/Karriar/Karriarworkshops/</item>
-        <item>http://www.mah.se/english/Student/Karriar/Job-Coaching/</item>
-        <item>http://www.mah.se/english/Student/Karriar/Available-jobs/</item>
+        <item>http://www.mah.se/Ar-student/Karriar/Jobbcoachning/</item>
+        <item>http://mah.se/medarbetare/Personalfragor/Platsannonser/</item>
     </string-array>
     <string-array name="new_student">
-        <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Health-and-Society/</item>
-        <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Culture-and-Society/Current-Student/Welcome-to-the-Faculty-of-Culture-and-Society/</item>
+		<item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Health-and-Society/</item>
+        <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Culture-and-Society/</item>
         <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-education-and-society/Welcome-to-the-Facutly-of-Education-and-Society/</item>
         <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Odontology/</item>
         <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Technology-and-Society/</item>

@@ -26,7 +26,7 @@ public class StartActivity extends Activity
 	private EditText editTextUsername;
 	private EditText editTextPassword;
 	boolean restoredsuccess = false;
-	boolean loginOK =false;
+	boolean loginOK = false;
 	private String username;
 	private String password;
 	private static AsyncTask<String, Void, Integer> asyncLoginTask;

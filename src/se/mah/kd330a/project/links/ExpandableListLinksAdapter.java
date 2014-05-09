@@ -1,4 +1,4 @@
-package se.mah.kd330a.project.faq;
+package se.mah.kd330a.project.links;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +15,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ExpandableListFaqAdapter extends BaseExpandableListAdapter {
+public class ExpandableListLinksAdapter extends BaseExpandableListAdapter {
 	
 	private Context _context;
 	
@@ -26,7 +26,7 @@ public class ExpandableListFaqAdapter extends BaseExpandableListAdapter {
 	private List<Integer> _groupImages;
 	
  
-    public ExpandableListFaqAdapter(Context context,List<Integer> groupImages, List<String> listDataHeader, List<String> listDataHeader2, 
+    public ExpandableListLinksAdapter(Context context,List<Integer> groupImages, List<String> listDataHeader, List<String> listDataHeader2, 
             HashMap<String, List<String>> listChildData) {
     	
         this._context = context;
