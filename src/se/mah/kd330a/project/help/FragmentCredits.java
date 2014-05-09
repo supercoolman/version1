@@ -13,6 +13,11 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+
+// Detta är about this app fragmentet.
+// Vi behöver döpa om paketet och lägga till IDK13 och versions nummer. 
+
+
 public class FragmentCredits extends Fragment {
 
 	/** Called when the activity is first created. */
