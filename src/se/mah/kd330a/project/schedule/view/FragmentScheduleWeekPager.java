@@ -19,15 +19,15 @@ public class FragmentScheduleWeekPager extends Fragment {
 
 	private static ArrayList<ScheduleWeek> myScheduleInWeeks;
 	private ParseData parseData;
-	private static int num_items = 0;
+	private static int numItems = 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		parseData = new ParseData();
 		myScheduleInWeeks = parseData.getParsedDataFromKronoxByWeekNew(20);
 		if (myScheduleInWeeks != null) {
-			num_items = myScheduleInWeeks.size();
-			Log.i("onCreate in FragmentScheduleWeekPager",Integer.toString(num_items));
+			numItems = myScheduleInWeeks.size();
+			Log.i("onCreate in FragmentScheduleWeekPager",Integer.toString(numItems));
 		}
 		super.onCreate(savedInstanceState);
 	}
@@ -65,7 +65,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 
 		@Override
 		public int getCount() {
-			return num_items;
+			return numItems;
 		}
 	}
 }

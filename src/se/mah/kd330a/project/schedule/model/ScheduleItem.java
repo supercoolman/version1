@@ -27,16 +27,14 @@ import net.fortuna.ical4j.model.component.VEvent;
  *  Can we make it presentable?
  */
 public class ScheduleItem implements Serializable {
-	/**
-	 * C110
-	 */
-	private static final long serialVersionUID = 2L;
+
+	private static final long SERIAL_VERSION_UID = 2L;
 	
-	SimpleDateFormat time_format = new SimpleDateFormat("HH:mm", Locale.US);
-	SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
-	SimpleDateFormat date_format2 = new SimpleDateFormat("dd MMM, yyyy", Locale.US);
-	SimpleDateFormat week_day_format = new SimpleDateFormat("EEEE", Locale.US);
-	SimpleDateFormat short_week_day_format = new SimpleDateFormat("EE", Locale.US);
+	SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.US);
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+	SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd MMM, yyyy", Locale.US);
+	SimpleDateFormat weekDayFormat = new SimpleDateFormat("EEEE", Locale.US);
+	SimpleDateFormat shortWeekDayFormat = new SimpleDateFormat("EE", Locale.US);
 
 	private String startTime;
 	private String endTime;
@@ -58,12 +56,12 @@ public class ScheduleItem implements Serializable {
 	// text += "Last modified:" +
 	// date_format.format(v.getLastModified().getDate()) + "\n";
 	public ScheduleItem(VEvent v) {
-		startTime = time_format.format(v.getStartDate().getDate());
-		weekDay = week_day_format.format(v.getStartDate().getDate());
-		shortWeekDay = short_week_day_format.format(v.getStartDate().getDate());
-		dateAndTime2 = date_format2.format(v.getStartDate().getDate());
+		startTime = timeFormat.format(v.getStartDate().getDate());
+		weekDay = weekDayFormat.format(v.getStartDate().getDate());
+		shortWeekDay = shortWeekDayFormat.format(v.getStartDate().getDate());
+		dateAndTime2 = dateFormat2.format(v.getStartDate().getDate());
 
-		endTime = time_format.format(v.getEndDate().getDate());
+		endTime = timeFormat.format(v.getEndDate().getDate());
 		location = v.getLocation().getValue();
 		courseName = "PlaceHolder";
 		String summary = v.getSummary().getValue();

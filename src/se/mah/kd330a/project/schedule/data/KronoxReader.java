@@ -64,7 +64,7 @@ public class KronoxReader {
 	/**
 	 * This will download the iCalendar file from KronoX and save it locally.
 	 * 
-	 * @param ctx
+	 * @param c
 	 *        Context from getApplicationContext()
 	 * @param courses
 	 *        The courses that will be included in the calendar
@@ -73,18 +73,18 @@ public class KronoxReader {
 	 */
 	
 	
-	public static void update(Context ctx) throws IOException {
+	public static void update(Context c) throws IOException {
 		if (Me.getInstance().getCourses().size() > 0){
 			URL url = new URL(KronoxReader.generateURL());
-			InputStream is = url.openStream();
-			DataInputStream dis = new DataInputStream(is);
-			FileOutputStream fos = ctx.openFileOutput(KronoxReader.COURSES_FILENAME, Context.MODE_PRIVATE);
+			InputStream inputStream = url.openStream();
+			DataInputStream dataInputStream = new DataInputStream(inputStream);
+			FileOutputStream fileOutputStream = c.openFileOutput(KronoxReader.COURSES_FILENAME, Context.MODE_PRIVATE);
 			byte[] buffer = new byte[4096];
 			int length;
-			while((length = dis.read(buffer)) > 0) {
-				fos.write(buffer, 0, length);
+			while((length = dataInputStream.read(buffer)) > 0) {
+				fileOutputStream.write(buffer, 0, length);
 			}
-			fos.close();
+			fileOutputStream.close();
 		}
 	}
 	
@@ -95,8 +95,8 @@ public class KronoxReader {
 	 * @return The file stream
 	 * @throws FileNotFoundException
 	 */
-	public static FileInputStream getFile(Context ctx) throws FileNotFoundException {
-		return ctx.openFileInput(KronoxReader.COURSES_FILENAME);
+	public static FileInputStream getFile(Context c) throws FileNotFoundException {
+		return c.openFileInput(KronoxReader.COURSES_FILENAME);
 	}
 	
 	/**
@@ -105,9 +105,9 @@ public class KronoxReader {
 	 * @return true if deleted
 	 * @throws FileNotFoundException
 	 */
-	public static boolean clearKronox(Context ctx){
+	public static boolean clearKronox(Context c){
 		boolean result = false;
-		File file = new File(ctx.getFilesDir(), COURSES_FILENAME);
+		File file = new File(c.getFilesDir(), COURSES_FILENAME);
 		if (file.exists()){
 			result = file.delete();
 		}
