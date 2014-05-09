@@ -100,16 +100,20 @@ public class FragmentCredits extends Fragment {
 	// --> gdTeamS
 	
 	public void Scroll() {
-		
-		// Ny kod
-		
-		
-		
-		//Gammla koden.
 
 		String s = "";
 
 		Resources res = getResources();
+		
+		String[] idk = res.getStringArray(R.array.idk13);
+
+		for (int i = 0; i < idk.length; i++) {
+			s = s + "\n" + idk[i];
+		}
+
+		s = s + "\n";
+	
+		
 		String[] idTeamS = res.getStringArray(R.array.Idteam);
 
 		for (int i = 0; i < idTeamS.length; i++) {
@@ -131,6 +135,16 @@ public class FragmentCredits extends Fragment {
 		for (int i = 0; i < techTeamS.length; i++) {
 			s = s + "\n" + techTeamS[i];
 		}
+		
+		s = s + "\n";
+		
+		String[] utgivare = res.getStringArray(R.array.utgivare);
+
+		for (int i = 0; i < utgivare.length; i++) {
+			s = s + "\n" + utgivare[i];
+		}
+
+		s = s + "\n";
 		tvData.setTextSize(14);
 		tvData.setGravity(Gravity.CENTER);
 
