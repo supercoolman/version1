@@ -51,6 +51,7 @@ public class KronoxReader {
 		  courses = courses.substring(0, courses.lastIndexOf("%2C"));
 		}
 		String url = "http://schema.mah.se/setup/jsp/SchemaICAL.ics";
+		// If we decide to make it possible to see calender in the past, change the date here
 		url += String.format("?startDatum=idag&intervallTyp=%s&intervallAntal=%d",
 		                     LENGTH_UNIT, LENGTH);
 		url += "&sprak=" + LANGUAGE;

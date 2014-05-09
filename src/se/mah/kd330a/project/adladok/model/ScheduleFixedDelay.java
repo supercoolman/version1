@@ -1,5 +1,8 @@
 package se.mah.kd330a.project.adladok.model;
 
+//A change is needed to improve the batterlife.
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
