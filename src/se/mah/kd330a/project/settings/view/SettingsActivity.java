@@ -66,6 +66,9 @@ public class SettingsActivity extends Activity {
 		return true;
 	}
 
+	
+	// HŠr Šr logout knappen.
+	
 	public void toLadokInlogg(View view) {
 		//Clear all including backstack
 		Me.getInstance().clearAllIncludingSavedData(this);
