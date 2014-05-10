@@ -20,20 +20,25 @@ public class FragmentLinks extends Fragment {
 	PagerTabStrip pagerTabStrip;
 	
 	// This is used to pass data to pageradapter and later to child fragments
-	private final List<String[]> mLinkArrays = new ArrayList<String[]>();
-    private final int[] mLinkImgs = new int[]{R.drawable.itsupport_lager, R.drawable.housing, R.drawable.studentservice,
-                R.drawable.careerservice, R.drawable.newstudent };
+	private final List<String[]> mTextArrayList = new ArrayList<String[]>();
+	private final List<String[]> mLinkArrayList = new ArrayList<String[]>();
+	String[] linkOptions;
+	
+    // not used ATM
+	private final int[] mLinkImgs = new int[]{R.drawable.itsupport_lager, R.drawable.housing, R.drawable.studentservice,
+                R.drawable.careerservice, R.drawable.newstudent, R.drawable.newstudent };
     
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mLinkArrays.add(getResources().getStringArray(R.array.links_options));
-	      mLinkArrays.add(getResources().getStringArray(R.array.links_list_options));
-		mLinkArrays.add(getResources().getStringArray(R.array.student_at_mah));
-		mLinkArrays.add(getResources().getStringArray(R.array.it));
-		mLinkArrays.add(getResources().getStringArray(R.array.library));
-		mLinkArrays.add(getResources().getStringArray(R.array.housing));
-		mLinkArrays.add(getResources().getStringArray(R.array.career_guide));
+		linkOptions = getResources().getStringArray(R.array.links_options);
+		
+	    mTextArrayList.add(getResources().getStringArray(R.array.links_list_options));
+		mTextArrayList.add(getResources().getStringArray(R.array.student_at_mah));
+		mTextArrayList.add(getResources().getStringArray(R.array.it));
+		mTextArrayList.add(getResources().getStringArray(R.array.library));
+		mTextArrayList.add(getResources().getStringArray(R.array.housing));
+		mTextArrayList.add(getResources().getStringArray(R.array.career_guide));
 	}
 	
     @Override
@@ -52,6 +57,6 @@ public class FragmentLinks extends Fragment {
 	}
     
     private PagerAdapter buildAdapter() {
-        return(new CollectionPagerAdapter(getChildFragmentManager(), mLinkArrays, mLinkImgs));
+        return(new CollectionPagerAdapter(getChildFragmentManager(), mTextArrayList, mLinkImgs, linkOptions));
       } 
 }
