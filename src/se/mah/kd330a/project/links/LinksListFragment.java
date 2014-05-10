@@ -20,24 +20,21 @@ public class LinksListFragment extends Fragment {
 	int image;
 	
 	public static final String LINK_LIST = "se.mah.kd330a.project.links.LINK_LIST";
-	   public static final String IMAGE = "se.mah.kd330a.project.links.IMAGE";
+	public static final String IMAGE = "se.mah.kd330a.project.links.IMAGE";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.links_list_fragment, container, false);
 		ListView listView = (ListView) v.findViewById(R.id.list_view);
-		ImageView imageView = (ImageView) v.findViewById(R.id.list_image);
 		
 		// Get arguments from FragmentStatePagerAdapter
 		Bundle args = getArguments();
-		
-		linkList = args.getStringArray("LINK_LIST");
-		adapter = new ArrayAdapter<String>(getActivity(), R.layout.link_item, linkList);
-		listView.setAdapter(adapter);
-		
 		image = args.getInt("IMAGE");
-		imageView.setImageResource(image);
+		linkList = args.getStringArray("LINK_LIST");
+		
+		adapter = new LinkArrayAdapter(getActivity(), R.layout.link_item, linkList, image);
+		listView.setAdapter(adapter);
 		
 		return v;
 	}

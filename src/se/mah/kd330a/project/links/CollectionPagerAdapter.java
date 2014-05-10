@@ -39,6 +39,6 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		return linkArrays.get(0)[position];
+	    return linkArrays.get(0)[position];
 	}
 }
