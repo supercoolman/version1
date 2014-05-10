@@ -13,13 +13,11 @@ public class LinkArrayAdapter extends ArrayAdapter<String> {
     
     private final Activity context;
     private final String[] linkList;
-    private final int image;
 
-    public LinkArrayAdapter(Activity context, int resource, String[] linkList, int image) {
+    public LinkArrayAdapter(Activity context, int resource, String[] linkList) {
         super(context, resource, linkList);
         this.context = context;
         this.linkList = linkList;
-        this.image = image;
     }
 
     @Override

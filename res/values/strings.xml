@@ -81,38 +81,39 @@
     	<item>"Book a group room"</item> 
     </string-array>
     
-    <string-array name="html_links_it">
-        <item>"https://idservice.mah.se/default.aspx"</item>
-        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/"</item>
-        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>
-    </string-array>
-    <string-array name="student_housing">
-        <item>http://hemma.mah.se/</item>
-        <item>http://www.mah.se/english/Student/Housing/Student-Housing-FAQ/</item>
-    </string-array>
-    <string-array name="student_service">
-        <item>http://www.mah.se/english/Student/Student-services/</item>
-    </string-array>
-    <string-array name="career_service">
-        <item>http://www.mah.se/english/Student/Karriar/Karriarworkshops/</item>
-        <item>http://www.mah.se/Ar-student/Karriar/Jobbcoachning/</item>
-        <item>http://mah.se/medarbetare/Personalfragor/Platsannonser/</item>
-    </string-array>
-    <string-array name="new_student">
-		<item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Health-and-Society/</item>
-        <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Culture-and-Society/</item>
-        <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-education-and-society/Welcome-to-the-Facutly-of-Education-and-Society/</item>
-        <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Odontology/</item>
-        <item>http://www.mah.se/english/Schools-and-faculties/Faculty-of-Technology-and-Society/</item>
-        <item></item>
+    <string-array name="url_student_at_mah">
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
     </string-array>
     
-    <string-array name="link_drawables">
-        <item>@drawable/itsupport_lager</item>
-        <item>@drawable/housing</item>
-        <item>@drawable/studentservice</item>
-        <item>@drawable/careerservice</item>
-        <item>@drawable/newstudent</item>
+    <string-array name="url_it">
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+    </string-array>
+    
+    <string-array name="url_library">
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+    </string-array>
+    <string-array name="url_housing">
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+    </string-array>
+    
+    <string-array name="url_career_guide">
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
+        <item>http://mah.se/</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>

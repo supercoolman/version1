@@ -1,6 +1,5 @@
 package se.mah.kd330a.project.links;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -12,13 +11,11 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	List<String[]> textArrayList;
 	String[] linkOptions;
-	int[] linkImgs;
 	Bundle args;
 
-	public CollectionPagerAdapter(FragmentManager fm, List<String[]> textArrayList, int[] linkImgs, String[] linkOptions) {
+	public CollectionPagerAdapter(FragmentManager fm, List<String[]> textArrayList, String[] linkOptions) {
 		super(fm);
 		this.textArrayList = textArrayList;
-		this.linkImgs = linkImgs;
 		this.linkOptions = linkOptions;
 	}
 	
@@ -29,8 +26,7 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 		// Bundle some stuff to use in fragments
 		args = new Bundle();
 		args.putStringArray("TEXT_ARRAY", textArrayList.get(i));
-		args.putInt("IMAGE", linkImgs[i]);
-		
+
 		fragment.setArguments(args);
 		return fragment;
 	}

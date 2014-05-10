@@ -2,6 +2,8 @@ package se.mah.kd330a.project.links;
 
 
 import se.mah.kd330a.project.R;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,17 +13,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class LinksListFragment extends Fragment {
     
     Listener listener = new Listener();
-
 	ArrayAdapter<String> adapter;
 	String[] textArray;
-	int image;
-	
+
 	public static final String TEXT_ARRAY = "se.mah.kd330a.project.links.TEXT_ARRAY";
-	public static final String IMAGE = "se.mah.kd330a.project.links.IMAGE";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,10 +31,9 @@ public class LinksListFragment extends Fragment {
 		
 		// Get arguments from FragmentStatePagerAdapter
 		Bundle args = getArguments();
-		image = args.getInt("IMAGE");
 		textArray = args.getStringArray("TEXT_ARRAY");
 		
-		adapter = new LinkArrayAdapter(getActivity(), R.layout.link_item, textArray, image);
+		adapter = new LinkArrayAdapter(getActivity(), R.layout.link_item, textArray);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(listener);
 		
@@ -44,9 +43,7 @@ public class LinksListFragment extends Fragment {
 	private class Listener implements OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-            
+            Toast.makeText(getActivity(), (String.valueOf(arg2)), Toast.LENGTH_SHORT).show();
         }
-	    
 	}
-	
 }

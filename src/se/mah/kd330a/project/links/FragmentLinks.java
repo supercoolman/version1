@@ -21,12 +21,7 @@ public class FragmentLinks extends Fragment {
 	
 	// This is used to pass data to pageradapter and later to child fragments
 	private final List<String[]> mTextArrayList = new ArrayList<String[]>();
-	private final List<String[]> mLinkArrayList = new ArrayList<String[]>();
 	String[] linkOptions;
-	
-    // not used ATM
-	private final int[] mLinkImgs = new int[]{R.drawable.itsupport_lager, R.drawable.housing, R.drawable.studentservice,
-                R.drawable.careerservice, R.drawable.newstudent, R.drawable.newstudent };
     
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +52,6 @@ public class FragmentLinks extends Fragment {
 	}
     
     private PagerAdapter buildAdapter() {
-        return(new CollectionPagerAdapter(getChildFragmentManager(), mTextArrayList, mLinkImgs, linkOptions));
+        return(new CollectionPagerAdapter(getChildFragmentManager(), mTextArrayList, linkOptions));
       } 
 }
