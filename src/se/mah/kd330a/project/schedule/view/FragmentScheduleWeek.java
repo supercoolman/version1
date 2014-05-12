@@ -51,8 +51,6 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_schedule_expendable_list_view, container,false);
-		TextView v = (TextView) rootView.findViewById(R.id.schudule_week_number);
-		v.setText("Week " + (scheduleWeek.getWeekNumber()));
 		ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.expandable_list);
 		TextView empty = (TextView) rootView.findViewById(R.id.emptytw);
 		elv.setEmptyView(empty);

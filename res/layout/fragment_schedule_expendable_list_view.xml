@@ -3,31 +3,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-		android:background="@color/white"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/schudule_week_number"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:gravity="center_vertical"
-            android:layout_centerInParent="true"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/grey_dark" />
-
-        <ImageView
-            android:id="@+id/dividerElement"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@id/schudule_week_number"
-            android:background="@color/grey_light" />
-    </RelativeLayout>
-
     <ExpandableListView
         android:id="@+id/expandable_list"
         android:layout_width="match_parent"
@@ -43,7 +18,6 @@
             android:id="@+id/dividerElement"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_below="@id/schudule_week_number"
             android:background="@color/grey" />
         
      <TextView android:id="@+id/emptytw"

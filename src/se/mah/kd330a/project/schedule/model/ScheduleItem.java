@@ -21,8 +21,8 @@ import net.fortuna.ical4j.model.component.VEvent;
  *  You get the summary by the command v.getSummary().getValue() in the constructor below
  *  A typical string can look like:
  *
- *  Coursegrp: KD330A-20132-62311- Sign: K3LARA Description: Project room Activity type: Okänd
- *  Programme: VGSJU13h VGSJU13h1 VGSJU13h2 Coursegrp: OM113A-20132-OM113-D16 Sign: HSANMOS Description: Övning Injektionsgivning VP. 16:1 Activity type: Okänd
+ *  Coursegrp: KD330A-20132-62311- Sign: K3LARA Description: Project room Activity type: Okï¿½nd
+ *  Programme: VGSJU13h VGSJU13h1 VGSJU13h2 Coursegrp: OM113A-20132-OM113-D16 Sign: HSANMOS Description: ï¿½vning Injektionsgivning VP. 16:1 Activity type: Okï¿½nd
  *  
  *  Can we make it presentable?
  */
@@ -32,7 +32,7 @@ public class ScheduleItem implements Serializable {
 	
 	SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.US);
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
-	SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd MMM, yyyy", Locale.US);
+	SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd MMM yyyy", Locale.US);
 	SimpleDateFormat weekDayFormat = new SimpleDateFormat("EEEE", Locale.US);
 	SimpleDateFormat shortWeekDayFormat = new SimpleDateFormat("EE", Locale.US);
 
