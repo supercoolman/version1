@@ -78,9 +78,6 @@ public class FragmentCredits extends Fragment {
 	public void onDestroyView() {
 		tread=false;
 		super.onDestroyView();
-		
-		
-		
 	}
 
 	private Runnable compScroll = new Runnable() {
@@ -100,6 +97,12 @@ public class FragmentCredits extends Fragment {
 	// --> gdTeamS
 	
 	public void Scroll() {
+		
+		int x = 0;
+		int y = 10;
+		
+		while(x < y){
+		
 
 		String s = "";
 
@@ -154,6 +157,10 @@ public class FragmentCredits extends Fragment {
 		// View v = findViewById(R.id.scroll_container);
 		//
 		myscroll.startScroll(0, -500, 0, 2000, 40000);
+		
+		}
+		
+		x++;
 
 	}
 
