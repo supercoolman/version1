@@ -7,10 +7,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import se.mah.kd330a.project.adladok.model.Me;
 import android.content.Context;
+import android.util.Log;
 public class KronoxReader {
+	
+	private static final String 	TAG = KronoxReader.class.getName();
 	
 	private final static String 	COURSES_FILENAME = "courses_ical";
 	private final static String 	LENGTH_UNIT = "v"; // d=days, v=weeks, m=months
@@ -21,8 +28,10 @@ public class KronoxReader {
 	private final static String 	LANGUAGE = "EN";
 	
 	
+	private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
 	private KronoxReader() {
-//		Prevents from calling newInstance – only one instance can be running
+//		Prevents from calling newInstance ��� only one instance can be running
 //		Called Singleton class.
 	}
 	
@@ -37,6 +46,12 @@ public class KronoxReader {
 	private static String generateURL() {
 		String courses = "";
 		String programCourse ="";
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -28);
+		String fourWeeksBack = dateFormat.format(new Date(calendar.getTimeInMillis()));
+		Log.d(TAG, fourWeeksBack);
+		
 		for(se.mah.kd330a.project.adladok.model.Course myCourses : Me.getInstance().getCourses()) {
 			if (!myCourses.getKronoxCalendarCode().isEmpty()){
 				if(myCourses.getProgram().isEmpty()){  //fristaende course
@@ -52,8 +67,8 @@ public class KronoxReader {
 		}
 		String url = "http://schema.mah.se/setup/jsp/SchemaICAL.ics";
 		// If we decide to make it possible to see calender in the past, change the date here
-		url += String.format("?startDatum=idag&intervallTyp=%s&intervallAntal=%d",
-		                     LENGTH_UNIT, LENGTH);
+		url += String.format("?startDatum=%s", fourWeeksBack);
+		url += String.format("&intervallTyp=%s&intervallAntal=%d", LENGTH_UNIT, LENGTH);
 		url += "&sprak=" + LANGUAGE;
 		url += "&sokMedAND=false";
 		url += "&resurser=" + courses;

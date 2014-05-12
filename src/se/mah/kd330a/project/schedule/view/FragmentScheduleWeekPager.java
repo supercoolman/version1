@@ -40,6 +40,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 		ViewPager pager = (ViewPager) result.findViewById(R.id.pager);
 		ViewPagerAdapter viewPagerAdapter = buildAdapter();
 		pager.setAdapter(viewPagerAdapter);
+		pager.setCurrentItem(4);
 
 		return (result);
 	}

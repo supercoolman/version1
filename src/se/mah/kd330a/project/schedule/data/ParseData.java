@@ -24,7 +24,7 @@ public class ParseData {
 
 	public ArrayList<ScheduleWeek> getParsedDataFromKronoxByWeekNew(int numberOfWeeks) {
 		if (!Me.getInstance().getUserID().isEmpty()) {
-			for (int i = 0; i < numberOfWeeks; i++) {
+			for (int i = -4; i < numberOfWeeks; i++) {
 				scheduleWeeks.add(getScheduleWeek(i));
 			}
 			return scheduleWeeks;
