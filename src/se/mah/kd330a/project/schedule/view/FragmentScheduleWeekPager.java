@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +43,11 @@ public class FragmentScheduleWeekPager extends Fragment {
 		ViewPagerAdapter viewPagerAdapter = buildAdapter();
 		pager.setAdapter(viewPagerAdapter);
 		pager.setCurrentItem(4);
+		
+		
+		PagerTabStrip pagerTabStrip = (PagerTabStrip) result.findViewById(R.id.weeks_pager_tab_stip);
+		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));	
+		pagerTabStrip.setDrawFullUnderline(true);
 
 		return (result);
 	}
