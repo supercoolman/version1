@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-//my new comment
+//my new comment (isaks edition)
 public class LinksListFragment extends Fragment {
     
     Listener listener = new Listener();
