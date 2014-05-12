@@ -101,7 +101,7 @@ public class FragmentCredits extends Fragment {
 		int x = 0;
 		int y = 10;
 		
-		while(x < y){
+		if(x < y){
 		
 
 		String s = "";
