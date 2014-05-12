@@ -30,7 +30,7 @@ public class LinkArrayAdapter extends ArrayAdapter<String> {
         TextView textView_1 = (TextView) row.findViewById(R.id.list_text_view_1);
         textView_1.setText(linkList[position]);
         TextView textView_2 = (TextView) row.findViewById(R.id.list_text_view_2);
-        textView_2.setText(linkList[position]);
+        textView_2.setText("subtext");
         
         return row;
     }
