@@ -220,8 +220,8 @@
     
     <!-- Ny array -->
     <string-array name ="idk13">
-        <item>Version 2</item>
-        <item>Interaktionsdesign programmet 2013 </item>
+        <item>Version 2\n</item>
+        <item>Interaktionsdesign programmet 2013\n</item>
         <item>Måns Ahlgren</item>
         <item>Gustaf Andersson</item>
         <item>Eva Andreasson</item>
