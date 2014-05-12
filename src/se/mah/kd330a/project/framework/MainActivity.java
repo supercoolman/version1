@@ -1,7 +1,4 @@
-
 package se.mah.kd330a.project.framework;
-
-
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -146,7 +143,6 @@ public class MainActivity extends FragmentActivity implements Observer{
     }
     
     
-    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -185,7 +181,10 @@ public class MainActivity extends FragmentActivity implements Observer{
             selectItem(position);
         }
     }
-
+    
+    
+    // Meny till vänster, ändra här för lägga till logut knappen.
+    
     public void selectItem(int position) {
         // update the main content by replacing fragments
     	android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
