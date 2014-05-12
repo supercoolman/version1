@@ -1,7 +1,4 @@
-
 package se.mah.kd330a.project.framework;
-
-
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
