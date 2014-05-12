@@ -21,6 +21,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 	private ParseData parseData;
 	private static int numItems = 0;
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		parseData = new ParseData();
@@ -63,10 +64,19 @@ public class FragmentScheduleWeekPager extends Fragment {
 			return new FragmentScheduleDay();
 			}
 		}
-
+		
+		@Override
+		public CharSequence getPageTitle(int number){
+			String title = "Week "+myScheduleInWeeks.get(number).getWeekNumber();
+			return title;
+		}
+		
 		@Override
 		public int getCount() {
 			return numItems;
 		}
+		
+		
 	}
+	
 }
