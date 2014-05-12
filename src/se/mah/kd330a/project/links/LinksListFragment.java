@@ -23,9 +23,13 @@ public class LinksListFragment extends Fragment {
     
     Listener listener = new Listener();
 	ArrayAdapter<String> adapter;
-	String[] textArray;
+	String[] linkTitle;
+	String[] linkSubTitle;
+	int position;
 
-	public static final String TEXT_ARRAY = "se.mah.kd330a.project.links.TEXT_ARRAY";
+	public static final String LINK_TITLE = "se.mah.kd330a.project.links.LINK_TITLE";
+	public static final String LINK_SUB_TITLE = "se.mah.kd330a.project.links.LINK_SUB_TITLE";
+    public static final String POSITION = "se.mah.kd330a.project.links.POSITION";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,9 +39,11 @@ public class LinksListFragment extends Fragment {
 		
 		// Get arguments from FragmentStatePagerAdapter
 		Bundle args = getArguments();
-		textArray = args.getStringArray("TEXT_ARRAY");
+		linkTitle = args.getStringArray("LINK_TITLE");
+		position = args.getInt("POSITION");
+		linkSubTitle = args.getStringArray("LINK_SUB_TITLE");
 		
-		adapter = new LinkArrayAdapter(getActivity(), R.layout.link_item, textArray);
+		adapter = new LinkArrayAdapter(getActivity(), R.layout.link_item, linkTitle, linkSubTitle, position);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(listener);
 		

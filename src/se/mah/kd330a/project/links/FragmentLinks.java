@@ -21,7 +21,8 @@ public class FragmentLinks extends Fragment {
 	PagerTabStrip pagerTabStrip;
 	
 	// This is used to pass data to pageradapter and later to child fragments
-	private final List<String[]> mTextArrayList = new ArrayList<String[]>();
+	private final List<String[]> mTitleArrayList = new ArrayList<String[]>();
+	private final List<String[]> mSubTitleArrayList = new ArrayList<String[]>();
 	String[] linkOptions;
     
 	@Override
@@ -29,12 +30,14 @@ public class FragmentLinks extends Fragment {
 		super.onCreate(savedInstanceState);
 		linkOptions = getResources().getStringArray(R.array.links_options);
 		
-	    mTextArrayList.add(getResources().getStringArray(R.array.links_list_options));
-		mTextArrayList.add(getResources().getStringArray(R.array.student_at_mah));
-		mTextArrayList.add(getResources().getStringArray(R.array.it));
-		mTextArrayList.add(getResources().getStringArray(R.array.library));
-		mTextArrayList.add(getResources().getStringArray(R.array.housing));
-		mTextArrayList.add(getResources().getStringArray(R.array.career_guide));
+	    mTitleArrayList.add(getResources().getStringArray(R.array.links_list_options));
+		mTitleArrayList.add(getResources().getStringArray(R.array.student_at_mah));
+		mTitleArrayList.add(getResources().getStringArray(R.array.it));
+		mTitleArrayList.add(getResources().getStringArray(R.array.library));
+		mTitleArrayList.add(getResources().getStringArray(R.array.housing));
+		mTitleArrayList.add(getResources().getStringArray(R.array.career_guide));
+		
+		mSubTitleArrayList.add(getResources().getStringArray(R.array.links_list_sub_options));
 	}
 	
     @Override
@@ -54,6 +57,6 @@ public class FragmentLinks extends Fragment {
 	}
     
     private PagerAdapter buildAdapter() {
-        return(new CollectionPagerAdapter(getChildFragmentManager(), mTextArrayList, linkOptions));
+        return(new CollectionPagerAdapter(getChildFragmentManager(), mTitleArrayList, linkOptions, mSubTitleArrayList));
       } 
 }

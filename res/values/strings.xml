@@ -37,12 +37,20 @@
        <item>"Career Guide"</item>
     </string-array>
     
-        <string-array name ="links_list_options">
+    <string-array name ="links_list_options">
        <item>"Student@MAH"</item> 
        <item>"IT"</item>
        <item>"Library"</item>
        <item>"Housing"</item>
        <item>"Career Guide"</item>
+    </string-array>
+    
+    <string-array name="links_list_sub_options">
+        <item>"Student@MAH subtitle"</item>
+        <item>"IT subtitle"</item>
+        <item>"Library subtitle"</item>
+        <item>"Housing subtitle"</item>
+        <item>"Career Guide subtitle"</item>
     </string-array>
     
     <string-array name = "it">

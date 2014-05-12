@@ -12,12 +12,16 @@ import android.widget.TextView;
 public class LinkArrayAdapter extends ArrayAdapter<String> {
     
     private final Activity context;
-    private final String[] linkList;
+    private final String[] linkTitle;
+    private final String[] linkSubTitle;
+    private int pos;
 
-    public LinkArrayAdapter(Activity context, int resource, String[] linkList) {
-        super(context, resource, linkList);
+    public LinkArrayAdapter(Activity context, int resource, String[] linkTitle, String[] linkSubTitle, int pos) {
+        super(context, resource, linkTitle);
         this.context = context;
-        this.linkList = linkList;
+        this.linkTitle = linkTitle;
+        this.linkSubTitle = linkSubTitle;
+        this.pos = pos;
     }
 
     @Override
@@ -28,10 +32,13 @@ public class LinkArrayAdapter extends ArrayAdapter<String> {
         row = inflater.inflate(R.layout.link_item, null);
         
         TextView textView_1 = (TextView) row.findViewById(R.id.list_text_view_1);
-        textView_1.setText(linkList[position]);
+        textView_1.setText(linkTitle[position]);
         TextView textView_2 = (TextView) row.findViewById(R.id.list_text_view_2);
-        textView_2.setText("subtext");
-        
+        if(pos == 0) {
+            textView_2.setText(linkSubTitle[position]);
+        } else {
+            textView_2.setText(" ");
+        }
         return row;
     }
 }

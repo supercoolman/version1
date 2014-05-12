@@ -9,14 +9,16 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
-	List<String[]> textArrayList;
+	List<String[]> titleArrayList;
+	List<String[]> subTitleArrayList;
 	String[] linkOptions;
 	Bundle args;
 
-	public CollectionPagerAdapter(FragmentManager fm, List<String[]> textArrayList, String[] linkOptions) {
+	public CollectionPagerAdapter(FragmentManager fm, List<String[]> titleArrayList, String[] linkOptions, List<String[]> subTitleArrayList) {
 		super(fm);
-		this.textArrayList = textArrayList;
+		this.titleArrayList = titleArrayList;
 		this.linkOptions = linkOptions;
+		this.subTitleArrayList = subTitleArrayList;
 	}
 	
 	@Override
@@ -25,7 +27,9 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 		
 		// Bundle some stuff to use in fragments
 		args = new Bundle();
-		args.putStringArray("TEXT_ARRAY", textArrayList.get(i));
+		args.putStringArray("LINK_TITLE", titleArrayList.get(i));
+		args.putStringArray("LINK_SUB_TITLE", subTitleArrayList.get(0));
+		args.putInt("POSITION", i);
 
 		fragment.setArguments(args);
 		return fragment;
