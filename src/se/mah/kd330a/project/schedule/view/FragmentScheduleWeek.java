@@ -39,12 +39,12 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		return f;
 	}
 
-	ScheduleWeek _scheduleWeek;
+	ScheduleWeek scheduleWeek;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		_scheduleWeek = (ScheduleWeek) getArguments().getSerializable("ScheduleWeek");
+		scheduleWeek = (ScheduleWeek) getArguments().getSerializable("ScheduleWeek");
 
 	}
 
@@ -52,7 +52,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_schedule_expendable_list_view, container,false);
 		TextView v = (TextView) rootView.findViewById(R.id.schudule_week_number);
-		v.setText("Week " + (_scheduleWeek.getWeekNumber()));
+		v.setText("Week " + (scheduleWeek.getWeekNumber()));
 		ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.expandable_list);
 		TextView empty = (TextView) rootView.findViewById(R.id.emptytw);
 		elv.setEmptyView(empty);
@@ -71,7 +71,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 
 		@Override
 		public int getGroupCount() {
-			return _scheduleWeek.getScheduleItems().size();
+			return scheduleWeek.getScheduleItems().size();
 		}
 
 		@Override
@@ -81,13 +81,13 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 
 		@Override
 		public Object getGroup(int i) {
-			return _scheduleWeek.getScheduleItems().get(i);
+			return scheduleWeek.getScheduleItems().get(i);
 		}
 
 		@Override
 		public Object getChild(int i, int i1) {
 			ArrayList<String> childs = new ArrayList<String>();
-			childs.add(_scheduleWeek.getScheduleItems().get(i).getTeacherId());
+			childs.add(scheduleWeek.getScheduleItems().get(i).getTeacherId());
 			return childs;
 		}
 
