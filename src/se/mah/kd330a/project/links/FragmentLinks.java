@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.mah.kd330a.project.R;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -46,6 +47,7 @@ public class FragmentLinks extends Fragment {
     		
     		pagerTabStrip = (PagerTabStrip) v.findViewById(R.id.pager_tab_strip);
     		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));
+            pagerTabStrip.setTextSpacing(1);
     		pagerTabStrip.setDrawFullUnderline(true);
     		
     	return v;

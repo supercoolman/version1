@@ -2,6 +2,7 @@ package se.mah.kd330a.project.links;
 
 
 import se.mah.kd330a.project.R;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
