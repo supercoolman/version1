@@ -220,8 +220,47 @@
     
     <!-- Ny array -->
     <string-array name ="idk13">
-        <item>Version 2</item>
-        <item>Interaktionsdesign programmet 2013 </item>        
+        <item>Version 2\n</item>
+        <item>Interaktionsdesign programmet 2013\n</item>
+        <item>Måns Ahlgren</item>
+        <item>Gustaf Andersson</item>
+        <item>Eva Andreasson</item>
+        <item>Kristin Asker</item>
+        <item>David Axby</item>
+        <item>Joakim Dicksson</item>
+        <item>Malin Dotevall Banks</item>
+        <item>Tuannoorgekhan Dulkhadir</item>
+        <item>Eya Khazzar</item>
+        <item>Mario El-Hajj</item>
+        <item>Isak Fredlund</item>
+        <item>Amanda Hammarberg</item>
+        <item>Erik Hassel</item>
+        <item>Kim Holmberg</item>
+        <item>Julia Håkansson</item>
+        <item>Jonas Karlsson</item>
+        <item>Maren Kleppan Møller</item>
+        <item>Elias Lindblad</item>
+        <item>Billy Lund</item>
+        <item>Isak Lund Lilja</item>
+        <item>Heléne Lundhag Dyson</item>
+        <item>Oskar Lundquist</item>
+        <item>Ayla Markkula</item>
+        <item>Tor Möller</item>
+        <item>Luana Neacsu</item>
+        <item>Anton Nyman</item>
+        <item>Gabriella Olsson</item>
+        <item>Julia Persson</item>
+        <item>Sandra Petersson</item>
+        <item>Svante Richter</item>
+        <item>Carl William Shearer</item>
+        <item>André Stenberg</item>
+        <item>Tonny Sterner</item>
+        <item>Niklas Svanberg</item>
+        <item>Jesper Söderberg</item>
+        <item>Benjamin Thorsell</item>
+        <item>Viktor Tornborg</item>
+        <item>Yuliya N Vatsova</item>
+        
         </string-array>
         
     <string-array name ="utgivare">
