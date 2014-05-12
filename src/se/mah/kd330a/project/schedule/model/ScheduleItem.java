@@ -44,13 +44,13 @@ public class ScheduleItem implements Serializable {
 	private String dateAndTime2;
 	private String location;
 	private String courseName;
-	private String teacherID;
+	private String teacherId;
 	private String description;
 	private boolean isDivider = false;
 	
 	
 	//Needed for color coordinating
-		private String courseID = "";
+		private String courseId = "";
 
 	// text += "Summary:" + v.getSummary().getValue() + "\n";
 	// text += "Last modified:" +
@@ -71,12 +71,12 @@ public class ScheduleItem implements Serializable {
 					summary.indexOf("Coursegrp: ") + 29);
 			
 			
-			courseID = summary.substring(summary.indexOf("Coursegrp: ") + 11,
+			courseId = summary.substring(summary.indexOf("Coursegrp: ") + 11,
 					summary.indexOf("Coursegrp: ") + 17); 
 			
 		}
 		if (summary.indexOf("Sign: ") != -1) {
-			teacherID = summary.substring(summary.indexOf("Sign: ") + 6,
+			teacherId = summary.substring(summary.indexOf("Sign: ") + 6,
 					summary.indexOf("Sign: ") + 12);
 		}
 		if (summary.indexOf("Description: ") != -1){
@@ -115,8 +115,8 @@ public class ScheduleItem implements Serializable {
 		return courseName;
 	}
 
-	public String getTeacherID() {
-		return teacherID;
+	public String getTeacherId() {
+		return teacherId;
 	}
 
 	public String getWeekDay() {
@@ -131,12 +131,12 @@ public class ScheduleItem implements Serializable {
 		return dateAndTime2;
 	}
 	
-	public String getCourseID() {
-		return courseID;
+	public String getCourseId() {
+		return courseId;
 	}
 
-	public void setCourseID(String courseID) {
-		this.courseID = courseID;
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
 	}
 
 	
