@@ -46,9 +46,9 @@ public class KronoxCalendar {
 			today.set(java.util.Calendar.HOUR_OF_DAY, 0);
 			today.clear(java.util.Calendar.MINUTE);
 			today.clear(java.util.Calendar.SECOND);
-			Dur one_day = new Dur(7, 0, 0, 0);
+			Dur oneDay = new Dur(7, 0, 0, 0);
 			Rule[] rules = new Rule[1];
-			Period period = new Period(new DateTime(today.getTime()), one_day);
+			Period period = new Period(new DateTime(today.getTime()), oneDay);
 			rules[0] = new PeriodRule(period);
 			Filter filter = new Filter(rules, Filter.MATCH_ANY);
 			retval = filter.filter(calendar.getComponents(Component.VEVENT));
@@ -68,9 +68,9 @@ public class KronoxCalendar {
 		thisMonday.clear(java.util.Calendar.MINUTE);
 		thisMonday.clear(java.util.Calendar.SECOND);
 		//Ok continue
-		Dur seven_days = new Dur(7, 0, 0, 0);
+		Dur sevenDays = new Dur(7, 0, 0, 0);
 		Rule[] rules = new Rule[1];
-		Period period = new Period(new DateTime(thisMonday.getTime()), seven_days);
+		Period period = new Period(new DateTime(thisMonday.getTime()), sevenDays);
 		rules[0] = new PeriodRule(period);
 		
 		// MATCH_ALL - all rules must be matched

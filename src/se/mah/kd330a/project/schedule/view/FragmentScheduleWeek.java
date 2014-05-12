@@ -87,7 +87,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		@Override
 		public Object getChild(int i, int i1) {
 			ArrayList<String> childs = new ArrayList<String>();
-			childs.add(_scheduleWeek.getScheduleItems().get(i).getTeacherID());
+			childs.add(_scheduleWeek.getScheduleItems().get(i).getTeacherId());
 			return childs;
 		}
 
@@ -113,7 +113,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			String currentDate = currentSI.getDateAndTime2();
 			String previousDate = "dummyDate";
 			ScheduleItem previousSI = null ;
-			String courseID = currentSI.getCourseID();
+			String courseID = currentSI.getCourseId();
 			Course course = Me.getInstance().getCourse(courseID);
 			
 			String courseName ="Missing";
@@ -207,7 +207,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 				}
 			});
 			
-			String courseID = currentSI.getCourseID();
+			String courseID = currentSI.getCourseId();
 			Course course = Me.getInstance().getCourse(courseID);
 			String courseName ="Missing";
 			int color = 0;
