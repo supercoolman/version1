@@ -119,10 +119,10 @@
     </string-array>
     
     <string-array name="url_career_guide">
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
+        <item>"http://mah.se/medarbetare/Personalfragor/Platsannonser/"</item>	 <!-- item links to site with job posting, site is in swedish -->
+        <item>"http://www.mah.se/Ar-student/Karriar/Jobbcoachning/"</item>	 <!-- item links to site about Job coaching -->
+        <item>"http://www.mah.se/english/Student/Karriar/Karriarworkshops/"</item>	 <!-- item links to CareerWorkshop website, site is in swedish-->
+        <item>"http://futurefinder.mah.se/sv/"</item>	 <!-- item links to Future Finder website, site is in swedish -->
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
