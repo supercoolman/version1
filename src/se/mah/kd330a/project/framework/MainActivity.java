@@ -3,8 +3,13 @@ package se.mah.kd330a.project.framework;
 
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -14,6 +19,7 @@ import net.fortuna.ical4j.data.ParserException;
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
+import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay;
 import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
 import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
@@ -111,6 +117,9 @@ public class MainActivity extends FragmentActivity implements Observer{
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        
+       
+		
 
         if (savedInstanceState == null) {
             selectItem(0);
@@ -129,6 +138,7 @@ public class MainActivity extends FragmentActivity implements Observer{
     protected void onResume() {
     	// TODO Auto-generated method stub
     	super.onResume();
+        Me.getInstance().startUpdate(this);
     	Log.i(TAG,"OnResume");
     	 //Me.getInstance().startUpdate(this);
     }
@@ -138,7 +148,7 @@ public class MainActivity extends FragmentActivity implements Observer{
     	// TODO Auto-generated method stub
     	super.onDestroy();
     	Log.i(TAG,"onDestroy Scheduled updater thread stopped");
-    	 Me.getInstance().stopUpdate();
+    	 //Me.getInstance().stopUpdate();
     }
     
     public RSSFeed getRssNewsFeed() {

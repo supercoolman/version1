@@ -52,8 +52,6 @@ public class Me{
 	private final String ME_FILE_NAME = "MEfile";
 	private static Me instanceOfMe;
 	private static AsyncTask<String, Void, Integer> asyncLoginTask; 
-	private ScheduledExecutorService executor_;
-
 	private ScheduleFixedDelay scheduledTask;
 	
 	public static Me getInstance(){
@@ -69,15 +67,6 @@ public class Me{
 	
 	 public void startUpdate(Context ctx){
 		 scheduledUpdater(ctx);
-	 }
-	
-	 public void stopUpdate(){
-		 this.executor_.shutdown();
-		 while (!executor_.isTerminated()) {
-	        }
-		 Log.i(TAG, "ThreadPoolExecutor: Finished all threads");
-	      System.out.println("Finished all threads");
-		 
 	 }
 
 	 public Observable getObservable() {
@@ -247,16 +236,15 @@ public class Me{
 	        } catch (Exception e) {
 	        	Log.i(TAG,"LoginError: "+e.getMessage());
 	       }
-	        return result.toString();
-	}
+	       return result.toString();
+	}		
 	 
 	 /**Starts the updating from AD,LADOK and Kronox**/
 	 private void scheduledUpdater(Context ctx){
 		 scheduledTask = new ScheduleFixedDelay(ctx);
-		 executor_ = Executors.newSingleThreadScheduledExecutor();
 		 try {
-				 this.executor_.scheduleWithFixedDelay(scheduledTask, ScheduleFixedDelay.initalDelayInSeconds, ScheduleFixedDelay.delayBetweenUpdatesInSeconds, TimeUnit.SECONDS);//FOR test only 30
-				 Log.i(TAG, "UpdateSchedule started");
+			 scheduledTask.run();
+			 Log.i(TAG, "UpdateSchedule started");
 		 } catch (Exception e) {
 				Log.e(TAG,"ScheduelError: "+e.getMessage());
 			}

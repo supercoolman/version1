@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Observable;
 
 import se.mah.kd330a.project.adladok.xmlparser.Parser;
@@ -23,9 +27,6 @@ import android.util.Log;
 
 public class ScheduleFixedDelay extends Observable implements Runnable  {
 	
-	public final static long initalDelayInSeconds = 0;
-	public final static long delayBetweenUpdatesInSeconds = 180; //3  minutes then we take AD every 30 minutes
-	//public final static long delayBetweenUpdatesInSeconds = 30; //30sec for testing
 	private int ADUpdateCount=10; 
 	public enum UpdateType {
 		   KRONOX, 
@@ -36,6 +37,10 @@ public class ScheduleFixedDelay extends Observable implements Runnable  {
 	private Context c;
     private String TAG ="ScheduleFixedDelay";
     
+	private final static String 	COURSES_FILENAME = "courses_ical";
+	private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	private static Calendar calendar = Calendar.getInstance();
+    
 	public ScheduleFixedDelay(Context c){
 		this.c = c;
 	}
@@ -43,6 +48,16 @@ public class ScheduleFixedDelay extends Observable implements Runnable  {
 	
 	@Override
 	public void run() {
+		File iCal = new File(c.getFilesDir(), COURSES_FILENAME);
+		String lastMod = dateFormat.format(new Date(iCal.lastModified()));
+		String todayDate = dateFormat.format(new Date(calendar.getTimeInMillis()));	
+
+        if(!lastMod.equals(todayDate)){
+
+		Log.i("Updater","Updated");
+
+		
+
 			String[] files = c.fileList();
 			for (String s : files) {
 				Log.d(TAG,"Filename: "+s);
@@ -120,6 +135,10 @@ public class ScheduleFixedDelay extends Observable implements Runnable  {
 			//ITSL
 			//????
 			
-		}
+		
+	}else{
+		Log.i("Updater","Didn't update");
+	}
+   }
  }
 
