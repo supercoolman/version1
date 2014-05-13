@@ -57,9 +57,8 @@
     	<item>"IDService.mah.se"</item> 
     	<item>"Wireless Network"</item> 
     	<item>"Printing And Copying"</item> 
-    	<item>"MAH@Instagram"</item>
-        <item>"MAH@Facebook"</item>
-        <item>"MAH@Twitter"</item> 
+    	<item>"MAH@Instagram, MAH@facebook, MAH@Twitter"</item>
+      
     </string-array>
     
     <string-array name = "housing">
