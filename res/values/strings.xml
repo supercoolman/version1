@@ -90,12 +90,12 @@
     </string-array>
     
     <string-array name="url_student_at_mah">
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
+        <item>"http://www.mah.se/english/Student/Student-services/"</item>	 <!-- item links to Student Service -->
+        <item>"https://minastudier.mah.se"</item>	 <!-- item links to mina studier .se -->
+        <item>"http://mah.se/Nyheter/Kalender/"</item>	 <!-- item links to Event Callender -->
+        <item>"http://malmostudenter.se/english/"</item>	 <!-- item links to Student Union -->
+        <item>"http://kaftis.com/"</item>	 <!-- item links to Odontology Student Union -->
+        <item>"http://www.mah.se/english/Education/Exchange-student/"</item>	 <!-- item links to site for Exchange Students -->
     </string-array>
     
     <string-array name="url_it">
