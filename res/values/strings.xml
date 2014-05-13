@@ -86,6 +86,7 @@
      <string-array name = "library">
     	<item>"Link to library"</item> 
     	<item>"Book a group room"</item> 
+    	<item>"Search for a datebase"</item>
     </string-array>
     
     <string-array name="url_student_at_mah">
