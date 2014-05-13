@@ -114,9 +114,9 @@
     
     
     <string-array name="url_housing">
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
+         <item>"http://hemma.mah.se/"</item>	 <!-- item links to site for student housing, hosted by MAH -->
+        <item>"http://www.mah.se/english/Student/Housing/Student-Housing-FAQ/"</item>	<!-- item links to FAQ's about student housing -->
+        <item>"http://www.mah.se/english/Student/Housing/Accommodation/"</item>	 <!-- item links to Housing for Exchange Students -->
     </string-array>
     
     <string-array name="url_career_guide">
