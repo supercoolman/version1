@@ -35,7 +35,6 @@ public class FragmentLinks extends Fragment {
 		mTitleArrayList.add(getResources().getStringArray(R.array.library));
 		mTitleArrayList.add(getResources().getStringArray(R.array.housing));
 		mTitleArrayList.add(getResources().getStringArray(R.array.career_guide));
-
 	}
 	
     @Override

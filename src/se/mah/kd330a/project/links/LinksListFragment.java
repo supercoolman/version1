@@ -37,7 +37,6 @@ public class LinksListFragment extends Fragment {
 		View v = inflater.inflate(R.layout.links_list_fragment, container, false);
 		ListView listView = (ListView) v.findViewById(R.id.list_view);
 		
-		// Get arguments from FragmentStatePagerAdapter
 		Bundle args = getArguments();
 		linkTitle = args.getStringArray("LINK_TITLE");
 		position = args.getInt("POSITION");

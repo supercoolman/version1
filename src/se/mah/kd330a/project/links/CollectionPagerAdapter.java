@@ -43,6 +43,6 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 	@Override
 	public CharSequence getPageTitle(int position) {
 	    linkOptions = context.getResources().getStringArray(R.array.links_options);
-	    return linkOptions[position];
+	    return " " + linkOptions[position] + " ";
 	}
 }
