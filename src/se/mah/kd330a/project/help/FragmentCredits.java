@@ -98,15 +98,12 @@ public class FragmentCredits extends Fragment {
 	
 	public void Scroll() {
 		
-		int x = 0;
-		int y = 10;
-		
-		if(x < y){
-		
 
 		String s = "";
 
 		Resources res = getResources();
+		
+		for (int f = 0; f < 10; f++){
 		
 		String[] idk = res.getStringArray(R.array.idk13);
 
@@ -146,8 +143,13 @@ public class FragmentCredits extends Fragment {
 		for (int i = 0; i < utgivare.length; i++) {
 			s = s + "\n" + utgivare[i];
 		}
+		
+		
 
 		s = s + "\n";
+		
+		}
+		
 		tvData.setTextSize(14);
 		tvData.setGravity(Gravity.CENTER);
 
@@ -156,12 +158,12 @@ public class FragmentCredits extends Fragment {
 		//
 		// View v = findViewById(R.id.scroll_container);
 		//
-		myscroll.startScroll(0, -500, 0, 2000, 40000);
+		myscroll.startScroll(0, -500, 0, 10000, 40000);
 		
-		}
 		
-		x++;
+	
 
 	}
+		
 
 }
