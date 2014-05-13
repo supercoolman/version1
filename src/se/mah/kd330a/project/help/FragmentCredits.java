@@ -50,7 +50,10 @@ public class FragmentCredits extends Fragment {
 		myscroll = new Scroller(getActivity(), new LinearInterpolator());
 
 		tvData.setScroller(myscroll);
+		
 		Scroll();
+		
+		
 
 		Thread thread = new Thread() {
 			@Override
@@ -103,7 +106,9 @@ public class FragmentCredits extends Fragment {
 
 		Resources res = getResources();
 		
-		for (int f = 0; f < 10; f++){
+		//Loop the credits
+		
+		for (int f = 0; f < 20; f++){
 		
 		String[] idk = res.getStringArray(R.array.idk13);
 
@@ -143,9 +148,6 @@ public class FragmentCredits extends Fragment {
 		for (int i = 0; i < utgivare.length; i++) {
 			s = s + "\n" + utgivare[i];
 		}
-		
-		
-
 		s = s + "\n";
 		
 		}
@@ -157,8 +159,9 @@ public class FragmentCredits extends Fragment {
 		// int length = tvData.getLineCount();
 		//
 		// View v = findViewById(R.id.scroll_container);
-		//
-		myscroll.startScroll(0, -500, 0, 10000, 40000);
+		
+		//Change duration of scroll. Speed and duration needs to calibrated  (0, -500, speed, duration)
+		myscroll.startScroll(0, -500, 0, 20000, 80000);
 		
 		
 	
