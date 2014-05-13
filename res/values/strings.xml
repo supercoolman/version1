@@ -107,9 +107,11 @@
     </string-array>
     
     <string-array name="url_library">
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
+        <item>"http://www.mah.se/bibliotek"</item>	 <!-- item links to Library webbsite, site is in swedish (option for english, OFE) -->
+    	<item>"http://www.mah.se/Bibliotek/Oppettider-och-kontakt/Orkanenbiblioteket/Boka-grupprum/"</item>	 <!-- item links to Book A room, site is in swedish (OFE) -->
     </string-array>
+    
+    
     <string-array name="url_housing">
         <item>http://mah.se/</item>
         <item>http://mah.se/</item>
