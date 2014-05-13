@@ -99,12 +99,12 @@
     </string-array>
     
     <string-array name="url_it">
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
+        <item>"https://idservice.mah.se/default.aspx"</item>	 <!-- item links to ID-service website -->
+        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>	 <!-- item links to Printing and Copying -->
+        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/"</item>	 <!-- item links to Wireless Network help -->
+    	<item>"https://www.facebook.com/malmouniversity"</item> <!-- item links to MAH's FaceBook Feed -->
+   		<item>"https://twitter.com/MalmoUniversity"</item>	 <!-- item links to MAH's Twitter Feed -->
+    	<item>"http://instagram.com/malmostudent"</item>	 <!-- item links to MAH's Instagram Feed -->
     </string-array>
     
     <string-array name="url_library">
