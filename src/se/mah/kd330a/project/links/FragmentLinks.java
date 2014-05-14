@@ -25,6 +25,7 @@ public class FragmentLinks extends Fragment {
 	// This is used to pass data to pageradapter and later to child fragments
 	private final List<String[]> mTitleArrayList = new ArrayList<String[]>();
     
+	// Fetches the stringarrays
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
