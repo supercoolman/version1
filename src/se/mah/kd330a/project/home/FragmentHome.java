@@ -1,51 +1,29 @@
 package se.mah.kd330a.project.home;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
 
-import net.fortuna.ical4j.data.ParserException;
+import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Constants;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
-import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
-import se.mah.kd330a.project.framework.MainActivity;
-//import com.handmark.pulltorefresh.library.PullToRefreshBase;
-//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.Article;
 import se.mah.kd330a.project.itsl.FeedManager;
-import se.mah.kd330a.project.itsl.ListPagerAdapter;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
-import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
-import se.mah.kd330a.project.R;
-import android.app.ActionBar;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class FragmentHome extends Fragment implements FeedManager.FeedManagerDoneListener, Observer
+public class FragmentHome extends Fragment implements FeedManager.FeedManagerDoneListener
 {
 
 	private NextClassWidget nextClass;
@@ -57,8 +35,8 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	private FeedManager ITSLfeedManager;
 	private String TAG ="FragmentHome";
 	
-	public FragmentHome()
-	{
+	public FragmentHome(){
+		
 	}
 
 	@Override
@@ -66,7 +44,6 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	{
 		Log.i("FragmentHome", "OnCreate: ");
 		super.onCreate(savedInstanceState);
-		Me.getInstance().getObservable().addObserver(this);
         try {
 			KronoxCalendar.createCalendar(KronoxReader.getFile(getActivity().getApplicationContext()));
 		} catch (Exception e) {
@@ -102,25 +79,21 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		return rootView;
 	}
 
-	private void setNewsFeedMah(ViewGroup rootView)
-	{
+	private void setNewsFeedMah(ViewGroup rootView) {
 		Log.i(TAG,"setNewsFeedMah: ");
-		try
-		{
-			fis = getActivity().openFileInput(Constants.mahNewsSavedFileName);
+		try {
+			fis = getActivity().openFileInput(Constants.MAH_NEWS_SAVED_FILE_NAME);
 			in = new ObjectInputStream(fis);
 			newsFeed = (RSSFeed) in.readObject();
 			in.close();
 			fis.close();
 			Log.i(TAG, "Items in MAHNews feed: "+ Integer.toString(newsFeed.getItemCount()));
 		}
-		catch (Exception ex)
-		{
+		catch (Exception ex) {
 			Log.e(TAG, "Error in get method");
 		}
 
-		try
-		{
+		try {
 			LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 			LinearLayout newsFeedMahWidget = (LinearLayout) rootView.findViewById(R.id.news_feed_widget);
 			for (int i = 0; i < 1; i++)
@@ -132,8 +105,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 
 			}
 		}
-		catch (Exception ex)
-		{
+		catch (Exception ex) {
 			Log.e(TAG, "Error in get method");
 		}
 
@@ -223,39 +195,6 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	{
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void update(Observable observable, Object data) {
-		UpdateType type= (UpdateType)data;
-		Log.i(TAG,"updated with data: "+type);
-		switch(type){
-		case KRONOX:
-			getActivity().runOnUiThread(new Runnable(){
-				@Override
-				public void run() {
-					profileRegistered = nextClass.anyClassesToday();
-					if (profileRegistered){
-						setNextKronoxClass(rootView);
-					}	
-				}
-				
-			});
-			
-			break;
-		case MAHNEWS:
-			getActivity().runOnUiThread(new Runnable(){
-				@Override
-				public void run() {
-					setNewsFeedMah(rootView);
-				}
-				
-			});
-			break;
-		default:
-			break;
-		}
-		
 	}
 
 }

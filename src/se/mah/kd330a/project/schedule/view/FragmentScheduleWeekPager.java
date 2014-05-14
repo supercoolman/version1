@@ -20,25 +20,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class FragmentScheduleWeekPager extends Fragment implements OnRefreshListener {
+public class FragmentScheduleWeekPager extends Fragment {
 
 	private static ArrayList<ScheduleWeek> myScheduleInWeeks;
 	private ParseData parseData;
 	private static int numItems = 0;
 
-	private SwipeRefreshLayout mSwipeRefreshLayout;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		parseData = new ParseData();
 		myScheduleInWeeks = parseData.getParsedDataFromKronoxByWeekNew(20);
-		
-		mSwipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_container);
-	    mSwipeRefreshLayout.setOnRefreshListener(this);
-	    mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
-	            android.R.color.holo_green_light,
-	            android.R.color.holo_orange_light,
-	            android.R.color.holo_red_light);
 		
 		if (myScheduleInWeeks != null) {
 			numItems = myScheduleInWeeks.size();
@@ -51,17 +42,28 @@ public class FragmentScheduleWeekPager extends Fragment implements OnRefreshList
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		Log.i("onCreateView", "loaded");
+
+	   
 		View result = inflater.inflate(R.layout.view_pager_fragment, container,false);
 		ViewPager pager = (ViewPager) result.findViewById(R.id.pager);
 		ViewPagerAdapter viewPagerAdapter = buildAdapter();
 		pager.setAdapter(viewPagerAdapter);
 		pager.setCurrentItem(4);
 		
-		
 		PagerTabStrip pagerTabStrip = (PagerTabStrip) result.findViewById(R.id.weeks_pager_tab_stip);
 		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));	
 		pagerTabStrip.setDrawFullUnderline(true);
-
+		
+		SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) result.findViewById(R.id.swipe_container);
+		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+		swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				Toast.makeText(getActivity(), "So refreshed ", Toast.LENGTH_LONG).show();	
+			}
+		});
+		
 		return (result);
 	}
 
@@ -94,19 +96,5 @@ public class FragmentScheduleWeekPager extends Fragment implements OnRefreshList
 		public int getCount() {
 			return numItems;
 		}
-	}
-
-	@Override
-	public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 2000);
-		
-	}
-	
-
-	
+	}	
 }

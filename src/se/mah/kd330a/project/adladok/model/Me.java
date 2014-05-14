@@ -1,62 +1,40 @@
 package se.mah.kd330a.project.adladok.model;
 
 import java.io.File;
-import java.io.Serializable;
-import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
-import java.util.Observable;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
-import net.fortuna.ical4j.model.parameter.ScheduleStatus;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
-import org.xmlpull.v1.XmlSerializer;
 
-import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.xmlparser.Parser;
-import se.mah.kd330a.project.schedule.data.KronoxCalendar;
-import se.mah.kd330a.project.schedule.data.KronoxReader;
-import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Context;
-import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.util.Log;
-import android.util.Xml;
 
 
-public class Me{
-	private static final long serialVersionUID = 1L;
-	//Static variables there is only one Me
-	private List<Course> myCourses = new ArrayList<Course>();
-	private List<Teacher> myTeachers = new ArrayList<Teacher>();
-	private String firstName="";
-	private String lastName="";
-	private String email="";
-	private String dispayName="";
-	private boolean isStaff = false;
-	private boolean isStudent = false;
-    private String TAG ="MeClass";
-	private String userID="";
-	private String password="";
-	private final String ME_FILE_NAME = "MEfile";
-	private static Me instanceOfMe;
-	private static AsyncTask<String, Void, Integer> asyncLoginTask; 
-	private ScheduleFixedDelay scheduledTask;
-	private Refresh	mRefresh;
+public class Me {
+	private static final long 	serialVersionUID = 1L;
+	private static final String TAG = "MeClass";
+	private static final String ME_FILE_NAME = "MEfile";
+	
+	//Static variables because there is only one Me
+	private List<Course> 		myCourses = new ArrayList<Course>();
+	private List<Teacher> 		myTeachers = new ArrayList<Teacher>();
+	private String 				firstName = "";
+	private String 				lastName = "";
+	private String 				email = "";
+	private String 				dispayName = "";
+	private boolean 			isStaff = false;
+	private boolean 			isStudent = false;
+	private String 				userID = "";
+	private String 				password = "";
+	private static Me 			instanceOfMe;
+	private Refresh				mRefresh;
 	
 	public static Me getInstance(){
-		if (instanceOfMe==null){
+		if (instanceOfMe == null){
 			instanceOfMe = new Me();
 		}
 		return instanceOfMe;
@@ -65,20 +43,12 @@ public class Me{
 	private Me() {
 		/*Singleton*/
 	}		
-	
-	 public void startUpdate(Context ctx){
-		 scheduledUpdater(ctx);
-	 }
 	 
 	 public void startRefresher(Context context) {
 		 mRefresh = new Refresh(context);
 		 mRefresh.execute();
 	 }
-
-	 public Observable getObservable() {
-			return scheduledTask;
-	}
-	
+	 
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -225,6 +195,11 @@ public class Me{
 		this.myCourses.add(course);
 	}
 	 
+	
+	/**
+	 * Logs in the user.
+	 * TODO: Poses a huge security risk, since the id and password is both sent and returned in plaintext.
+	 */
     private static final String NAMESPACE = "http://mahapp.k3.mah.se/";
     private static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
     public String getUserInfoAsXML(String loginID, String password){	   
@@ -244,16 +219,4 @@ public class Me{
 	       }
 	       return result.toString();
 	}		
-	 
-	 /**Starts the updating from AD,LADOK and Kronox**/
-	 private void scheduledUpdater(Context ctx){
-		 scheduledTask = new ScheduleFixedDelay(ctx);
-		 try {
-			 scheduledTask.run();
-			 Log.i(TAG, "UpdateSchedule started");
-		 } catch (Exception e) {
-				Log.e(TAG,"ScheduelError: "+e.getMessage());
-			}
-			
-	}
 }

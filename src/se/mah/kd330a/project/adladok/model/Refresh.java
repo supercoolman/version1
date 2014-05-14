@@ -1,13 +1,8 @@
 package se.mah.kd330a.project.adladok.model;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URL;
 
-import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
 import se.mah.kd330a.project.adladok.xmlparser.Parser;
 import se.mah.kd330a.project.home.data.DOMParser;
 import se.mah.kd330a.project.home.data.RSSFeed;
@@ -69,8 +64,8 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 		
 		try {
 			DOMParser domParser = new DOMParser();
-			RSSFeed rssFeed = domParser.parseXml(Constants.mahNewsAdress);
-			FileOutputStream fout = mContext.openFileOutput(Constants.mahNewsSavedFileName, Context.MODE_PRIVATE);
+			RSSFeed rssFeed = domParser.parseXml(Constants.MAH_NEWS_ADDRESS);
+			FileOutputStream fout = mContext.openFileOutput(Constants.MAH_NEWS_SAVED_FILE_NAME, Context.MODE_PRIVATE);
 			ObjectOutputStream out = new ObjectOutputStream(fout);
 			out.writeObject(rssFeed);
 			out.close();

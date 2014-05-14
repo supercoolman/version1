@@ -31,7 +31,7 @@ public class KronoxReader {
 	private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	private KronoxReader() {
-//		Prevents from calling newInstance ��� only one instance can be running
+//		Prevents from calling newInstance only one instance can be running
 //		Called Singleton class.
 	}
 	

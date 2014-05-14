@@ -3,45 +3,26 @@ package se.mah.kd330a.project.framework;
 
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
-import net.fortuna.ical4j.data.ParserException;
 import se.mah.kd330a.project.R;
-import se.mah.kd330a.project.adladok.model.Course;
+import se.mah.kd330a.project.adladok.model.Constants;
 import se.mah.kd330a.project.adladok.model.Me;
-import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay;
-import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
 import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
 import se.mah.kd330a.project.help.FragmentCredits;
 import se.mah.kd330a.project.home.FragmentHome;
 import se.mah.kd330a.project.home.data.RSSFeed;
-import se.mah.kd330a.project.itsl.FeedManager;
 import se.mah.kd330a.project.itsl.FragmentITSL;
-import se.mah.kd330a.project.schedule.data.KronoxCalendar;
-import se.mah.kd330a.project.schedule.data.KronoxReader;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
 import se.mah.kd330a.project.settings.view.SettingsActivity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -52,11 +33,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class MainActivity extends FragmentActivity implements Observer{
+public class MainActivity extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private String urlNewsFeed = "http://www.mah.se/english/News/";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mMenuTitles;
@@ -75,8 +55,6 @@ public class MainActivity extends FragmentActivity implements Observer{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Me.getInstance().startUpdate(this);
-        Me.getInstance().getObservable().addObserver(this); //register....
         Me.getInstance().startRefresher(this);
         mTitle = mDrawerTitle = getTitle();
         mMenuTitles = getResources().getStringArray(R.array.menu_texts);
@@ -129,27 +107,19 @@ public class MainActivity extends FragmentActivity implements Observer{
     
     @Override
     protected void onPause() {
-    	// TODO Auto-generated method stub
     	super.onPause();
     	Log.i(TAG,"OnPause");
-    	//Me.saveMeToLocalStorage(this);
     }
     
     @Override
     protected void onResume() {
-    	// TODO Auto-generated method stub
     	super.onResume();
-        Me.getInstance().startUpdate(this);
     	Log.i(TAG,"OnResume");
-    	 //Me.getInstance().startUpdate(this);
     }
     
     @Override
     protected void onDestroy() {
-    	// TODO Auto-generated method stub
     	super.onDestroy();
-    	Log.i(TAG,"onDestroy Scheduled updater thread stopped");
-    	 //Me.getInstance().stopUpdate();
     }
     
     public RSSFeed getRssNewsFeed() {
@@ -276,36 +246,10 @@ public class MainActivity extends FragmentActivity implements Observer{
 	}
     
     public void toNewsFeedOnWeb(View view) {
-    	Uri uri = Uri.parse(urlNewsFeed);
+    	Uri uri = Uri.parse(Constants.URL_NEWS_FEED);
     	Intent launchBrowser = new Intent(Intent.ACTION_VIEW,
     	uri);
     	startActivity(launchBrowser);
     }
-
-	@Override
-	public void update(Observable observable, Object data) {
-		// TODO Auto-generated method stub
-		Log.i(TAG,"Called from updater with data: "+(UpdateType)data);
-		
-		switch ((UpdateType)data){
-		case KRONOX:
-			Log.i(TAG,"Data: KRONOX");
-		break;
-		case COURSES_and_AD:
-			Log.i(TAG,"Data: COURSES");
-		break;
-		case MAHNEWS:
-			Log.i(TAG,"Data: MAHNEWS");
-		break;
-		case ALL:
-			Log.i(TAG,"Data: ALL");
-		break;
-		
-		default:
-			break;
-		
-		}
-	}
-
 }
 
