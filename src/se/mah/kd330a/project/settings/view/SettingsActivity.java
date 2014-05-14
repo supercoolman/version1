@@ -6,7 +6,6 @@ import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.StartActivity;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.Course;
-
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -23,6 +22,7 @@ public class SettingsActivity extends Activity {
 	private String profilName;
 	private String profilId;
 	private ArrayList<Course> myCourses;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +66,14 @@ public class SettingsActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate doubble the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.help, menu);
-		Me.getInstance().clearAllIncludingSavedData(this);
-		Me.getInstance().stopUpdate();
-		Intent intent = new Intent(this, StartActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(intent);
-		finish();
+		
 		
 		return true;
 	}
 
 	
-	// HŠr Šr logout knappen.
-	/*public void toLadokInlogg(View view) {
+	// This button on standby.
+	public void toLadokInlogg(View view) {
 		//Clear all including backstack
 		Me.getInstance().clearAllIncludingSavedData(this);
 		Me.getInstance().stopUpdate();
@@ -88,6 +82,6 @@ public class SettingsActivity extends Activity {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 		finish();
-	}*/
+	}
 
 }
