@@ -77,6 +77,7 @@ public class MainActivity extends FragmentActivity implements Observer{
         setContentView(R.layout.activity_main);
         Me.getInstance().startUpdate(this);
         Me.getInstance().getObservable().addObserver(this); //register....
+        Me.getInstance().startRefresher(this);
         mTitle = mDrawerTitle = getTitle();
         mMenuTitles = getResources().getStringArray(R.array.menu_texts);
         mMenuIcons = getResources().obtainTypedArray(R.array.menu_icons);

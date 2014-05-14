@@ -53,6 +53,7 @@ public class Me{
 	private static Me instanceOfMe;
 	private static AsyncTask<String, Void, Integer> asyncLoginTask; 
 	private ScheduleFixedDelay scheduledTask;
+	private Refresh	mRefresh;
 	
 	public static Me getInstance(){
 		if (instanceOfMe==null){
@@ -67,6 +68,11 @@ public class Me{
 	
 	 public void startUpdate(Context ctx){
 		 scheduledUpdater(ctx);
+	 }
+	 
+	 public void startRefresher(Context context) {
+		 mRefresh = new Refresh(context);
+		 mRefresh.execute();
 	 }
 
 	 public Observable getObservable() {

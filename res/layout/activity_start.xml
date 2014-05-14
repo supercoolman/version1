@@ -59,7 +59,8 @@
             android:hint="Mah login"
             android:inputType="textPersonName"
             android:lines="1"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:text="testUser2" />
 
         <EditText
             android:id="@+id/editText2"
@@ -73,7 +74,8 @@
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:text="testUser2" />
 
         <LinearLayout
             android:id="@+id/linearLayout1"
