@@ -138,6 +138,7 @@
         <item>"https://www.facebook.com/malmouniversity"</item> 						<!-- item links to MAH's FaceBook Feed -->
         <item>"https://twitter.com/MalmoUniversity"</item>	 							<!-- item links to MAH's Twitter Feed -->
     	<item>"http://instagram.com/malmostudent"</item>	 							<!-- item links to MAH's Instagram Feed -->
+    	<item>"https://www.linkedin.com/company/malmo-university"</item>				<!-- item links to MAH's LinkedIn Feed -->
     </string-array>
     
 
