@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 
 public class FragmentLinks extends Fragment {
 	
-	ViewPager viewPager;
+	public static ViewPager viewPager;
 	PagerTabStrip pagerTabStrip;
 	Context context;
 	

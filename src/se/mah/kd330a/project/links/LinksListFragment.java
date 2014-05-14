@@ -22,7 +22,8 @@ import android.widget.Toast;
 public class LinksListFragment extends Fragment {
     
     Listener listener = new Listener();
-	ArrayAdapter<String> adapter;
+	ArrayAdapter<String> categoriesAdapter;
+	ArrayAdapter<String> linksAdapter;
 	String[] linkTitle;
 	String[] linkSubTitle;
 	int position;
@@ -43,13 +44,14 @@ public class LinksListFragment extends Fragment {
 		linkSubTitle = args.getStringArray("LINK_SUB_TITLE");
 		 
 		if(position == 0) {
-		    adapter = new CategoriesArrayAdapter(getActivity(), R.layout.link_category_item, linkTitle, linkSubTitle);
+		    categoriesAdapter = new CategoriesArrayAdapter(getActivity(), R.layout.link_category_item, linkTitle, linkSubTitle);
+		    listView.setAdapter(categoriesAdapter);
+		    listView.setOnItemClickListener(listener);
 		} else {
-		    adapter = new LinksArrayAdapter(getActivity(), R.layout.link_list_item, linkTitle);
+		    linksAdapter = new LinksArrayAdapter(getActivity(), R.layout.link_list_item, linkTitle);
+		    listView.setAdapter(linksAdapter);
 		}
 		
-		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(listener);
 		
 		return v;
 	}
@@ -57,7 +59,7 @@ public class LinksListFragment extends Fragment {
 	private class Listener implements OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-            
+            FragmentLinks.viewPager.setCurrentItem(arg2+1);
             Toast.makeText(getActivity(), (String.valueOf(arg2)), Toast.LENGTH_SHORT).show();
         }
 	}
