@@ -253,7 +253,7 @@ public class FragmentITSL extends Fragment implements
 	{
 		/*
 		 *  here we retrieve the tabfragment object that should already have 
-		 *  been initialized and added to the categoriesAdapter
+		 *  been initialized and added to the adapter
 		 */
 		if (mViewPager != null)
 			mViewPager.setCurrentItem(tab.getPosition());

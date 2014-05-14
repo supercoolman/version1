@@ -64,9 +64,13 @@
     </string-array>
     
     <string-array name = "social_media">
-    	<item>"Mah@Facebook"</item> 
-    	<item>"Mah@Twitter"</item> 
-    	<item>"Mah@Instagram"</item> 
+    	<item>"MAH@Facebook"</item> 
+    	<item>"MAH@Twitter"</item> 
+    	<item>"MAH@Instagram"</item> 
+    	<item>"MAH@LinkedIn"</item> 
+    	<item>"MAH#@Tumblr."</item> 
+
+    	
     </string-array>
     
     <string-array name = "housing">

@@ -86,7 +86,7 @@ public class FragmentFloorMap extends Fragment{
 		final Spinner spinnerBuilding = (Spinner) getView().findViewById(R.id.spinner_bilding);
 		final Spinner spinnerFloor = (Spinner) getView().findViewById(R.id.spinner_floor);
 
-		//first categoriesAdapter
+		//first adapter
 		ArrayAdapter<CharSequence> buildingAdapter = ArrayAdapter
 				.createFromResource(getActivity(), R.array.find_building_array,
 						android.R.layout.simple_spinner_item);
@@ -99,7 +99,7 @@ public class FragmentFloorMap extends Fragment{
 		spinnerBuilding.setSelection(spPositionBuilding, true);
 		int floorArrey = resetFloor(spPositionBuilding);	
 
-		//second categoriesAdapter
+		//second adapter
 		ArrayAdapter<CharSequence> floorAdapter = ArrayAdapter
 				.createFromResource(getActivity(), floorArrey,
 						android.R.layout.simple_spinner_item);
