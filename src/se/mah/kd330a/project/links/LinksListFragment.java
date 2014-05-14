@@ -2,11 +2,11 @@ package se.mah.kd330a.project.links;
 
 
 import se.mah.kd330a.project.R;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +41,7 @@ public class LinksListFragment extends Fragment {
 		linkTitle = args.getStringArray("LINK_TITLE");
 		position = args.getInt("POSITION");
 		linkSubTitle = args.getStringArray("LINK_SUB_TITLE");
-		
+		 
 		if(position == 0) {
 		    adapter = new CategoriesArrayAdapter(getActivity(), R.layout.link_category_item, linkTitle, linkSubTitle);
 		} else {

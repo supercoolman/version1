@@ -6,5 +6,6 @@
     android:layout_height="0dp"
     android:divider="@color/grey_light"
     android:dividerHeight="8.0dp"
-    android:padding="8dp" >
+    android:padding="8dp"
+    android:descendantFocusability="blocksDescendants" >
 </ListView>
