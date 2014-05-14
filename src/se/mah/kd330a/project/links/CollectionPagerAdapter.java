@@ -37,7 +37,7 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public int getCount() {
-		return 6;
+		return 7;
 	}
 
 	@Override

@@ -35,6 +35,7 @@
        <item>"Library"</item>
        <item>"Housing"</item>
        <item>"Career Guide"</item>
+       <item>"Social Media"</item>
     </string-array>
     
     <string-array name ="links_list_options">
@@ -52,6 +53,7 @@
         <item>"Library subtitle"</item>
         <item>"Housing subtitle"</item>
         <item>"Career Guide subtitle"</item>
+        <item>"Social Media subtitle"</item>
     </string-array>
     
     <string-array name = "it">
