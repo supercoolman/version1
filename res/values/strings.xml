@@ -44,7 +44,7 @@
        <item>"Housing"</item>
        <item>"Career Guide"</item>
     </string-array>
-    
+  
     <string-array name="links_list_sub_options">
         <item>"Student@MAH subtitle"</item>
         <item>"IT subtitle"</item>
@@ -90,40 +90,40 @@
     </string-array>
     
     <string-array name="url_student_at_mah">
-        <item>"http://www.mah.se/english/Student/Student-services/"</item>	 <!-- item links to Student Service -->
-        <item>"https://minastudier.mah.se"</item>	 <!-- item links to mina studier .se -->
-        <item>"http://mah.se/Nyheter/Kalender/"</item>	 <!-- item links to Event Callender -->
-        <item>"http://malmostudenter.se/english/"</item>	 <!-- item links to Student Union -->
-        <item>"http://kaftis.com/"</item>	 <!-- item links to Odontology Student Union -->
-        <item>"http://www.mah.se/english/Education/Exchange-student/"</item>	 <!-- item links to site for Exchange Students -->
+        <item>"http://www.mah.se/english/Student/Student-services/"</item>	 			<!-- item links to Student Service -->
+        <item>"https://minastudier.mah.se"</item>	 									<!-- item links to mina studier .se -->
+        <item>"http://mah.se/Nyheter/Kalender/"</item>	 								<!-- item links to Event Callender -->
+        <item>"http://malmostudenter.se/english/"</item>	 							<!-- item links to Student Union -->
+        <item>"http://kaftis.com/"</item>	 											<!-- item links to Odontology Student Union -->
+        <item>"http://www.mah.se/english/Education/Exchange-student/"</item>		 	<!-- item links to site for Exchange Students -->
     </string-array>
     
     <string-array name="url_it">
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
-        <item>http://mah.se/</item>
+        <item>"https://idservice.mah.se/default.aspx"</item>	 						<!-- item links to ID-service website -->
+        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>	 <!-- item links to Printing and Copying -->
+        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/"</item>	 <!-- item links to Wireless Network help -->
+    	<item>"https://www.facebook.com/malmouniversity"</item> 						<!-- item links to MAH's FaceBook Feed -->
+   		<item>"https://twitter.com/MalmoUniversity"</item>	 							<!-- item links to MAH's Twitter Feed -->
+    	<item>"http://instagram.com/malmostudent"</item>	 							<!-- item links to MAH's Instagram Feed -->
     </string-array>
     
     <string-array name="url_library">
-        <item>"http://www.mah.se/bibliotek"</item>	 <!-- item links to Library webbsite, site is in swedish (option for english, OFE) -->
+        <item>"http://www.mah.se/bibliotek"</item>	 									<!-- item links to Library webbsite, site is in swedish (option for english, OFE) -->
     	<item>"http://www.mah.se/Bibliotek/Oppettider-och-kontakt/Orkanenbiblioteket/Boka-grupprum/"</item>	 <!-- item links to Book A room, site is in swedish (OFE) -->
     </string-array>
     
     
     <string-array name="url_housing">
-         <item>"http://hemma.mah.se/"</item>	 <!-- item links to site for student housing, hosted by MAH -->
+         <item>"http://hemma.mah.se/"</item>	 										<!-- item links to site for student housing, hosted by MAH -->
         <item>"http://www.mah.se/english/Student/Housing/Student-Housing-FAQ/"</item>	<!-- item links to FAQ's about student housing -->
-        <item>"http://www.mah.se/english/Student/Housing/Accommodation/"</item>	 <!-- item links to Housing for Exchange Students -->
+        <item>"http://www.mah.se/english/Student/Housing/Accommodation/"</item>	 		<!-- item links to Housing for Exchange Students -->
     </string-array>
     
     <string-array name="url_career_guide">
-        <item>"http://mah.se/medarbetare/Personalfragor/Platsannonser/"</item>	 <!-- item links to site with job posting, site is in swedish -->
-        <item>"http://www.mah.se/Ar-student/Karriar/Jobbcoachning/"</item>	 <!-- item links to site about Job coaching -->
-        <item>"http://www.mah.se/english/Student/Karriar/Karriarworkshops/"</item>	 <!-- item links to CareerWorkshop website, site is in swedish-->
-        <item>"http://futurefinder.mah.se/sv/"</item>	 <!-- item links to Future Finder website, site is in swedish -->
+        <item>"http://mah.se/medarbetare/Personalfragor/Platsannonser/"</item>	 		<!-- item links to site with job posting, site is in swedish -->
+        <item>"http://www.mah.se/Ar-student/Karriar/Jobbcoachning/"</item>	 			<!-- item links to site about Job coaching -->
+        <item>"http://www.mah.se/english/Student/Karriar/Karriarworkshops/"</item>	 	<!-- item links to CareerWorkshop website, site is in swedish-->
+        <item>"http://futurefinder.mah.se/sv/"</item>	 								<!-- item links to Future Finder website, site is in swedish -->
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
@@ -141,7 +141,7 @@
     
     <string name="home_block_description">Image of Malmö Högskola</string>
     <string name="title_activity_splash">SplashActivity</string>
-    <string name="my_courses_heading">My Courses</string>
+    <string name="my_courses_heading"> My Courses</string>
     <string name="my_profile_heading">My Profile</string>
 
     <!-- The label for use as a searchable item -->
