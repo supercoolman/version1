@@ -43,6 +43,7 @@
        <item>"Library"</item>
        <item>"Housing"</item>
        <item>"Career Guide"</item>
+       <item>"Social Media"</item>
     </string-array>
   
     <string-array name="links_list_sub_options">
@@ -57,8 +58,13 @@
     	<item>"IDService.mah.se"</item> 
     	<item>"Wireless Network"</item> 
     	<item>"Printing And Copying"</item> 
-    	<item>"MAH@Instagram, MAH@facebook, MAH@Twitter"</item>
       
+    </string-array>
+    
+    <string-array name = "social_media">
+    	<item>"Mah@Facebook"</item> 
+    	<item>"Mah@Twitter"</item> 
+    	<item>"Mah@Instagram"</item> 
     </string-array>
     
     <string-array name = "housing">
@@ -125,6 +131,13 @@
         <item>"http://www.mah.se/english/Student/Karriar/Karriarworkshops/"</item>	 	<!-- item links to CareerWorkshop website, site is in swedish-->
         <item>"http://futurefinder.mah.se/sv/"</item>	 								<!-- item links to Future Finder website, site is in swedish -->
     </string-array>
+    
+    <string-array name="url_social_media">
+        <item>"https://www.facebook.com/malmouniversity"</item> 						<!-- item links to MAH's FaceBook Feed -->
+        <item>"https://twitter.com/MalmoUniversity"</item>	 							<!-- item links to MAH's Twitter Feed -->
+    	<item>"http://instagram.com/malmostudent"</item>	 							<!-- item links to MAH's Instagram Feed -->
+    </string-array>
+    
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
