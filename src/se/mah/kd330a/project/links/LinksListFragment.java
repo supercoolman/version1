@@ -42,7 +42,12 @@ public class LinksListFragment extends Fragment {
 		position = args.getInt("POSITION");
 		linkSubTitle = args.getStringArray("LINK_SUB_TITLE");
 		
-		adapter = new LinkArrayAdapter(getActivity(), R.layout.link_item, linkTitle, linkSubTitle, position);
+		if(position == 0) {
+		    adapter = new CategoriesArrayAdapter(getActivity(), R.layout.link_category_item, linkTitle, linkSubTitle);
+		} else {
+		    adapter = new LinksArrayAdapter(getActivity(), R.layout.link_list_item, linkTitle);
+		}
+		
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(listener);
 		
