@@ -1,6 +1,7 @@
 package se.mah.kd330a.project.links;
 
 import se.mah.kd330a.project.R;
+import android.R.anim;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -30,6 +31,9 @@ public class LinksArrayAdapter extends ArrayAdapter<String> {
         
         TextView textView_1 = (TextView) row.findViewById(R.id.list_text_view_1);
         textView_1.setText(linkTitle[position]);
+        
+        ImageButton imageButton = (ImageButton) row.findViewById(R.id.image_button);
+        imageButton.setImageResource(R.drawable.ic_action_call);
         return row;
     }
 }
