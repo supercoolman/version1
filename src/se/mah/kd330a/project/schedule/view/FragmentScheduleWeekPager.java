@@ -6,6 +6,7 @@ import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.schedule.data.ParseData;
 import se.mah.kd330a.project.schedule.model.ScheduleWeek;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class FragmentScheduleWeekPager extends Fragment implements OnRefreshListener {
 
@@ -24,14 +26,19 @@ public class FragmentScheduleWeekPager extends Fragment implements OnRefreshList
 	private ParseData parseData;
 	private static int numItems = 0;
 
-	private SwipeRefreshLayout swipeRefreshLayout;
+	private SwipeRefreshLayout mSwipeRefreshLayout;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		parseData = new ParseData();
 		myScheduleInWeeks = parseData.getParsedDataFromKronoxByWeekNew(20);
 		
-		swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_container);
+		mSwipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_container);
+	    mSwipeRefreshLayout.setOnRefreshListener(this);
+	    mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
+	            android.R.color.holo_green_light,
+	            android.R.color.holo_orange_light,
+	            android.R.color.holo_red_light);
 		
 		if (myScheduleInWeeks != null) {
 			numItems = myScheduleInWeeks.size();
@@ -87,56 +94,19 @@ public class FragmentScheduleWeekPager extends Fragment implements OnRefreshList
 		public int getCount() {
 			return numItems;
 		}
-		
-		
 	}
-	
-    private void initSwipeOptions() {
-        swipeRefreshLayout.setOnRefreshListener(this);
-        setAppearance();
-        disableSwipe();
-    }
- 
-    private void setAppearance() {
-        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
-        android.R.color.holo_green_light,
-        android.R.color.holo_orange_light,
-        android.R.color.holo_red_light);
-    }
- 
-    /**
-     * It shows the SwipeRefreshLayout progress
-     */
-    public void showSwipeProgress() {
-        swipeRefreshLayout.setRefreshing(true);
-    }
- 
-    /**
-     * It shows the SwipeRefreshLayout progress
-     */
-    public void hideSwipeProgress() {
-        swipeRefreshLayout.setRefreshing(false);
-    }
- 
-    /**
-     * Enables swipe gesture
-     */
-    public void enableSwipe() {
-        swipeRefreshLayout.setEnabled(true);
-    }
- 
-    /**
-     * Disables swipe gesture. It prevents manual gestures but keeps the option tu show
-     * refreshing programatically.
-     */
-    public void disableSwipe() {
-        swipeRefreshLayout.setEnabled(false);
-    }
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
 		
 	}
+	
+
 	
 }

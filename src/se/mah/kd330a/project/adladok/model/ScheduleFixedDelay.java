@@ -52,8 +52,6 @@ public class ScheduleFixedDelay extends Observable implements Runnable  {
 		String lastMod = dateFormat.format(new Date(iCal.lastModified()));
 		String todayDate = dateFormat.format(new Date(calendar.getTimeInMillis()));	
 
-        if(!lastMod.equals(todayDate)){
-
 		Log.i("Updater","Updated");
 
 		
@@ -135,10 +133,6 @@ public class ScheduleFixedDelay extends Observable implements Runnable  {
 			//ITSL
 			//????
 			
-		
-	}else{
-		Log.i("Updater","Didn't update");
-	}
    }
  }
 
