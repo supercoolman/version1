@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.mah.kd330a.project.R;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,35 +20,29 @@ public class FragmentLinks extends Fragment {
 	
 	ViewPager viewPager;
 	PagerTabStrip pagerTabStrip;
+	Context context;
 	
 	// This is used to pass data to pageradapter and later to child fragments
 	private final List<String[]> mTitleArrayList = new ArrayList<String[]>();
-	private final List<String[]> mSubTitleArrayList = new ArrayList<String[]>();
-	String[] linkOptions;
     
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		linkOptions = getResources().getStringArray(R.array.links_options);
-		
+		context = getActivity();
 	    mTitleArrayList.add(getResources().getStringArray(R.array.links_list_options));
 		mTitleArrayList.add(getResources().getStringArray(R.array.student_at_mah));
 		mTitleArrayList.add(getResources().getStringArray(R.array.it));
 		mTitleArrayList.add(getResources().getStringArray(R.array.library));
 		mTitleArrayList.add(getResources().getStringArray(R.array.housing));
 		mTitleArrayList.add(getResources().getStringArray(R.array.career_guide));
-		
-		mSubTitleArrayList.add(getResources().getStringArray(R.array.links_list_sub_options));
 	}
 	
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
     		View v = inflater.inflate(R.layout.links_fragment, container, false);
-    
     		viewPager = (ViewPager) v.findViewById(R.id.pager);
     		viewPager.setAdapter(buildAdapter());
-    		
     		pagerTabStrip = (PagerTabStrip) v.findViewById(R.id.pager_tab_strip);
     		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));
             pagerTabStrip.setTextSpacing(1);
@@ -57,6 +52,6 @@ public class FragmentLinks extends Fragment {
 	}
     
     private PagerAdapter buildAdapter() {
-        return(new CollectionPagerAdapter(getChildFragmentManager(), mTitleArrayList, linkOptions, mSubTitleArrayList));
+        return(new CollectionPagerAdapter(getChildFragmentManager(), mTitleArrayList, context));
       } 
 }

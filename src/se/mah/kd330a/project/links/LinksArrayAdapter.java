@@ -7,21 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class LinkArrayAdapter extends ArrayAdapter<String> {
+public class LinksArrayAdapter extends ArrayAdapter<String> {
     
     private final Activity context;
     private final String[] linkTitle;
-    private final String[] linkSubTitle;
-    private int pos;
 
-    public LinkArrayAdapter(Activity context, int resource, String[] linkTitle, String[] linkSubTitle, int pos) {
+    public LinksArrayAdapter(Activity context, int resource, String[] linkTitle) {
         super(context, resource, linkTitle);
         this.context = context;
         this.linkTitle = linkTitle;
-        this.linkSubTitle = linkSubTitle;
-        this.pos = pos;
     }
 
     @Override
@@ -29,16 +26,10 @@ public class LinkArrayAdapter extends ArrayAdapter<String> {
         View row = convertView;
         
         LayoutInflater inflater = context.getLayoutInflater();
-        row = inflater.inflate(R.layout.link_item, null);
+        row = inflater.inflate(R.layout.link_list_item, null);
         
         TextView textView_1 = (TextView) row.findViewById(R.id.list_text_view_1);
         textView_1.setText(linkTitle[position]);
-        TextView textView_2 = (TextView) row.findViewById(R.id.list_text_view_2);
-        if(pos == 0) {
-            textView_2.setText(linkSubTitle[position]);
-        } else {
-            textView_2.setText(" ");
-        }
         return row;
     }
 }

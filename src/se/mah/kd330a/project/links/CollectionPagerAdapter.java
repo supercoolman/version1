@@ -2,6 +2,8 @@ package se.mah.kd330a.project.links;
 
 import java.util.List;
 
+import se.mah.kd330a.project.R;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,25 +12,23 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	List<String[]> titleArrayList;
-	List<String[]> subTitleArrayList;
+	Context context;
 	String[] linkOptions;
 	Bundle args;
 
-	public CollectionPagerAdapter(FragmentManager fm, List<String[]> titleArrayList, String[] linkOptions, List<String[]> subTitleArrayList) {
+	public CollectionPagerAdapter(FragmentManager fm, List<String[]> titleArrayList, Context context) {
 		super(fm);
 		this.titleArrayList = titleArrayList;
-		this.linkOptions = linkOptions;
-		this.subTitleArrayList = subTitleArrayList;
+		this.context = context;
 	}
 	
 	@Override
 	public Fragment getItem(int i) {
 		Fragment fragment = new LinksListFragment();
-		
-		// Bundle some stuff to use in fragments
+
 		args = new Bundle();
 		args.putStringArray("LINK_TITLE", titleArrayList.get(i));
-		args.putStringArray("LINK_SUB_TITLE", subTitleArrayList.get(0));
+		args.putStringArray("LINK_SUB_TITLE", context.getResources().getStringArray(R.array.links_list_sub_options));
 		args.putInt("POSITION", i);
 
 		fragment.setArguments(args);
@@ -42,6 +42,7 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-	    return linkOptions[position];
+	    linkOptions = context.getResources().getStringArray(R.array.links_options);
+	    return " " + linkOptions[position] + " ";
 	}
 }
