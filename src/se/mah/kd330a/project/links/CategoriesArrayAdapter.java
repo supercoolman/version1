@@ -3,6 +3,8 @@ package se.mah.kd330a.project.links;
 import se.mah.kd330a.project.R;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +15,11 @@ import android.widget.TextView;
 
 public class CategoriesArrayAdapter extends ArrayAdapter<String> {
     
-    private final Activity context;
-    private final String[] linkTitle;
-    private final String[] linkSubTitle;
+    Activity context;
+    String[] linkTitle;
+    String[] linkSubTitle;
+    TypedArray images;
     
-	int images[] = {
-			
-			R.drawable.student, R.drawable.it,R.drawable .ic_library, R.drawable.ic_housing, 
-			R.drawable.ic_career,R.drawable.ic_social,};
-    
-
     public CategoriesArrayAdapter(Activity context, int resource, String[] linkTitle, String[] linkSubTitle) {
         super(context, resource, linkTitle);
         this.context = context;
@@ -44,7 +41,8 @@ public class CategoriesArrayAdapter extends ArrayAdapter<String> {
         
         //loads the icons for each category from the images array
         ImageView imageView = (ImageView) row.findViewById(R.id.category_image);
-        imageView.setImageResource(images[position]);
+        images = FragmentLinks.images;
+        imageView.setImageDrawable(images.getDrawable(position+1));
         return row;
     }
 }

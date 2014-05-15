@@ -7,6 +7,7 @@ import java.util.List;
 import se.mah.kd330a.project.R;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -24,12 +25,14 @@ public class FragmentLinks extends Fragment {
 	
 	// This is used to pass data to pageradapter and later to child fragments
 	private final List<String[]> mTitleArrayList = new ArrayList<String[]>();
+	public static TypedArray images;
     
 	// Fetches the stringarrays
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = getActivity();
+		images = context.getResources().obtainTypedArray(R.array.images_links);
 	    mTitleArrayList.add(getResources().getStringArray(R.array.links_list_options));
 		mTitleArrayList.add(getResources().getStringArray(R.array.student_at_mah));
 		mTitleArrayList.add(getResources().getStringArray(R.array.it));

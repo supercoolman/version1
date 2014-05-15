@@ -52,19 +52,16 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		
-		
-		// fetch the image array
-		images=context.getResources().obtainTypedArray(R.array.images_links);
-	    
-	    linkOptions = context.getResources().getStringArray(R.array.links_options);
-	    SpannableStringBuilder sb = new SpannableStringBuilder(" "+linkOptions[position]+" ");
 
+		// fetch the image array
+		images = FragmentLinks.images;
+	    linkOptions = context.getResources().getStringArray(R.array.links_options);
+	    
+	    SpannableStringBuilder sb = new SpannableStringBuilder(" "+linkOptions[position]+" ");
 	    myDrawable = images.getDrawable(position);
 	    myDrawable.setBounds(0, 1, myDrawable.getIntrinsicWidth(), myDrawable.getIntrinsicHeight()); 
 	    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BASELINE); 
 	    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);; 
-	    
-	  	    return sb;
+	    return sb;
 	}
 }
