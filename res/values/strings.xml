@@ -28,6 +28,15 @@
         <item>@drawable/menuitem_6</item>
     </string-array>
     
+        <array name="images_links">
+        <item>@drawable/student</item>
+        <item>@drawable/it</item>
+        <item>@drawable/ic_library</item>
+        <item>@drawable/ic_housing</item>
+        <item>@drawable/ic_career</item>
+        <item>@drawable/ic_social</item>
+    </array>
+    
     <string-array name ="links_options">
        <item>"Categories"</item>
        <item>"Student@MAH"</item> 
@@ -281,5 +290,6 @@
     <string name="activity">Activity: </string>
     <string name="noactivity">Activity not entered</string>
     <string name="emptycalendertext">No scheduled lectures for this week.</string>
+    <integer-array name="images"></integer-array>
 
 </resources>

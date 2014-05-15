@@ -16,6 +16,7 @@ public class CategoriesArrayAdapter extends ArrayAdapter<String> {
     private final Activity context;
     private final String[] linkTitle;
     private final String[] linkSubTitle;
+    
 	int images[] = {
 			
 			R.drawable.student, R.drawable.it,R.drawable .ic_library, R.drawable.ic_housing, 
