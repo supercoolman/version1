@@ -56,11 +56,16 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        /*
-         *  Starts the refresher, which fetches courses, news etc.
-         *  Not related to ITSL.
-         */
-      //  Me.getInstance().startRefresher(this);
+        Me.getInstance().startRefresher(new FragmentCallback() {
+
+			@Override
+			public void onRefreshCompleted() {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
+
         
         mTitle = mDrawerTitle = getTitle();
         mMenuTitles = getResources().getStringArray(R.array.menu_texts);
@@ -110,6 +115,7 @@ public class MainActivity extends FragmentActivity {
             selectItem(1);
         }
     }
+    
     
     @Override
     protected void onPause() {

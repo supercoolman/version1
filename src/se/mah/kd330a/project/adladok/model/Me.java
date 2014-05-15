@@ -50,6 +50,7 @@ public class Me {
 		mRefresh.execute();
 	}
 	
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}

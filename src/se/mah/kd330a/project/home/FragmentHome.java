@@ -13,6 +13,7 @@ import se.mah.kd330a.project.itsl.Article;
 import se.mah.kd330a.project.itsl.FeedManager;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
+import se.mah.kd330a.project.schedule.view.FragmentScheduleWeek.FragmentCallback;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -35,10 +36,13 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	private FeedManager ITSLfeedManager;
 	private String TAG ="FragmentHome";
 	
-	public FragmentHome(){
-		
+	public FragmentHome() {
+		/*
+		 * Empty constructor
+		 */
 	}
 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -49,15 +53,14 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		} catch (Exception e) {
 			Log.e("FragmentHome", e.toString());
 		} 
-		try
-		{
+		try {
 			nextClass = new NextClassWidget();
 			profileRegistered = nextClass.anyClassesToday();
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			Log.e("FragmentHome", "OnCreate: "+e.toString());
 		}
+		
 	}
 
 	@Override
@@ -70,11 +73,10 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		ITSLfeedManager = new FeedManager(this, getActivity().getApplicationContext());
 		//ITSLfeedManager.getFeedList().size()
 		Log.i(TAG,"ITSLfeedManager.getFeedList().size()" + ITSLfeedManager.getFeedList().size());
-		if (!ITSLfeedManager.loadCache())
-		{
+	    if (!ITSLfeedManager.loadCache()) {
 			ITSLfeedManager.reset();
 			ITSLfeedManager.processFeeds();
-		}	
+		}
 		//Perhaps or all should be done in ScheduledFixedDelay????
 		return rootView;
 	}

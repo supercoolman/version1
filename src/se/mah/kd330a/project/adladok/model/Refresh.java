@@ -15,10 +15,8 @@ import android.util.Log;
 
 public class Refresh extends AsyncTask<Void, Void, Void> {
 	
-	private Context mContext;
-	private FragmentCallback mFragmentCallback;
-	
-	public  boolean toggle;
+	private Context 			mContext;
+	private FragmentCallback 	mFragmentCallback;
 	
 	public Refresh(FragmentCallback fragmentCallback) {
 		this.mFragmentCallback = fragmentCallback;
@@ -37,6 +35,7 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 		/**
 		 * Fetches user info by sending them to a web service.
 		 * TODO: This is a huge security risk, since the users credentials are  sent in plaintext. Consider using OAuth or obfuscating the password.
+		 * 		 At least send over ssl.
 		 */
 		
 		try{

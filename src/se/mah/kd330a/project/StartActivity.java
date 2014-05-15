@@ -20,8 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.EditText;
 
-public class StartActivity extends Activity
-{
+public class StartActivity extends Activity {
 	private final String TAG = "StartActivity";
 	private EditText editTextUsername;
 	private EditText editTextPassword;
