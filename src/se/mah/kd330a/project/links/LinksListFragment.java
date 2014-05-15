@@ -16,9 +16,6 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-//my new comment (isaks edition)
-// new comment from julia
-
 public class LinksListFragment extends Fragment {
     
     Listener listener = new Listener();
@@ -52,9 +49,9 @@ public class LinksListFragment extends Fragment {
 		    listView.setAdapter(linksAdapter);
 		}
 		
-		
 		return v;
 	}
+	
 	
 	private class Listener implements OnItemClickListener {
         @Override
