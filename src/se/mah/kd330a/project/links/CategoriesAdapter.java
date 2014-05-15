@@ -32,11 +32,11 @@ public class CategoriesAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = context.getLayoutInflater();
         row = inflater.inflate(R.layout.link_category_item, null);
         
-        TextView textView_1 = (TextView) row.findViewById(R.id.list_text_view_1);
+        TextView textView_1 = (TextView) row.findViewById(R.id.title);
         textView_1.setText(linkTitle[position]);
         
         linkSubTitle = LinksParentFragment.subTitles;
-        TextView textView_2 = (TextView) row.findViewById(R.id.list_text_view_2);
+        TextView textView_2 = (TextView) row.findViewById(R.id.sub_title);
         textView_2.setText(linkSubTitle[position]);
         
         //loads the icons for each category from the images array
