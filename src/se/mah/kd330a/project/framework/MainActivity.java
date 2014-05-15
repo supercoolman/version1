@@ -143,8 +143,7 @@ public class MainActivity extends FragmentActivity implements Observer{
     
     public RSSFeed getRssNewsFeed() {
     	return newsFeed;
-    }
-    
+    } 
     
    /* The overflow menu has been removed bellow: 
     @Override
@@ -153,14 +152,14 @@ public class MainActivity extends FragmentActivity implements Observer{
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
+    
     /* Called whenever we call invalidateOptionsMenu() */
-    /*
+ 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
          // The action bar home/up action should open or close the drawer.
@@ -178,7 +177,7 @@ public class MainActivity extends FragmentActivity implements Observer{
             return super.onOptionsItemSelected(item);
         }
     }
-
+    
     /* The click listener for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -187,9 +186,7 @@ public class MainActivity extends FragmentActivity implements Observer{
         }
     }
     
-    
     // Meny till vänster, ändra här för lägga till logut knappen.
-    
     public void selectItem(int position) {
         // update the main content by replacing fragments
     	android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -283,22 +280,20 @@ public class MainActivity extends FragmentActivity implements Observer{
 	public void update(Observable observable, Object data) {
 		// TODO Auto-generated method stub
 		Log.i(TAG,"Called from updater with data: "+(UpdateType)data);
-		
 		switch ((UpdateType)data){
-		case KRONOX:
-			Log.i(TAG,"Data: KRONOX");
-		break;
-		case COURSES_and_AD:
-			Log.i(TAG,"Data: COURSES");
-		break;
-		case MAHNEWS:
-			Log.i(TAG,"Data: MAHNEWS");
-		break;
-		case ALL:
-			Log.i(TAG,"Data: ALL");
-		break;
-		
-		default:
+			case KRONOX:
+				Log.i(TAG,"Data: KRONOX");
+			break;
+			case COURSES_and_AD:
+				Log.i(TAG,"Data: COURSES");
+			break;
+			case MAHNEWS:
+				Log.i(TAG,"Data: MAHNEWS");
+			break;
+			case ALL:
+				Log.i(TAG,"Data: ALL");
+			break;
+			default:
 			break;
 		
 		}

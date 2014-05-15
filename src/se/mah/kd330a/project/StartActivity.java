@@ -20,8 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.EditText;
 
-public class StartActivity extends Activity
-{
+public class StartActivity extends Activity{
 	private final String TAG = "StartActivity";
 	private EditText editTextUsername;
 	private EditText editTextPassword;
@@ -105,27 +104,27 @@ public class StartActivity extends Activity
 	    	Log.i(TAG,"Starting Login");
 	        //get the info from web service
 	    	try {
-	        	SoapObject loginrequest = new SoapObject(NAMESPACE, "logInTheUser");
-	            loginrequest.addProperty("username", params[0]);
-	            loginrequest.addProperty("password", params[1]);
-	            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-	            envelope.dotNet=true;
-	            envelope.setOutputSoapObject(loginrequest);
-	            HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-	            androidHttpTransport.call(NAMESPACE+"logInTheUser", envelope);
-	            String rawResult = ((Object)envelope.getResponse()).toString();
-	            Log.d(TAG,"Loginresult "+rawResult);
-	            boolean loggedIn = rawResult.equals("true")?true:false;
-	            if (loggedIn&&params[2].equals("hide")){
-	            	result = 1;
-	            }else if  (loggedIn&&params[2].equals("click")){
-	            	result = 2;
-	            }
+	        		SoapObject loginrequest = new SoapObject(NAMESPACE, "logInTheUser");
+	        		loginrequest.addProperty("username", params[0]);
+	        		loginrequest.addProperty("password", params[1]);
+	        		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+	            	envelope.dotNet=true;
+	            	envelope.setOutputSoapObject(loginrequest);
+	            	HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+	            	androidHttpTransport.call(NAMESPACE+"logInTheUser", envelope);
+	            	String rawResult = ((Object)envelope.getResponse()).toString();
+	            	Log.d(TAG,"Loginresult "+rawResult);
+	            	boolean loggedIn = rawResult.equals("true")?true:false;
+	            	if (loggedIn&&params[2].equals("hide")){
+	            		result = 1;
+	            	}else if  (loggedIn&&params[2].equals("click")){
+	            		result = 2;
+	            	}
 	            
-	        } catch (Exception e) {
-	        	Log.e(TAG,"LoginError: not logged in... "+e.getMessage());
-	       }
-	        return result;
+	        	} catch (Exception e) {
+	        		Log.e(TAG,"LoginError: not logged in... "+e.getMessage());
+	        	}
+	    	return result;
 	    }
 	    
 	    @Override
@@ -151,16 +150,14 @@ public class StartActivity extends Activity
 	/**
 	 * When all tasks have completed we can go on to the MainActivity
 	 */
-	public void tasksCompleted()
-	{
+	public void tasksCompleted(){
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 		finish();
 	}
 	
 	@Override
-	public void onDestroy()
-	{
+	public void onDestroy(){
 		super.onDestroy();
 		Log.i(TAG, "finish(): destroying StartActivity now");
 	}
