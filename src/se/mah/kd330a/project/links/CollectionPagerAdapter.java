@@ -1,8 +1,8 @@
 package se.mah.kd330a.project.links;
 
 import java.util.List;
-
 import se.mah.kd330a.project.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -14,6 +14,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 
+@SuppressLint("Recycle")
 public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	List<String[]> titleArrayList;
@@ -57,12 +58,12 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 		images=context.getResources().obtainTypedArray(R.array.images_links);
 	    
 	    linkOptions = context.getResources().getStringArray(R.array.links_options);
-	    SpannableStringBuilder sb = new SpannableStringBuilder(""+ linkOptions[position]);
+	    SpannableStringBuilder sb = new SpannableStringBuilder( " "+linkOptions[position]+" ");
 
 	    myDrawable = images.getDrawable(position);
-	    myDrawable.setBounds(0, 0, myDrawable.getIntrinsicWidth(), myDrawable.getIntrinsicHeight()); 
+	    myDrawable.setBounds(0, 1, myDrawable.getIntrinsicWidth(), myDrawable.getIntrinsicHeight()); 
 	    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BASELINE); 
-	    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); 
+	    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);; 
 	    
 	  	    return sb;
 	}
