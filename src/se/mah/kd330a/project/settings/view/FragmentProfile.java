@@ -22,24 +22,42 @@ public class FragmentProfile extends android.support.v4.app.Fragment  {
 	private String profilName;
 	private String profilId;
 	private ArrayList<Course> myCourses;
-	private TextView profilNameTextView;
+	TextView profilNameTextView;
 	TextView profilIdTextView;
-	TextView currentCourse;
 	LinearLayout coursesContent;
-	
-	public FragmentProfile(){
-	}
-	
+	TextView currentCourse;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		ViewGroup rootView = (ViewGroup) inflater
 				.inflate(R.layout.activity_settings, container, false);
-			
 		
+		if (Me.getInstance().getUserID() != null) {
+			profilName = Me.getInstance().getDispayName();
+			profilId = Me.getInstance().getUserID();
+			myCourses = (ArrayList<Course>) Me.getInstance().getCourses();
+			profilNameTextView = (TextView)rootView.findViewById(R.id.profil_name);
+			profilIdTextView = (TextView)rootView.findViewById(R.id.profil_id);
+			profilNameTextView.setText(profilName);
+			profilIdTextView.setText(profilId);
+			coursesContent = (LinearLayout)rootView.findViewById(R.id.my_courses_content);
+			LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			
+			for (Course course : myCourses) {
+				currentCourse = new TextView(getActivity());
+				currentCourse.setText(course.getDisplaynameSv());
+				currentCourse.setLayoutParams(params);
+				currentCourse.setPadding(12, 5, 12, 5);
+				currentCourse.setTextColor(R.color.grey_dark);
+				currentCourse.setTextSize(14);
+				coursesContent.addView(currentCourse);
+			}
+		} else {
+			profilNameTextView = (TextView)rootView.findViewById(R.id.profil_name);
+			profilNameTextView.setText("No profile");
+		}
 		return rootView;
 	}
-	
 	
 }
