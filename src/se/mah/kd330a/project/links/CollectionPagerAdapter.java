@@ -58,7 +58,7 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 		images=context.getResources().obtainTypedArray(R.array.images_links);
 	    
 	    linkOptions = context.getResources().getStringArray(R.array.links_options);
-	    SpannableStringBuilder sb = new SpannableStringBuilder( " "+linkOptions[position]+" ");
+	    SpannableStringBuilder sb = new SpannableStringBuilder(" "+linkOptions[position]+" ");
 
 	    myDrawable = images.getDrawable(position);
 	    myDrawable.setBounds(0, 1, myDrawable.getIntrinsicWidth(), myDrawable.getIntrinsicHeight()); 

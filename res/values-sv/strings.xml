@@ -57,7 +57,7 @@
     </string-array>
     
     <string-array name = "it">
-    	<item>"IDService.mah.se"</item> 
+    	<item>"IDService"</item> 
     	<item>"Trådlösa nätverk"</item> 
     	<item>"Skriva ut och kopiera"</item> 
       
@@ -67,10 +67,7 @@
     	<item>"MAH@Facebook"</item> 
     	<item>"MAH@Twitter"</item> 
     	<item>"MAH@Instagram"</item> 
-    	<item>"MAH@LinkedIn"</item> 
-    	<item>"MAH#@Tumblr"</item> 
-
-    	
+    	<item>"MAH@LinkedIn"</item>
     </string-array>
     
     <string-array name = "housing">
@@ -81,7 +78,7 @@
     
     <string-array name = "student_at_mah">
         <item>"Studentservice"</item> 
-    	<item>"MinaStudier.mah.se"</item> 
+    	<item>"MinaStudier"</item> 
     	<item>"Studentkåren Malmö"</item> 
     	<item>"Events"</item>
     	<item>"Odontologiska Studentkåren"</item> 
