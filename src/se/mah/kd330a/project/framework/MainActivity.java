@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import net.fortuna.ical4j.data.ParserException;
 import se.mah.kd330a.project.R;
+import se.mah.kd330a.project.StartActivity;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
@@ -63,6 +64,7 @@ public class MainActivity extends FragmentActivity implements Observer{
 	private final int FIND = 4;
 	private final int FAQ = 5;
 	private final int HELP = 6;
+	private final int LOGOUT = 7;
 	
 
     @Override
@@ -223,6 +225,11 @@ public class MainActivity extends FragmentActivity implements Observer{
 			fragment = new FragmentCredits();
 		    transaction.addToBackStack(null);
 			break;
+		case LOGOUT:
+			fragment = new FragmentLogout();
+			transaction.addToBackStack(null);
+			loggout();
+			break;
 		default:	
 			fragment = new FragmentHome();
 		}
@@ -245,6 +252,16 @@ public class MainActivity extends FragmentActivity implements Observer{
      * onPostCreate() and onConfigurationChanged()...
      */
 
+    public void loggout(){
+        Me.getInstance().clearAllIncludingSavedData(this);
+        Me.getInstance().stopUpdate();
+        Intent intent = new Intent(this, StartActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+        }
+    
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
