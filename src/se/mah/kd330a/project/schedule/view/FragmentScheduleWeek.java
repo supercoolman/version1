@@ -2,33 +2,33 @@ package se.mah.kd330a.project.schedule.view;
 
 import java.util.ArrayList;
 
-import android.widget.ExpandableListView;
-import android.widget.ImageView;
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
+import se.mah.kd330a.project.adladok.model.FragmentCallback;
 import se.mah.kd330a.project.adladok.model.Me;
-import se.mah.kd330a.project.adladok.model.Refresh;
 import se.mah.kd330a.project.find.data.RoomDbHandler;
 import se.mah.kd330a.project.find.view.FragmentFloorMap;
 import se.mah.kd330a.project.find.view.FragmentResult;
+import se.mah.kd330a.project.framework.MainActivity;
 import se.mah.kd330a.project.schedule.model.ScheduleItem;
 import se.mah.kd330a.project.schedule.model.ScheduleWeek;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,20 +73,31 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 					@Override
 					public void onRefreshCompleted() {
 						swipeRefreshLayout.setRefreshing(false);
+						((MainActivity)getActivity()).refreshCurrent();
 						Toast.makeText(getActivity(), "Sooooo refreshed!", Toast.LENGTH_LONG).show();
 					}
 					
-				});
+				}, getActivity());
 			}
 		});
-		
+		// Fixes a bug where you couldn't scroll up to the top after scrolling down.
+        elv.setOnScrollListener(new AbsListView.OnScrollListener() {
+        @Override
+        public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem == 0)
+                        swipeRefreshLayout.setEnabled(true);
+                else
+                        swipeRefreshLayout.setEnabled(false);
+        }
+
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
+                        // TODO Auto-generated method stub
+                       
+                }
+    });
 		return rootView;
-	}
-	
-	public interface FragmentCallback {
-		public void onRefreshCompleted();
-	}
-	 
+	}	 
 
 	public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
 

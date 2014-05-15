@@ -10,7 +10,6 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import se.mah.kd330a.project.adladok.xmlparser.Parser;
-import se.mah.kd330a.project.schedule.view.FragmentScheduleWeek.FragmentCallback;
 import android.content.Context;
 import android.util.Log;
 
@@ -45,8 +44,8 @@ public class Me {
 		/*Singleton*/
 	}
 	
-	public void startRefresher(FragmentCallback fragmentCallback) {
-		mRefresh = new Refresh(fragmentCallback);
+	public void startRefresher(FragmentCallback fragmentCallback, Context context) {
+		mRefresh = new Refresh(fragmentCallback, context);
 		mRefresh.execute();
 	}
 	

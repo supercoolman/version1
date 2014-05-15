@@ -5,6 +5,7 @@ package se.mah.kd330a.project.framework;
 
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Constants;
+import se.mah.kd330a.project.adladok.model.FragmentCallback;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
@@ -50,6 +51,7 @@ public class MainActivity extends FragmentActivity {
 	private final int 				FIND = 3;
 	private final int 				FAQ = 4;
 	private final int 				HELP = 5;
+	private int refreshCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +59,12 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         
         Me.getInstance().startRefresher(new FragmentCallback() {
-
 			@Override
 			public void onRefreshCompleted() {
-				// TODO Auto-generated method stub
-				
+				refreshCurrent();
 			}
         	
-        });
+        }, this);
 
         
         mTitle = mDrawerTitle = getTitle();
@@ -214,12 +214,47 @@ public class MainActivity extends FragmentActivity {
 		}
     	transaction.replace(R.id.content_frame, fragment);
     	transaction.commit();
+    	refreshCheck = position;
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
         setTitle(mMenuTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
-
+    
+    public void refreshCurrent(){
+        Fragment fragment = null;
+    	android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+    	android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+    	switch (refreshCheck) {
+    	case HOME:	
+    		fragment = new FragmentHome();
+    		break;
+    	case SCHEDULE:
+    		fragment = new FragmentScheduleWeekPager();
+    		transaction.addToBackStack(null);
+    		break;
+    	case ITSL:
+    		fragment = new FragmentITSL();
+    		transaction.addToBackStack(null);
+    		break;
+    	case FIND:
+    		fragment = new FragmentFind();
+    		transaction.addToBackStack(null);
+    		break;
+    	case FAQ:
+    		fragment = new FragmentFaq();
+    		transaction.addToBackStack(null);
+    		break;
+    	case HELP:
+    		fragment = new FragmentCredits();
+    	    transaction.addToBackStack(null);
+    		break;
+    	}
+    	transaction.replace(R.id.content_frame, fragment, "FRAGMENT");
+        transaction.commit();
+        Log.i("Refresh","Refreshed");
+        
+    }
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;

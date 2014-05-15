@@ -13,7 +13,6 @@ import se.mah.kd330a.project.itsl.Article;
 import se.mah.kd330a.project.itsl.FeedManager;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
-import se.mah.kd330a.project.schedule.view.FragmentScheduleWeek.FragmentCallback;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
