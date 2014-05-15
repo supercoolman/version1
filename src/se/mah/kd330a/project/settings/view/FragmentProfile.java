@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
 
 @SuppressLint("ResourceAsColor")
-public class FragmentProfile extends android.support.v4.app.Fragment  {
+public class FragmentProfile extends android.support.v4.app.Fragment{
 	SharedPreferences sharedPref;
 	private String profilName;
 	private String profilId;

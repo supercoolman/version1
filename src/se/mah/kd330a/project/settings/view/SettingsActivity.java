@@ -23,7 +23,6 @@ public class SettingsActivity extends Activity {
 	private String profilId;
 	private ArrayList<Course> myCourses;
 	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,19 +58,14 @@ public class SettingsActivity extends Activity {
 		}
 	}
 	
-	
-	
 	// Actionbar "Profile" icon and menu. Settings main.xml
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate doubble the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.help, menu);
-		
-		
 		return true;
 	}
 
-	
 	// This button on standby.
 	public void toLadokInlogg(View view) {
 		//Clear all including backstack
