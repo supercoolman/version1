@@ -23,6 +23,8 @@ public class LinksArrayAdapter extends ArrayAdapter<String> {
         this.context = context;
         this.linkTitle = linkTitle;
     }
+    
+    
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -39,7 +41,7 @@ public class LinksArrayAdapter extends ArrayAdapter<String> {
         imageButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Toast.makeText(context, "making call", Toast.LENGTH_SHORT);
+                Toast.makeText(context, "making call at pos:", Toast.LENGTH_SHORT).show();
             }
         });
         return row;
