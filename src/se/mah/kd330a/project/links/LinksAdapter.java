@@ -32,7 +32,7 @@ public class LinksAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = context.getLayoutInflater();
         row = inflater.inflate(R.layout.link_list_item, null);
         
-        TextView textView_1 = (TextView) row.findViewById(R.id.list_text_view_1);
+        TextView textView_1 = (TextView) row.findViewById(R.id.title);
         textView_1.setText(linkTitle[position]);
         
         ImageButton imageButton = (ImageButton) row.findViewById(R.id.image_button);

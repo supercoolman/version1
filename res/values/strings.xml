@@ -28,7 +28,7 @@
         <item>@drawable/menuitem_6</item>
     </string-array>
     
-        <array name="images_links">
+    <array name="images_links">
         <item>@drawable/tomikon</item>
         <item>@drawable/student</item>
         <item>@drawable/it</item>
