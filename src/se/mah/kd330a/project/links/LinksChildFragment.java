@@ -1,6 +1,9 @@
 package se.mah.kd330a.project.links;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import se.mah.kd330a.project.R;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,18 +19,23 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-public class LinksListFragment extends Fragment {
+public class LinksChildFragment extends Fragment {
     
     Listener listener = new Listener();
 	ArrayAdapter<String> categoriesAdapter;
 	ArrayAdapter<String> linksAdapter;
-	String[] linkTitle;
-	String[] linkSubTitle;
 	int position;
+    String[] linkTitle;
 
-	public static final String LINK_TITLE = "se.mah.kd330a.project.links.LINK_TITLE";
-	public static final String LINK_SUB_TITLE = "se.mah.kd330a.project.links.LINK_SUB_TITLE";
     public static final String POSITION = "se.mah.kd330a.project.links.POSITION";
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
+        position = args.getInt("POSITION");
+        linkTitle = LinksParentFragment.titleArrayList.get(position);
+    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,28 +43,23 @@ public class LinksListFragment extends Fragment {
 		View v = inflater.inflate(R.layout.links_list_fragment, container, false);
 		ListView listView = (ListView) v.findViewById(R.id.list_view);
 		
-		Bundle args = getArguments();
-		linkTitle = args.getStringArray("LINK_TITLE");
-		position = args.getInt("POSITION");
-		linkSubTitle = args.getStringArray("LINK_SUB_TITLE");
-		 
 		if(position == 0) {
-		    categoriesAdapter = new CategoriesArrayAdapter(getActivity(), R.layout.link_category_item, linkTitle, linkSubTitle);
+		    categoriesAdapter = new CategoriesAdapter(getActivity(), R.layout.link_category_item, linkTitle);
 		    listView.setAdapter(categoriesAdapter);
 		    listView.setOnItemClickListener(listener);
+		    Toast.makeText(getActivity(), "categoriesAdapter created", Toast.LENGTH_SHORT).show();
 		} else {
-		    linksAdapter = new LinksArrayAdapter(getActivity(), R.layout.link_list_item, linkTitle);
+		    linksAdapter = new LinksAdapter(getActivity(), R.layout.link_list_item, linkTitle);
 		    listView.setAdapter(linksAdapter);
 		}
 		
 		return v;
 	}
 	
-	
 	private class Listener implements OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-            FragmentLinks.viewPager.setCurrentItem(arg2+1);
+            LinksParentFragment.viewPager.setCurrentItem(arg2+1);
         }
 	}
 }

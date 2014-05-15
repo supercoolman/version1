@@ -17,29 +17,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentLinks extends Fragment {
+public class LinksParentFragment extends Fragment {
 	
 	public static ViewPager viewPager;
 	PagerTabStrip pagerTabStrip;
-	Context context;
 	
-	// This is used to pass data to pageradapter and later to child fragments
-	private final List<String[]> mTitleArrayList = new ArrayList<String[]>();
+	public static List<String[]> titleArrayList = new ArrayList<String[]>();
 	public static TypedArray images;
+	public static String[] subTitles;
+	public static String[] linkOptions;
     
-	// Fetches the stringarrays
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		context = getActivity();
-		images = context.getResources().obtainTypedArray(R.array.images_links);
-	    mTitleArrayList.add(getResources().getStringArray(R.array.links_list_options));
-		mTitleArrayList.add(getResources().getStringArray(R.array.student_at_mah));
-		mTitleArrayList.add(getResources().getStringArray(R.array.it));
-		mTitleArrayList.add(getResources().getStringArray(R.array.library));
-		mTitleArrayList.add(getResources().getStringArray(R.array.housing));
-		mTitleArrayList.add(getResources().getStringArray(R.array.career_guide));
-		mTitleArrayList.add(getResources().getStringArray(R.array.social_media));
+		subTitles = getResources().getStringArray(R.array.links_list_sub_options);
+		images = getResources().obtainTypedArray(R.array.images_links);
+	    linkOptions = getResources().getStringArray(R.array.links_options);
+	    titleArrayList.add(getResources().getStringArray(R.array.links_list_options));
+		titleArrayList.add(getResources().getStringArray(R.array.student_at_mah));
+		titleArrayList.add(getResources().getStringArray(R.array.it));
+		titleArrayList.add(getResources().getStringArray(R.array.library));
+		titleArrayList.add(getResources().getStringArray(R.array.housing));
+		titleArrayList.add(getResources().getStringArray(R.array.career_guide));
+		titleArrayList.add(getResources().getStringArray(R.array.social_media));
 	}
 	
     @Override
@@ -52,11 +52,10 @@ public class FragmentLinks extends Fragment {
     		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));
             pagerTabStrip.setTextSpacing(1);
     		pagerTabStrip.setDrawFullUnderline(true);
-    		
     	return v;
 	}
     
     private PagerAdapter buildAdapter() {
-        return(new CollectionPagerAdapter(getChildFragmentManager(), mTitleArrayList, context));
+        return(new CollectionPagerAdapter(getChildFragmentManager()));
       } 
 }

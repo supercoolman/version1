@@ -21,7 +21,7 @@ import se.mah.kd330a.project.home.FragmentHome;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.FeedManager;
 import se.mah.kd330a.project.itsl.FragmentITSL;
-import se.mah.kd330a.project.links.FragmentLinks;
+import se.mah.kd330a.project.links.LinksParentFragment;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
@@ -209,7 +209,7 @@ public class MainActivity extends FragmentActivity implements Observer{
 			transaction.addToBackStack(null);
 			break;
 		case LINKS:
-			fragment = new FragmentLinks();
+			fragment = new LinksParentFragment();
 			transaction.addToBackStack(null);
 			break;
 		case HELP:

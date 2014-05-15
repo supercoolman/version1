@@ -17,30 +17,20 @@ import android.text.style.ImageSpan;
 @SuppressLint("Recycle")
 public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
-	List<String[]> titleArrayList;
-	Context context;
-	String[] linkOptions;
 	TypedArray images;
 	Drawable myDrawable;
 	Bundle args;
-	
-	
-	public CollectionPagerAdapter(FragmentManager fm, List<String[]> titleArrayList, Context context) {
+	String[] linkOptions;
+
+	public CollectionPagerAdapter(FragmentManager fm) {
 		super(fm);
-		this.titleArrayList = titleArrayList;
-		this.context = context;
 	}
 	
 	@Override
 	public Fragment getItem(int i) {
-		Fragment fragment = new LinksListFragment();
-
+		Fragment fragment = new LinksChildFragment();
 		args = new Bundle();
-		args.putStringArray("LINK_TITLE", titleArrayList.get(i));
-		args.putStringArray("LINK_SUB_TITLE", context.getResources().getStringArray(R.array.links_list_sub_options));
 		args.putInt("POSITION", i);
-	
-
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -52,11 +42,10 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-
 		// fetch the image array
-		images = FragmentLinks.images;
-	    linkOptions = context.getResources().getStringArray(R.array.links_options);
-	    
+		images = LinksParentFragment.images;
+	    linkOptions = LinksParentFragment.linkOptions;
+		
 	    SpannableStringBuilder sb = new SpannableStringBuilder(" "+linkOptions[position]+" ");
 	    myDrawable = images.getDrawable(position);
 	    myDrawable.setBounds(0, 1, myDrawable.getIntrinsicWidth(), myDrawable.getIntrinsicHeight()); 
