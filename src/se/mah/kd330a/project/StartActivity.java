@@ -65,7 +65,7 @@ public class StartActivity extends Activity {
 		editTextUsername = (EditText) findViewById(R.id.editText1);
 		editTextPassword = (EditText) findViewById(R.id.editText2);
 		editTextUsername.setText(Me.getInstance().getUserID());
-		// Automatic Login yo
+		// Automatic Login yoo
 		editTextUsername.setText("testUser1");
 		editTextPassword.setText("testUser1");
 
