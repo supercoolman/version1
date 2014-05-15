@@ -11,6 +11,7 @@ import se.mah.kd330a.project.schedule.data.KronoxReader;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 public class Refresh extends AsyncTask<Void, Void, Void> {
 	
@@ -27,10 +28,12 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 	protected void onPreExecute() {
 		super.onPreExecute();
 		Log.d("Async", "Prepare for download");
+		Toast.makeText(mContext, "Downloading...", Toast.LENGTH_LONG).show();
 	}
 
 	@Override
 	protected Void doInBackground(Void... params) {
+		
 		
 		/**
 		 * Fetches user info by sending them to a web service.
@@ -56,6 +59,7 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 			KronoxReader.update(mContext.getApplicationContext());
 			KronoxCalendar.createCalendar(KronoxReader.getFile(mContext.getApplicationContext()));
 			Log.d("Async", "Downloading...");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,12 +89,9 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		// TODO Auto-generated method stub
+		Toast.makeText(mContext, "Download complete.", Toast.LENGTH_LONG).show();
 		super.onPostExecute(result);
 		mFragmentCallback.onRefreshCompleted();
 		Log.d("Async", "Done.");
 	}
-
-	
-	
-
 }

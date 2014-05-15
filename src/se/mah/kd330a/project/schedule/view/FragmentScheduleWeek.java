@@ -87,7 +87,6 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
         @Override
         public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (!elv.canScrollVertically(-100)){
-                	
                 	swipeRefreshLayout.setEnabled(true);
                 }
                 else{
