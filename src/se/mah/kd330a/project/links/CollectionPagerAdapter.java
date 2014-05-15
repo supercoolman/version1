@@ -30,6 +30,7 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 		args.putStringArray("LINK_TITLE", titleArrayList.get(i));
 		args.putStringArray("LINK_SUB_TITLE", context.getResources().getStringArray(R.array.links_list_sub_options));
 		args.putInt("POSITION", i);
+	
 
 		fragment.setArguments(args);
 		return fragment;
