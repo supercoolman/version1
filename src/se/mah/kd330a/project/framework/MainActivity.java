@@ -143,8 +143,7 @@ public class MainActivity extends FragmentActivity implements Observer{
     
     public RSSFeed getRssNewsFeed() {
     	return newsFeed;
-    }
-    
+    } 
     
    /* The overflow menu has been removed bellow: 
     @Override
@@ -153,14 +152,14 @@ public class MainActivity extends FragmentActivity implements Observer{
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
+    
     /* Called whenever we call invalidateOptionsMenu() */
-    /*
+ 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
          // The action bar home/up action should open or close the drawer.
@@ -178,7 +177,7 @@ public class MainActivity extends FragmentActivity implements Observer{
             return super.onOptionsItemSelected(item);
         }
     }
-
+    
     /* The click listener for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
