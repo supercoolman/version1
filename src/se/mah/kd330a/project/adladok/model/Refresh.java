@@ -8,6 +8,7 @@ import se.mah.kd330a.project.home.data.DOMParser;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
+import se.mah.kd330a.project.schedule.view.FragmentScheduleWeek.FragmentCallback;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -15,11 +16,12 @@ import android.util.Log;
 public class Refresh extends AsyncTask<Void, Void, Void> {
 	
 	private Context mContext;
+	private FragmentCallback mFragmentCallback;
 	
 	public  boolean toggle;
 	
-	public Refresh(Context context) {
-		this.mContext = context;
+	public Refresh(FragmentCallback fragmentCallback) {
+		this.mFragmentCallback = fragmentCallback;
 	}
 	
 
@@ -85,6 +87,7 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 	protected void onPostExecute(Void result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
+		mFragmentCallback.onRefreshCompleted();
 		Log.d("Async", "Done.");
 	}
 

@@ -21,6 +21,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,7 +46,8 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 	}
 
 	ScheduleWeek scheduleWeek;
-
+	SwipeRefreshLayout swipeRefreshLayout;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,21 +64,29 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		elv.setAdapter(new ExpandableListViewAdapter(getActivity()));
 		elv.setOnChildClickListener(this);
 		
-		final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container);
+		swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container);
 		swipeRefreshLayout.setColorScheme(R.color.blue, R.color.green, R.color.orange, R.color.red_mah);
 		swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				Me.getInstance().startRefresher(getActivity());
-				Toast.makeText(getActivity(), "So refreshed ", Toast.LENGTH_LONG).show();
+				Me.getInstance().startRefresher(new FragmentCallback(){
+					@Override
+					public void onRefreshCompleted() {
+						swipeRefreshLayout.setRefreshing(false);
+						Log.d(TAG, "Refresh stopped :)");
+					}
+					
+				});
 			}
 		});
 		
-		swipeRefreshLayout.setRefreshing(false);
-		
-		
 		return rootView;
 	}
+	
+	public interface FragmentCallback {
+		public void onRefreshCompleted();
+	}
+	 
 
 	public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
 

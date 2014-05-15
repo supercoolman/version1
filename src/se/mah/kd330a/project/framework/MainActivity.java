@@ -60,7 +60,7 @@ public class MainActivity extends FragmentActivity {
          *  Starts the refresher, which fetches courses, news etc.
          *  Not related to ITSL.
          */
-        Me.getInstance().startRefresher(this);
+      //  Me.getInstance().startRefresher(this);
         
         mTitle = mDrawerTitle = getTitle();
         mMenuTitles = getResources().getStringArray(R.array.menu_texts);
