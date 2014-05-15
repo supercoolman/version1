@@ -146,6 +146,7 @@ public class MainActivity extends FragmentActivity implements Observer{
     }
     
     
+   /* The overflow menu has been removed bellow: 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -154,6 +155,7 @@ public class MainActivity extends FragmentActivity implements Observer{
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
+    /*
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
