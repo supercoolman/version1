@@ -6,14 +6,16 @@
     <string-array name="menu_texts">
         <item>Home</item>
         <item>My Schedule</item>
+        <item >Me @ MAH</item>
         <item>It\'s Learning</item>
         <item>Find on Campus</item>
         <item>Me @ MAH</item>
-        <item>About this app</item>
+        <item>Credits</item>
     </string-array>
     <string-array name="menu_icons">
         <item>@drawable/ic_menu_home</item>
         <item>@drawable/ic_menu_schedule</item>
+        <item >ic_menu_help</item>
         <item>@drawable/ic_menu_itsl2</item>
         <item>@drawable/ic_menu_find</item>
         <item>@drawable/ic_menu_faq</item>
@@ -22,6 +24,7 @@
     <string-array name="menu_colors">
         <item>@drawable/menuitem_1</item>
         <item>@drawable/menuitem_2</item>
+        <item >@drawable/menuitem_3</item>
         <item>@drawable/menuitem_3</item>
         <item>@drawable/menuitem_4</item>
         <item>@drawable/menuitem_5</item>

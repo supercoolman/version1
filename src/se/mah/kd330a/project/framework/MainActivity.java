@@ -22,6 +22,7 @@ import se.mah.kd330a.project.itsl.FragmentITSL;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
+import se.mah.kd330a.project.settings.view.FragmentProfile;
 import se.mah.kd330a.project.settings.view.SettingsActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -57,10 +58,12 @@ public class MainActivity extends FragmentActivity implements Observer{
     private final String TAG = "MainActivity";
     private final int HOME = 0;
 	private final int SCHEDULE = 1;
-	private final int ITSL = 2;
-	private final int FIND = 3;
-	private final int FAQ = 4;
-	private final int HELP = 5;
+	private final int PROFILE = 2;
+	private final int ITSL = 3;
+	private final int FIND = 4;
+	private final int FAQ = 5;
+	private final int HELP = 6;
+	
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +146,7 @@ public class MainActivity extends FragmentActivity implements Observer{
     }
     
     
+   /* The overflow menu has been removed bellow: 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -151,6 +155,7 @@ public class MainActivity extends FragmentActivity implements Observer{
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
+    /*
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
@@ -205,6 +210,10 @@ public class MainActivity extends FragmentActivity implements Observer{
 			break;
 		case FIND:
 			fragment = new FragmentFind();
+			transaction.addToBackStack(null);
+			break;
+		case PROFILE:
+			fragment = new FragmentProfile();
 			transaction.addToBackStack(null);
 			break;
 		case FAQ:
