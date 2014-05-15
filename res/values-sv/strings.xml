@@ -35,7 +35,7 @@
        <item>"Bibliotek"</item>
        <item>"Bostad"</item>
        <item>"Karriär Guide"</item>
-       <item>"Sociala Media"</item>
+       <item>"Sociala Medier"</item>
     </string-array>
     
     <string-array name ="links_list_options">
@@ -44,7 +44,7 @@
        <item>"Bibliotek"</item>
        <item>"Bostad"</item>
        <item>"Karriär Guide"</item>
-       <item>"Sociala Media"</item>
+       <item>"Sociala Medier"</item>
     </string-array>
   
     <string-array name="links_list_sub_options">
@@ -53,13 +53,13 @@
         <item>"Bibliotek subtitle"</item>
         <item>"Bostad subtitle"</item>
         <item>"Karriär Guide subtitle"</item>
-        <item>"Sociala Media subtitle"</item>
+        <item>"Sociala Medier subtitle"</item>
     </string-array>
     
     <string-array name = "it">
     	<item>"IDService.mah.se"</item> 
-    	<item>"Wireless Network"</item> 
-    	<item>"Printing And Copying"</item> 
+    	<item>"Trådlösa nätverk"</item> 
+    	<item>"Skriva ut och kopiera"</item> 
       
     </string-array>
     
@@ -68,7 +68,7 @@
     	<item>"MAH@Twitter"</item> 
     	<item>"MAH@Instagram"</item> 
     	<item>"MAH@LinkedIn"</item> 
-    	<item>"MAH#@Tumblr."</item> 
+    	<item>"MAH#@Tumblr"</item> 
 
     	
     </string-array>
@@ -80,7 +80,7 @@
     </string-array>
     
     <string-array name = "student_at_mah">
-        <item>"Student Service"</item> 
+        <item>"Studentservice"</item> 
     	<item>"MinaStudier.mah.se"</item> 
     	<item>"Studentkåren Malmö"</item> 
     	<item>"Events"</item>
@@ -90,8 +90,8 @@
     
      <string-array name = "career_guide">
     	<item>"Jobbannonser"</item> 
-    	<item>"Jobb Coach"</item> 
-    	<item>"Karriär Workshop"</item>
+    	<item>"Jobbcoach"</item> 
+    	<item>"Karriärworkshop"</item>
         <item>"Future Finder"</item>
     </string-array>
     
