@@ -1,11 +1,13 @@
 package se.mah.kd330a.project.schedule.view;
 
 import java.util.ArrayList;
+
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
+import se.mah.kd330a.project.adladok.model.Refresh;
 import se.mah.kd330a.project.find.data.RoomDbHandler;
 import se.mah.kd330a.project.find.view.FragmentFloorMap;
 import se.mah.kd330a.project.find.view.FragmentResult;
@@ -13,9 +15,12 @@ import se.mah.kd330a.project.schedule.model.ScheduleItem;
 import se.mah.kd330a.project.schedule.model.ScheduleWeek;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,6 +61,20 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		elv.setEmptyView(empty);
 		elv.setAdapter(new ExpandableListViewAdapter(getActivity()));
 		elv.setOnChildClickListener(this);
+		
+		final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container);
+		swipeRefreshLayout.setColorScheme(R.color.blue, R.color.green, R.color.orange, R.color.red_mah);
+		swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				Me.getInstance().startRefresher(getActivity());
+				Toast.makeText(getActivity(), "So refreshed ", Toast.LENGTH_LONG).show();
+			}
+		});
+		
+		swipeRefreshLayout.setRefreshing(false);
+		
+		
 		return rootView;
 	}
 

@@ -34,28 +34,34 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
-    private String[] mMenuTitles;
-    private TypedArray mMenuIcons;
-    private TypedArray mMenuColors;
-    public RSSFeed newsFeed;
-    private final String TAG = "MainActivity";
-    private final int HOME = 0;
-	private final int SCHEDULE = 1;
-	private final int ITSL = 2;
-	private final int FIND = 3;
-	private final int FAQ = 4;
-	private final int HELP = 5;
+    private DrawerLayout 			mDrawerLayout;
+    private ListView 				mDrawerList;
+    private ActionBarDrawerToggle 	mDrawerToggle;
+    private CharSequence 			mDrawerTitle;
+    private CharSequence 			mTitle;
+    private String[] 				mMenuTitles;
+    private TypedArray 				mMenuIcons;
+    private TypedArray 				mMenuColors;
+    public RSSFeed 					mNewsFeed;
+    private final String 			TAG = MainActivity.class.getName();
+    private final int 				HOME = 0;
+	private final int 				SCHEDULE = 1;
+	private final int 				ITSL = 2;
+	private final int 				FIND = 3;
+	private final int 				FAQ = 4;
+	private final int 				HELP = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        /*
+         *  Starts the refresher, which fetches courses, news etc.
+         *  Not related to ITSL.
+         */
         Me.getInstance().startRefresher(this);
+        
         mTitle = mDrawerTitle = getTitle();
         mMenuTitles = getResources().getStringArray(R.array.menu_texts);
         mMenuIcons = getResources().obtainTypedArray(R.array.menu_icons);
@@ -67,6 +73,7 @@ public class MainActivity extends FragmentActivity {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         
         mDrawerList.setSelector(R.drawable.menu_selector);
+        
         // set up the drawer's list view with items and click listener
         mDrawerList.setAdapter(new MenuAdapter(this,
                 R.layout.drawer_list_item, mMenuTitles, mMenuIcons, mMenuColors));
@@ -95,13 +102,12 @@ public class MainActivity extends FragmentActivity {
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
+          
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         
-       
-		
-
+        
         if (savedInstanceState == null) {
-            selectItem(0);
+            selectItem(1);
         }
     }
     
@@ -123,7 +129,7 @@ public class MainActivity extends FragmentActivity {
     }
     
     public RSSFeed getRssNewsFeed() {
-    	return newsFeed;
+    	return mNewsFeed;
     }
     
     

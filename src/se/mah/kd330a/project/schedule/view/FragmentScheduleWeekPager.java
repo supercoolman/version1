@@ -6,19 +6,15 @@ import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.schedule.data.ParseData;
 import se.mah.kd330a.project.schedule.model.ScheduleWeek;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 public class FragmentScheduleWeekPager extends Fragment {
 
@@ -54,16 +50,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));	
 		pagerTabStrip.setDrawFullUnderline(true);
 		
-		SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) result.findViewById(R.id.swipe_container);
-		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
-		swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-			
-			@Override
-			public void onRefresh() {
-				Toast.makeText(getActivity(), "So refreshed ", Toast.LENGTH_LONG).show();	
-			}
-		});
-		
+
 		return (result);
 	}
 

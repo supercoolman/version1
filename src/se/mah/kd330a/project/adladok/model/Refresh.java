@@ -16,6 +16,8 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 	
 	private Context mContext;
 	
+	public  boolean toggle;
+	
 	public Refresh(Context context) {
 		this.mContext = context;
 	}
@@ -83,7 +85,6 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 	protected void onPostExecute(Void result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
-		
 		Log.d("Async", "Done.");
 	}
 
