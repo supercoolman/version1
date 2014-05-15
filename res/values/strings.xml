@@ -10,7 +10,7 @@
         <item>It\'s Learning</item>
         <item>Find on Campus</item>
         <item>Me @ MAH</item>
-        <item>About this app</item>
+        <item>Credits</item>
     </string-array>
     <string-array name="menu_icons">
         <item>@drawable/ic_menu_home</item>
