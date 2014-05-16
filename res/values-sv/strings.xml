@@ -8,7 +8,7 @@
         <item>Mitt schema</item>
         <item>It\'s Learning</item>
         <item>Hitta på Campus</item>
-        <item>Länkar @ MAH</item>
+        <item>Länkar på MAH</item>
         <item>Om denna app</item>
     </string-array>
     <string-array name="menu_icons">
@@ -30,7 +30,7 @@
     
     <string-array name ="links_options">
        <item>"Kategorier"</item>
-       <item>"Student@MAH"</item> 
+       <item>"Student på MAH"</item> 
        <item>"IT"</item>
        <item>"Bibliotek"</item>
        <item>"Bostad"</item>
@@ -39,7 +39,7 @@
     </string-array>
     
     <string-array name ="links_list_options">
-       <item>"Student@MAH"</item> 
+       <item>"Student på MAH"</item> 
        <item>"IT"</item>
        <item>"Bibliotek"</item>
        <item>"Bostad"</item>
@@ -56,6 +56,7 @@
         <item>"Gå med i våra sociala nätverk"</item>
     </string-array>
   
+ 
     
     <string-array name = "it">
     	<item>"IDService"</item> 
@@ -65,10 +66,10 @@
     </string-array>
     
     <string-array name = "social_media">
-    	<item>"MAH@Facebook"</item> 
-    	<item>"MAH@Twitter"</item> 
-    	<item>"MAH@Instagram"</item> 
-    	<item>"MAH@LinkedIn"</item>
+    	<item>"MAH på Facebook"</item> 
+    	<item>"MAH på Twitter"</item> 
+    	<item>"MAH på Instagram"</item> 
+    	<item>"MAH på LinkedIn"</item>
     </string-array>
     
     <string-array name = "housing">
@@ -79,9 +80,9 @@
     
     <string-array name = "student_at_mah">
         <item>"Studentservice"</item> 
-    	<item>"MinaStudier"</item> 
+    	<item>"Mina Studier"</item> 
     	<item>"Studentkåren Malmö"</item> 
-    	<item>"Events"</item>
+    	<item>"Evenemang"</item>
     	<item>"Odontologiska Studentkåren"</item> 
     	<item>"Utbytesstudent"</item> 
     </string-array>

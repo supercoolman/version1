@@ -113,38 +113,38 @@
     
     <string-array name="url_student_at_mah">
         <item>"http://www.mah.se/english/Student/Student-services/"</item>	 			<!-- item links to Student Service -->
-        <item>"https://minastudier.mah.se"</item>	 									<!-- item links to mina studier .se -->
-        <item>"http://mah.se/Nyheter/Kalender/"</item>	 								<!-- item links to Event Callender -->
+        <item>"https://minastudier.mah.se/default.aspx"</item>	 									<!-- item links to mina studier .se -->
+        <item>"http://www.mah.se/english/Student/Student-health-services/Contact/"</item>  <!-- item links to student health -->
         <item>"http://malmostudenter.se/english/"</item>	 							<!-- item links to Student Union -->
+        <item>"http://mah.se/Nyheter/Kalender/"</item>	 								<!-- item links to Event Callender -->
         <item>"http://kaftis.com/"</item>	 											<!-- item links to Odontology Student Union -->
         <item>"http://www.mah.se/english/Education/Exchange-student/"</item>		 	<!-- item links to site for Exchange Students -->
-        <item>"http://www.mah.se/english/Student/Student-health-services/Contact/"</item>  <!-- item links to student health -->
-        
     </string-array>
     
     <string-array name="url_it">
         <item>"https://idservice.mah.se/default.aspx"</item>	 						<!-- item links to ID-service website -->
-        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>	 <!-- item links to Printing and Copying -->
         <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/"</item>	 <!-- item links to Wireless Network help -->
+        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>	 <!-- item links to Printing and Copying -->
     </string-array>
     
     <string-array name="url_library">
-        <item>"http://www.mah.se/bibliotek"</item>	 									<!-- item links to Library webbsite, site is in swedish (option for english, OFE) -->
-    	<item>"http://www.mah.se/Bibliotek/Oppettider-och-kontakt/Orkanenbiblioteket/Boka-grupprum/"</item>	 <!-- item links to Book A room, site is in swedish (OFE) -->
+        <item>"http://www.mah.se/english/Library/"</item>	 									<!-- item links to Library webbsite, site is in swedish (option for english, OFE) -->
+    	<item>"http://www.mah.se/english/Library/Opening-Hours-and-Contacts/Orkanen-Library/Booking-group-rooms/"</item>	 <!-- item links to Book A room, site is in swedish (OFE) -->
+        <item>"http://infosok.mah.se/english/Library/Finding-Information/Find-Databases/"</item>	<!-- item links to Find a Database -->
     </string-array>
     
     
     <string-array name="url_housing">
-         <item>"http://hemma.mah.se/"</item>	 										<!-- item links to site for student housing, hosted by MAH -->
         <item>"http://www.mah.se/english/Student/Housing/Student-Housing-FAQ/"</item>	<!-- item links to FAQ's about student housing -->
+        <item>"http://hemma.mah.se/?lang=en"</item>
         <item>"http://www.mah.se/english/Student/Housing/Accommodation/"</item>	 		<!-- item links to Housing for Exchange Students -->
     </string-array>
     
     <string-array name="url_career_guide">
         <item>"http://mah.se/medarbetare/Personalfragor/Platsannonser/"</item>	 		<!-- item links to site with job posting, site is in swedish -->
-        <item>"http://www.mah.se/Ar-student/Karriar/Jobbcoachning/"</item>	 			<!-- item links to site about Job coaching -->
+        <item>"http://www.mah.se/english/Student/Career/Job-Coaching/"</item>	 			<!-- item links to site about Job coaching -->
         <item>"http://www.mah.se/english/Student/Karriar/Karriarworkshops/"</item>	 	<!-- item links to CareerWorkshop website, site is in swedish-->
-        <item>"http://futurefinder.mah.se/sv/"</item>	 								<!-- item links to Future Finder website, site is in swedish -->
+        <item>"http://futurefinder.mah.se/"</item>	 								<!-- item links to Future Finder website, site is in swedish -->
     </string-array>
     
     <string-array name="url_social_media">
