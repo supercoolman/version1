@@ -21,6 +21,7 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 	Drawable myDrawable;
 	Bundle args;
 	String[] linkOptions;
+	CharSequence pageTitle;
 
 	public CollectionPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -43,14 +44,21 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 	@Override
 	public CharSequence getPageTitle(int position) {
 		// fetch the image array
+	    
 		images = LinksParentFragment.images;
-	    linkOptions = LinksParentFragment.linkOptions;
-		
-	    SpannableStringBuilder sb = new SpannableStringBuilder(" "+linkOptions[position]+" ");
 	    myDrawable = images.getDrawable(position);
-	    myDrawable.setBounds(0, 1, myDrawable.getIntrinsicWidth(), myDrawable.getIntrinsicHeight()); 
-	    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BASELINE); 
-	    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);; 
-	    return sb;
+	    myDrawable.setBounds(0, 1, 128, 128);
+	    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BOTTOM); 
+		
+		if(position == 0) {
+		    linkOptions = LinksParentFragment.linkOptions;
+		    SpannableStringBuilder sb = new SpannableStringBuilder(" "+linkOptions[position]+" ");
+		    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);; 
+		    return sb;
+		} else {
+		    SpannableStringBuilder sb = new SpannableStringBuilder(" "+" ");
+		    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);; 
+		    return sb;
+		}
 	}
 }
