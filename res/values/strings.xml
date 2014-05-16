@@ -16,12 +16,12 @@
     <string-array name="menu_icons">
         <item>@drawable/ic_menu_home</item>
         <item>@drawable/ic_menu_schedule</item>
-        <item >ic_menu_help</item>
+        <item >@drawable/ic_menu_me</item>
         <item>@drawable/ic_menu_itsl2</item>
         <item>@drawable/ic_menu_find</item>
         <item>@drawable/ic_menu_faq</item>
         <item>@drawable/ic_menu_help</item>
-        <item >ic_action_profile</item>
+        <item >@drawable/ic_action_profile</item>
     </string-array>
     <string-array name="menu_colors">
         <item>@drawable/menuitem_1</item>
