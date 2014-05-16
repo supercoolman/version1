@@ -169,7 +169,7 @@ public class StartActivity extends Activity {
 	        		break;
 	        }
 	        
-	        Log.i(TAG,"Logged in with result: 0:problem, 1:fromSavedData, 2:fromScreen::: "+result);
+	        Log.i(TAG,"Logged in with result: " + resultCode);
 	    }
 	}
 
