@@ -24,7 +24,7 @@ public class LinksChildFragment extends Fragment {
     Listener listener = new Listener();
 	ArrayAdapter<String> categoriesAdapter;
 	ArrayAdapter<String> linksAdapter;
-	int position;
+	public static int position;
     String[] linkTitle;
 
     public static final String POSITION = "se.mah.kd330a.project.links.POSITION";
@@ -47,7 +47,6 @@ public class LinksChildFragment extends Fragment {
 		    categoriesAdapter = new CategoriesAdapter(getActivity(), R.layout.link_category_item, linkTitle);
 		    listView.setAdapter(categoriesAdapter);
 		    listView.setOnItemClickListener(listener);
-		    Toast.makeText(getActivity(), "categoriesAdapter created", Toast.LENGTH_SHORT).show();
 		} else {
 		    linksAdapter = new LinksAdapter(getActivity(), R.layout.link_list_item, linkTitle);
 		    listView.setAdapter(linksAdapter);

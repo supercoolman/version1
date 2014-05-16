@@ -21,7 +21,7 @@
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:layout_alignTop="@+id/title"
-    android:background="@drawable/links_states"
+    android:background="@color/white"
     android:layout_alignParentRight="true" />
     
 </RelativeLayout>
