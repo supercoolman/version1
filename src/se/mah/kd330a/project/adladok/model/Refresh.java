@@ -15,6 +15,10 @@ import android.widget.Toast;
 
 public class Refresh extends AsyncTask<Void, Void, Void> {
 	
+	/**
+	 * Class for starting an AsyncTask that downloads new info to the app.
+	 */
+	
 	private Context 			mContext;
 	private FragmentCallback 	mFragmentCallback;
 	
@@ -23,7 +27,9 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 		this.mContext = context;
 	}
 	
-
+	/**
+	 * What to do before task begins
+	 */
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
@@ -31,6 +37,9 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 		Toast.makeText(mContext, "Downloading...", Toast.LENGTH_LONG).show();
 	}
 
+	/**
+	 * What to do
+	 */
 	@Override
 	protected Void doInBackground(Void... params) {
 		
@@ -65,7 +74,7 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 		}
 		
 		/**
-		 * Fetch the teacher real name
+		 * TODO Fetch the teacher real name
 		 */
 		try {
 			
@@ -78,7 +87,6 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 		/**
 		 * Update MAH News feed and parse to xml
 		 */
-		
 		try {
 			DOMParser domParser = new DOMParser();
 			RSSFeed rssFeed = domParser.parseXml(Constants.MAH_NEWS_ADDRESS);
@@ -96,6 +104,9 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 		return null;
 	}
 
+	/**
+	 * What to do once it's finished
+	 */
 	@Override
 	protected void onPostExecute(Void result) {
 		// TODO Auto-generated method stub
