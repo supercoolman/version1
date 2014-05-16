@@ -112,7 +112,7 @@ public class MainActivity extends FragmentActivity {
         
         
         if (savedInstanceState == null) {
-            selectItem(1);
+            selectItem(0);
         }
     }
     

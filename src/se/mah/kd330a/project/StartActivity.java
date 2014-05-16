@@ -1,4 +1,4 @@
-package se.mah.kd330a.project;
+	package se.mah.kd330a.project;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -6,6 +6,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import se.mah.kd330a.project.adladok.model.Me;
+import se.mah.kd330a.project.adladok.model.Refresh;
 import se.mah.kd330a.project.framework.MainActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,9 +31,12 @@ public class StartActivity extends Activity {
 	private String password;
 	private static AsyncTask<String, Void, Integer> asyncLoginTask;
 	private enum LOGINMESSAGE {SHOW,NOSHOW};
+	private Refresh refresh;
+	
+	
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{		
+	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 		((LinearLayout) findViewById(R.id.login_view)).setVisibility(LinearLayout.GONE);
@@ -49,8 +53,7 @@ public class StartActivity extends Activity {
 		}
 	}
 
-	public void showLoginView(LOGINMESSAGE loginmessage)
-	{
+	public void showLoginView(LOGINMESSAGE loginmessage) {
 		switch(loginmessage){
 		case SHOW:
 			Toast.makeText(this, "Unable to log you in", Toast.LENGTH_LONG).show();
@@ -72,8 +75,7 @@ public class StartActivity extends Activity {
 
 	}
 
-	public void hideLoginView()
-	{
+	public void hideLoginView() {
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow((IBinder) findViewById(R.id.login_view).getWindowToken(), 0);
 		((View) findViewById(R.id.login_view)).setVisibility(View.GONE);
@@ -81,8 +83,7 @@ public class StartActivity extends Activity {
 		asyncLoginTask = new AsyncTaskLoginUser().execute(username,password,"hide"); 
 	}
 
-	public void loginButtonClicked(View v)
-	{
+	public void loginButtonClicked(View v) {
 		username = editTextUsername.getText().toString();
 		password = editTextPassword.getText().toString();
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -118,7 +119,7 @@ public class StartActivity extends Activity {
 	            boolean loggedIn = rawResult.equals("true")?true:false;
 	            if (loggedIn&&params[2].equals("hide")){
 	            	result = 1;
-	            }else if  (loggedIn&&params[2].equals("click")){
+	            } else if  (loggedIn&&params[2].equals("click")){
 	            	result = 2;
 	            }
 	            
@@ -151,8 +152,8 @@ public class StartActivity extends Activity {
 	/**
 	 * When all tasks have completed we can go on to the MainActivity
 	 */
-	public void tasksCompleted()
-	{
+	public void tasksCompleted() {
+		//refresh.execute();
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 		finish();
