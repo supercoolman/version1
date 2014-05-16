@@ -58,13 +58,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        Me.getInstance().startRefresher(new FragmentCallback() {
-			@Override
-			public void onRefreshCompleted() {
-				refreshCurrent();
-			}
-        	
-        }, this);
+        
 
         
         mTitle = mDrawerTitle = getTitle();

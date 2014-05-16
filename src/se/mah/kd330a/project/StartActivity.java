@@ -5,6 +5,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import se.mah.kd330a.project.adladok.model.FragmentCallback;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.Refresh;
 import se.mah.kd330a.project.framework.MainActivity;
@@ -80,7 +81,7 @@ public class StartActivity extends Activity {
 		imm.hideSoftInputFromWindow((IBinder) findViewById(R.id.login_view).getWindowToken(), 0);
 		((View) findViewById(R.id.login_view)).setVisibility(View.GONE);
 		((View) findViewById(R.id.loading_view)).setVisibility(View.VISIBLE);
-		asyncLoginTask = new AsyncTaskLoginUser().execute(username,password,"hide"); 
+		asyncLoginTask = new AsyncTaskLoginUser(this).execute(username,password,"hide"); 
 	}
 
 	public void loginButtonClicked(View v) {
@@ -90,7 +91,7 @@ public class StartActivity extends Activity {
 		imm.hideSoftInputFromWindow((IBinder) findViewById(R.id.login_view).getWindowToken(), 0);
 		((View) findViewById(R.id.login_view)).setVisibility(View.GONE);
 		((View) findViewById(R.id.loading_view)).setVisibility(View.VISIBLE);
-		asyncLoginTask = new AsyncTaskLoginUser().execute(username,password,"click");
+		asyncLoginTask = new AsyncTaskLoginUser(this).execute(username,password,"click");
 	}
 	
 	/**
@@ -99,6 +100,11 @@ public class StartActivity extends Activity {
 	private class AsyncTaskLoginUser extends AsyncTask<String, Void, Integer> {
 	    private static final String NAMESPACE = "http://mahapp.k3.mah.se/";
 	    private static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
+		private Activity mActivity;
+
+	    public AsyncTaskLoginUser(Activity activity){
+	    	this.mActivity = activity; 
+	    }
 	    
 	    @Override
 	    protected Integer doInBackground(String... params) {
@@ -135,12 +141,12 @@ public class StartActivity extends Activity {
 	        Log.i(TAG,"Logged in with result 0:problem, 1:fromSavedData, 2:fromScreen::: "+result);
 	        switch(result){
 	        	case 1: //hide
-	        		tasksCompleted();
+	        		tasksCompleted(mActivity);
 	        		break;
 	        	case 2: //click
 	        		Me.getInstance().setUserID(username);
 	        		Me.getInstance().setPassword(password);
-	    			tasksCompleted();
+	    			tasksCompleted(mActivity);
 	        		break;
 	        	default:
 	        		showLoginView(LOGINMESSAGE.SHOW); 			
@@ -152,11 +158,18 @@ public class StartActivity extends Activity {
 	/**
 	 * When all tasks have completed we can go on to the MainActivity
 	 */
-	public void tasksCompleted() {
+	public void tasksCompleted(final Activity activity) {
 		//refresh.execute();
-		Intent intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
-		finish();
+		Me.getInstance().startRefresher(new FragmentCallback() {
+			@Override
+			public void onRefreshCompleted() {
+				Intent intent = new Intent(activity, MainActivity.class);
+				startActivity(intent);
+				finish();
+			}
+        	
+        }, this);
+		
 	}
 	
 	@Override
