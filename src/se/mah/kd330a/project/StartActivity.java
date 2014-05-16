@@ -5,6 +5,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import se.mah.kd330a.project.adladok.model.Constants;
 import se.mah.kd330a.project.adladok.model.FragmentCallback;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.Refresh;
@@ -77,13 +78,16 @@ public class StartActivity extends Activity {
 		mEditTextUsername = (EditText) findViewById(R.id.editText1);
 		mEditTextPassword = (EditText) findViewById(R.id.editText2);
 		mEditTextUsername.setText(Me.getInstance().getUserID());
-		// Automatic Login yoo
+		
+		// For testing, set default test user.
 		mEditTextUsername.setText("testUser1");
 		mEditTextPassword.setText("testUser1");
 
 
 	}
 
+	
+	// Hides the login view.
 	public void hideLoginView() {
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow((IBinder) findViewById(R.id.login_view).getWindowToken(), 0);
@@ -92,6 +96,7 @@ public class StartActivity extends Activity {
 		asyncLoginTask = new AsyncTaskLoginUser(this).execute(mUsername,mPassword,"hide"); 
 	}
 
+	// Get input and show loading screen on click.
 	public void loginButtonClicked(View v) {
 		mUsername = mEditTextUsername.getText().toString();
 		mPassword = mEditTextPassword.getText().toString();
@@ -106,9 +111,7 @@ public class StartActivity extends Activity {
 	 * AsyncTask handling login on another thread
 	 */
 	private class AsyncTaskLoginUser extends AsyncTask<String, Void, Integer> {
-	    private static final String NAMESPACE = "http://mahapp.k3.mah.se/";
-	    private static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
-		private Activity mActivity;
+	 	private Activity mActivity;
 
 	    public AsyncTaskLoginUser(Activity activity){
 	    	this.mActivity = activity; 
@@ -118,17 +121,19 @@ public class StartActivity extends Activity {
 	    protected Integer doInBackground(String... params) {
 	    	Integer result = 0; //error;
 	    	Log.i(TAG,"Starting Login");
-	        //get the info from web service
+	    	
+	        // Get the info from web service
 	    	try {
-	        	SoapObject loginrequest = new SoapObject(NAMESPACE, "logInTheUser");
+	        	SoapObject loginrequest = new SoapObject(Constants.NAMESPACE, "logInTheUser");
 	            loginrequest.addProperty("username", params[0]);
 	            loginrequest.addProperty("password", params[1]);
 	            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-	            envelope.dotNet=true;
+	            envelope.dotNet = true;
 	            envelope.setOutputSoapObject(loginrequest);
-	            HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-	            androidHttpTransport.call(NAMESPACE+"logInTheUser", envelope);
+	            HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
+	            androidHttpTransport.call(Constants.NAMESPACE + "logInTheUser", envelope);
 	            String rawResult = ((Object)envelope.getResponse()).toString();
+	            
 	            Log.d(TAG,"Loginresult "+rawResult);
 	            boolean loggedIn = rawResult.equals("true")?true:false;
 	            if (loggedIn&&params[2].equals("hide")){
@@ -146,20 +151,25 @@ public class StartActivity extends Activity {
 	    @Override
 	    protected void onPostExecute(Integer result) {
 	        super.onPostExecute(result);
-	        Log.i(TAG,"Logged in with result 0:problem, 1:fromSavedData, 2:fromScreen::: "+result);
+	        String resultCode = "";
 	        switch(result){
 	        	case 1: //hide
 	        		tasksCompleted(mActivity);
+	        		resultCode = "From saved data.";
 	        		break;
 	        	case 2: //click
 	        		Me.getInstance().setUserID(mUsername);
 	        		Me.getInstance().setPassword(mPassword);
 	    			tasksCompleted(mActivity);
+	    			resultCode = "From screen.";
 	        		break;
 	        	default:
+	        		resultCode = "Problem.";
 	        		showLoginView(LOGINMESSAGE.SHOW); 			
 	        		break;
 	        }
+	        
+	        Log.i(TAG,"Logged in with result: 0:problem, 1:fromSavedData, 2:fromScreen::: "+result);
 	    }
 	}
 
