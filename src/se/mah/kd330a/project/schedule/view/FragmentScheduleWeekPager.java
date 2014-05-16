@@ -47,7 +47,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 		pager.setCurrentItem(4);
 		
 		PagerTabStrip pagerTabStrip = (PagerTabStrip) result.findViewById(R.id.weeks_pager_tab_stip);
-		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));	
+		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.blue));	
 		pagerTabStrip.setDrawFullUnderline(true);
 		
 
