@@ -1,7 +1,4 @@
-
 package se.mah.kd330a.project.framework;
-
-
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import net.fortuna.ical4j.data.ParserException;
 import se.mah.kd330a.project.R;
+import se.mah.kd330a.project.StartActivity;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
@@ -25,6 +23,7 @@ import se.mah.kd330a.project.links.FragmentLinks;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
+import se.mah.kd330a.project.settings.view.FragmentProfile;
 import se.mah.kd330a.project.settings.view.SettingsActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -58,12 +57,14 @@ public class MainActivity extends FragmentActivity implements Observer{
     private TypedArray mMenuColors;
     public RSSFeed newsFeed;
     private final String TAG = "MainActivity";
-    private final static int HOME = 0;
-	private final static int SCHEDULE = 1;
-	private final static int ITSL = 2;
-	private final static int FIND = 3;
-	private final static int LINKS = 4;
-	private final static int HELP = 5;
+    private final int HOME = 0;
+	private final int SCHEDULE = 1;
+	private final int PROFILE = 2;
+	private final int ITSL = 3;
+	private final int FIND = 4;
+	private final int FAQ = 5;
+	private final int HELP = 6;
+	private final int LOGOUT = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,23 +144,23 @@ public class MainActivity extends FragmentActivity implements Observer{
     
     public RSSFeed getRssNewsFeed() {
     	return newsFeed;
-    }
+    } 
     
-    
-    
+   /* The overflow menu has been removed bellow: 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
+    
     /* Called whenever we call invalidateOptionsMenu() */
+ 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
          // The action bar HOME/up action should open or close the drawer.
@@ -177,7 +178,7 @@ public class MainActivity extends FragmentActivity implements Observer{
             return super.onOptionsItemSelected(item);
         }
     }
-
+    
     /* The click listener for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -185,7 +186,8 @@ public class MainActivity extends FragmentActivity implements Observer{
             selectItem(position);
         }
     }
-
+    
+    // Meny till vänster, ändra här för lägga till logut knappen.
     public void selectItem(int position) {
         // update the main content by replacing fragments
     	android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -208,13 +210,23 @@ public class MainActivity extends FragmentActivity implements Observer{
 			fragment = new FragmentFind();
 			transaction.addToBackStack(null);
 			break;
-		case LINKS:
-			fragment = new FragmentLinks();
+		case PROFILE:
+			fragment = new FragmentProfile();
+			transaction.addToBackStack(null);
+			break;
+		case FAQ:
+			fragment = new FragmentProfile();
+			//fragment = new FragmentFaq();//What is this
 			transaction.addToBackStack(null);
 			break;
 		case HELP:
 			fragment = new FragmentCredits();
 		    transaction.addToBackStack(null);
+			break;
+		case LOGOUT:
+			fragment = new FragmentLogout();
+			transaction.addToBackStack(null);
+			loggout();
 			break;
 		default:	
 			fragment = new FragmentHome();
@@ -238,6 +250,16 @@ public class MainActivity extends FragmentActivity implements Observer{
      * onPostCreate() and onConfigurationChanged()...
      */
 
+    public void loggout(){
+        Me.getInstance().clearAllIncludingSavedData(this);
+        Me.getInstance().stopUpdate();
+        Intent intent = new Intent(this, StartActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+        }
+    
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -275,22 +297,20 @@ public class MainActivity extends FragmentActivity implements Observer{
 	public void update(Observable observable, Object data) {
 		// TODO Auto-generated method stub
 		Log.i(TAG,"Called from updater with data: "+(UpdateType)data);
-		
 		switch ((UpdateType)data){
-		case KRONOX:
-			Log.i(TAG,"Data: KRONOX");
-		break;
-		case COURSES_and_AD:
-			Log.i(TAG,"Data: COURSES");
-		break;
-		case MAHNEWS:
-			Log.i(TAG,"Data: MAHNEWS");
-		break;
-		case ALL:
-			Log.i(TAG,"Data: ALL");
-		break;
-		
-		default:
+			case KRONOX:
+				Log.i(TAG,"Data: KRONOX");
+			break;
+			case COURSES_and_AD:
+				Log.i(TAG,"Data: COURSES");
+			break;
+			case MAHNEWS:
+				Log.i(TAG,"Data: MAHNEWS");
+			break;
+			case ALL:
+				Log.i(TAG,"Data: ALL");
+			break;
+			default:
 			break;
 		
 		}

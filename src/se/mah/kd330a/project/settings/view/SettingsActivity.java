@@ -6,7 +6,6 @@ import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.StartActivity;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.Course;
-
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -23,7 +22,7 @@ public class SettingsActivity extends Activity {
 	private String profilName;
 	private String profilId;
 	private ArrayList<Course> myCourses;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +57,8 @@ public class SettingsActivity extends Activity {
 			profilNameTextView.setText("No profile");
 		}
 	}
-
+	
+	// Actionbar "Profile" icon and menu. Settings main.xml
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate doubble the menu; this adds items to the action bar if it is present.
@@ -66,6 +66,7 @@ public class SettingsActivity extends Activity {
 		return true;
 	}
 
+	// This button on standby.
 	public void toLadokInlogg(View view) {
 		//Clear all including backstack
 		Me.getInstance().clearAllIncludingSavedData(this);
