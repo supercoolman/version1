@@ -59,12 +59,12 @@
     </string-array>
   
     <string-array name="links_list_sub_options">
-        <item>"Student@MAH subtitle"</item>
-        <item>"IT subtitle"</item>
-        <item>"Library subtitle"</item>
-        <item>"Housing subtitle"</item>
-        <item>"Career Guide subtitle"</item>
-        <item>"Social Media subtitle"</item>
+        <item>"General information for student @ MAH"</item>
+        <item>"Can help with all things It"</item>
+        <item>"Importsnt thingd for library"</item>
+        <item>"Find your new home in Malmö"</item>
+        <item>"Prepare yourself for your future"</item>
+        <item>"Join us @ social networks"</item>
     </string-array>
     
     <string-array name = "it">
