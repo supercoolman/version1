@@ -10,14 +10,15 @@
         android:id="@+id/cat_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="6dp"
+        android:padding="8dp"
         android:layout_marginRight="4dp"
         android:layout_alignParentRight="true" >
         
         <ImageView 
         android:id="@+id/category_image"
-        android:layout_width="50dip"
-        android:layout_height="50dip" />
+        android:layout_width="55dip"
+        android:layout_height="55dip"
+         />
         
     </LinearLayout>
 
