@@ -30,8 +30,8 @@
     
     <array name="images_links">
         <item>@drawable/tomikon</item>
-        <item>@drawable/student</item>
-        <item>@drawable/it</item>
+        <item>@drawable/ic_student</item>
+        <item>@drawable/ic_it</item>
         <item>@drawable/ic_library</item>
         <item>@drawable/ic_housing</item>
         <item>@drawable/ic_career</item>
@@ -90,10 +90,12 @@
     <string-array name = "student_at_mah">
         <item>"Student Service"</item> 
     	<item>"Student Self Service"</item> 
+    	<item>"Student Health"</item> 
     	<item>"Student Union Malmö"</item> 
     	<item>"Events"</item>
     	<item>"Odontolog Student Union"</item> 
     	<item>"Exchange Student"</item> 
+    	
     </string-array>
     
      <string-array name = "career_guide">
@@ -116,15 +118,14 @@
         <item>"http://malmostudenter.se/english/"</item>	 							<!-- item links to Student Union -->
         <item>"http://kaftis.com/"</item>	 											<!-- item links to Odontology Student Union -->
         <item>"http://www.mah.se/english/Education/Exchange-student/"</item>		 	<!-- item links to site for Exchange Students -->
+        <item>"http://www.mah.se/english/Student/Student-health-services/Contact/"</item>  <!-- item links to student health -->
+        
     </string-array>
     
     <string-array name="url_it">
         <item>"https://idservice.mah.se/default.aspx"</item>	 						<!-- item links to ID-service website -->
         <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>	 <!-- item links to Printing and Copying -->
         <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/"</item>	 <!-- item links to Wireless Network help -->
-    	<item>"https://www.facebook.com/malmouniversity"</item> 						<!-- item links to MAH's FaceBook Feed -->
-   		<item>"https://twitter.com/MalmoUniversity"</item>	 							<!-- item links to MAH's Twitter Feed -->
-    	<item>"http://instagram.com/malmostudent"</item>	 							<!-- item links to MAH's Instagram Feed -->
     </string-array>
     
     <string-array name="url_library">
@@ -153,6 +154,13 @@
     	<item>"https://www.linkedin.com/company/malmo-university"</item>				<!-- item links to MAH's LinkedIn Feed -->
     </string-array>
     
+    <string-array name = "Number">
+        <item > "+46 40 665 75 65"</item>      <!-- -Number to Student Kåren --> 
+        <item > "+46 40 665 86 50"</item>      <!-- -Number to Odontologe Kåren --> 
+        <item > "+46 40 665 73 00"</item>      <!-- -Number to Library --> 
+        <item > "+46 40 665 70 00"</item>      <!-- -Number to Student Service --> 
+        <item > "+46 40 665 70 00"</item>      <!-- -Number to It support --> 
+    </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
