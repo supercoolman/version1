@@ -1,9 +1,5 @@
 package se.mah.kd330a.project.adladok.model;
 
-import android.graphics.Color;
-import android.util.Log;
-import se.mah.kd330a.project.R;
-
 public class Course {
 	 private String displaynamesv;
 	 private String displaynameen;
@@ -12,7 +8,7 @@ public class Course {
 	 private String program ="";
 	 private String antterm ="";
 	 private String term;
-	 private int color = 2131034120;
+	 private int color = 0;
 
 	 public int getColor() {
 		 return color;

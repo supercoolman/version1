@@ -23,16 +23,20 @@ import android.widget.Toast;
 import android.widget.EditText;
 
 public class StartActivity extends Activity {
-	private final String TAG = "StartActivity";
-	private EditText editTextUsername;
-	private EditText editTextPassword;
-	boolean restoredsuccess = false;
-	boolean loginOK =false;
-	private String username;
-	private String password;
+	/**
+	 * This is the activity that starts before the Main Activity.
+	 * It logs in the user and refreshes the schedule.
+	 */
+	
+	private final String 	TAG = "StartActivity";
+	private EditText 		mEditTextUsername;
+	private EditText 		mEditTextPassword;
+	boolean 				mRestoredSuccess = false;
+	boolean 				mLoginOK = false;
+	private String 			mUsername;
+	private String 			mPassword;
 	private static AsyncTask<String, Void, Integer> asyncLoginTask;
 	private enum LOGINMESSAGE {SHOW,NOSHOW};
-	private Refresh refresh;
 	
 	
 	
@@ -41,19 +45,23 @@ public class StartActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 		((LinearLayout) findViewById(R.id.login_view)).setVisibility(LinearLayout.GONE);
-		((LinearLayout) findViewById(R.id.loading_view)).setVisibility(LinearLayout.GONE);		
-		restoredsuccess = Me.getInstance().restoreMeFromLocalStorage(this);
-		//check if password changed
-		Log.i(TAG,"restoredsuccess: "+restoredsuccess);
-		if(restoredsuccess){
-			username = Me.getInstance().getUserID();
-			password = Me.getInstance().getPassword();
+		((LinearLayout) findViewById(R.id.loading_view)).setVisibility(LinearLayout.GONE);
+		
+		// This checks if the user is already saved on local storage.
+		mRestoredSuccess = Me.getInstance().restoreMeFromLocalStorage(this);
+		
+		//Check if password changed
+		Log.i(TAG,"restoredsuccess: "+mRestoredSuccess);
+		if(mRestoredSuccess){
+			mUsername = Me.getInstance().getUserID();
+			mPassword = Me.getInstance().getPassword();
 			hideLoginView();
 		}else{
 			showLoginView(LOGINMESSAGE.NOSHOW);
 		}
 	}
 
+	// Shows the login view. Toasts if the credentials are wrong.
 	public void showLoginView(LOGINMESSAGE loginmessage) {
 		switch(loginmessage){
 		case SHOW:
@@ -66,12 +74,12 @@ public class StartActivity extends Activity {
 		}
 		((View) findViewById(R.id.loading_view)).setVisibility(View.GONE);
 		((View) findViewById(R.id.login_view)).setVisibility(View.VISIBLE);
-		editTextUsername = (EditText) findViewById(R.id.editText1);
-		editTextPassword = (EditText) findViewById(R.id.editText2);
-		editTextUsername.setText(Me.getInstance().getUserID());
+		mEditTextUsername = (EditText) findViewById(R.id.editText1);
+		mEditTextPassword = (EditText) findViewById(R.id.editText2);
+		mEditTextUsername.setText(Me.getInstance().getUserID());
 		// Automatic Login yoo
-		editTextUsername.setText("testUser1");
-		editTextPassword.setText("testUser1");
+		mEditTextUsername.setText("testUser1");
+		mEditTextPassword.setText("testUser1");
 
 
 	}
@@ -81,17 +89,17 @@ public class StartActivity extends Activity {
 		imm.hideSoftInputFromWindow((IBinder) findViewById(R.id.login_view).getWindowToken(), 0);
 		((View) findViewById(R.id.login_view)).setVisibility(View.GONE);
 		((View) findViewById(R.id.loading_view)).setVisibility(View.VISIBLE);
-		asyncLoginTask = new AsyncTaskLoginUser(this).execute(username,password,"hide"); 
+		asyncLoginTask = new AsyncTaskLoginUser(this).execute(mUsername,mPassword,"hide"); 
 	}
 
 	public void loginButtonClicked(View v) {
-		username = editTextUsername.getText().toString();
-		password = editTextPassword.getText().toString();
+		mUsername = mEditTextUsername.getText().toString();
+		mPassword = mEditTextPassword.getText().toString();
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow((IBinder) findViewById(R.id.login_view).getWindowToken(), 0);
 		((View) findViewById(R.id.login_view)).setVisibility(View.GONE);
 		((View) findViewById(R.id.loading_view)).setVisibility(View.VISIBLE);
-		asyncLoginTask = new AsyncTaskLoginUser(this).execute(username,password,"click");
+		asyncLoginTask = new AsyncTaskLoginUser(this).execute(mUsername,mPassword,"click");
 	}
 	
 	/**
@@ -144,8 +152,8 @@ public class StartActivity extends Activity {
 	        		tasksCompleted(mActivity);
 	        		break;
 	        	case 2: //click
-	        		Me.getInstance().setUserID(username);
-	        		Me.getInstance().setPassword(password);
+	        		Me.getInstance().setUserID(mUsername);
+	        		Me.getInstance().setPassword(mPassword);
 	    			tasksCompleted(mActivity);
 	        		break;
 	        	default:

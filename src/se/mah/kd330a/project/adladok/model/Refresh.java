@@ -64,6 +64,16 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 			e.printStackTrace();
 		}
 		
+		/**
+		 * Fetch the teacher real name
+		 */
+		try {
+			
+			
+		} catch (Exception e) {
+			
+		}
+		
 		
 		/**
 		 * Update MAH News feed and parse to xml

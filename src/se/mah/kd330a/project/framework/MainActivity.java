@@ -5,8 +5,6 @@ package se.mah.kd330a.project.framework;
 
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Constants;
-import se.mah.kd330a.project.adladok.model.FragmentCallback;
-import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
 import se.mah.kd330a.project.help.FragmentCredits;
