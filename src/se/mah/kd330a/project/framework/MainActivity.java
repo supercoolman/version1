@@ -13,6 +13,7 @@ import se.mah.kd330a.project.StartActivity;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
+import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
 import se.mah.kd330a.project.help.FragmentCredits;
 import se.mah.kd330a.project.home.FragmentHome;
@@ -215,8 +216,7 @@ public class MainActivity extends FragmentActivity implements Observer{
 			transaction.addToBackStack(null);
 			break;
 		case FAQ:
-			fragment = new FragmentProfile();
-			//fragment = new FragmentFaq();//What is this
+			fragment = new FragmentFaq();
 			transaction.addToBackStack(null);
 			break;
 		case HELP:
