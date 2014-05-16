@@ -26,12 +26,12 @@
     <string-array name="menu_colors">
         <item>@drawable/menuitem_1</item>
         <item>@drawable/menuitem_2</item>
-        <item >@drawable/menuitem_3</item>
+        <item >@drawable/menuitem_7</item>
         <item>@drawable/menuitem_3</item>
         <item>@drawable/menuitem_4</item>
         <item>@drawable/menuitem_5</item>
         <item>@drawable/menuitem_6</item>
-        <item >@drawable/menuitem_3</item>
+        <item >@drawable/menuitem_8</item>
     </string-array>
     
     
