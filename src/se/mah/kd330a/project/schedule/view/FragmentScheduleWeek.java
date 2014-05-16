@@ -28,8 +28,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +63,17 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		elv.setEmptyView(rootView.findViewById(R.id.emptytw));
 		elv.setAdapter(new ExpandableListViewAdapter(getActivity()));
 		elv.setOnChildClickListener(this);
+		
+		elv.setOnGroupExpandListener(new OnGroupExpandListener() {
+	        int previousGroup = -1;
+
+	        @Override
+	        public void onGroupExpand(int groupPosition) {
+	            if(groupPosition != previousGroup)
+	                elv.collapseGroup(previousGroup);
+	            previousGroup = groupPosition;
+	        }
+	    });
 		
 		swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container);
 		swipeRefreshLayout.setColorScheme(R.color.blue, R.color.green, R.color.orange, R.color.red_mah);
