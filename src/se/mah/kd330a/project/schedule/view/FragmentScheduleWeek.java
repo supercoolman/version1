@@ -35,9 +35,15 @@ import android.widget.Toast;
 
 public class FragmentScheduleWeek extends Fragment implements OnChildClickListener {
 
-	// private static ArrayList<ScheduleItem> _scheduleItemsThisWeek;
-	private final String TAG = "FragmentScheduleWeek";
-	
+	/**
+	 * This is the brain for the expandable list part of the schedule. 
+	 * It includes the RefreshLayout(Pull down to update), onClicks, expands lectures etc. 
+	 */
+
+	private final String 		TAG = 	"FragmentScheduleWeek";
+	private ScheduleWeek 		scheduleWeek;
+	private SwipeRefreshLayout 	swipeRefreshLayout;
+
 	public static FragmentScheduleWeek newInstance(ScheduleWeek scheduleWeek,int position) {
 		FragmentScheduleWeek f = new FragmentScheduleWeek();
 		Bundle b = new Bundle();
@@ -46,14 +52,12 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		return f;
 	}
 
-	ScheduleWeek scheduleWeek;
-	SwipeRefreshLayout swipeRefreshLayout;
-	
+
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		scheduleWeek = (ScheduleWeek) getArguments().getSerializable("ScheduleWeek");
-
 	}
 
 	@Override
@@ -63,18 +67,19 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		elv.setEmptyView(rootView.findViewById(R.id.emptytw));
 		elv.setAdapter(new ExpandableListViewAdapter(getActivity()));
 		elv.setOnChildClickListener(this);
-		
-		elv.setOnGroupExpandListener(new OnGroupExpandListener() {
-	        int previousGroup = -1;
 
-	        @Override
-	        public void onGroupExpand(int groupPosition) {
-	            if(groupPosition != previousGroup)
-	                elv.collapseGroup(previousGroup);
-	            previousGroup = groupPosition;
-	        }
-	    });
-		
+		elv.setOnGroupExpandListener(new OnGroupExpandListener() {
+			int previousGroup = -1;
+
+			@Override
+			public void onGroupExpand(int groupPosition) {
+				if(groupPosition != previousGroup)
+					elv.collapseGroup(previousGroup);
+				previousGroup = groupPosition;
+			}
+		});
+
+		// swipeRefreshLayout this code activates the part for pulling down to update the schedule (It activates all data in the app).
 		swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container);
 		swipeRefreshLayout.setColorScheme(R.color.blue, R.color.green, R.color.orange, R.color.red_mah);
 		swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -87,31 +92,31 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 						((MainActivity)getActivity()).refreshCurrent();
 						Toast.makeText(getActivity(), "Sooooo refreshed!", Toast.LENGTH_LONG).show();
 					}
-					
+
 				}, getActivity());
 			}
 		});
-		// Fixes a bug where you couldn't scroll up to the top after scrolling down.
-        elv.setOnScrollListener(new AbsListView.OnScrollListener() {
-        @Override
-        public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (!elv.canScrollVertically(-100)){
-                	swipeRefreshLayout.setEnabled(true);
-                }
-                else{
-                	swipeRefreshLayout.setEnabled(false);
-                }
-        }
-        @Override
-        public void onScrollStateChanged(AbsListView view, int scrollState) {
-        	// TODO Auto-generated method stub
-        }
-    });
+		
+		// This fixed a bug where you couldn't scroll up after scrolling down without updating the app.
+		// It disables the swipeRefreshLayout if you aren't scrolled all the way to the top. 
+		elv.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				if (!elv.canScrollVertically(-100)){  
+					swipeRefreshLayout.setEnabled(true);
+				}
+				else{
+					swipeRefreshLayout.setEnabled(false);
+				}
+			}
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+			}
+		});
 		return rootView;
-	}	 
+	} 
 
 	public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
-
 		String lastDate = null;
 		String location;	
 		public ExpandableListViewAdapter(Context context) {	
@@ -164,7 +169,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			ScheduleItem previousSI = null ;
 			String courseID = currentSI.getCourseId();
 			Course course = Me.getInstance().getCourse(courseID);
-			
+
 			String courseName ="Missing";
 			int color = 0;
 			if (course!=null){
@@ -174,7 +179,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 				courseName = courseID;
 				color = getResources().getColor(R.color.red_mah);
 			}
-			
+
 			if(groupPosition!=0){
 				previousSI=(ScheduleItem) getGroup(groupPosition-1);
 				previousDate=previousSI.getDateAndTime2();
@@ -224,7 +229,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 				LayoutInflater infalInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				convertView = infalInflater.inflate(R.layout.schedule_list_item, null);
 			}
-			
+
 			ScheduleItem currentSI = (ScheduleItem) getGroup(groupPosition);
 			location = currentSI.getRoomCode();
 			TextView lector = (TextView) convertView.findViewById(R.id.list_course_child_lector);
@@ -232,10 +237,9 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			TextView activity = (TextView)convertView.findViewById(R.id.list_course_child_activity);
 			Button btnFind = (Button) convertView.findViewById(R.id.findButton);
 			btnFind.setOnClickListener(new OnClickListener() {
-				
+				// onClick for the "Find Room" button.
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					try {
 						String[] locs = location.split(" ");
 						RoomDbHandler dbHandler = new RoomDbHandler(getActivity());
@@ -251,11 +255,11 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 							Toast.makeText(getActivity(), getString(R.string.find_db_error), Toast.LENGTH_LONG).show();
 					}
 					catch (Exception e) {
-						
+
 					}
 				}
 			});
-			
+
 			String courseID = currentSI.getCourseId();
 			Course course = Me.getInstance().getCourse(courseID);
 			String courseName ="Missing";
@@ -272,7 +276,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			calendarColorFrameC2.setBackgroundColor(color);
 			return convertView;
 		}
-		
+
 		private void startNavigation(String roomNr) {
 			Fragment fragment = new FragmentResult();
 			Bundle args = new Bundle();
@@ -285,7 +289,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			fragmentTrans.addToBackStack(null);
 			fragmentTrans.commit();
 		}
-		
+
 		private void showFloorMap(String floorMapCode) {
 			Fragment fragment = new FragmentFloorMap();
 			Bundle args = new Bundle();
@@ -297,7 +301,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			fragmentTrans.addToBackStack(null);
 			fragmentTrans.commit();		
 		}
-		
+
 		@Override
 		public boolean isChildSelectable(int i, int i1) {
 			return true;
@@ -305,11 +309,11 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 
 
 	}
-
+	
+	// Is called when an expanded lecture is pressed. 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v,
 			int groupPosition, int ChildPosition, long id) {
-		// TODO Auto-generated method stub
 		return parent.collapseGroup(groupPosition);
 	}
 
