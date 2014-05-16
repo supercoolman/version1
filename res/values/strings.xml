@@ -31,7 +31,7 @@
     <array name="images_links">
         <item>@drawable/tomikon</item>
         <item>@drawable/ic_student</item>
-        <item>@drawable/it</item>
+        <item>@drawable/ic_it</item>
         <item>@drawable/ic_library</item>
         <item>@drawable/ic_housing</item>
         <item>@drawable/ic_career</item>
