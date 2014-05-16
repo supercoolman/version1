@@ -79,7 +79,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			}
 		});
 
-		// swipeRefreshLayout this code activates the part for pulling down to update the schedule (It activates all data in the app).
+		// swipeRefreshLayout this code activates the part for pulling down to update the schedule (It activates all data in the app)
 		swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container);
 		swipeRefreshLayout.setColorScheme(R.color.blue, R.color.green, R.color.orange, R.color.red_mah);
 		swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
