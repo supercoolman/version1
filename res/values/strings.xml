@@ -28,10 +28,21 @@
         <item>@drawable/menuitem_6</item>
     </string-array>
     
+    <array name="images_links">
+        <item>@drawable/tomikon</item>
+        <item>@drawable/student</item>
+        <item>@drawable/it</item>
+        <item>@drawable/ic_library</item>
+        <item>@drawable/ic_housing</item>
+        <item>@drawable/ic_career</item>
+        <item>@drawable/ic_social</item> 
+        <item>@drawable/tomikon</item>
+    </array>
+    
     <string-array name ="links_options">
-       <item>"Categories"</item>
+       <item>"Categories      "</item>
        <item>"Student@MAH"</item> 
-       <item>"IT"</item>
+       <item>"IT  "</item>
        <item>"Library"</item>
        <item>"Housing"</item>
        <item>"Career Guide"</item>
@@ -57,7 +68,7 @@
     </string-array>
     
     <string-array name = "it">
-    	<item>"IDService.mah.se"</item> 
+    	<item>"IDService"</item> 
     	<item>"Wireless Network"</item> 
     	<item>"Printing And Copying"</item> 
       
@@ -68,9 +79,6 @@
     	<item>"MAH@Twitter"</item> 
     	<item>"MAH@Instagram"</item> 
     	<item>"MAH@LinkedIn"</item> 
-    	<item>"MAH#@Tumblr."</item> 
-
-    	
     </string-array>
     
     <string-array name = "housing">
@@ -81,7 +89,7 @@
     
     <string-array name = "student_at_mah">
         <item>"Student Service"</item> 
-    	<item>"MinaStudier.mah.se"</item> 
+    	<item>"Student Self Service"</item> 
     	<item>"Student Union Malmö"</item> 
     	<item>"Events"</item>
     	<item>"Odontolog Student Union"</item> 
@@ -98,7 +106,7 @@
      <string-array name = "library">
     	<item>"Link to library"</item> 
     	<item>"Book a group room"</item> 
-    	<item>"Search for a datebase"</item>
+    	<item>"Search for a database"</item>
     </string-array>
     
     <string-array name="url_student_at_mah">
@@ -281,5 +289,6 @@
     <string name="activity">Activity: </string>
     <string name="noactivity">Activity not entered</string>
     <string name="emptycalendertext">No scheduled lectures for this week.</string>
+    <integer-array name="images"></integer-array>
 
 </resources>

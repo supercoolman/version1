@@ -1,37 +1,36 @@
 package se.mah.kd330a.project.links;
 
 import java.util.List;
-
 import se.mah.kd330a.project.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 
+@SuppressLint("Recycle")
 public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
-	List<String[]> titleArrayList;
-	Context context;
-	String[] linkOptions;
+	TypedArray images;
+	Drawable myDrawable;
 	Bundle args;
+	String[] linkOptions;
 
-	public CollectionPagerAdapter(FragmentManager fm, List<String[]> titleArrayList, Context context) {
+	public CollectionPagerAdapter(FragmentManager fm) {
 		super(fm);
-		this.titleArrayList = titleArrayList;
-		this.context = context;
 	}
 	
 	@Override
 	public Fragment getItem(int i) {
-		Fragment fragment = new LinksListFragment();
-
+		Fragment fragment = new LinksChildFragment();
 		args = new Bundle();
-		args.putStringArray("LINK_TITLE", titleArrayList.get(i));
-		args.putStringArray("LINK_SUB_TITLE", context.getResources().getStringArray(R.array.links_list_sub_options));
 		args.putInt("POSITION", i);
-	
-
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -43,10 +42,15 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-	    
-	    linkOptions = context.getResources().getStringArray(R.array.links_options);
-
-	   
-	  	    return linkOptions[position];
+		// fetch the image array
+		images = LinksParentFragment.images;
+	    linkOptions = LinksParentFragment.linkOptions;
+		
+	    SpannableStringBuilder sb = new SpannableStringBuilder(" "+linkOptions[position]+" ");
+	    myDrawable = images.getDrawable(position);
+	    myDrawable.setBounds(0, 1, myDrawable.getIntrinsicWidth(), myDrawable.getIntrinsicHeight()); 
+	    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BASELINE); 
+	    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);; 
+	    return sb;
 	}
 }
