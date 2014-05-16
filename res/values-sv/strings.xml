@@ -46,15 +46,16 @@
        <item>"Karriärguide"</item>
        <item>"Sociala Medier"</item>
     </string-array>
-  
-    <string-array name="links_list_sub_options">
-        <item>"Student@MAH subtitle"</item>
-        <item>"IT subtitle"</item>
-        <item>"Bibliotek subtitle"</item>
-        <item>"Bostad subtitle"</item>
-        <item>"Karriärguide subtitle"</item>
-        <item>"Sociala Medier subtitle"</item>
+    
+ 	<string-array name="links_list_sub_options">
+        <item>"Generell information för studenter på MAH"</item>
+        <item>"Hjälper till med allt IT-relaterat"</item>
+        <item>"Viktig information om biblioteket"</item>
+        <item>"Hitta ditt nya hem i Malmö"</item>
+        <item>"Framtidsförberedelser"</item>
+        <item>"Gå med i våra sociala nätverk"</item>
     </string-array>
+  
     
     <string-array name = "it">
     	<item>"IDService"</item> 
