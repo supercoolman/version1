@@ -19,7 +19,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +29,7 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
-import android.widget.ScrollView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,8 +60,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_schedule_expendable_list_view, container,false);
 		final ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.expandable_list);
-		TextView empty = (TextView) rootView.findViewById(R.id.emptytw);
-		elv.setEmptyView(empty);
+		elv.setEmptyView(rootView.findViewById(R.id.emptytw));
 		elv.setAdapter(new ExpandableListViewAdapter(getActivity()));
 		elv.setOnChildClickListener(this);
 		

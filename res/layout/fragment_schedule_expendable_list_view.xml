@@ -19,14 +19,8 @@
 	        android:dividerHeight="0dp"
 	        android:groupIndicator="@null"
 	        android:layout_marginBottom="8dp" />
-	    
-	        <ImageView
-	            android:id="@+id/dividerElement"
-	            android:layout_width="match_parent"
-	            android:layout_height="2dp"
-	            android:background="@color/grey" />
-	        
-	     <TextView android:id="@+id/emptytw"
+	      
+	    <ListView android:id="@+id/emptytw"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
 	        android:layout_marginLeft="8dp"

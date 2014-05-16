@@ -57,7 +57,7 @@ public class StartActivity extends Activity {
 	public void showLoginView(LOGINMESSAGE loginmessage) {
 		switch(loginmessage){
 		case SHOW:
-			Toast.makeText(this, "Unable to log you in", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Unable to log you in.", Toast.LENGTH_LONG).show();
 			break;
 		case NOSHOW:
 			break;
@@ -159,7 +159,6 @@ public class StartActivity extends Activity {
 	 * When all tasks have completed we can go on to the MainActivity
 	 */
 	public void tasksCompleted(final Activity activity) {
-		//refresh.execute();
 		Me.getInstance().startRefresher(new FragmentCallback() {
 			@Override
 			public void onRefreshCompleted() {
