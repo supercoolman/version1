@@ -3,154 +3,138 @@
 
     <string name="app_name">Malmö Högskola</string>
 
-        <string-array name="menu_texts">
-        <item>Home</item>
-        <item>My Schedule</item>
-        <item >Me @ MAH</item>
+    <string-array name="menu_texts">
+        <item>Hem</item>
+        <item>Mitt schema</item>
         <item>It\'s Learning</item>
-        <item>Find on Campus</item>
-        <item>Links @ MAH</item>
-        <item>Credits</item>
-        <item >Log Out</item>
+        <item>Hitta på Campus</item>
+        <item>Länkar på MAH</item>
+        <item>Om denna app</item>
     </string-array>
     <string-array name="menu_icons">
         <item>@drawable/ic_menu_home</item>
         <item>@drawable/ic_menu_schedule</item>
-        <item >@drawable/ic_menu_me</item>
         <item>@drawable/ic_menu_itsl2</item>
         <item>@drawable/ic_menu_find</item>
         <item>@drawable/ic_menu_faq</item>
         <item>@drawable/ic_menu_help</item>
-        <item >@drawable/ic_action_profile</item>
     </string-array>
     <string-array name="menu_colors">
         <item>@drawable/menuitem_1</item>
         <item>@drawable/menuitem_2</item>
-        <item >@drawable/menuitem_7</item>
         <item>@drawable/menuitem_3</item>
         <item>@drawable/menuitem_4</item>
         <item>@drawable/menuitem_5</item>
         <item>@drawable/menuitem_6</item>
-        <item >@drawable/menuitem_8</item>
     </string-array>
     
-    <array name="images_links">
-        <item>@drawable/tomikon</item>
-        <item>@drawable/ic_student</item>
-        <item>@drawable/ic_it</item>
-        <item>@drawable/ic_library_new</item>
-        <item>@drawable/ic_housing_new</item>
-        <item>@drawable/ic_career_new</item>
-        <item>@drawable/ic_social_new</item> 
-        <item>@drawable/tomikon</item>
-    </array>
-    
     <string-array name ="links_options">
-       <item>"Categories"</item>
-       <item>"Student@MAH"</item> 
+       <item>"Kategorier"</item>
+       <item>"Student på MAH"</item> 
        <item>"IT"</item>
-       <item>"Library"</item>
-       <item>"Housing"</item>
-       <item>"Career Guide"</item>
-       <item>"Social Media"</item>
+       <item>"Bibliotek"</item>
+       <item>"Bostad"</item>
+       <item>"Karriärguide"</item>
+       <item>"Sociala Medier"</item>
     </string-array>
     
     <string-array name ="links_list_options">
-       <item>"Student@MAH"</item> 
+       <item>"Student på MAH"</item> 
        <item>"IT"</item>
-       <item>"Library"</item>
-       <item>"Housing"</item>
-       <item>"Career Guide"</item>
-       <item>"Social Media"</item>
+       <item>"Bibliotek"</item>
+       <item>"Bostad"</item>
+       <item>"Karriärguide"</item>
+       <item>"Sociala Medier"</item>
+    </string-array>
+    
+ 	<string-array name="links_list_sub_options">
+        <item>"Generell information för studenter på MAH"</item>
+        <item>"Hjälper till med allt IT-relaterat"</item>
+        <item>"Viktig information om biblioteket"</item>
+        <item>"Hitta ditt nya hem i Malmö"</item>
+        <item>"Framtidsförberedelser"</item>
+        <item>"Gå med i våra sociala nätverk"</item>
     </string-array>
   
-    <string-array name="links_list_sub_options">
-        <item>"General information for students"</item>
-        <item>"All things IT"</item>
-        <item>"Important things for library"</item>
-        <item>"Find a home in Malmö"</item>
-        <item>"Useful links regarding your future"</item>
-        <item>"MAH @ social networks"</item>
-    </string-array>
+ 
     
     <string-array name = "it">
     	<item>"IDService"</item> 
-    	<item>"Wireless Network"</item> 
-    	<item>"Printing And Copying"</item> 
+    	<item>"Trådlösa nätverk"</item> 
+    	<item>"Skriva ut och kopiera"</item> 
       
     </string-array>
     
     <string-array name = "social_media">
-    	<item>"MAH@Facebook"</item> 
-    	<item>"MAH@Twitter"</item> 
-    	<item>"MAH@Instagram"</item> 
-    	<item>"MAH@LinkedIn"</item> 
+    	<item>"MAH på Facebook"</item> 
+    	<item>"MAH på Twitter"</item> 
+    	<item>"MAH på Instagram"</item> 
+    	<item>"MAH på LinkedIn"</item>
     </string-array>
     
     <string-array name = "housing">
-    	<item>"Student Housing"</item> 
-    	<item>"Rental Housing"</item> 
-    	<item>"Exchange Student"</item> 
+    	<item>"Studentbostäder"</item> 
+    	<item>"Hyresbostäder"</item> 
+    	<item>"Utbytesstudent"</item> 
     </string-array>
     
     <string-array name = "student_at_mah">
-        <item>"Student Service"</item> 
-    	<item>"Student Self Service"</item> 
-    	<item>"Student Health"</item> 
-    	<item>"Student Union Malmö"</item> 
-    	<item>"Events"</item>
-    	<item>"Odontolog Student Union"</item> 
-    	<item>"Exchange Student"</item> 
-    	
+        <item>"Studentservice"</item> 
+    	<item>"Mina Studier"</item> 
+    	<item>"Studentkåren Malmö"</item> 
+    	<item>"Evenemang"</item>
+    	<item>"Odontologiska Studentkåren"</item> 
+    	<item>"Utbytesstudent"</item> 
     </string-array>
     
      <string-array name = "career_guide">
-    	<item>"Job advertisement"</item> 
-    	<item>"Job Coach"</item> 
-    	<item>"Career Workshop"</item>
+    	<item>"Jobbannonser"</item> 
+    	<item>"Jobbcoach"</item> 
+    	<item>"Karriärworkshop"</item>
         <item>"Future Finder"</item>
     </string-array>
     
      <string-array name = "library">
-    	<item>"Go to library"</item> 
-    	<item>"Book a group room"</item> 
-    	<item>"List of databases"</item>
+    	<item>"Länk till biblioteket"</item> 
+    	<item>"Boka ett grupprum"</item> 
+    	<item>"Databassökning"</item>
     </string-array>
     
     <string-array name="url_student_at_mah">
         <item>"http://www.mah.se/english/Student/Student-services/"</item>	 			<!-- item links to Student Service -->
-        <item>"https://minastudier.mah.se/default.aspx"</item>	 									<!-- item links to mina studier .se -->
-        <item>"http://www.mah.se/english/Student/Student-health-services/Contact/"</item>  <!-- item links to student health -->
-        <item>"http://malmostudenter.se/english/"</item>	 							<!-- item links to Student Union -->
+        <item>"https://minastudier.mah.se"</item>	 									<!-- item links to mina studier .se -->
         <item>"http://mah.se/Nyheter/Kalender/"</item>	 								<!-- item links to Event Callender -->
+        <item>"http://malmostudenter.se/english/"</item>	 							<!-- item links to Student Union -->
         <item>"http://kaftis.com/"</item>	 											<!-- item links to Odontology Student Union -->
         <item>"http://www.mah.se/english/Education/Exchange-student/"</item>		 	<!-- item links to site for Exchange Students -->
     </string-array>
     
     <string-array name="url_it">
         <item>"https://idservice.mah.se/default.aspx"</item>	 						<!-- item links to ID-service website -->
-        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/"</item>	 <!-- item links to Wireless Network help -->
         <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/"</item>	 <!-- item links to Printing and Copying -->
+        <item>"http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/"</item>	 <!-- item links to Wireless Network help -->
+    	<item>"https://www.facebook.com/malmouniversity"</item> 						<!-- item links to MAH's FaceBook Feed -->
+   		<item>"https://twitter.com/MalmoUniversity"</item>	 							<!-- item links to MAH's Twitter Feed -->
+    	<item>"http://instagram.com/malmostudent"</item>	 							<!-- item links to MAH's Instagram Feed -->
     </string-array>
     
     <string-array name="url_library">
-        <item>"http://www.mah.se/english/Library/"</item>	 									<!-- item links to Library webbsite, site is in swedish (option for english, OFE) -->
-    	<item>"http://www.mah.se/english/Library/Opening-Hours-and-Contacts/Orkanen-Library/Booking-group-rooms/"</item>	 <!-- item links to Book A room, site is in swedish (OFE) -->
-        <item>"http://infosok.mah.se/english/Library/Finding-Information/Find-Databases/"</item>	<!-- item links to Find a Database -->
+        <item>"http://www.mah.se/bibliotek"</item>	 									<!-- item links to Library webbsite, site is in swedish (option for english, OFE) -->
+    	<item>"http://www.mah.se/Bibliotek/Oppettider-och-kontakt/Orkanenbiblioteket/Boka-grupprum/"</item>	 <!-- item links to Book A room, site is in swedish (OFE) -->
     </string-array>
     
     
     <string-array name="url_housing">
+         <item>"http://hemma.mah.se/"</item>	 										<!-- item links to site for student housing, hosted by MAH -->
         <item>"http://www.mah.se/english/Student/Housing/Student-Housing-FAQ/"</item>	<!-- item links to FAQ's about student housing -->
-        <item>"http://hemma.mah.se/?lang=en"</item>
         <item>"http://www.mah.se/english/Student/Housing/Accommodation/"</item>	 		<!-- item links to Housing for Exchange Students -->
     </string-array>
     
     <string-array name="url_career_guide">
         <item>"http://mah.se/medarbetare/Personalfragor/Platsannonser/"</item>	 		<!-- item links to site with job posting, site is in swedish -->
-        <item>"http://www.mah.se/english/Student/Career/Job-Coaching/"</item>	 			<!-- item links to site about Job coaching -->
+        <item>"http://www.mah.se/Ar-student/Karriar/Jobbcoachning/"</item>	 			<!-- item links to site about Job coaching -->
         <item>"http://www.mah.se/english/Student/Karriar/Karriarworkshops/"</item>	 	<!-- item links to CareerWorkshop website, site is in swedish-->
-        <item>"http://futurefinder.mah.se/"</item>	 								<!-- item links to Future Finder website, site is in swedish -->
+        <item>"http://futurefinder.mah.se/sv/"</item>	 								<!-- item links to Future Finder website, site is in swedish -->
     </string-array>
     
     <string-array name="url_social_media">
@@ -160,23 +144,6 @@
     	<item>"https://www.linkedin.com/company/malmo-university"</item>				<!-- item links to MAH's LinkedIn Feed -->
     </string-array>
     
-    <string-array name ="student_nr">
-        <item>"111"</item>
-    </string-array>
-    <string-array name ="it_nr">
-        <item>"222"</item>
-    </string-array>
-    <string-array name ="library_nr">
-        <item>"333"</item>
-    </string-array>
-    
-    <string-array name = "number">
-        <item > "+46 40 665 75 65"</item>      <!-- -Number to Student Kåren --> 
-        <item > "+46 40 665 86 50"</item>      <!-- -Number to Odontologe Kåren --> 
-        <item > "+46 40 665 73 00"</item>      <!-- -Number to Library --> 
-        <item > "+46 40 665 70 00"</item>      <!-- -Number to Student Service --> 
-        <item > "+46 40 665 70 00"</item>      <!-- -Number to It support --> 
-    </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -257,6 +224,9 @@
     
     
     <!--  It's Learning -->
+    
+    
+    
     <string name="tx_textMain">You can get the latest news for your courses from It\'s learning right here in the app if you follow these steps.</string>
     <string name="tx_textTwo">Launch the browser in your mobile phone and log in to It\'s Learning </string>
     <string name="tx_textThree">The Icon shown below indicates the information that can be displayed by this app. For example, the Dashboard and Latest Changes in your courses uses this icon:</string>
@@ -270,60 +240,9 @@
     <string name="hello">scrollup</string>
     <string name="credits">Credits</string>
     <string name="it">Interaction design</string>
-    <string name="whenMade">Version 2 of this app was released on June 5th 2014.</string>
-    
-         <!--  IDK13 -->
-    <string-array name ="idk13">
-        <item>Version 2\n</item>
-        <item>Interaktionsdesign-programmet 2013\n</item>
-        <item>Måns Ahlgren</item>
-        <item>Gustaf Andersson</item>
-        <item>Eva Andreasson</item>
-        <item>Kristin Asker</item>
-        <item>David Axby</item>
-        <item>Joakim Dicksson</item>
-        <item>Malin Dotevall Banks</item>
-        <item>Tuannoorgekhan Dulkhadir</item>
-        <item>Eya Khazzar</item>
-        <item>Mario El-Hajj</item>
-        <item>Isak Fredlund</item>
-        <item>Amanda Hammarberg</item>
-        <item>Erik Hassel</item>
-        <item>Kim Holmberg</item>
-        <item>Julia Håkansson</item>
-        <item>Axel Isaksson</item>
-        <item>Jonas Karlsson</item>
-        <item>Maren Kleppan Møller</item>
-        <item>Elias Lindblad</item>
-        <item>Billy Lund</item>
-        <item>Isak Lund Lilja</item>
-        <item>Heléne Lundhag Dyson</item>
-        <item>Oskar Lundquist</item>
-        <item>Ayla Markkula</item>
-        <item>Tor Möller</item>
-        <item>Luana Neacsu</item>
-        <item>Anton Nyman</item>
-        <item>Gabriella Olsson</item>
-        <item>Julia Persson</item>
-        <item>Sandra Petersson</item>
-        <item>Carl William Shearer</item>
-        <item>André Stenberg</item>
-        <item>Tonny Sterner</item>
-        <item>Niklas Svanberg</item>
-        <item>Jesper Söderberg</item>
-        <item>Benjamin Thorsell</item>
-        <item>Viktor Tornborg</item>
-        <item>Yuliya N Vatsova</item>
-        </string-array>
-        
+    <string name="whenMade">The app was released on 8th November 2013</string>
 
-	<string-array name ="utgivare">
-        <item>Ansvarig utgivare: </item>
-        <item>Lars Holmberg</item></string-array>
-	<!-- End of IDK 13 -->
-	
- 	<string-array name="Idteam">
-     	<item>Version 1 \n</item> 
+ <string-array name="Idteam"> 
       	<item>INTERACTION DESIGN</item>
      	<item>Anil Akyol</item>
         <item>Daniel Bagge</item>
@@ -361,6 +280,5 @@
     <string name="activity">Activity: </string>
     <string name="noactivity">Activity not entered</string>
     <string name="emptycalendertext">No scheduled lectures for this week.</string>
-    <integer-array name="images"></integer-array>
 
 </resources>
