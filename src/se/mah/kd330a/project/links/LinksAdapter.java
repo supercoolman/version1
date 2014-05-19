@@ -56,18 +56,15 @@ public class LinksAdapter extends ArrayAdapter<String> {
             }
         });
         
-        if(pos != 3 && pos!= 5) {
-            holder.imageButton.setVisibility(View.GONE);
-        }
+        viewPagerPosition = LinksChildFragment.position;
+        test(pos, viewPagerPosition, holder);
         
         holder.imageButton.setOnClickListener(new OnClickListener() {
-            
             @Override
             public void onClick(View v) {
                 startDialActivity(phone);
             }
         });
-        
         return row;
     }
     
@@ -81,5 +78,18 @@ public class LinksAdapter extends ArrayAdapter<String> {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         context.startActivity(intent);
+    }
+    
+    private void test(int position, int viewPagerPosition, ViewHolder viewHolder) {
+        switch (viewPagerPosition) {
+            case 1:
+                if(position != 3 && position != 5) {
+                    viewHolder.imageButton.setVisibility(View.GONE);
+                }
+            case 3:
+                if(position != 0) {
+                    viewHolder.imageButton.setVisibility(View.GONE);
+                }
+        }
     }
 }
