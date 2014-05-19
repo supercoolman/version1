@@ -23,6 +23,7 @@ public class LinksAdapter extends ArrayAdapter<String> {
     String[] linkTitle;
     int viewPagerPosition;
     String phone = "0709704828";
+    String url = "http://www.google.se";
 
     public LinksAdapter(Activity context, int resource, String[] linkTitle) {
         super(context, resource, linkTitle);
@@ -46,14 +47,27 @@ public class LinksAdapter extends ArrayAdapter<String> {
             }
         });
         
-        TextView textView_1 = (TextView) row.findViewById(R.id.title);
-        textView_1.setText(linkTitle[pos]);
+        TextView textView = (TextView) row.findViewById(R.id.title);
+        textView.setText(linkTitle[pos]);
+        textView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openWebSite(url);
+            }
+        });
+        
         return row;
     }
     
     private void startDialActivity(String phone){
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:"+phone));
+        context.startActivity(intent);
+    }
+    
+    private void openWebSite(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
         context.startActivity(intent);
     }
 }

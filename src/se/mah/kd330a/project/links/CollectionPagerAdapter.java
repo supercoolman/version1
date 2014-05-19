@@ -21,7 +21,6 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 	Drawable myDrawable;
 	Bundle args;
 	String[] linkOptions;
-	CharSequence pageTitle;
 
 	public CollectionPagerAdapter(FragmentManager fm) {
 		super(fm);
