@@ -24,5 +24,13 @@
     android:layout_alignParentRight="true"
     android:background="@drawable/imagebutton_states"
     android:src="@drawable/ic_action_call" />
+
+    <ImageView
+        android:id="@+id/window_icon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toRightOf="@+id/title"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_window_grey" />
     
 </RelativeLayout>
