@@ -61,4 +61,6 @@ public class LinksChildFragment extends Fragment {
             LinksParentFragment.viewPager.setCurrentItem(arg2+1);
         }
 	}
+	
+	
 }

@@ -46,19 +46,31 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 		// fetch the image array
 	    
 		images = LinksParentFragment.images;
-	    myDrawable = images.getDrawable(position);
-	    myDrawable.setBounds(0, 1, 128, 128);
-	    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BOTTOM); 
+	    linkOptions = LinksParentFragment.linkOptions;
+	    SpannableStringBuilder sb = null ;
 		
-		if(position == 0) {
-		    linkOptions = LinksParentFragment.linkOptions;
-		    SpannableStringBuilder sb = new SpannableStringBuilder(" "+linkOptions[position]+" ");
-		    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);; 
-		    return sb;
-		} else {
-		    SpannableStringBuilder sb = new SpannableStringBuilder(" "+" ");
-		    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);; 
-		    return sb;
-		}
+	    if(position==0){
+	    sb = new SpannableStringBuilder(" "+linkOptions[0]+" ");
+
+	    myDrawable = images.getDrawable(position);
+	    myDrawable.setBounds(0, 1, 84, 84); 
+	
+	    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BASELINE); 
+	    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	    
+	    
+	    } else{
+		    sb = new SpannableStringBuilder(" "+" ");
+		    myDrawable = images.getDrawable(position);
+		    myDrawable.setBounds(0, 1, 64, 64); 
+		
+		    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BASELINE); 
+		    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	    	
+	    	
+	    }
+	    
+	    return sb;
+
 	}
 }
