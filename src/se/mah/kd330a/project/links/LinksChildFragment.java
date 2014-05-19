@@ -35,6 +35,7 @@ public class LinksChildFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.links_list_fragment, container, false);
+        Toast.makeText(getActivity(), "VP-POS: " + String.valueOf(LinksParentFragment.viewPager.getCurrentItem()), Toast.LENGTH_SHORT).show();
 		ListView listView = (ListView) v.findViewById(R.id.list_view);
 		
 		if(position == 0) {
