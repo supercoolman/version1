@@ -31,28 +31,41 @@ public class LinksAdapter extends ArrayAdapter<String> {
         this.linkTitle = linkTitle;
     }
     
+    static class ViewHolder {
+        TextView textView;
+        ImageButton imageButton;
+    }
     
     @Override
     public View getView(final int pos, View convertView, ViewGroup parent) {
         View row = convertView;
-        LayoutInflater inflater = context.getLayoutInflater();
-        row = inflater.inflate(R.layout.link_list_item, null);
-        viewPagerPosition = LinksParentFragment.viewPager.getCurrentItem();
         
-        ImageButton imageButton = (ImageButton) row.findViewById(R.id.image_button);
-        imageButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                startDialActivity(phone);
-            }
-        });
+        if(row == null) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            row = inflater.inflate(R.layout.link_list_item, null);
+            
+            ViewHolder viewHolder = new ViewHolder();
+            viewHolder.textView = (TextView) row.findViewById(R.id.title);
+            viewHolder.imageButton = (ImageButton) row.findViewById(R.id.image_button);
+            row.setTag(viewHolder);
+        }
         
-        TextView textView = (TextView) row.findViewById(R.id.title);
-        textView.setText(linkTitle[pos]);
-        textView.setOnClickListener(new OnClickListener() {
+        ViewHolder holder = (ViewHolder) row.getTag();
+        String title = linkTitle[pos];
+        holder.textView.setText(title);
+        holder.textView.setOnClickListener(new OnClickListener() {
+            
             @Override
             public void onClick(View v) {
                 openWebSite(url);
+            }
+        });
+        
+        holder.imageButton.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                startDialActivity(phone);
             }
         });
         
