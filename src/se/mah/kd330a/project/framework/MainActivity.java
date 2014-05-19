@@ -10,9 +10,9 @@ import se.mah.kd330a.project.home.FragmentHome;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.FragmentITSL;
 import se.mah.kd330a.project.links.LinksParentFragment;
+import se.mah.kd330a.project.profile.view.FragmentProfile;
+import se.mah.kd330a.project.profile.view.SettingsActivity;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
-import se.mah.kd330a.project.settings.view.FragmentProfile;
-import se.mah.kd330a.project.settings.view.SettingsActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -22,6 +22,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -39,9 +40,10 @@ public class MainActivity extends FragmentActivity {
 	 * Holds the "main" app.
 	 */
 
-	private DrawerLayout 			mDrawerLayout;
-	private ListView 				mDrawerList;
-	private ActionBarDrawerToggle 	mDrawerToggle;
+	public static DrawerLayout 			mDrawerLayout;
+	public static ListView 				mDrawerList;
+	public ActionBarDrawerToggle 	mDrawerToggle;
+	private Fragment				mFragment;
 	private CharSequence 			mDrawerTitle;
 	private CharSequence 			mTitle;
 	private String[] 				mMenuTitles;
@@ -49,14 +51,14 @@ public class MainActivity extends FragmentActivity {
 	private TypedArray 				mMenuColors;
 	public RSSFeed 					mNewsFeed;
 	private final String 			TAG = MainActivity.class.getName();
-    private final int 				HOME = 0;
-	private final int 				SCHEDULE = 1;
-	private final int 				PROFILE = 2;
-	private final int 				ITSL = 3;
-	private final int 				FIND = 4;
-	private final int 				LINKS = 5;
-	private final int 				HELP = 6;
-	private final int 				LOGOUT = 7;
+    public static final int 		HOME = 0;
+	public static final int 		SCHEDULE = 1;
+	public static final int 		PROFILE = 2;
+	public static final int 		ITSL = 3;
+	public static final int 		FIND = 4;
+	public static final int 		LINKS = 5;
+	public static final int 		HELP = 6;
+	public static final int 		LOGOUT = 7;
 	private int 					refreshCheck;
 
 	@Override
@@ -68,8 +70,6 @@ public class MainActivity extends FragmentActivity {
 		mMenuTitles = getResources().getStringArray(R.array.menu_texts);
 		mMenuIcons = getResources().obtainTypedArray(R.array.menu_icons);
 		mMenuColors = getResources().obtainTypedArray(R.array.menu_colors);
-		mMenuIcons.recycle();
-		mMenuColors.recycle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -117,7 +117,15 @@ public class MainActivity extends FragmentActivity {
 			selectItem(0);
 		}
 	}
-
+	
+	/* The click listener for ListView in the navigation drawer */
+	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			selectItem(position);
+			Log.d("Drawer", String.valueOf(position));
+		}
+	}
 
 	@Override
 	protected void onPause() {
@@ -135,12 +143,6 @@ public class MainActivity extends FragmentActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-
-	public RSSFeed getRssNewsFeed() {
-		return mNewsFeed;
-	}
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -173,63 +175,61 @@ public class MainActivity extends FragmentActivity {
 		}
 	}
 
-	/* The click listener for ListView in the navigation drawer */
-	private class DrawerItemClickListener implements ListView.OnItemClickListener {
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			selectItem(position);
-		}
-	}
-
 	public void selectItem(int position) {
 		// update the main content by replacing fragments
-		android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager. popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE); 
-		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-		Fragment fragment;
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		switch (position) {
 		case HOME:	
-			fragment = new FragmentHome();
+			mFragment = new FragmentHome();
+			transaction.addToBackStack(null);
+			Log.d("Drawer", "Home");
 			break;
 		case SCHEDULE:
-			fragment = new FragmentScheduleWeekPager();
+			mFragment = new FragmentScheduleWeekPager();
 			transaction.addToBackStack(null);
+			Log.d("Drawer", "Schedule");
 			break;
 		case ITSL:
-			fragment = new FragmentITSL();
+			mFragment = new FragmentITSL();
 			transaction.addToBackStack(null);
+			Log.d("Drawer", "ITSL");
 			break;
 		case FIND:
-			fragment = new FragmentFind();
+			mFragment = new FragmentFind();
 			transaction.addToBackStack(null);
+			Log.d("Drawer", "Find");
 			break;
 		case PROFILE:
-			fragment = new FragmentProfile();
+			mFragment = new FragmentProfile();
 			transaction.addToBackStack(null);
+			Log.d("Drawer", "Profile");
 			break;
 		case LINKS:
-			fragment = new LinksParentFragment();
+			mFragment = new LinksParentFragment();
 			transaction.addToBackStack(null);
+			Log.d("Drawer", "Links");
 			break;
 		case HELP:
-			fragment = new FragmentCredits();
+			mFragment = new FragmentCredits();
 			transaction.addToBackStack(null);
+			Log.d("Drawer", "Credits");
 			break;
 		case LOGOUT:
-			fragment = new FragmentLogout();
-			transaction.addToBackStack(null);
+			mFragment = new FragmentLogout();
+			Log.d("Drawer", "Logout");
 			logout();
 			break;
 		default:	
-			fragment = new FragmentHome();
+			mFragment = new FragmentHome();
+			Log.d("Drawer", "Default");
 		}
-		transaction.replace(R.id.content_frame, fragment);
+		transaction.replace(R.id.content_frame, mFragment);
 		transaction.commit();
 		refreshCheck = position;
 		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
 		setTitle(mMenuTitles[position]);
-		mDrawerLayout.closeDrawer(mDrawerList);
 	}
 
 	/**
@@ -240,35 +240,29 @@ public class MainActivity extends FragmentActivity {
 	 */
 	public void refreshCurrent(){
 		Fragment fragment = null;
-		android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		switch (refreshCheck) {
 		case HOME:	
 			fragment = new FragmentHome();
 			break;
 		case SCHEDULE:
 			fragment = new FragmentScheduleWeekPager();
-			transaction.addToBackStack(null);
 			break;
 		case ITSL:
 			fragment = new FragmentITSL();
-			transaction.addToBackStack(null);
 			break;
 		case FIND:
 			fragment = new FragmentFind();
-			transaction.addToBackStack(null);
 			break;
 		case PROFILE:
 			fragment = new FragmentProfile();
-			transaction.addToBackStack(null);
 			break;
 		case LINKS:
 			fragment = new LinksParentFragment();
-			transaction.addToBackStack(null);
 			break;
 		case HELP:
 			fragment = new FragmentCredits();
-			transaction.addToBackStack(null);
 			break;
 		}
 		transaction.replace(R.id.content_frame, fragment, "FRAGMENT");
@@ -297,13 +291,21 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		// Pass any configuration change to the drawer toggls
+		// Pass any configuration change to the drawer toggles
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
+
+	public void toNewsFeedOnWeb(View view) {
+		Uri uri = Uri.parse(Constants.URL_NEWS_FEED);
+		Intent launchBrowser = new Intent(Intent.ACTION_VIEW,
+				uri);
+		startActivity(launchBrowser);
+	}
+	
 	public void toSchedule(View view) {
 		selectItem(this.SCHEDULE);
-	}
+	}	
 
 	public void toITSL(View view) {
 		selectItem(this.ITSL);
@@ -311,13 +313,6 @@ public class MainActivity extends FragmentActivity {
 
 	public void toFind(View view) {
 		selectItem(this.FIND);
-	}
-
-	public void toNewsFeedOnWeb(View view) {
-		Uri uri = Uri.parse(Constants.URL_NEWS_FEED);
-		Intent launchBrowser = new Intent(Intent.ACTION_VIEW,
-				uri);
-		startActivity(launchBrowser);
 	}
 	
     public void logout(){

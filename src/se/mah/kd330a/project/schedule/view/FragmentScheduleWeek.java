@@ -89,7 +89,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 					@Override
 					public void onRefreshCompleted() {
 						swipeRefreshLayout.setRefreshing(false);
-						((MainActivity)getActivity()).refreshCurrent();
+					//	((MainActivity)getActivity()).refreshCurrent();
 					}
 
 				}, getActivity());

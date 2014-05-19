@@ -8,11 +8,13 @@ import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Constants;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
+import se.mah.kd330a.project.framework.MainActivity;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.Article;
 import se.mah.kd330a.project.itsl.FeedManager;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -47,6 +49,15 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	{
 		Log.i("FragmentHome", "OnCreate: ");
 		super.onCreate(savedInstanceState);
+		
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	{
+		Log.i("FragmentHome", "OnCreateView: ");
+		
+		
         try {
 			KronoxCalendar.createCalendar(KronoxReader.getFile(getActivity().getApplicationContext()));
 		} catch (Exception e) {
@@ -58,14 +69,8 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		}
 		catch (Exception e) {
 			Log.e("FragmentHome", "OnCreate: "+e.toString());
-		}
+		} 
 		
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-	{
-		Log.i("FragmentHome", "OnCreateView: ");
 		rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_home, container, false);
 		setNextKronoxClass(rootView);
 		setNewsFeedMah(rootView);
@@ -76,7 +81,8 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 			ITSLfeedManager.reset();
 			ITSLfeedManager.processFeeds();
 		}
-		//Perhaps or all should be done in ScheduledFixedDelay????
+	    
+	    MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
 		return rootView;
 	}
 

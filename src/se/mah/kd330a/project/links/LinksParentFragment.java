@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.mah.kd330a.project.R;
+import se.mah.kd330a.project.framework.MainActivity;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,9 @@ public class LinksParentFragment extends Fragment {
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+    	
+    		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
+    		
     		View v = inflater.inflate(R.layout.links_fragment, container, false);
     		viewPager = (ViewPager) v.findViewById(R.id.pager);
     		viewPager.setAdapter(buildAdapter());

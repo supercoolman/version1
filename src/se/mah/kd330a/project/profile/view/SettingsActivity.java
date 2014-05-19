@@ -1,4 +1,4 @@
-package se.mah.kd330a.project.settings.view;
+package se.mah.kd330a.project.profile.view;
 
 import java.util.ArrayList;
 

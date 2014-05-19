@@ -29,6 +29,10 @@ public class StartActivity extends Activity {
 	 * It logs in the user and refreshes the schedule.
 	 */
 	
+	
+	// Change this to false if startActivity should refresh
+	private boolean debugMode = false;
+	
 	private final String 	TAG = "StartActivity";
 	private EditText 		mEditTextUsername;
 	private EditText 		mEditTextPassword;
@@ -179,15 +183,21 @@ public class StartActivity extends Activity {
 	 * When all tasks have completed we can go on to the MainActivity
 	 */
 	public void tasksCompleted(final Activity activity) {
-		Me.getInstance().startRefresher(new FragmentCallback() {
-			@Override
-			public void onRefreshCompleted() {
-				Intent intent = new Intent(activity, MainActivity.class);
-				startActivity(intent);
-				finish();
-			}
-        	
-        }, this);
+		if(!debugMode){
+			Me.getInstance().startRefresher(new FragmentCallback() {
+				@Override
+				public void onRefreshCompleted() {
+					Intent intent = new Intent(activity, MainActivity.class);
+					startActivity(intent);
+					finish();
+				}
+	        	
+	        }, this);
+		} else {
+			Intent intent = new Intent(activity, MainActivity.class);
+			startActivity(intent);
+			finish();
+		}
 	}
 	
 	@Override

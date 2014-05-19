@@ -1,10 +1,11 @@
-package se.mah.kd330a.project.settings.view;
+package se.mah.kd330a.project.profile.view;
 
 import java.util.ArrayList;
 
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.Me;
+import se.mah.kd330a.project.framework.MainActivity;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.SharedPreferences;
@@ -57,6 +58,8 @@ public class FragmentProfile extends android.support.v4.app.Fragment{
 			profilNameTextView = (TextView)rootView.findViewById(R.id.profil_name);
 			profilNameTextView.setText("No profile");
 		}
+		
+		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
 		return rootView;
 	}
 	

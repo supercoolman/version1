@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="se.mah.kd330a.project.settings.view.SettingsActivity"
+            android:name="se.mah.kd330a.project.profile.view.SettingsActivity"
             android:label="@string/title_activity_settings" >
 
             <!-- The meta-data element is needed for versions lower than 4.1 -->

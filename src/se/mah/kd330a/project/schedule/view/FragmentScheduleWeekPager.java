@@ -3,6 +3,7 @@ package se.mah.kd330a.project.schedule.view;
 import java.util.ArrayList;
 
 import se.mah.kd330a.project.R;
+import se.mah.kd330a.project.framework.MainActivity;
 import se.mah.kd330a.project.schedule.data.ParseData;
 import se.mah.kd330a.project.schedule.model.ScheduleWeek;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 		}
 		super.onCreate(savedInstanceState);
 	}
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +59,7 @@ public class FragmentScheduleWeekPager extends Fragment {
 		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.blue));	
 		pagerTabStrip.setDrawFullUnderline(true);
 
+		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
 
 		return (result);
 	}

@@ -1,6 +1,7 @@
 package se.mah.kd330a.project.help;
 
 import se.mah.kd330a.project.R;
+import se.mah.kd330a.project.framework.MainActivity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -62,6 +63,8 @@ public class FragmentCredits extends Fragment {
 		};
 
 		thread.start();
+		
+		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
 		return rootView;
 	}
 	
