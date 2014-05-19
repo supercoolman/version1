@@ -25,24 +25,35 @@ public class CategoriesAdapter extends ArrayAdapter<String> {
         this.context = context;
         this.linkTitle = linkTitle;
     }
+    
+    static class ViewHolder {
+        TextView textView_1;
+        TextView textView_2;
+        ImageView imageView;
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        LayoutInflater inflater = context.getLayoutInflater();
-        row = inflater.inflate(R.layout.link_category_item, null);
+        if(row == null) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            row = inflater.inflate(R.layout.link_category_item, null);
+            ViewHolder viewHolder = new ViewHolder();
+            viewHolder.textView_1 = (TextView) row.findViewById(R.id.title);
+            viewHolder.textView_2 = (TextView) row.findViewById(R.id.sub_title);
+            viewHolder.imageView = (ImageView) row.findViewById(R.id.category_image);
+            row.setTag(viewHolder);
+        }
         
-        TextView textView_1 = (TextView) row.findViewById(R.id.title);
-        textView_1.setText(linkTitle[position]);
+        ViewHolder holder = (ViewHolder) row.getTag();
+        String title = linkTitle[position];
+        holder.textView_1.setText(title);
         
         linkSubTitle = LinksParentFragment.subTitles;
-        TextView textView_2 = (TextView) row.findViewById(R.id.sub_title);
-        textView_2.setText(linkSubTitle[position]);
+        holder.textView_2.setText(linkSubTitle[position]);
         
-        //loads the icons for each category from the images array
         images = LinksParentFragment.images;
-        ImageView imageView = (ImageView) row.findViewById(R.id.category_image);
-        imageView.setImageDrawable(images.getDrawable(position+1));
+        holder.imageView.setImageDrawable(images.getDrawable(position+1));
         return row;
     }
 }
