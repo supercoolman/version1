@@ -59,12 +59,12 @@
     </string-array>
   
     <string-array name="links_list_sub_options">
-        <item>"General information for student @ MAH"</item>
-        <item>"Can help with all things it"</item>
+        <item>"General information for students"</item>
+        <item>"All things IT"</item>
         <item>"Important things for library"</item>
-        <item>"Find your new home in Malmö"</item>
-        <item>"Prepare yourself for your future"</item>
-        <item>"Join us @ social networks"</item>
+        <item>"Find a home in Malmö"</item>
+        <item>"Useful links regarding your future"</item>
+        <item>"MAH @ social networks"</item>
     </string-array>
     
     <string-array name = "it">
@@ -106,9 +106,9 @@
     </string-array>
     
      <string-array name = "library">
-    	<item>"Link to library"</item> 
+    	<item>"Go to library"</item> 
     	<item>"Book a group room"</item> 
-    	<item>"Search for a database"</item>
+    	<item>"List of databases"</item>
     </string-array>
     
     <string-array name="url_student_at_mah">
