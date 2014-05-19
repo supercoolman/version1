@@ -1,42 +1,6 @@
 package se.mah.kd330a.project.home;
 
 import java.io.FileInputStream;
-<<<<<<< HEAD
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
-//import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
-
-//import net.fortuna.ical4j.data.ParserException;
-import se.mah.kd330a.project.adladok.model.Constants;
-import se.mah.kd330a.project.adladok.model.Course;
-import se.mah.kd330a.project.adladok.model.Me;
-import se.mah.kd330a.project.adladok.model.ScheduleFixedDelay.UpdateType;
-//import se.mah.kd330a.project.framework.MainActivity;
-//import com.handmark.pulltorefresh.library.PullToRefreshBase;
-//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import se.mah.kd330a.project.home.data.RSSFeed;
-import se.mah.kd330a.project.itsl.Article;
-import se.mah.kd330a.project.itsl.FeedManager;
-//import se.mah.kd330a.project.itsl.ListPagerAdapter;
-import se.mah.kd330a.project.schedule.data.KronoxCalendar;
-import se.mah.kd330a.project.schedule.data.KronoxReader;
-//import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
-import se.mah.kd330a.project.R;
-//import android.app.ActionBar;
-//import android.content.Context;
-//import android.content.SharedPreferences;
-//import android.graphics.Color;
-//import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-//import android.support.v4.view.ViewPager;
-//import android.text.method.LinkMovementMethod;
-=======
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -51,20 +15,13 @@ import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
->>>>>>> c9a5e0dbd40598a724716082ee91b9fd708de2ae
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-<<<<<<< HEAD
-//import android.widget.ScrollView;
-import android.widget.TextView;
-//import android.widget.Toast;
-=======
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
->>>>>>> c9a5e0dbd40598a724716082ee91b9fd708de2ae
 
 public class FragmentHome extends Fragment implements FeedManager.FeedManagerDoneListener
 {
@@ -240,42 +197,5 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		// TODO Auto-generated method stub
 
 	}
-
-<<<<<<< HEAD
-	@Override
-	public void update(Observable observable, Object data) {
-		UpdateType type= (UpdateType)data;
-		Log.i(TAG,"updated with data: "+type);
-		switch(type){
-		case KRONOX:
-			getActivity().runOnUiThread(new Runnable(){
-				@Override
-				public void run() {
-					profileRegistered = nextClass.anyClassesToday();
-					if (profileRegistered){
-						setNextKronoxClass(rootView);
-					}	
-				}
-				
-			});
-			
-			break;
-		case MAHNEWS:
-			getActivity().runOnUiThread(new Runnable(){
-				@Override
-				public void run() {
-					setNewsFeedMah(rootView);
-				}
-				
-			});
-			break;
-		default:
-			break;
-		}
-		
-	}
-
-}//Commit Test 
-=======
+	
 }
->>>>>>> c9a5e0dbd40598a724716082ee91b9fd708de2ae

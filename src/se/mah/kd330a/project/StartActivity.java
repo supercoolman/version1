@@ -23,16 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.EditText;
 
-<<<<<<< HEAD
-public class StartActivity extends Activity{
-	private final String TAG = "StartActivity";
-	private EditText editTextUsername;
-	private EditText editTextPassword;
-	boolean restoredsuccess = false;
-	boolean loginOK = false;
-	private String username;
-	private String password;
-=======
 public class StartActivity extends Activity {
 	/**
 	 * This is the activity that starts before the Main Activity.
@@ -46,7 +36,6 @@ public class StartActivity extends Activity {
 	boolean 				mLoginOK = false;
 	private String 			mUsername;
 	private String 			mPassword;
->>>>>>> c9a5e0dbd40598a724716082ee91b9fd708de2ae
 	private static AsyncTask<String, Void, Integer> asyncLoginTask;
 	private enum LOGINMESSAGE {SHOW,NOSHOW};
 	
@@ -137,24 +126,6 @@ public class StartActivity extends Activity {
 	    	
 	        // Get the info from web service
 	    	try {
-<<<<<<< HEAD
-	        		SoapObject loginrequest = new SoapObject(NAMESPACE, "logInTheUser");
-	        		loginrequest.addProperty("username", params[0]);
-	        		loginrequest.addProperty("password", params[1]);
-	        		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-	            	envelope.dotNet=true;
-	            	envelope.setOutputSoapObject(loginrequest);
-	            	HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-	            	androidHttpTransport.call(NAMESPACE+"logInTheUser", envelope);
-	            	String rawResult = ((Object)envelope.getResponse()).toString();
-	            	Log.d(TAG,"Loginresult "+rawResult);
-	            	boolean loggedIn = rawResult.equals("true")?true:false;
-	            	if (loggedIn&&params[2].equals("hide")){
-	            		result = 1;
-	            	}else if  (loggedIn&&params[2].equals("click")){
-	            		result = 2;
-	            	}
-=======
 	        	SoapObject loginrequest = new SoapObject(Constants.NAMESPACE, "logInTheUser");
 	            loginrequest.addProperty("username", params[0]);
 	            loginrequest.addProperty("password", params[1]);
@@ -172,7 +143,6 @@ public class StartActivity extends Activity {
 	            } else if  (loggedIn&&params[2].equals("click")){
 	            	result = 2;
 	            }
->>>>>>> c9a5e0dbd40598a724716082ee91b9fd708de2ae
 	            
 	        	} catch (Exception e) {
 	        		Log.e(TAG,"LoginError: not logged in... "+e.getMessage());
@@ -208,12 +178,6 @@ public class StartActivity extends Activity {
 	/**
 	 * When all tasks have completed we can go on to the MainActivity
 	 */
-<<<<<<< HEAD
-	public void tasksCompleted(){
-		Intent intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
-		finish();
-=======
 	public void tasksCompleted(final Activity activity) {
 		Me.getInstance().startRefresher(new FragmentCallback() {
 			@Override
@@ -224,8 +188,6 @@ public class StartActivity extends Activity {
 			}
         	
         }, this);
-		
->>>>>>> c9a5e0dbd40598a724716082ee91b9fd708de2ae
 	}
 	
 	@Override
