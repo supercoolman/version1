@@ -34,7 +34,6 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 	protected void onPreExecute() {
 		super.onPreExecute();
 		Log.d("Async", "Prepare for download");
-		Toast.makeText(mContext, "Downloading...", Toast.LENGTH_LONG).show();
 	}
 
 	/**
@@ -67,7 +66,6 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 		try {
 			KronoxReader.update(mContext.getApplicationContext());
 			KronoxCalendar.createCalendar(KronoxReader.getFile(mContext.getApplicationContext()));
-			Log.d("Async", "Downloading...");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,8 +107,6 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 	 */
 	@Override
 	protected void onPostExecute(Void result) {
-		// TODO Auto-generated method stub
-		Toast.makeText(mContext, "Download complete.", Toast.LENGTH_LONG).show();
 		super.onPostExecute(result);
 		mFragmentCallback.onRefreshCompleted();
 		Log.d("Async", "Done.");

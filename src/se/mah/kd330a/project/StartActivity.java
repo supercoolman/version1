@@ -66,7 +66,7 @@ public class StartActivity extends Activity {
 	public void showLoginView(LOGINMESSAGE loginmessage) {
 		switch(loginmessage){
 		case SHOW:
-			Toast.makeText(this, "Unable to log you in.", Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, "Unable to log you in.", Toast.LENGTH_LONG).show();
 			break;
 		case NOSHOW:
 			break;
@@ -117,10 +117,12 @@ public class StartActivity extends Activity {
 	    	this.mActivity = activity; 
 	    }
 	    
-	    @Override
+
+		@Override
 	    protected Integer doInBackground(String... params) {
 	    	Integer result = 0; //error;
 	    	Log.i(TAG,"Starting Login");
+	    	
 	    	
 	        // Get the info from web service
 	    	try {
@@ -134,7 +136,7 @@ public class StartActivity extends Activity {
 	            androidHttpTransport.call(Constants.NAMESPACE + "logInTheUser", envelope);
 	            String rawResult = ((Object)envelope.getResponse()).toString();
 	            
-	            Log.d(TAG,"Loginresult "+rawResult);
+	            // Log.d(TAG,"Loginresult "+rawResult);
 	            boolean loggedIn = rawResult.equals("true")?true:false;
 	            if (loggedIn&&params[2].equals("hide")){
 	            	result = 1;

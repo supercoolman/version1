@@ -40,7 +40,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 	 * It includes the RefreshLayout(Pull down to update), onClicks, expands lectures etc. 
 	 */
 
-	private final String 		TAG = 	"FragmentScheduleWeek";
+	private final String 		TAG = "FragmentScheduleWeek";
 	private ScheduleWeek 		scheduleWeek;
 	private SwipeRefreshLayout 	swipeRefreshLayout;
 
@@ -90,7 +90,6 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 					public void onRefreshCompleted() {
 						swipeRefreshLayout.setRefreshing(false);
 						((MainActivity)getActivity()).refreshCurrent();
-						Toast.makeText(getActivity(), "Sooooo refreshed!", Toast.LENGTH_LONG).show();
 					}
 
 				}, getActivity());

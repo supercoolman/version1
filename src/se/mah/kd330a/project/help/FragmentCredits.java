@@ -39,7 +39,7 @@ public class FragmentCredits extends Fragment {
 				R.layout.fragment_screen_help, container, false);
 
 		tvData = (TextView) rootView.findViewById(R.id.textview);
-		credtisTv = (TextView) rootView.findViewById(R.id.textView1);
+		credtisTv = (TextView) rootView.findViewById(R.id.loading);
 		whenMadeTv = (TextView) rootView.findViewById(R.id.textView2);
 
 		myscroll = new Scroller(getActivity(), new LinearInterpolator());
