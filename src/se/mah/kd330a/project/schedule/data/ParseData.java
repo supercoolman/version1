@@ -24,7 +24,7 @@ public class ParseData {
 
 	public ArrayList<ScheduleWeek> getParsedDataFromKronoxByWeekNew(int numberOfWeeks) {
 		if (!Me.getInstance().getUserID().isEmpty()) {
-			for (int i = 0; i < numberOfWeeks; i++) {
+			for (int i = -4; i < numberOfWeeks; i++) {
 				scheduleWeeks.add(getScheduleWeek(i));
 			}
 			return scheduleWeeks;
@@ -53,7 +53,7 @@ public class ParseData {
 				if (c instanceof VEvent) {
 					ScheduleItem s = new ScheduleItem((VEvent) c);
 					//Clean out items from courses that I am not registered on (program courses)
-					if (Me.getInstance().getCourse(s.getCourseID())!=null){
+					if (Me.getInstance().getCourse(s.getCourseId())!=null){
 						thisWeekList.add(s);
 					}
 				}

@@ -1,6 +1,7 @@
 package se.mah.kd330a.project.home;
 
 import java.io.FileInputStream;
+<<<<<<< HEAD
 //import java.io.FileNotFoundException;
 //import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -35,17 +36,37 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 //import android.support.v4.view.ViewPager;
 //import android.text.method.LinkMovementMethod;
+=======
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
+import se.mah.kd330a.project.R;
+import se.mah.kd330a.project.adladok.model.Constants;
+import se.mah.kd330a.project.adladok.model.Course;
+import se.mah.kd330a.project.adladok.model.Me;
+import se.mah.kd330a.project.home.data.RSSFeed;
+import se.mah.kd330a.project.itsl.Article;
+import se.mah.kd330a.project.itsl.FeedManager;
+import se.mah.kd330a.project.schedule.data.KronoxCalendar;
+import se.mah.kd330a.project.schedule.data.KronoxReader;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+>>>>>>> c9a5e0dbd40598a724716082ee91b9fd708de2ae
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.LinearLayout;
+<<<<<<< HEAD
 //import android.widget.ScrollView;
 import android.widget.TextView;
 //import android.widget.Toast;
+=======
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
+>>>>>>> c9a5e0dbd40598a724716082ee91b9fd708de2ae
 
-public class FragmentHome extends Fragment implements FeedManager.FeedManagerDoneListener, Observer
+public class FragmentHome extends Fragment implements FeedManager.FeedManagerDoneListener
 {
 
 	private NextClassWidget nextClass;
@@ -57,30 +78,31 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	private FeedManager ITSLfeedManager;
 	private String TAG ="FragmentHome";
 	
-	public FragmentHome()
-	{
+	public FragmentHome() {
+		/*
+		 * Empty constructor
+		 */
 	}
 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		Log.i("FragmentHome", "OnCreate: ");
 		super.onCreate(savedInstanceState);
-		Me.getInstance().getObservable().addObserver(this);
         try {
 			KronoxCalendar.createCalendar(KronoxReader.getFile(getActivity().getApplicationContext()));
 		} catch (Exception e) {
 			Log.e("FragmentHome", e.toString());
 		} 
-		try
-		{
+		try {
 			nextClass = new NextClassWidget();
 			profileRegistered = nextClass.anyClassesToday();
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			Log.e("FragmentHome", "OnCreate: "+e.toString());
 		}
+		
 	}
 
 	@Override
@@ -93,34 +115,29 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		ITSLfeedManager = new FeedManager(this, getActivity().getApplicationContext());
 		//ITSLfeedManager.getFeedList().size()
 		Log.i(TAG,"ITSLfeedManager.getFeedList().size()" + ITSLfeedManager.getFeedList().size());
-		if (!ITSLfeedManager.loadCache())
-		{
+	    if (!ITSLfeedManager.loadCache()) {
 			ITSLfeedManager.reset();
 			ITSLfeedManager.processFeeds();
-		}	
+		}
 		//Perhaps or all should be done in ScheduledFixedDelay????
 		return rootView;
 	}
 
-	private void setNewsFeedMah(ViewGroup rootView)
-	{
+	private void setNewsFeedMah(ViewGroup rootView) {
 		Log.i(TAG,"setNewsFeedMah: ");
-		try
-		{
-			fis = getActivity().openFileInput(Constants.mahNewsSavedFileName);
+		try {
+			fis = getActivity().openFileInput(Constants.MAH_NEWS_SAVED_FILE_NAME);
 			in = new ObjectInputStream(fis);
 			newsFeed = (RSSFeed) in.readObject();
 			in.close();
 			fis.close();
 			Log.i(TAG, "Items in MAHNews feed: "+ Integer.toString(newsFeed.getItemCount()));
 		}
-		catch (Exception ex)
-		{
+		catch (Exception ex) {
 			Log.e(TAG, "Error in get method");
 		}
 
-		try
-		{
+		try {
 			LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 			LinearLayout newsFeedMahWidget = (LinearLayout) rootView.findViewById(R.id.news_feed_widget);
 			for (int i = 0; i < 1; i++)
@@ -132,8 +149,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 
 			}
 		}
-		catch (Exception ex)
-		{
+		catch (Exception ex) {
 			Log.e(TAG, "Error in get method");
 		}
 
@@ -225,6 +241,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void update(Observable observable, Object data) {
 		UpdateType type= (UpdateType)data;
@@ -259,3 +276,6 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	}
 
 }//Commit Test 
+=======
+}
+>>>>>>> c9a5e0dbd40598a724716082ee91b9fd708de2ae

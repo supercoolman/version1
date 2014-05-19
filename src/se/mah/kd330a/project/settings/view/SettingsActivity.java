@@ -70,7 +70,6 @@ public class SettingsActivity extends Activity {
 	public void toLadokInlogg(View view) {
 		//Clear all including backstack
 		Me.getInstance().clearAllIncludingSavedData(this);
-		Me.getInstance().stopUpdate();
 		Intent intent = new Intent(this, StartActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

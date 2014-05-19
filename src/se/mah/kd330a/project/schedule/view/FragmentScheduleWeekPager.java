@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,17 +18,22 @@ import android.view.ViewGroup;
 
 public class FragmentScheduleWeekPager extends Fragment {
 
+	/**
+	 * "Container" for the schedule.
+	 */
+
 	private static ArrayList<ScheduleWeek> myScheduleInWeeks;
 	private ParseData parseData;
-	private static int num_items = 0;
+	private static int numItems = 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		parseData = new ParseData();
 		myScheduleInWeeks = parseData.getParsedDataFromKronoxByWeekNew(20);
+
 		if (myScheduleInWeeks != null) {
-			num_items = myScheduleInWeeks.size();
-			Log.i("onCreate in FragmentScheduleWeekPager",Integer.toString(num_items));
+			numItems = myScheduleInWeeks.size();
+			Log.i("onCreate in FragmentScheduleWeekPager",Integer.toString(numItems));
 		}
 		super.onCreate(savedInstanceState);
 	}
@@ -36,10 +42,21 @@ public class FragmentScheduleWeekPager extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		Log.i("onCreateView", "loaded");
+
+
 		View result = inflater.inflate(R.layout.view_pager_fragment, container,false);
 		ViewPager pager = (ViewPager) result.findViewById(R.id.pager);
 		ViewPagerAdapter viewPagerAdapter = buildAdapter();
 		pager.setAdapter(viewPagerAdapter);
+		pager.setCurrentItem(4);
+
+		/**
+		 * Scrolling tabs
+		 */
+		PagerTabStrip pagerTabStrip = (PagerTabStrip) result.findViewById(R.id.weeks_pager_tab_stip);
+		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.blue));	
+		pagerTabStrip.setDrawFullUnderline(true);
+
 
 		return (result);
 	}
@@ -57,15 +74,21 @@ public class FragmentScheduleWeekPager extends Fragment {
 		public Fragment getItem(int num) {
 			Log.i("getItem", Integer.toString(num));
 			if(myScheduleInWeeks != null){
-			return FragmentScheduleWeek.newInstance(myScheduleInWeeks.get(num),num);
+				return FragmentScheduleWeek.newInstance(myScheduleInWeeks.get(num),num);
 			} else {
-			return new FragmentScheduleDay();
+				return new FragmentScheduleDay();
 			}
 		}
 
 		@Override
-		public int getCount() {
-			return num_items;
+		public CharSequence getPageTitle(int number){
+			String title = "Week "+myScheduleInWeeks.get(number).getWeekNumber();
+			return title;
 		}
-	}
+
+		@Override
+		public int getCount() {
+			return numItems;
+		}
+	}	
 }

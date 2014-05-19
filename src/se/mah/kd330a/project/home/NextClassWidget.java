@@ -69,7 +69,7 @@ public class NextClassWidget {
 			setStartTime(items.get(0).getStartTime());
 			setEndTime(items.get(0).getEndTime());
 			setDate(items.get(0).getShortWeekDay() + ", " + items.get(0).getDateAndTime2());
-			setCourseId(items.get(0).getCourseID());
+			setCourseId(items.get(0).getCourseId());
 			setCourseName(Me.getInstance().getCourse(getCourseId()).getDisplaynameEn()); //Not so pretty
 			return true;
 		} else {
