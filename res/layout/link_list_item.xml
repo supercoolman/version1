@@ -6,7 +6,7 @@
     android:background="@drawable/links_layer_list_unpressed"
     android:descendantFocusability="blocksDescendants"
     android:baselineAligned="false"
-    android:padding="16dp" >
+    android:padding="8dp" >
 
      <TextView 
     android:id="@+id/title"
@@ -20,8 +20,8 @@
  
     <ImageButton 
     android:id="@+id/image_button"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
+    android:layout_width="64dp"
+    android:layout_height="64dp"
     android:layout_alignTop="@+id/title"
     android:layout_alignParentRight="true"
     android:background="@drawable/imagebutton_states"
@@ -29,8 +29,8 @@
 
     <ImageView
         android:id="@+id/window_icon"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:layout_toRightOf="@+id/title"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_window_grey" />

@@ -61,6 +61,10 @@ public class LinksAdapter extends ArrayAdapter<String> {
             }
         });
         
+        if(pos != 3 && pos!= 5) {
+            holder.imageButton.setVisibility(View.GONE);
+        }
+        
         holder.imageButton.setOnClickListener(new OnClickListener() {
             
             @Override
