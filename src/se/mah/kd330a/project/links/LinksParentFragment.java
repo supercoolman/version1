@@ -26,10 +26,14 @@ public class LinksParentFragment extends Fragment {
 	public static TypedArray images;
 	public static String[] subTitles;
 	public static String[] linkOptions;
+	public static List<String[]> phoneNumbers = new ArrayList<String[]>();
     
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		phoneNumbers.add(getResources().getStringArray(R.array.student_nr));
+	    phoneNumbers.add(getResources().getStringArray(R.array.it_nr));
+        phoneNumbers.add(getResources().getStringArray(R.array.library_nr));
 		subTitles = getResources().getStringArray(R.array.links_list_sub_options);
 		images = getResources().obtainTypedArray(R.array.images_links);
 	    linkOptions = getResources().getStringArray(R.array.links_options);
