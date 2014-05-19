@@ -34,6 +34,7 @@
 
     <style name="itsl_tabs.style" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@drawable/itsl_tabs</item>
+        
     </style>
 
     <style name="mah_button_grey">

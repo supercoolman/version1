@@ -4,12 +4,12 @@ import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.StartActivity;
 import se.mah.kd330a.project.adladok.model.Constants;
 import se.mah.kd330a.project.adladok.model.Me;
-import se.mah.kd330a.project.faq.FragmentFaq;
 import se.mah.kd330a.project.find.FragmentFind;
 import se.mah.kd330a.project.help.FragmentCredits;
 import se.mah.kd330a.project.home.FragmentHome;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.FragmentITSL;
+import se.mah.kd330a.project.links.LinksParentFragment;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
 import se.mah.kd330a.project.settings.view.FragmentProfile;
 import se.mah.kd330a.project.settings.view.SettingsActivity;
@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity {
 	private final int 				PROFILE = 2;
 	private final int 				ITSL = 3;
 	private final int 				FIND = 4;
-	private final int 				FAQ = 5;
+	private final int 				LINKS = 5;
 	private final int 				HELP = 6;
 	private final int 				LOGOUT = 7;
 	private int 					refreshCheck;
@@ -68,6 +68,8 @@ public class MainActivity extends FragmentActivity {
 		mMenuTitles = getResources().getStringArray(R.array.menu_texts);
 		mMenuIcons = getResources().obtainTypedArray(R.array.menu_icons);
 		mMenuColors = getResources().obtainTypedArray(R.array.menu_colors);
+		mMenuIcons.recycle();
+		mMenuColors.recycle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -205,8 +207,8 @@ public class MainActivity extends FragmentActivity {
 			fragment = new FragmentProfile();
 			transaction.addToBackStack(null);
 			break;
-		case FAQ:
-			fragment = new FragmentFaq();
+		case LINKS:
+			fragment = new LinksParentFragment();
 			transaction.addToBackStack(null);
 			break;
 		case HELP:
@@ -256,8 +258,12 @@ public class MainActivity extends FragmentActivity {
 			fragment = new FragmentFind();
 			transaction.addToBackStack(null);
 			break;
-		case FAQ:
-			fragment = new FragmentFaq();
+		case PROFILE:
+			fragment = new FragmentProfile();
+			transaction.addToBackStack(null);
+			break;
+		case LINKS:
+			fragment = new LinksParentFragment();
 			transaction.addToBackStack(null);
 			break;
 		case HELP:
