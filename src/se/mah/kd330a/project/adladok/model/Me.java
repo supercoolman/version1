@@ -206,19 +206,18 @@ public class Me {
 	 * Logs in the user.
 	 * TODO: Poses a huge security risk, since the id and password is both sent and returned in plaintext.
 	 */
-	private static final String NAMESPACE = "http://mahapp.k3.mah.se/";
-	private static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
+
 	public String getUserInfoAsXML(String loginID, String password){	   
 		Object result="";
 		try {
-			SoapObject loginrequest = new SoapObject(NAMESPACE, "getUserInfo");
+			SoapObject loginrequest = new SoapObject(Constants.NAMESPACE, "getUserInfo");
 			loginrequest.addProperty("username", loginID);
 			loginrequest.addProperty("password", password);
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet=true;
 			envelope.setOutputSoapObject(loginrequest);
-			HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-			androidHttpTransport.call(NAMESPACE+"getUserInfo", envelope);
+			HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
+			androidHttpTransport.call(Constants.NAMESPACE+"getUserInfo", envelope);
 			result = (Object)envelope.getResponse();
 		} catch (Exception e) {
 			Log.i(TAG,"LoginError: "+e.getMessage());
