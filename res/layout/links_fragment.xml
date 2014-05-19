@@ -9,12 +9,10 @@
     <android.support.v4.view.PagerTabStrip
         android:id="@+id/pager_tab_strip"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="64dp"
         android:layout_gravity="top"
-        android:background="@color/yellow"
+        android:background="@color/white"
         android:focusable="false"
-        android:paddingBottom="0dp"
-        android:paddingTop="0dp"
         android:textColor="@color/black" />
     
 </android.support.v4.view.ViewPager>
