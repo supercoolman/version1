@@ -32,10 +32,10 @@
         <item>@drawable/tomikon</item>
         <item>@drawable/ic_student</item>
         <item>@drawable/ic_it</item>
-        <item>@drawable/ic_library</item>
-        <item>@drawable/ic_housing</item>
-        <item>@drawable/ic_career</item>
-        <item>@drawable/ic_social</item> 
+        <item>@drawable/ic_library_new</item>
+        <item>@drawable/ic_housing_new</item>
+        <item>@drawable/ic_career_new</item>
+        <item>@drawable/ic_social_new</item> 
         <item>@drawable/tomikon</item>
     </array>
     

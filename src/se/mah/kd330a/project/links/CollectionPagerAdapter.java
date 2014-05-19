@@ -45,12 +45,28 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 		// fetch the image array
 		images = LinksParentFragment.images;
 	    linkOptions = LinksParentFragment.linkOptions;
+	    SpannableStringBuilder sb = null ;
 		
-	    SpannableStringBuilder sb = new SpannableStringBuilder(" "+linkOptions[position]+" ");
+	    if(position==0){
+	    sb = new SpannableStringBuilder(" "+linkOptions[0]+" ");
 	    myDrawable = images.getDrawable(position);
-	    myDrawable.setBounds(0, 1, myDrawable.getIntrinsicWidth(), myDrawable.getIntrinsicHeight()); 
+	    myDrawable.setBounds(0, 1, 84, 84); 
+	
 	    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BASELINE); 
-	    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);; 
+	    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	    
+	    
+	    } else{
+		    sb = new SpannableStringBuilder(" "+" ");
+		    myDrawable = images.getDrawable(position);
+		    myDrawable.setBounds(0, 1, 64, 64); 
+		
+		    ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BASELINE); 
+		    sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	    	
+	    	
+	    }
+	    
 	    return sb;
 	}
 }
