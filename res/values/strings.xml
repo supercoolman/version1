@@ -40,9 +40,9 @@
     </array>
     
     <string-array name ="links_options">
-       <item>"Categories      "</item>
+       <item>"Categories"</item>
        <item>"Student@MAH"</item> 
-       <item>"IT  "</item>
+       <item>"IT"</item>
        <item>"Library"</item>
        <item>"Housing"</item>
        <item>"Career Guide"</item>
