@@ -8,7 +8,7 @@
         <item>Mitt schema</item>
         <item>It\'s Learning</item>
         <item>Hitta på Campus</item>
-        <item>Länkar @ MAH</item>
+        <item>Länkar på MAH</item>
         <item>Om denna app</item>
     </string-array>
     <string-array name="menu_icons">
@@ -30,31 +30,33 @@
     
     <string-array name ="links_options">
        <item>"Kategorier"</item>
-       <item>"Student@MAH"</item> 
+       <item>"Student på MAH"</item> 
        <item>"IT"</item>
        <item>"Bibliotek"</item>
        <item>"Bostad"</item>
-       <item>"Karriär Guide"</item>
+       <item>"Karriärguide"</item>
        <item>"Sociala Medier"</item>
     </string-array>
     
     <string-array name ="links_list_options">
-       <item>"Student@MAH"</item> 
+       <item>"Student på MAH"</item> 
        <item>"IT"</item>
        <item>"Bibliotek"</item>
        <item>"Bostad"</item>
-       <item>"Karriär Guide"</item>
+       <item>"Karriärguide"</item>
        <item>"Sociala Medier"</item>
     </string-array>
-  
-    <string-array name="links_list_sub_options">
-        <item>"Student@MAH subtitle"</item>
-        <item>"IT subtitle"</item>
-        <item>"Bibliotek subtitle"</item>
-        <item>"Bostad subtitle"</item>
-        <item>"Karriär Guide subtitle"</item>
-        <item>"Sociala Medier subtitle"</item>
+    
+ 	<string-array name="links_list_sub_options">
+        <item>"Generell information för studenter på MAH"</item>
+        <item>"Hjälper till med allt IT-relaterat"</item>
+        <item>"Viktig information om biblioteket"</item>
+        <item>"Hitta ditt nya hem i Malmö"</item>
+        <item>"Framtidsförberedelser"</item>
+        <item>"Gå med i våra sociala nätverk"</item>
     </string-array>
+  
+ 
     
     <string-array name = "it">
     	<item>"IDService"</item> 
@@ -64,10 +66,10 @@
     </string-array>
     
     <string-array name = "social_media">
-    	<item>"MAH@Facebook"</item> 
-    	<item>"MAH@Twitter"</item> 
-    	<item>"MAH@Instagram"</item> 
-    	<item>"MAH@LinkedIn"</item>
+    	<item>"MAH på Facebook"</item> 
+    	<item>"MAH på Twitter"</item> 
+    	<item>"MAH på Instagram"</item> 
+    	<item>"MAH på LinkedIn"</item>
     </string-array>
     
     <string-array name = "housing">
@@ -78,9 +80,9 @@
     
     <string-array name = "student_at_mah">
         <item>"Studentservice"</item> 
-    	<item>"MinaStudier"</item> 
+    	<item>"Mina Studier"</item> 
     	<item>"Studentkåren Malmö"</item> 
-    	<item>"Events"</item>
+    	<item>"Evenemang"</item>
     	<item>"Odontologiska Studentkåren"</item> 
     	<item>"Utbytesstudent"</item> 
     </string-array>

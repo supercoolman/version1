@@ -21,6 +21,7 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 	Drawable myDrawable;
 	Bundle args;
 	String[] linkOptions;
+	CharSequence pageTitle;
 
 	public CollectionPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -43,12 +44,14 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 	@Override
 	public CharSequence getPageTitle(int position) {
 		// fetch the image array
+	    
 		images = LinksParentFragment.images;
 	    linkOptions = LinksParentFragment.linkOptions;
 	    SpannableStringBuilder sb = null ;
 		
 	    if(position==0){
 	    sb = new SpannableStringBuilder(" "+linkOptions[0]+" ");
+
 	    myDrawable = images.getDrawable(position);
 	    myDrawable.setBounds(0, 1, 84, 84); 
 	
@@ -68,5 +71,6 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 	    }
 	    
 	    return sb;
+
 	}
 }
