@@ -21,7 +21,8 @@
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:layout_alignTop="@+id/title"
-    android:background="@color/white"
-    android:layout_alignParentRight="true" />
+    android:layout_alignParentRight="true"
+    android:background="@drawable/imagebutton_states"
+    android:src="@drawable/ic_action_call" />
     
 </RelativeLayout>

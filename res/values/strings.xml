@@ -154,7 +154,17 @@
     	<item>"https://www.linkedin.com/company/malmo-university"</item>				<!-- item links to MAH's LinkedIn Feed -->
     </string-array>
     
-    <string-array name = "Number">
+    <string-array name ="student_nr">
+        <item>"111"</item>
+    </string-array>
+    <string-array name ="it_nr">
+        <item>"222"</item>
+    </string-array>
+    <string-array name ="library_nr">
+        <item>"333"</item>
+    </string-array>
+    
+    <string-array name = "number">
         <item > "+46 40 665 75 65"</item>      <!-- -Number to Student Kåren --> 
         <item > "+46 40 665 86 50"</item>      <!-- -Number to Odontologe Kåren --> 
         <item > "+46 40 665 73 00"</item>      <!-- -Number to Library --> 
