@@ -78,7 +78,7 @@ public class FragmentITSL extends Fragment implements
 			 */
 			rootView = (ViewGroup) inflater.inflate(R.layout.itsl_help, container, false);
 		}
-			
+		
 		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
 		
 		return rootView;

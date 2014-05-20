@@ -2,7 +2,6 @@ package se.mah.kd330a.project.framework;
 
 
 import se.mah.kd330a.project.R;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -41,6 +40,8 @@ public class MenuAdapter extends ArrayAdapter<String> {
 	public String getItem(int position) {
 		return menuItems[position];
 	}
+
+	
 	@SuppressLint("NewApi")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {

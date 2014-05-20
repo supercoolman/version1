@@ -14,8 +14,8 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
 
-// Detta Šr about this app fragmentet.
-// Vi behšver dšpa om paketet och lŠgga till IDK13 och versions nummer. 
+// Detta ï¿½r about this app fragmentet.
+// Vi behï¿½ver dï¿½pa om paketet och lï¿½gga till IDK13 och versions nummer. 
 
 public class FragmentCredits extends Fragment {
 
@@ -63,8 +63,6 @@ public class FragmentCredits extends Fragment {
 		};
 
 		thread.start();
-		
-		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
 		return rootView;
 	}
 	
@@ -83,7 +81,7 @@ public class FragmentCredits extends Fragment {
 		}
 	};
 	
-	// HŠr Šr text funktionen, vi ska Šndra i arrayen,
+	// Hï¿½r ï¿½r text funktionen, vi ska ï¿½ndra i arrayen,
 	// --> idTeanS
 	// --> gdTeamS
 	

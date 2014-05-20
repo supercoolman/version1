@@ -40,9 +40,9 @@ public class MainActivity extends FragmentActivity {
 	 * Holds the "main" app.
 	 */
 
-	public static DrawerLayout 			mDrawerLayout;
-	public static ListView 				mDrawerList;
-	public ActionBarDrawerToggle 	mDrawerToggle;
+	public static DrawerLayout 		mDrawerLayout;
+	public static ListView 			mDrawerList;
+	private ActionBarDrawerToggle 	mDrawerToggle;
 	private CharSequence 			mDrawerTitle;
 	private CharSequence 			mTitle;
 	private String[] 				mMenuTitles;
@@ -116,15 +116,6 @@ public class MainActivity extends FragmentActivity {
 			selectItem(0);
 		}
 	}
-	
-	/* The click listener for ListView in the navigation drawer */
-	private class DrawerItemClickListener implements ListView.OnItemClickListener {
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			selectItem(position);
-			Log.d("Drawer", String.valueOf(position));
-		}
-	}
 
 	@Override
 	protected void onPause() {
@@ -141,6 +132,10 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+	}
+	
+	public RSSFeed getRssNewsFeed() {
+		return mNewsFeed;
 	}
 
 	@Override
@@ -173,16 +168,25 @@ public class MainActivity extends FragmentActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+	
+	/* The click listener for ListView in the navigation drawer */
+	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			selectItem(position);
+			Log.d("Drawer", String.valueOf(position));
+		}
+	}
 
 	public void selectItem(int position) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE); 
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
-		Fragment fragment;
+		Fragment fragment = null;
 		switch (position) {
 		case HOME:	
 			fragment = new FragmentHome();
-			transaction.addToBackStack(null);
 			Log.d("Drawer", "Home");
 			break;
 		case SCHEDULE:
@@ -221,7 +225,7 @@ public class MainActivity extends FragmentActivity {
 			logout();
 			break;
 		default:	
-			fragment = new FragmentHome();
+			// fragment = new FragmentHome();
 			Log.d("Drawer", "Default");
 		}
 		transaction.replace(R.id.content_frame, fragment);
@@ -230,6 +234,7 @@ public class MainActivity extends FragmentActivity {
 		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
 		setTitle(mMenuTitles[position]);
+		//mDrawerLayout.closeDrawer(mDrawerList);
 	}
 
 	/**

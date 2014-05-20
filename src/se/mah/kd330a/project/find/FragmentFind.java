@@ -45,8 +45,8 @@ public class FragmentFind extends Fragment {
 		ViewGroup rootView = (ViewGroup) inflater
 				.inflate(R.layout.fragment_screen_find, container, false);
 		
-		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
 		
+		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
 		return rootView;
 	}
 

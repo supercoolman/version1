@@ -59,8 +59,8 @@ public class FragmentScheduleWeekPager extends Fragment {
 		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.blue));	
 		pagerTabStrip.setDrawFullUnderline(true);
 
+		
 		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
-
 		return (result);
 	}
 

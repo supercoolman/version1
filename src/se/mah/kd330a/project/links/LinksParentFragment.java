@@ -48,8 +48,6 @@ public class LinksParentFragment extends Fragment {
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-    	
-    		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
     		
     		View v = inflater.inflate(R.layout.links_fragment, container, false);
     		viewPager = (ViewPager) v.findViewById(R.id.pager);
@@ -58,6 +56,8 @@ public class LinksParentFragment extends Fragment {
     		pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.red_mah));
             pagerTabStrip.setTextSpacing(1);
     		pagerTabStrip.setDrawFullUnderline(true);
+    		
+    		MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
     	return v;
 	}
     
