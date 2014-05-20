@@ -43,7 +43,6 @@ public class MainActivity extends FragmentActivity {
 	public static DrawerLayout 			mDrawerLayout;
 	public static ListView 				mDrawerList;
 	public ActionBarDrawerToggle 	mDrawerToggle;
-	private Fragment				mFragment;
 	private CharSequence 			mDrawerTitle;
 	private CharSequence 			mTitle;
 	private String[] 				mMenuTitles;
@@ -179,52 +178,53 @@ public class MainActivity extends FragmentActivity {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
+		Fragment fragment;
 		switch (position) {
 		case HOME:	
-			mFragment = new FragmentHome();
+			fragment = new FragmentHome();
 			transaction.addToBackStack(null);
 			Log.d("Drawer", "Home");
 			break;
 		case SCHEDULE:
-			mFragment = new FragmentScheduleWeekPager();
+			fragment = new FragmentScheduleWeekPager();
 			transaction.addToBackStack(null);
 			Log.d("Drawer", "Schedule");
 			break;
 		case ITSL:
-			mFragment = new FragmentITSL();
+			fragment = new FragmentITSL();
 			transaction.addToBackStack(null);
 			Log.d("Drawer", "ITSL");
 			break;
 		case FIND:
-			mFragment = new FragmentFind();
+			fragment = new FragmentFind();
 			transaction.addToBackStack(null);
 			Log.d("Drawer", "Find");
 			break;
 		case PROFILE:
-			mFragment = new FragmentProfile();
+			fragment = new FragmentProfile();
 			transaction.addToBackStack(null);
 			Log.d("Drawer", "Profile");
 			break;
 		case LINKS:
-			mFragment = new LinksParentFragment();
+			fragment = new LinksParentFragment();
 			transaction.addToBackStack(null);
 			Log.d("Drawer", "Links");
 			break;
 		case HELP:
-			mFragment = new FragmentCredits();
+			fragment = new FragmentCredits();
 			transaction.addToBackStack(null);
 			Log.d("Drawer", "Credits");
 			break;
 		case LOGOUT:
-			mFragment = new FragmentLogout();
+			fragment = new FragmentLogout();
 			Log.d("Drawer", "Logout");
 			logout();
 			break;
 		default:	
-			mFragment = new FragmentHome();
+			fragment = new FragmentHome();
 			Log.d("Drawer", "Default");
 		}
-		transaction.replace(R.id.content_frame, mFragment);
+		transaction.replace(R.id.content_frame, fragment);
 		transaction.commit();
 		refreshCheck = position;
 		// update selected item and title, then close the drawer
