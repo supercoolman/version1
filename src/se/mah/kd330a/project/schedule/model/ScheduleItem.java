@@ -21,8 +21,8 @@ import net.fortuna.ical4j.model.component.VEvent;
  *  You get the summary by the command v.getSummary().getValue() in the constructor below
  *  A typical string can look like:
  *
- *  Coursegrp: KD330A-20132-62311- Sign: K3LARA Description: Project room Activity type: Ok�nd
- *  Programme: VGSJU13h VGSJU13h1 VGSJU13h2 Coursegrp: OM113A-20132-OM113-D16 Sign: HSANMOS Description: �vning Injektionsgivning VP. 16:1 Activity type: Ok�nd
+ *  Coursegrp: KD330A-20132-62311- Sign: K3LARA Description: Project room Activity type: Ok���nd
+ *  Programme: VGSJU13h VGSJU13h1 VGSJU13h2 Coursegrp: OM113A-20132-OM113-D16 Sign: HSANMOS Description: ���vning Injektionsgivning VP. 16:1 Activity type: Ok���nd
  *  
  *  Can we make it presentable?
  */
@@ -78,6 +78,7 @@ public class ScheduleItem implements Serializable {
 		if (summary.indexOf("Sign: ") != -1) {
 			teacherId = summary.substring(summary.indexOf("Sign: ") + 6,
 					summary.indexOf("Sign: ") + 12);
+			Log.d("TeacherID", teacherId);
 		}
 		if (summary.indexOf("Description: ") != -1){
 			description = summary.substring(summary.indexOf("Description: ") + 13,
@@ -85,6 +86,7 @@ public class ScheduleItem implements Serializable {
 		}
 		//Log.i("ScheduleSummary",v.getSummary().getValue());
 		//Log.i("Description: ",description);
+		
 	}
 
 	public String getDescription() {
@@ -138,6 +140,4 @@ public class ScheduleItem implements Serializable {
 	public void setCourseId(String courseId) {
 		this.courseId = courseId;
 	}
-
-	
 }

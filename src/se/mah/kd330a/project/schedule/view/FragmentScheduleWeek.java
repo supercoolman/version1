@@ -1,6 +1,7 @@
 package se.mah.kd330a.project.schedule.view;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Course;
@@ -10,6 +11,7 @@ import se.mah.kd330a.project.find.data.RoomDbHandler;
 import se.mah.kd330a.project.find.view.FragmentFloorMap;
 import se.mah.kd330a.project.find.view.FragmentResult;
 import se.mah.kd330a.project.framework.MainActivity;
+import se.mah.kd330a.project.schedule.data.RetrieveTeacherRealName;
 import se.mah.kd330a.project.schedule.model.ScheduleItem;
 import se.mah.kd330a.project.schedule.model.ScheduleWeek;
 import android.content.Context;
@@ -19,6 +21,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -265,18 +268,37 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 
 			String courseID = currentSI.getCourseId();
 			Course course = Me.getInstance().getCourse(courseID);
+			
+			String lectorID = childTexts.get(0);
+			String retrieveTeacherRealName = "";
+			try {
+				retrieveTeacherRealName = new RetrieveTeacherRealName().execute(childTexts.get(0)).get();
+				Log.d("retrieveTeacherRealName", retrieveTeacherRealName);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String courseName ="Missing";
 			int color = 0;
-			if (course!=null){
+			if (course != null){
 				courseName = course.getDisplaynameEn();
 				color = Me.getInstance().getCourse(courseID).getColor();
 			}
-			lector.setText(childTexts.get(0));
+			
+			if(retrieveTeacherRealName != null) {
+				lector.setText(retrieveTeacherRealName);
+			} else {
+				lector.setText(lectorID);
+			}
 			activity.setText(currentSI.getDescription());
 			ImageView calendarColorFrameC1 = (ImageView) convertView.findViewById(R.id.calendarColorFrame1);
 			ImageView calendarColorFrameC2= (ImageView) convertView.findViewById(R.id.calendarColorFrame2);
 			calendarColorFrameC1.setBackgroundColor(color);
 			calendarColorFrameC2.setBackgroundColor(color);
+			
 			return convertView;
 		}
 
