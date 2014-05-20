@@ -50,14 +50,14 @@ public class MainActivity extends FragmentActivity {
 	private TypedArray 				mMenuColors;
 	public RSSFeed 					mNewsFeed;
 	private final String 			TAG = MainActivity.class.getName();
-    private final int 		HOME = 0;
-	private final int 		SCHEDULE = 1;
-	private final int 		PROFILE = 2;
-	private final int 		ITSL = 3;
-	private final int 		FIND = 4;
-	private final int 		LINKS = 5;
-	private final int 		HELP = 6;
-	private final int 		LOGOUT = 7;
+    private final int 				HOME = 0;
+	private final int 				SCHEDULE = 1;
+	private final int 				PROFILE = 2;
+	private final int 				ITSL = 3;
+	private final int 				FIND = 4;
+	private final int 				LINKS = 5;
+	private final int 				HELP = 6;
+	private final int 				LOGOUT = 7;
 	private int 					refreshCheck;
 
 	@Override
