@@ -14,12 +14,11 @@ import se.mah.kd330a.project.adladok.model.Me;
 import se.mah.kd330a.project.schedule.model.*;
 
 public class ParseData {
-	//
+	
 	ArrayList<ScheduleWeek> scheduleWeeks;
 
 	public ParseData() {
 		scheduleWeeks = new ArrayList<ScheduleWeek>();
-
 	}
 
 	public ArrayList<ScheduleWeek> getParsedDataFromKronoxByWeekNew(int numberOfWeeks) {
@@ -44,6 +43,7 @@ public class ParseData {
 
 		ArrayList<ScheduleItem> thisWeekList = new ArrayList<ScheduleItem>();
 		Collection<?> kronox_events = KronoxCalendar.getWeeksEventsFromThisWeek(weekFromThisWeek);
+		
 		// Here we only take seven days from today this should be calculated
 		// from the monday this should be done in
 		// KronoxCalendar.sevenDaysEvents()

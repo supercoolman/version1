@@ -76,7 +76,6 @@ public class Refresh extends AsyncTask<Void, Void, Void> {
 		 */
 		try {
 			
-			
 		} catch (Exception e) {
 			
 		}
