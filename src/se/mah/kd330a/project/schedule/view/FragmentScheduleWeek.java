@@ -67,7 +67,6 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		elv.setEmptyView(rootView.findViewById(R.id.emptytw));
 		elv.setAdapter(new ExpandableListViewAdapter(getActivity()));
 		elv.setOnChildClickListener(this);
-
 		elv.setOnGroupExpandListener(new OnGroupExpandListener() {
 			int previousGroup = -1;
 
@@ -75,7 +74,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			public void onGroupExpand(int groupPosition) {
 				if(groupPosition != previousGroup)
 					elv.collapseGroup(previousGroup);
-				previousGroup = groupPosition;
+					previousGroup = groupPosition;
 			}
 		});
 
@@ -201,6 +200,9 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 				View calendarColorFrame2 = (View) convertView.findViewById(R.id.calendarColorFrame2);
 				calendarColorFrame1.setBackgroundColor(color);
 				calendarColorFrame2.setBackgroundColor(color);
+				
+
+				
 			} else {  //The calendar item not first
 				convertView = infalInflater.inflate(R.layout.schedule_list_group, null);
 				TextView courseNameTextView = (TextView) convertView.findViewById(R.id.list_course_name);
@@ -216,7 +218,9 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 				calendarColorFrame1.setBackgroundColor(color);
 				calendarColorFrame2.setBackgroundColor(color);
 			}
-
+			if(isExpanded){
+				convertView.findViewById(R.id.icPointer).setVisibility(View.INVISIBLE); 
+			}
 			return convertView;
 
 		}
