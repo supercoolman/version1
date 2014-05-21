@@ -3,7 +3,13 @@ package se.mah.kd330a.project.schedule.view;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
 import se.mah.kd330a.project.R;
+import se.mah.kd330a.project.adladok.model.Constants;
 import se.mah.kd330a.project.adladok.model.Course;
 import se.mah.kd330a.project.adladok.model.FragmentCallback;
 import se.mah.kd330a.project.adladok.model.Me;
@@ -11,10 +17,10 @@ import se.mah.kd330a.project.find.data.RoomDbHandler;
 import se.mah.kd330a.project.find.view.FragmentFloorMap;
 import se.mah.kd330a.project.find.view.FragmentResult;
 import se.mah.kd330a.project.framework.MainActivity;
-import se.mah.kd330a.project.schedule.data.RetrieveTeacherRealName;
 import se.mah.kd330a.project.schedule.model.ScheduleItem;
 import se.mah.kd330a.project.schedule.model.ScheduleWeek;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -46,6 +52,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 	private final String 		TAG = "FragmentScheduleWeek";
 	private ScheduleWeek 		scheduleWeek;
 	private SwipeRefreshLayout 	swipeRefreshLayout;
+	private TextView lector;
 
 	public static FragmentScheduleWeek newInstance(ScheduleWeek scheduleWeek,int position) {
 		FragmentScheduleWeek f = new FragmentScheduleWeek();
@@ -238,7 +245,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 
 			ScheduleItem currentSI = (ScheduleItem) getGroup(groupPosition);
 			location = currentSI.getRoomCode();
-			TextView lector = (TextView) convertView.findViewById(R.id.list_course_child_lector);
+			lector = (TextView) convertView.findViewById(R.id.list_course_child_lector);
 			//HERE enter activity
 			TextView activity = (TextView)convertView.findViewById(R.id.list_course_child_activity);
 			Button btnFind = (Button) convertView.findViewById(R.id.findButton);
@@ -270,7 +277,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			Course course = Me.getInstance().getCourse(courseID);
 			
 			String lectorID = childTexts.get(0);
-			String retrieveTeacherRealName = "";
+			/*String retrieveTeacherRealName = "";
 			try {
 				retrieveTeacherRealName = new RetrieveTeacherRealName().execute(childTexts.get(0)).get();
 				Log.d("retrieveTeacherRealName", retrieveTeacherRealName);
@@ -281,25 +288,76 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String courseName ="Missing";
+			*/String courseName ="Missing";
 			int color = 0;
 			if (course != null){
 				courseName = course.getDisplaynameEn();
 				color = Me.getInstance().getCourse(courseID).getColor();
 			}
 			
-			if(retrieveTeacherRealName != null) {
+			/*if(retrieveTeacherRealName != null) {
 				lector.setText(retrieveTeacherRealName);
 			} else {
 				lector.setText(lectorID);
-			}
+			}*/
 			activity.setText(currentSI.getDescription());
 			ImageView calendarColorFrameC1 = (ImageView) convertView.findViewById(R.id.calendarColorFrame1);
 			ImageView calendarColorFrameC2= (ImageView) convertView.findViewById(R.id.calendarColorFrame2);
 			calendarColorFrameC1.setBackgroundColor(color);
 			calendarColorFrameC2.setBackgroundColor(color);
 			
+			
+			
+			try {
+				new RetrieveTeacherReal().execute(childTexts.get(0)).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
 			return convertView;
+		}
+		class RetrieveTeacherReal extends AsyncTask<String, Integer, String> {			
+			Object objectResult;
+			@Override
+			protected void onPreExecute() {
+				// TODO Auto-generated method stub
+				super.onPreExecute();
+				Log.d("RetrieveTeacherRealName", "Starting to fetch Teacher Name");	
+			}
+
+			
+			protected String doInBackground(String... id) {
+				Log.d("RetrieveTeacherRealName", "Downloading Teacher Name");
+				objectResult="";
+				try {
+					SoapObject getTeacherId = new SoapObject(Constants.NAMESPACE, "getTeacherName");
+					getTeacherId.addProperty("id", id[0]);
+					SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+					envelope.dotNet=true;
+					envelope.setOutputSoapObject(getTeacherId);
+					HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
+					androidHttpTransport.call(Constants.NAMESPACE + "getTeacherName", envelope);
+					objectResult = (Object)envelope.getResponse();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				return objectResult.toString();
+			}
+
+			
+			protected void onPostExecute(String result) {
+				lector.setText(result);
+				Log.d("RetrieveTeacherRealName", objectResult.toString());
+				Log.d("RetrieveTeacherRealName", ""+result);
+
+				Log.d("RetrieveTeacherRealName", "Done");
+			}
 		}
 
 		private void startNavigation(String roomNr) {
