@@ -183,6 +183,7 @@ public class StartActivity extends Activity {
 	 * When all tasks have completed we can go on to the MainActivity
 	 */
 	public void tasksCompleted(final Activity activity) {
+		if(!mRestoredSuccess){
 		if(!debugMode){
 			Me.getInstance().startRefresher(new FragmentCallback() {
 				@Override
@@ -194,6 +195,11 @@ public class StartActivity extends Activity {
 	        	
 	        }, this);
 		} else {
+			Intent intent = new Intent(activity, MainActivity.class);
+			startActivity(intent);
+			finish();
+		}
+		}else{
 			Intent intent = new Intent(activity, MainActivity.class);
 			startActivity(intent);
 			finish();
