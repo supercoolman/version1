@@ -16,18 +16,25 @@
         android:orientation="horizontal"
         android:scrollbarAlwaysDrawVerticalTrack="true" >
 
+<!--  
         <ImageView
             android:id="@+id/calendarColorFrame1"
             android:layout_width="8dp"
             android:layout_height="match_parent"
             android:background="@color/green" />
+ -->
 
-        <ImageView
+       <!--  <ImageView
             android:id="@+id/calendarColorFrame2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="92dp"
             android:background="@color/green" />
+            
+            This element is broken.
+            android:layout_width="0dp"
+            As soon as you make any change in the code it realize that this do not work to begin with. 
+             -->
 
 
         <RelativeLayout
