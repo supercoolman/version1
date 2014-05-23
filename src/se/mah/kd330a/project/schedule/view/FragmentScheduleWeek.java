@@ -187,21 +187,23 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			}
 
 			if (groupPosition==0||!currentDate.equals(previousDate)) {  //Separator and first Calendar item
-				convertView = infalInflater.inflate(R.layout.schedule_list_seperator, null);
-				TextView sepertorText = (TextView) convertView.findViewById(R.id.list_item_section_text);
-				sepertorText.setText(currentSI.getWeekDay() + ", " + currentDate);
+				convertView = infalInflater.inflate(R.layout.schedule_list_separator_test, null);
+				TextView separatorText = (TextView) convertView.findViewById(R.id.list_item_section_text);
+				separatorText.setText(currentSI.getWeekDay() + ", " + currentDate);
 				lastDate = currentDate;
-				TextView courseNameTextView = (TextView) convertView.findViewById(R.id.list_course_name);
+				TextView courseNameTextView = (TextView) convertView.findViewById(R.id.list_course_coursename);
 				courseNameTextView.setText(courseName);
-				TextView startTime = (TextView) convertView.findViewById(R.id.list_course_start_time);
-				startTime.setText(currentSI.getStartTime());
-				TextView endTime = (TextView) convertView.findViewById(R.id.list_course_end_time);
-				endTime.setText(currentSI.getEndTime());
-				TextView location = (TextView) convertView.findViewById(R.id.list_course_location);
-				location.setText(currentSI.getRoomCode());
-				ImageView calendarColorFrame1 = (ImageView) convertView.findViewById(R.id.calendarColorFrame1);
+				TextView timeView = (TextView) convertView.findViewById(R.id.list_course_time_start_end);
+				timeView.setText(currentSI.getStartTime()+" - "+currentSI.getEndTime());
+				TextView building = (TextView) convertView.findViewById(R.id.list_course_building_id);
+				if(currentSI.getRoomCode().length()>0){
+				building.setText(""+currentSI.getRoomCode().charAt(0)+currentSI.getRoomCode().charAt(1));
+				}
+				TextView room = (TextView) convertView.findViewById(R.id.list_course_room_id);
+				if(currentSI.getRoomCode().length()>0){
+				room.setText(""+currentSI.getRoomCode().charAt(2)+currentSI.getRoomCode().charAt(3)+currentSI.getRoomCode().charAt(4)+currentSI.getRoomCode().charAt(5));
+				}
 				View calendarColorFrame2 = (View) convertView.findViewById(R.id.calendarColorFrame2);
-				calendarColorFrame1.setBackgroundColor(color);
 				calendarColorFrame2.setBackgroundColor(color);
 				
 
