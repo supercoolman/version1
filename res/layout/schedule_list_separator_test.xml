@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_light"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_light"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/list_item_section_text"
+            android:layout_marginTop="6dp"
+            layout="@layout/schedule_separator_layout" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:animateLayoutChanges="true"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:scrollbarAlwaysDrawVerticalTrack="true" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="15dp"
+            android:text="00:00 - 00:00"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/textView1"
+            android:text="K2" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView2"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@+id/textView2"
+            android:text="A307"
+            android:textStyle="bold" />
+
+        	<View
+        	    android:id="@+id/calendarColorFrame2"
+        	    android:layout_width="2dp"
+        	    android:layout_height="match_parent"
+        	    android:layout_alignParentTop="true"
+        	    android:layout_alignBottom="@+id/textView3"
+        	    android:background="@color/green" />
+    
+    </RelativeLayout>
+
+</RelativeLayout>
