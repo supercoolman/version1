@@ -40,7 +40,7 @@ public class FragmentCredits extends Fragment {
 		ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_help, container, false);
 		tvData = (TextView) rootView.findViewById(R.id.textview);
 		credtisTv = (TextView) rootView.findViewById(R.id.loading);
-		whenMadeTv = (TextView) rootView.findViewById(R.id.textView2);
+		whenMadeTv = (TextView) rootView.findViewById(R.id.list_course_building_id);
 		myscroll = new Scroller(getActivity(), new LinearInterpolator());
 		tvData.setScroller(myscroll);
 		Scroll();
