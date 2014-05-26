@@ -23,7 +23,7 @@ public class KronoxCalendar {
 	
 	/**
 	 * This creates the calendar object from an iCal file. Must be called before everything else.
-	 * This is an imported package from iCal4j.
+	 * This is an imported package from iCal4j. Lel
 	 * 
 	 * @param fin
 	 *        KronoxReader.getFile()
