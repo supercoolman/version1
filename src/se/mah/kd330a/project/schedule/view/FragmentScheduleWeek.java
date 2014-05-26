@@ -237,7 +237,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 			ArrayList<String> childTexts = (ArrayList<String>) getChild(groupPosition, childPosition);
 			if (convertView == null) {
 				LayoutInflater infalInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				convertView = infalInflater.inflate(R.layout.schedule_list_item, null);
+				convertView = infalInflater.inflate(R.layout.schedule_list_item_tester, null);
 			}
 
 			ScheduleItem currentSI = (ScheduleItem) getGroup(groupPosition);
@@ -298,10 +298,6 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 				lector.setText(lectorID);
 			}
 			activity.setText(currentSI.getDescription());
-			ImageView calendarColorFrameC1 = (ImageView) convertView.findViewById(R.id.calendarColorFrame1);
-			ImageView calendarColorFrameC2= (ImageView) convertView.findViewById(R.id.calendarColorFrame2);
-			calendarColorFrameC1.setBackgroundColor(color);
-			calendarColorFrameC2.setBackgroundColor(color);
 			
 			return convertView;
 		}
