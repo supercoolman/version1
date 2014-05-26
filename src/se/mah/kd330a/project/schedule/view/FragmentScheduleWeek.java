@@ -94,11 +94,13 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
 			@Override
 			public void onRefresh() {
+				swipeRefreshLayout.setEnabled(false);
 				Me.getInstance().startRefresher(new FragmentCallback(){
 					@Override
 					public void onRefreshCompleted() {
 						swipeRefreshLayout.setRefreshing(false);
 						((MainActivity)getActivity()).refreshCurrent();
+						swipeRefreshLayout.setEnabled(true);
 					}
 
 				}, getActivity());
