@@ -36,7 +36,8 @@
                 android:text="@string/activity"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey_dark"
-                android:textSize="11sp"
+                android:textSize="12sp"
+                android:textStyle="bold" 
                 android:paddingTop="2dp" />
         
          <TextView
@@ -48,7 +49,7 @@
                 android:layout_toRightOf="@+id/activity"
                 android:text="@string/noactivity"
                 android:textColor="@color/grey_dark"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
 
             
             <TextView
@@ -62,7 +63,8 @@
                 android:text="@string/signtitle"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/grey_dark"
-                android:textSize="11sp" />
+                android:textStyle="bold" 
+                android:textSize="12sp" />
             
 			<TextView
                 android:id="@+id/list_course_child_lector"
@@ -73,9 +75,28 @@
                 android:layout_toRightOf="@+id/textTeacherName"
                 android:text="@string/sign"
                 android:textColor="@color/grey_dark"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
 
-            <ImageView
+            
+           	<Button
+           	    android:id="@+id/findButton"
+           	    style="@style/mah_button_blue"
+           	    android:layout_width="50dp"
+           	    android:layout_height="32dp"
+           	    android:layout_above="@+id/icPointer"
+           	    android:layout_alignParentRight="true"
+           	    android:layout_below="@+id/activity"
+           	    android:layout_marginRight="18dp"
+           	    android:layout_marginTop="32dp"
+           	    android:layout_toRightOf="@+id/list_course_child_activity"
+           	    android:focusable="false"
+           	    android:focusableInTouchMode="false"
+           	    android:text="Find Room"
+           	    android:textColor="@drawable/mah_button_blue"
+           	    android:textSize="12sp"
+           	    android:textStyle="bold" />
+           	
+           	<ImageView
                 android:id="@+id/icPointer"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
@@ -86,21 +107,6 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="10dp"
                 android:rotationX="180" />
-            
-           	<Button
-           	    android:id="@+id/findButton"
-           	    style="@style/mah_button_blue"
-           	    android:layout_width="78dp"
-           	    android:layout_height="32dp"
-           	    android:layout_marginTop="32dp"
-           	    android:layout_marginRight="18dp"
-           	    android:layout_below="@+id/activity"
-           	    android:layout_alignParentRight="true"
-           	    android:focusable="false"
-           	    android:focusableInTouchMode="false"
-           	    android:text="Find Room"
-           	    android:textColor="@drawable/mah_button_blue"
-           	    android:textSize="11sp" />
 
     </RelativeLayout>
 
