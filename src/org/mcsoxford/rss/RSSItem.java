@@ -38,7 +38,7 @@ public class RSSItem extends RSSBase {
   }
 
   /**
-   * Returns an unmodifiable list of thumbnails. The return value is never
+   * Returns an unmodifiable categoryList of thumbnails. The return value is never
    * {@code null}. Images are in order of importance.
    */
   public java.util.List<MediaThumbnail> getThumbnails() {

@@ -104,5 +104,4 @@
                 android:background="@color/grey" >
             </View>
     </LinearLayout>
-
 </ScrollView>

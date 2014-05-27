@@ -55,8 +55,8 @@ public class DOMParser {
 					theString = nchild.item(j).getFirstChild().getNodeValue();
 
 					if (theString != null) {
-						if ("title".equals(nodeName)) {
-							// Node name is equals to 'title' so set the Node
+						if ("linkTitle".equals(nodeName)) {
+							// Node name is equals to 'linkTitle' so set the Node
 							// value to the Title in the RSSItem.
 							_item.setTitle(theString);
 						}
@@ -88,7 +88,7 @@ public class DOMParser {
 					}
 				}
 
-				// add item to the list
+				// add item to the categoryList
 				_feed.addItem(_item);
 			}
 

@@ -25,7 +25,7 @@ package org.mcsoxford.rss;
 class RSSHandler extends org.xml.sax.helpers.DefaultHandler {
 
   /**
-   * Constant for XML element name which identifies RSS items.
+   * Constant for XML element name which identifies RSS categoryList.
    */
   private static final String RSS_ITEM = "item";
 
@@ -87,9 +87,9 @@ class RSSHandler extends org.xml.sax.helpers.DefaultHandler {
   }
 
   /**
-   * Setter for RSS &lt;title&gt; elements inside a &lt;channel&gt; or an
-   * &lt;item&gt; element. The title of the RSS feed is set only if
-   * {@link #item} is {@code null}. Otherwise, the title of the RSS
+   * Setter for RSS &lt;linkTitle&gt; elements inside a &lt;channel&gt; or an
+   * &lt;item&gt; element. The linkTitle of the RSS feed is set only if
+   * {@link #item} is {@code null}. Otherwise, the linkTitle of the RSS
    * {@link #item} is set.
    */
   private final Setter SET_TITLE = new ContentSetter() {
@@ -105,8 +105,8 @@ class RSSHandler extends org.xml.sax.helpers.DefaultHandler {
 
   /**
    * Setter for RSS &lt;description&gt; elements inside a &lt;channel&gt; or an
-   * &lt;item&gt; element. The title of the RSS feed is set only if
-   * {@link #item} is {@code null}. Otherwise, the title of the RSS
+   * &lt;item&gt; element. The linkTitle of the RSS feed is set only if
+   * {@link #item} is {@code null}. Otherwise, the linkTitle of the RSS
    * {@link #item} is set.
    */
   private final Setter SET_DESCRIPTION = new ContentSetter() {
@@ -135,8 +135,8 @@ class RSSHandler extends org.xml.sax.helpers.DefaultHandler {
 
   /**
    * Setter for RSS &lt;link&gt; elements inside a &lt;channel&gt; or an
-   * &lt;item&gt; element. The title of the RSS feed is set only if
-   * {@link #item} is {@code null}. Otherwise, the title of the RSS
+   * &lt;item&gt; element. The linkTitle of the RSS feed is set only if
+   * {@link #item} is {@code null}. Otherwise, the linkTitle of the RSS
    * {@link #item} is set.
    */
   private final Setter SET_LINK = new ContentSetter() {
@@ -153,8 +153,8 @@ class RSSHandler extends org.xml.sax.helpers.DefaultHandler {
 
   /**
    * Setter for RSS &lt;pubDate&gt; elements inside a &lt;channel&gt; or an
-   * &lt;item&gt; element. The title of the RSS feed is set only if
-   * {@link #item} is {@code null}. Otherwise, the title of the RSS
+   * &lt;item&gt; element. The linkTitle of the RSS feed is set only if
+   * {@link #item} is {@code null}. Otherwise, the linkTitle of the RSS
    * {@link #item} is set.
    */
   private final Setter SET_PUBDATE = new ContentSetter() {
@@ -201,8 +201,8 @@ class RSSHandler extends org.xml.sax.helpers.DefaultHandler {
 
   /**
    * Setter for one or multiple RSS &lt;category&gt; elements inside a
-   * &lt;channel&gt; or an &lt;item&gt; element. The title of the RSS feed is
-   * set only if {@link #item} is {@code null}. Otherwise, the title of the RSS
+   * &lt;channel&gt; or an &lt;item&gt; element. The linkTitle of the RSS feed is
+   * set only if {@link #item} is {@code null}. Otherwise, the linkTitle of the RSS
    * {@link #item} is set.
    */
   private final Setter ADD_CATEGORY = new ContentSetter() {
@@ -298,7 +298,7 @@ class RSSHandler extends org.xml.sax.helpers.DefaultHandler {
 
     // initialize dispatchers to manage the state of the SAX handler
     setters = new java.util.HashMap<String, Setter>(/* 2^3 */16);
-    setters.put("title", SET_TITLE);
+    setters.put("linkTitle", SET_TITLE);
     setters.put("description", SET_DESCRIPTION);
     setters.put("content:encoded", SET_CONTENT);
     setters.put("link", SET_LINK);
@@ -363,7 +363,7 @@ class RSSHandler extends org.xml.sax.helpers.DefaultHandler {
 
   /**
    * Determines if the SAX parser is ready to receive data inside an XML element
-   * such as &lt;title&gt; or &lt;description&gt;.
+   * such as &lt;linkTitle&gt; or &lt;description&gt;.
    * 
    * @return boolean {@code true} if the SAX handler parses data inside an XML
    *         element, {@code false} otherwise

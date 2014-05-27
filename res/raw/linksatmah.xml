@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mainlist>
+    <list>
+        <linklist title="Categories">
+            <linkobjectlist>
+                <linkobject title="Student @ MAH">
+                    <subtitle>General information for students</subtitle>
+                    <icon>ic_student</icon>
+                </linkobject>
+                <linkobject title="IT">
+                    <subtitle>Support and information</subtitle>
+                    <icon>ic_it</icon>
+                </linkobject>
+                <linkobject title="Library">
+                    <subtitle>Find library or search for books</subtitle>
+                    <icon>ic_library_new</icon>
+                </linkobject>
+                <linkobject title="Housing">
+                    <subtitle>Find a home in Malmö</subtitle>
+                    <icon>ic_housing_new</icon>
+                </linkobject>
+                <linkobject title="Career guide">
+                    <subtitle>Useful links regarding your future</subtitle>
+                    <icon>ic_career_new</icon>
+                </linkobject>
+                <linkobject title="Social media">
+                    <subtitle>MAH @ social networks</subtitle>
+                    <icon>ic_social_new</icon>
+                </linkobject>
+            </linkobjectlist>
+        </linklist>
+		<linklist title="Student @ MAH">
+		       <linkobjectlist>
+		           <linkobject title="Student self service">
+		               <url>https://minastudier.mah.se</url>
+		           </linkobject>
+		           <linkobject title="Student centre">
+		               <url>http://www.mah.se/Student-Centre</url>
+		           </linkobject>
+		           <linkobject title="Student health service">
+		               <url>http://www.mah.se/english/Student/Student-health-services/Contact/</url>
+		           </linkobject>
+		           <linkobject title="Student union Malmö">
+		               <url>http://malmostudenter.se/english/</url>
+		           </linkobject>
+		           <linkobject title="Odontolog student union">
+		               <url>http://kaftis.com/</url>
+		           </linkobject>
+		           <linkobject title="Events">
+		               <url>http://mah.se/Nyheter/Kalender/</url>
+		           </linkobject>
+		           <linkobject title="Exchange student">
+		               <url>http://www.mah.se/english/Education/Exchange-student/</url>
+		           </linkobject>
+		       </linkobjectlist>
+		</linklist>
+		<linklist title="IT">
+		       <linkobjectlist>
+		           <linkobject title="IT-support">
+		               <url>https://www.mah.se/itsupport</url>
+		               <telnr>0406657525</telnr>
+		           </linkobject>
+		           <linkobject title="Helpdesk">
+		               <url>https://www.mah.se/ITsupport/Kontakt/Helpdesk/</url>
+		           </linkobject>
+		           <linkobject title="ID-service">
+		               <url>https://idservice.mah.se/</url>
+		           </linkobject>
+		           <linkobject title="Wi-fi">
+		               <url>http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Wireless-Network/</url>
+		           </linkobject>
+		           <linkobject title="Printing and copying">
+		               <url>http://www.mah.se/english/Student/Student-services/It-support/Programmes-and-Services/Printing-and-copying/</url>
+		           </linkobject>
+		       </linkobjectlist>
+		</linklist>
+		<linklist title="Library">
+		       <linkobjectlist>
+		           <linkobject title="Library main page">
+		               <url>http://www.mah.se/english/Library/</url>
+		           </linkobject>
+		           <linkobject title="Opening hours and contact">
+		               <url>http://www.mah.se/english/Library/Opening-Hours-and-Contacts/</url>
+		           </linkobject>
+		           <linkobject title="Book a group room at Orkanen Library">
+		               <url>http://www.mah.se/english/Library/Opening-Hours-and-Contacts/Orkanen-Library/Booking-group-rooms/</url>
+		           </linkobject>
+		       </linkobjectlist>
+		</linklist>
+		<linklist title="Housing">
+		       <linkobjectlist>
+		           <linkobject title="Student housing">
+		               <url>http://mah.se/english/Education/Housing/Student-Housing/</url>
+		           </linkobject>
+		           <linkobject title="Available housing">
+		               <url>http://hemma.mah.se/?lang=en</url>
+		           </linkobject>
+		       </linkobjectlist>
+		</linklist>
+		<linklist title="Career guide">
+		       <linkobjectlist>
+		           <linkobject title="Available jobs @ MAH">
+		               <url>http://mah.se/medarbetare/Personalfragor/Platsannonser/</url>
+		           </linkobject>
+		           <linkobject title="Career service">
+		               <url>http://www.mah.se/english/Student/Career/</url>
+		           </linkobject>
+				   <linkobject title="Future finder">
+		               <url>http://futurefinder.mah.se/</url>
+		           </linkobject>
+		       </linkobjectlist>
+		</linklist>
+		<linklist title="Social media">
+		       <linkobjectlist>
+		           <linkobject title="MAH @ Facebook">
+		               <url>http://www.facebook.com/malmouniversity</url>
+		               <icon>ic_fb</icon>
+		           </linkobject>
+		           <linkobject title="MAH @ Twitter">
+		               <url>http://www.twitter.com/MalmoUniversity</url>
+		               <icon>ic_twitter</icon>
+		           </linkobject>
+		           <linkobject title="MAH @ Instagram">
+		               <url>http://www.instagram.com/malmostudent</url>
+		               <icon>ic_insta</icon>
+		           </linkobject>
+		           <linkobject title="MAH @ LinkedIn">
+		               <url>http://www.linkedin.com/company/malmo-university</url>
+		               <icon>ic_linkedin</icon>
+		           </linkobject>
+		       </linkobjectlist>
+		</linklist>
+	</list>
+</mainlist>

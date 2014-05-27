@@ -20,7 +20,7 @@ import android.util.Log;
  * @author marcusmansson
  * 
  * FeedManager is responsible for managing several feeds, fetching them
- * sequentially and creating article objects of the items found.
+ * sequentially and creating article objects of the categoryList found.
  * 
  * FeedManager will return all articles to the registered
  * FeedCompleteListener when done.
@@ -88,7 +88,7 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 	}
 
 	/**
-	 * prepare for re-processing of feeds list; clears article list and resets
+	 * prepare for re-processing of feeds categoryList; clears article categoryList and resets
 	 * feed queue
 	 */
 	public void reset()
@@ -130,7 +130,7 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		
 		if (feedQueueCounter < feedList.size())
 		{
-			Log.i(TAG, "Will download feed nbr: " +feedQueueCounter+" of "+feedList.size() +" and I have "+ articleList.size() +" in the list");
+			Log.i(TAG, "Will download feed nbr: " +feedQueueCounter+" of "+feedList.size() +" and I have "+ articleList.size() +" in the categoryList");
 			processFeeds();
 		}
 		else
@@ -143,7 +143,7 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 			feedQueueCounter = 0;
 
 			/*
-			 * sorts the list by date in descending order
+			 * sorts the categoryList by date in descending order
 			 */
 			Collections.sort(articleList);
 
@@ -157,8 +157,8 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 			}
 
 			/*
-			 *  return the complete list of articles to the listener
-			 *  when all items in the feed queue are processed
+			 *  return the complete categoryList of articles to the listener
+			 *  when all categoryList in the feed queue are processed
 			 */
 			Log.i(TAG, "downloading complete, # articles: " + this.articleList.size());
 
@@ -176,7 +176,7 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 	{
 		if (feedList.isEmpty())
 		{
-			Log.i(TAG, "Feed list is empty, adding some feeds:");
+			Log.i(TAG, "Feed categoryList is empty, adding some feeds:");
 			//addFeedURL("http://www.mah.se/rss/nyheter");
 		}
 
@@ -247,8 +247,8 @@ public class FeedManager implements FeedDownloadTask.FeedCompleteListener
 		}
 		
 		/*
-		 *  return the complete list of articles to the listener
-		 *  when all items in the feed queue are processed
+		 *  return the complete categoryList of articles to the listener
+		 *  when all categoryList in the feed queue are processed
 		 */
 		Log.i(TAG, "load from cache done: " + this.articleList.size());
 

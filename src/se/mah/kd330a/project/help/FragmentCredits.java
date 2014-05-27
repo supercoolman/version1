@@ -14,8 +14,6 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
 
-// Detta �r about this app fragmentet.
-// Vi beh�ver d�pa om paketet och l�gga till IDK13 och versions nummer. 
 
 public class FragmentCredits extends Fragment {
 
@@ -81,10 +79,7 @@ public class FragmentCredits extends Fragment {
 		}
 	};
 	
-	// H�r �r text funktionen, vi ska �ndra i arrayen,
-	// --> idTeanS
-	// --> gdTeamS
-	
+
 	public void Scroll() {
 		String s = "";
 		Resources res = getResources();

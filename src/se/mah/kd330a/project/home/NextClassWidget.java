@@ -64,7 +64,7 @@ public class NextClassWidget {
 	private boolean setData() {
 		if (!items.isEmpty()) {
 
-			//setCourseName(items.get(0).getCourseName());
+			//setCourseName(categoryList.get(0).getCourseName());
 			setLocation(items.get(0).getRoomCode());
 			setStartTime(items.get(0).getStartTime());
 			setEndTime(items.get(0).getEndTime());
@@ -73,7 +73,7 @@ public class NextClassWidget {
 			setCourseName(Me.getInstance().getCourse(getCourseId()).getDisplaynameEn()); //Not so pretty
 			return true;
 		} else {
-			Log.e(getClass().toString(), "item list is empty");
+			Log.e(getClass().toString(), "item categoryList is empty");
 			return false;
 		}
 	}

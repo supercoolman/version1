@@ -21,8 +21,13 @@ import net.fortuna.ical4j.model.component.VEvent;
  *  You get the summary by the command v.getSummary().getValue() in the constructor below
  *  A typical string can look like:
  *
+<<<<<<< HEAD
  *  Coursegrp: KD330A-20132-62311- Sign: K3LARA Description: Project room Activity type: Ok���nd
  *  Programme: VGSJU13h VGSJU13h1 VGSJU13h2 Coursegrp: OM113A-20132-OM113-D16 Sign: HSANMOS Description: ���vning Injektionsgivning VP. 16:1 Activity type: Ok���nd
+=======
+ *  Coursegrp: KD330A-20132-62311- Sign: K3LARA Description: Project room Activity type: Ok�nd
+ *  Programme: VGSJU13h VGSJU13h1 VGSJU13h2 Coursegrp: OM113A-20132-OM113-D16 Sign: HSANMOS Description: �vning Injektionsgivning VP. 16:1 Activity type: Ok�nd
+>>>>>>> afefd801c0dff5c2dc0775350434f1a9b8287b08
  *  
  *  Can we make it presentable?
  */
