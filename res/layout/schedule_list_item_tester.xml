@@ -76,23 +76,6 @@
                 android:text="@string/sign"
                 android:textColor="@color/grey_dark"
                 android:textSize="12sp" />
-
-            
-           	<Button
-           	    android:id="@+id/findButton"
-           	    style="@style/mah_button_blue"
-           	    android:layout_width="88dp"
-           	    android:layout_height="48dp"
-           	    android:layout_alignRight="@+id/icPointer"
-           	    android:layout_above="@+id/icPointer"
-           	    android:layout_marginRight="18dp"
-           	    android:layout_marginTop="32dp"
-           	    android:focusable="false"
-           	    android:focusableInTouchMode="false"
-           	    android:text="Find Room"
-           	    android:textColor="@drawable/mah_button_blue"
-           	    android:textSize="12sp"
-           	    android:textStyle="bold" />
            	
            	<ImageView
                 android:id="@+id/icPointer"
@@ -103,9 +86,24 @@
                 android:background="@drawable/ic_pointer_down"
                 android:layout_marginRight="18dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:paddingBottom="5dp"
                 android:paddingTop="10dp"
                 android:rotationX="180" />
+
+           	<Button
+           	    android:id="@+id/findButton"
+           	    style="@style/mah_button_blue"
+           	    android:layout_width="98dp"
+           	    android:layout_height="48dp"
+           	    android:layout_above="@+id/icPointer"
+           	    android:layout_alignRight="@+id/icPointer"
+           	    android:focusable="false"
+           	    android:focusableInTouchMode="false"
+           	    android:text="Find Room"
+           	    android:textColor="@drawable/mah_button_blue"
+           	    android:textSize="12sp"
+           	    android:textStyle="bold" />
 
     </RelativeLayout>
 
