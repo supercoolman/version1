@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * {@link RSSLoader#poll()} or {@link RSSLoader#poll(long, TimeUnit)}.
  * 
  * <p>
- * <b>Usage Example</b>
+ * <b>Usage LinkList</b>
  * 
  * Suppose you want to load an array of RSS feed URIs concurrently before
  * retrieving the results one at a time. You could write this as:

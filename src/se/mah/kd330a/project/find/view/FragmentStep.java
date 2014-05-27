@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 public class FragmentStep extends Fragment implements OnImageLoaderListener {
 	public static final String ARG_PICNAME = "pic";
-	public static final String ARG_TEXTTITLE = "title";
+	public static final String ARG_TEXTTITLE = "linkTitle";
 	public static final String ARG_TEXTCONTENT = "content";
 	public static final String ARG_ARROW = "arrow";
 

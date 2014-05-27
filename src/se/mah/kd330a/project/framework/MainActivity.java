@@ -9,9 +9,8 @@ import se.mah.kd330a.project.help.FragmentCredits;
 import se.mah.kd330a.project.home.FragmentHome;
 import se.mah.kd330a.project.home.data.RSSFeed;
 import se.mah.kd330a.project.itsl.FragmentITSL;
-import se.mah.kd330a.project.links.LinksParentFragment;
+import se.mah.kd330a.project.links.ParentFragment;
 import se.mah.kd330a.project.profile.view.FragmentProfile;
-import se.mah.kd330a.project.profile.view.SettingsActivity;
 import se.mah.kd330a.project.schedule.view.FragmentScheduleWeekPager;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -69,6 +68,8 @@ public class MainActivity extends FragmentActivity {
 		mMenuTitles = getResources().getStringArray(R.array.menu_texts);
 		mMenuIcons = getResources().obtainTypedArray(R.array.menu_icons);
 		mMenuColors = getResources().obtainTypedArray(R.array.menu_colors);
+		mMenuIcons.recycle();
+		mMenuColors.recycle();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -78,6 +79,7 @@ public class MainActivity extends FragmentActivity {
 		mDrawerList.setSelector(R.drawable.menu_selector);
 
 		// set up the drawer's list view with items and click listener
+
 		mDrawerList.setAdapter(new MenuAdapter(this,
 				R.layout.drawer_list_item, mMenuTitles, mMenuIcons, mMenuColors));
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -133,17 +135,17 @@ public class MainActivity extends FragmentActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-	
+
 	public RSSFeed getRssNewsFeed() {
 		return mNewsFeed;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		MenuInflater inflater = getMenuInflater();
+//		inflater.inflate(R.menu.main, menu);
+//		return super.onCreateOptionsMenu(menu);
+//	}
 
 	/* Called whenever we call invalidateOptionsMenu() */
 	@Override
@@ -158,23 +160,14 @@ public class MainActivity extends FragmentActivity {
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
-		// Handle action buttons
-		switch(item.getItemId()) {
-		case R.id.action_help:
-			Intent intent = new Intent(this, SettingsActivity.class);
-			startActivity(intent);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
+		return true;
 	}
-	
+
 	/* The click listener for ListView in the navigation drawer */
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			selectItem(position);
-			Log.d("Drawer", String.valueOf(position));
 		}
 	}
 
@@ -184,6 +177,7 @@ public class MainActivity extends FragmentActivity {
 		fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE); 
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		Fragment fragment = null;
+
 		switch (position) {
 		case HOME:	
 			fragment = new FragmentHome();
@@ -207,10 +201,9 @@ public class MainActivity extends FragmentActivity {
 		case PROFILE:
 			fragment = new FragmentProfile();
 			transaction.addToBackStack(null);
-			Log.d("Drawer", "Profile");
 			break;
 		case LINKS:
-			fragment = new LinksParentFragment();
+			fragment = new ParentFragment();
 			transaction.addToBackStack(null);
 			Log.d("Drawer", "Links");
 			break;
@@ -245,36 +238,41 @@ public class MainActivity extends FragmentActivity {
 	 */
 	public void refreshCurrent(){
 		Fragment fragment = null;
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction transaction = fragmentManager.beginTransaction();
+		android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 		switch (refreshCheck) {
 		case HOME:	
 			fragment = new FragmentHome();
 			break;
 		case SCHEDULE:
 			fragment = new FragmentScheduleWeekPager();
+			transaction.addToBackStack(null);
 			break;
 		case ITSL:
 			fragment = new FragmentITSL();
+			transaction.addToBackStack(null);
 			break;
 		case FIND:
 			fragment = new FragmentFind();
+			transaction.addToBackStack(null);
 			break;
 		case PROFILE:
 			fragment = new FragmentProfile();
+			transaction.addToBackStack(null);
 			break;
 		case LINKS:
-			fragment = new LinksParentFragment();
+			fragment = new ParentFragment();
+			transaction.addToBackStack(null);
 			break;
 		case HELP:
 			fragment = new FragmentCredits();
+			transaction.addToBackStack(null);
 			break;
 		}
 		transaction.replace(R.id.content_frame, fragment, "FRAGMENT");
 		transaction.commit();
-		Log.i("Refresh","Refreshed");
-
 	}
+
 	@Override
 	public void setTitle(CharSequence title) {
 		mTitle = title;
@@ -296,21 +294,13 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		// Pass any configuration change to the drawer toggles
+		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-
-	public void toNewsFeedOnWeb(View view) {
-		Uri uri = Uri.parse(Constants.URL_NEWS_FEED);
-		Intent launchBrowser = new Intent(Intent.ACTION_VIEW,
-				uri);
-		startActivity(launchBrowser);
-	}
-	
 	public void toSchedule(View view) {
 		selectItem(this.SCHEDULE);
-	}	
+	}
 
 	public void toITSL(View view) {
 		selectItem(this.ITSL);
@@ -318,6 +308,13 @@ public class MainActivity extends FragmentActivity {
 
 	public void toFind(View view) {
 		selectItem(this.FIND);
+	}
+
+	public void toNewsFeedOnWeb(View view) {
+		Uri uri = Uri.parse(Constants.URL_NEWS_FEED);
+		Intent launchBrowser = new Intent(Intent.ACTION_VIEW,
+				uri);
+		startActivity(launchBrowser);
 	}
 	
     public void logout(){

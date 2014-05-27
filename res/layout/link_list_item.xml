@@ -2,37 +2,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/link_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/links_layer_list_unpressed"
-    android:descendantFocusability="blocksDescendants"
-    android:baselineAligned="false"
-    android:padding="8dp" >
+    android:layout_height="48dp"
+    android:padding="8dp"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants" >
+           
+ 	<ImageButton
+ 	    android:id="@+id/phone"
+ 	    android:layout_width="48dp"
+ 	    android:layout_height="48dp"
+ 	    android:layout_alignParentRight="true"
+ 	    android:layout_centerVertical="true"
+ 	    android:paddingRight="8dp"
+ 	    android:scaleType="centerCrop"
+ 	    android:background="@drawable/imagebutton_states"
+ 	    android:src="@drawable/ic_action_call" />
+ 	
+ 	<ImageView
+ 	    android:id="@+id/category_icon"
+ 	    android:layout_width="48dp"
+ 	    android:layout_height="48dp"
+ 	    android:layout_alignParentRight="true"
+ 	    android:layout_centerVertical="true"
+ 	    android:scaleType="centerCrop"
+ 	    android:paddingRight="8dp" />
 
-     <TextView 
-    android:id="@+id/title"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerVertical="true"
-    android:textSize="16sp"
-    android:padding="16dp"
-    android:textColor="@color/links_text_states"
-    android:layout_alignParentLeft="true"/>
- 
-    <ImageButton 
-    android:id="@+id/image_button"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_alignTop="@+id/title"
-    android:layout_alignParentRight="true"
-    android:background="@drawable/imagebutton_states"
-    android:src="@drawable/ic_action_call" />
-
-    <ImageView
-        android:id="@+id/window_icon"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_toRightOf="@+id/title"
+    <TextView
+        android:id="@+id/link_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_window_grey" />
+        android:layout_toLeftOf="@+id/phone"
+        android:textColor="@color/links_text_states"
+        android:textSize="16sp" />
     
+    <TextView
+        android:id="@+id/category_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+    
+        <TextView
+        android:id="@+id/category_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:paddingTop="8dp"
+        android:layout_below="@+id/category_title"
+        android:textColor="@color/grey_dark" />
+
 </RelativeLayout>
+

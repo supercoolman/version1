@@ -19,7 +19,7 @@ package org.mcsoxford.rss;
 import java.util.ArrayList;
 
 /**
- * Common data about RSS feeds and items.
+ * Common data about RSS feeds and categoryList.
  * 
  * @author Mr Horn
  */
@@ -88,7 +88,7 @@ abstract class RSSBase {
   }
 
   /**
-   * Returns the title.
+   * Returns the linkTitle.
    */
   public String toString() {
     return title;

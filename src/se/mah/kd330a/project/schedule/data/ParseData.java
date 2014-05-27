@@ -52,7 +52,9 @@ public class ParseData {
 				Component c = (Component) i.next();
 				if (c instanceof VEvent) {
 					ScheduleItem s = new ScheduleItem((VEvent) c);
+
 					//Clean out items from courses that I am not registered on (program courses)
+
 					if (Me.getInstance().getCourse(s.getCourseId())!=null){
 						thisWeekList.add(s);
 					}

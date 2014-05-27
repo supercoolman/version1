@@ -7,7 +7,6 @@ import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
-
 import se.mah.kd330a.project.R;
 import se.mah.kd330a.project.adladok.model.Constants;
 import se.mah.kd330a.project.adladok.model.Course;
@@ -77,6 +76,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 		elv.setEmptyView(rootView.findViewById(R.id.emptytw));
 		elv.setAdapter(new ExpandableListViewAdapter(getActivity()));
 		elv.setOnChildClickListener(this);
+
 		elv.setOnGroupExpandListener(new OnGroupExpandListener() {
 			int previousGroup = -1;
 
@@ -363,6 +363,7 @@ public class FragmentScheduleWeek extends Fragment implements OnChildClickListen
 				Log.d("RetrieveTeacherRealName", "Done");
 			}
 		}
+
 
 		private void startNavigation(String roomNr) {
 			Fragment fragment = new FragmentResult();

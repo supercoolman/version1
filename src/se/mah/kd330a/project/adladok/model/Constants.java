@@ -7,5 +7,4 @@ public class Constants {
 
 	public static final String NAMESPACE = "http://mahapp.k3.mah.se/";
 	public static final String URL = "http://195.178.234.7/mahapp/userinfo.asmx";
-	//kommentar wow
 }

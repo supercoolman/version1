@@ -17,7 +17,7 @@
 package org.mcsoxford.rss;
 
 /**
- * Data about an RSS feed and its RSS items.
+ * Data about an RSS feed and its RSS categoryList.
  * 
  * @author Mr Horn
  */
@@ -33,7 +33,7 @@ public class RSSFeed extends RSSBase {
   }
 
   /**
-   * Returns an unmodifiable list of RSS items.
+   * Returns an unmodifiable categoryList of RSS categoryList.
    */
   public java.util.List<RSSItem> getItems() {
     return java.util.Collections.unmodifiableList(items);

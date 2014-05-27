@@ -14,7 +14,6 @@ import se.mah.kd330a.project.itsl.Article;
 import se.mah.kd330a.project.itsl.FeedManager;
 import se.mah.kd330a.project.schedule.data.KronoxCalendar;
 import se.mah.kd330a.project.schedule.data.KronoxReader;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -49,7 +48,6 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 	{
 		Log.i("FragmentHome", "OnCreate: ");
 		super.onCreate(savedInstanceState);
-		
 	}
 	
 	@Override
@@ -83,6 +81,7 @@ public class FragmentHome extends Fragment implements FeedManager.FeedManagerDon
 		}
 	    
 	    MainActivity.mDrawerLayout.closeDrawer(MainActivity.mDrawerList);
+
 		return rootView;
 	}
 

@@ -194,7 +194,7 @@ public class FragmentITSL extends Fragment implements
 			fragments.add(fragment);
 		
 			
-			Log.i(TAG, "Filtered map key => tab title is: " + title);
+			Log.i(TAG, "Filtered map key => tab linkTitle is: " + title);
 		}
 		return fragments;
 	}

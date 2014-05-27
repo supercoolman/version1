@@ -41,7 +41,6 @@ public class MenuAdapter extends ArrayAdapter<String> {
 		return menuItems[position];
 	}
 
-	
 	@SuppressLint("NewApi")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
