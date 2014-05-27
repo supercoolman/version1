@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/grey_light"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -73,7 +74,7 @@
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/list_course_time_start_end"
             android:background="@color/blue" />
-
+        
         <TextView
             android:id="@+id/list_course_coursename"
             android:layout_width="wrap_content"
@@ -102,6 +103,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/icPointer"
             android:text=" " />
+
+		 <View
+            android:id="@+id/View01"
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@+id/calendarColorFrame2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/calendarColorFrame2"
+            android:background="@color/blue" />
+
 
     </RelativeLayout>
 
