@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/icPointer"
             android:text=" " />
-
+<!--
 		 <View
             android:id="@+id/View01"
             android:layout_width="2dp"
@@ -112,6 +112,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignTop="@+id/calendarColorFrame2"
             android:background="@color/blue" />
+            - -->
 
 
     </RelativeLayout>
