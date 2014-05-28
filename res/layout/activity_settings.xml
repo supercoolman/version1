@@ -7,14 +7,22 @@
     <LinearLayout
         android:id="@+id/content_help"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="244dp"
         android:orientation="vertical"
-        android:padding="8dp" >
+        android:padding="20dp" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/purple" />
 
         <LinearLayout
             android:id="@+id/profil_content"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical" >
 
@@ -24,17 +32,17 @@
                 android:layout_height="48dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
                 android:text="@string/my_profile_heading"
                 android:textColor="@color/grey_dark"
-                android:textSize="18sp"
-                android:gravity="center_vertical" />
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginBottom="6dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginBottom="6dp"
                 android:background="@color/grey_middle" >
             </View>
 
@@ -42,9 +50,9 @@
                 android:id="@+id/profil_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
                 android:text="Max Munster"
                 android:textColor="@color/grey_dark"
                 android:textSize="14sp" />
@@ -53,25 +61,26 @@
                 android:id="@+id/profil_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
                 android:text="AD0700"
                 android:textColor="@color/grey_dark"
                 android:textSize="14sp" />
         </LinearLayout>
-        
+
         <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginBottom="6dp"
-                android:background="@color/grey" >
-            </View>
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/grey" >
+        </View>
 
         <LinearLayout
             android:id="@+id/my_courses_content"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1.76"
             android:background="@color/white"
             android:orientation="vertical"
             android:paddingBottom="8dp" >
@@ -82,26 +91,26 @@
                 android:layout_height="48dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
                 android:text="@string/my_courses_heading"
                 android:textColor="@color/grey_dark"
-                android:textSize="18sp"
-                android:gravity="center_vertical" />
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginBottom="6dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:background="@color/grey_middle"
-                android:layout_marginBottom="6dp" >
-            </View>
+                android:background="@color/grey_middle" />
         </LinearLayout>
-        
+
         <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginBottom="6dp"
-                android:background="@color/grey" >
-            </View>
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/grey" >
+        </View>
     </LinearLayout>
+
 </ScrollView>
