@@ -273,49 +273,69 @@
     <string name="whenMade">Version 2 of this app was released on June 5th 2014.</string>
     
          <!--  IDK13 -->
-    <string-array name ="idk13">
+    <string-array name ="grupp1">
         <item>Version 2\n</item>
         <item>Interaktionsdesign-programmet 2013\n</item>
-        <item>Måns Ahlgren</item>
-        <item>Gustaf Andersson</item>
-        <item>Eva Andreasson</item>
-        <item>Kristin Asker</item>
-        <item>David Axby</item>
-        <item>Joakim Dicksson</item>
-        <item>Malin Dotevall Banks</item>
+        <item>HOME DEVELOPERS</item>
         <item>Tuannoorgekhan Dulkhadir</item>
-        <item>Eya Khazzar</item>
-        <item>Mario El-Hajj</item>
         <item>Isak Fredlund</item>
-        <item>Amanda Hammarberg</item>
-        <item>Erik Hassel</item>
-        <item>Kim Holmberg</item>
-        <item>Julia Håkansson</item>
         <item>Axel Isaksson</item>
-        <item>Jonas Karlsson</item>
-        <item>Maren Kleppan Møller</item>
-        <item>Elias Lindblad</item>
-        <item>Billy Lund</item>
-        <item>Isak Lund Lilja</item>
-        <item>Heléne Lundhag Dyson</item>
         <item>Oskar Lundquist</item>
         <item>Ayla Markkula</item>
-        <item>Tor Möller</item>
-        <item>Luana Neacsu</item>
-        <item>Anton Nyman</item>
-        <item>Gabriella Olsson</item>
-        <item>Julia Persson</item>
-        <item>Sandra Petersson</item>
-        <item>Carl William Shearer</item>
         <item>André Stenberg</item>
-        <item>Tonny Sterner</item>
-        <item>Niklas Svanberg</item>
-        <item>Jesper Söderberg</item>
-        <item>Benjamin Thorsell</item>
+        <item>Sandra Petersson</item>
+    </string-array>
+    
+    <string-array name ="grupp2">
+        <item>CREDITS AND ME @ MAH DEVELOPERS</item>
+        <item>Måns Ahlgren</item>
+        <item>Malin Dotevall Banks</item>
+        <item>Amanda Hammarberg</item>
+        <item>Kim Holmberg</item>
+        <item>Billy Lund</item>
+        <item>Julia Persson</item>
         <item>Viktor Tornborg</item>
+    </string-array>
+    
+    <string-array name ="grupp3">
+        <item>SCHEMA DEVELOPERS</item>
+        <item>Eva Andreasson</item>
+        <item>Mario El-Hajj</item>
+        <item>Elias Lindblad</item>
+        <item>Anton Nyman</item>
+        <item>Benjamin Thorsell</item>
+    </string-array>
+    
+    <string-array name ="grupp4">
+        <item>IT\'\S LEARNING DEVELOPERS</item>
+        <item>David Axby</item>
+        <item>Erik Hassel</item>
+        <item>Tor Möller</item>
+        <item>Gabriella Olsson</item>
+        <item>Tonny Sterner</item>
+        <item>Jesper Söderberg</item>
+    </string-array>
+    
+    <string-array name ="grupp5">
+        <item>FIND ON CAMPUS DEVELOPERS</item>
+        <item>Gustaf Andersson</item>
+        <item>Joakim Dicksson</item>
+        <item>Julia Håkansson</item>
+        <item>Luana Neacsu</item>
+        <item>Carl William Shearer</item>
+        <item>Niklas Svanberg</item>
+    </string-array>
+    
+    <string-array name ="grupp6">
+        <item>LINKS @ MAH DEVELOPERS</item>
+        <item>Kristin Asker</item>
+        <item>Eya Khazzar</item>
+        <item>Jonas Karlsson</item>
+        <item>Maren Kleppan Møller</item>
+        <item>Isak Lund Lilja</item>
         <item>Yuliya N Vatsova</item>
         <item>Simon Kramle</item>
-        </string-array>
+    </string-array>
         
 
 	<string-array name ="utgivare">

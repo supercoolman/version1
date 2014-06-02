@@ -86,10 +86,45 @@ public class FragmentCredits extends Fragment {
 		
 		//Loop the credits
 		for (int f = 0; f < 20; f++){
-			String[] idk = res.getStringArray(R.array.idk13);
+			String[] idk = res.getStringArray(R.array.grupp1);
 
 			for (int i = 0; i < idk.length; i++) {
 				s = s + "\n" + idk[i];
+			}
+			
+			s = s + "\n";
+			String[] idk2 = res.getStringArray(R.array.grupp2);
+
+			for (int i = 0; i < idk2.length; i++) {
+				s = s + "\n" + idk2[i];
+			}
+			
+			s = s + "\n";
+			String[] idk3 = res.getStringArray(R.array.grupp3);
+
+			for (int i = 0; i < idk3.length; i++) {
+				s = s + "\n" + idk3[i];
+			}
+			
+			s = s + "\n";
+			String[] idk4 = res.getStringArray(R.array.grupp4);
+
+			for (int i = 0; i < idk4.length; i++) {
+				s = s + "\n" + idk4[i];
+			}
+			
+			s = s + "\n";
+			String[] idk5 = res.getStringArray(R.array.grupp5);
+
+			for (int i = 0; i < idk5.length; i++) {
+				s = s + "\n" + idk5[i];
+			}
+			
+			s = s + "\n";
+			String[] idk6 = res.getStringArray(R.array.grupp6);
+
+			for (int i = 0; i < idk6.length; i++) {
+				s = s + "\n" + idk6[i];
 			}
 			
 			s = s + "\n";
